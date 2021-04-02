@@ -388,10 +388,12 @@ public class CalloutInOut extends CalloutEngine
 		//
 		int M_Warehouse_ID = Env.getContextAsInt(ctx, WindowNo, "M_Warehouse_ID");
 		boolean IsSOTrx = "Y".equals(Env.getContext(ctx, WindowNo, "IsSOTrx"));
-		if (IsSOTrx)
-		{
-			return "";
-		}
+		
+		// 28/06/2017 dREHER que setee unidad de medida en todos los casos, sin importar si es remito de cliente o proveedor
+		// if (IsSOTrx)
+		// {
+		//	return "";
+		// }
 
 		//	Set UOM/Locator/Qty
 		MProduct product = MProduct.get(ctx, M_Product_ID.intValue());
