@@ -17,6 +17,7 @@
 package org.compiere.apps;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Event;
@@ -61,6 +62,8 @@ import org.compiere.model.MSysConfig;
 import org.compiere.model.MSystem;
 import org.compiere.model.MTreeNode;
 import org.compiere.model.MUser;
+import org.compiere.model.X_LAR_Login;
+import org.compiere.plaf.CompiereColor;
 import org.compiere.swing.CButton;
 import org.compiere.swing.CFrame;
 import org.compiere.swing.CPanel;
@@ -111,6 +114,51 @@ public final class AMenu extends CFrame
 			public void windowClosing(WindowEvent e) {
 				if (!ADialog.ask(0, null, "ExitApplication?"))
 					return;
+				// region Roca
+				// dREHER 08/07/2015
+				// Se deslogueo en Adempiere, guardo log del acceso
+				
+				log.info("Comienza el log de egreso");
+				
+				MUser us = new MUser(Env.getCtx(), Env.getAD_User_ID(Env.getCtx()), null);
+				int C_BPartner_ID = us.getC_BPartner_ID();
+				
+				java.util.Date date = new java.util.Date();
+				Timestamp ahora = new Timestamp(date.getTime());
+				
+				String Equipo = "";
+				InetAddress localHost;
+				try {
+					localHost = InetAddress.getLocalHost();
+					Equipo = localHost.getHostName() + " - " + localHost.getHostAddress();
+					System.out.println(localHost.getHostName());
+					System.out.println(localHost.getHostAddress());
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				if(C_BPartner_ID > 0){
+					X_LAR_Login l = new X_LAR_Login(Env.getCtx(), 0, null);
+					l.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
+					l.setAD_User_ID(Env.getAD_User_ID(Env.getCtx()));
+					l.setAD_Role_ID(Env.getAD_Role_ID(Env.getCtx()));
+					l.setC_BPartner_ID(C_BPartner_ID);
+					l.setDescription("Salida del sistema=" + Env.getContext(Env.getCtx(), "#TIPONEGOCIO"));
+					l.setEquipo(Equipo);
+					l.setFecha(ahora);
+					l.setLAR_Sucursal_ID(Integer.valueOf(Env.getContext(Env.getCtx(), "#LAR_Sucursal_ID")));
+					l.setTipo("D"); // DesLoguin - salida a Adempiere
+					if(!l.save(null)){
+						log.warning("No se pudo guardar log de salida del sistema");
+					}
+				}
+				
+				// Fin de log al sistema
+				log.info("Finaliza el log de egreso");
+				
+
+				// endregion
 				dispose();
 			}
 			public void windowActivated(WindowEvent e) {}
@@ -195,7 +243,11 @@ public final class AMenu extends CFrame
 	//	Links
 	private int			m_request_Menu_ID = 0;
 	private int			m_note_Menu_ID = 0;
+	private int			m_CRM_Menu_ID = 0; // dREHER, mostrar boton con tareas programadas del crm
+	
 	private String		m_requestSQL = null;
+	private String		m_CRMSQL = null; // dREHER. sql para acciones programadas
+	
 //	private DecimalFormat	m_memoryFormat = DisplayType.getNumberFormat(DisplayType.Integer);
 	/**	Logger			*/
 	private static CLogger log = CLogger.getCLogger(AMenu.class);
@@ -266,6 +318,7 @@ public final class AMenu extends CFrame
 	private CPanel infoPanel = new CPanel();
 	private CButton bNotes = new CButton();
 	private CButton bRequests = new CButton();
+	private CButton bCRM = new CButton(); // dREHER Boton que muestra las tareas programadas del CRM
 	private GridLayout infoLayout = new GridLayout();
 	private JProgressBar memoryBar = new JProgressBar();
 	//	Tabs
@@ -320,6 +373,13 @@ public final class AMenu extends CFrame
 		bRequests.addActionListener(this);
 		bRequests.setIcon(Env.getImageIcon("Request24.gif"));
 		bRequests.setMargin(new Insets(0, 0, 0, 0));
+		
+		// dREHER, boton del CRM
+		bCRM.setActionCommand("CRM-Acciones");
+		bCRM.addActionListener(this);
+		bCRM.setIcon(Env.getImageIcon("Request24.gif"));
+		bCRM.setMargin(new Insets(0, 0, 0, 0));
+		
 		//
 		southLayout.setHgap(0);
 		southLayout.setVgap(1);
@@ -364,6 +424,10 @@ public final class AMenu extends CFrame
 		//
 		infoPanel.add(bNotes, null);
 		infoPanel.add(bRequests, null);
+		
+		// dREHER, boton CRM
+		infoPanel.add(bCRM, null);
+		
 		infoPanel.add(memoryBar, null);
 		//
 		int loc = Ini.getDividerLocation();
@@ -413,6 +477,10 @@ public final class AMenu extends CFrame
 		if (MRole.getDefault().isShowAcct() && MRole.getDefault().isAllow_Info_Account())
 		{
 			AEnv.addMenuItem("InfoAccount", null, KeyStroke.getKeyStroke(KeyEvent.VK_I, Event.ALT_MASK+Event.CTRL_MASK), mView, this);
+		}
+		if (MRole.getDefault().isAllow_Info_Schedule())
+		{
+			AEnv.addMenuItem("Agenda CRM", "InfoSchedule", null, mView, this);			
 		}
 		if (MRole.getDefault().isAllow_Info_Schedule())
 		{
@@ -580,6 +648,8 @@ public final class AMenu extends CFrame
 			gotoNotes();
 		else if (e.getSource() == bRequests)
 			gotoRequests();
+		else if (e.getSource() == bCRM)
+			gotoCRM();
 		else if (e.getActionCommand().equals("ShowAllWindow"))
 			m_WindowMenu.expose();
 		else if (!AEnv.actionPerformed(e.getActionCommand(), m_WindowNo, this))
@@ -648,6 +718,54 @@ public final class AMenu extends CFrame
 		(new AMenuStartItem (m_request_Menu_ID, true, Msg.translate(m_ctx, "R_Request_ID"), this)).start();		//	async load
 	}   //  gotoRequests
 
+
+	// dREHER, devuelve cantidad de acciones programadas
+	private int getCRM()
+	{
+		if (m_CRMSQL == null){
+			// m_CRMSQL = MRole.getDefault().addAccessSQL(MRole.getDefault().addAccessSQL ("SELECT COUNT(1) FROM R_Request "
+			//		+ "WHERE (SalesRep_ID=? OR AD_Role_ID=?) AND Processed='N'"
+			//		+ " AND (DateNextAction IS NULL OR TRUNC(DateNextAction) <= TRUNC(SysDate))"
+			//		+ " AND (R_Status_ID IS NULL OR R_Status_ID IN (SELECT R_Status_ID FROM R_Status WHERE IsClosed='N'))",
+			//		"R_Request", false, true);	
+
+			m_CRMSQL = " SELECT COUNT(*) FROM CRM_Accion a INNER JOIN CRM_ContactoAccion ca ON ca.CRM_ProxAccion_ID=a.CRM_Accion_ID"
+			+ " INNER JOIN CRM_Contacto c ON c.CRM_Contacto_ID=ca.CRM_Contacto_ID"
+			+ " INNER JOIN C_BPartner p ON p.C_BPartner_ID=c.C_BPartner_ID"
+			+ " INNER JOIN C_BPartner_Location pl ON pl.C_BPartner_ID=c.C_BPartner_ID"
+			+ " INNER JOIN AD_User u ON u.AD_User_ID=c.CreatedBy"
+			// m_CRMSQL += " INNER JOIN C_Location l ON l.C_Location_ID=pl.C_Location_ID";
+			+ " WHERE a.isActive='Y' AND ca.isTerminada<>'Y' AND (c.CreatedBy=? OR ?=0)";
+			// + " AND ca.fechaproxaccion NOT IS NULL";
+		}
+		
+		int retValue = DB.getSQLValue(null, m_CRMSQL, m_AD_User_ID, Env.getAD_Org_ID(Env.getCtx())); 
+		// int retValue = DB.getSQLValue(null, m_CRMSQL, Env.getAD_Org_ID(Env.getCtx()));
+		return retValue;
+	}	//	getRequests
+	
+	/*
+	 *  Open CRM Window
+	 */
+	private void gotoCRM()
+	{
+		
+		/*
+		if (m_CRM_Menu_ID == 0)
+			m_CRM_Menu_ID = DB.getSQLValue(null, "SELECT AD_Menu_ID "
+				+ "FROM AD_Menu m "
+				+ "WHERE m.Name LIKE '%CRM Acciones programadas%' ");
+		(new AMenuStartItem (m_CRM_Menu_ID, true, Msg.translate(m_ctx, "CRM - Acciones Programadas"), this)).start();		//	async load
+		*/
+		
+		System.out.println("Llamo a =new org.compiere.apps.search.InfoScheduleCRM (Env.getFrame(c), null, false); desde AMenu.java UpdateInfo.java");
+		new org.compiere.apps.search.InfoScheduleCRM (Env.getFrame(null), null, false);
+		
+		
+	}   //  gotoMessage
+
+	
+	
 	/**
 	 *	Show Memory Info - run GC if required - Update Requests/Memos/Activities
 	 */
@@ -677,11 +795,41 @@ public final class AMenu extends CFrame
 		if (DB.isConnected())
 		{
 			//	Requests
-			int requests =  getRequests();
+			// int request = getRequests(); 
+			// dREHER para que cargue menos
+			int requests =  -1;
+			
 			bRequests.setText(Msg.translate(m_ctx, "R_Request_ID") + ": " + requests);
 			//	Memo
 			int notes = getNotes();
 			bNotes.setText(Msg.translate(m_ctx, "AD_Note_ID") + ": " + notes);
+			
+			// dREHER, CRM tareas programadas
+			// int crm = getCRM();
+			// dREHER, se utiliza CRM externo, por lo tanto dejo de contar cuantas consultas de CRM hay dentro de Adempiere
+			int crm = -1;
+			bCRM.setText(Msg.translate(m_ctx, "CRM-Acciones programadas") + ": " + crm);
+			
+			
+			// dREHER, si hay notas cambiar color y emitir sonido, esto ultimo ver si no es muy denso!!!
+			Color bg = null;
+			
+			if( notes > 0 ){
+				bg = Color.PINK;
+			}else{
+				bg = bRequests.getBackground();
+			}
+			bNotes.setBackground(bg);
+			
+			// dREHER, cambiar el color de las acciones programadas
+			if( crm > 0 ){
+				bg = Color.PINK;
+			}else{
+				bg = bRequests.getBackground();
+			}
+			bCRM.setBackground(bg);
+			
+			
 			//	Activities
 			int activities = wfActivity.getActivitiesCount();
 			centerPane.setTitleAt(m_tabActivities, Msg.getMsg (m_ctx, "WorkflowActivities") + ": " + activities);
