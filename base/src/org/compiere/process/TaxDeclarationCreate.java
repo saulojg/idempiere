@@ -18,16 +18,19 @@ package org.compiere.process;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.GregorianCalendar;
 import java.util.logging.Level;
 
 import org.compiere.model.MFactAcct;
 import org.compiere.model.MInvoice;
 import org.compiere.model.MInvoiceTax;
+import org.compiere.model.MSysConfig;
 import org.compiere.model.MTaxDeclaration;
 import org.compiere.model.MTaxDeclarationAcct;
 import org.compiere.model.MTaxDeclarationLine;
 import org.compiere.util.AdempiereSystemError;
 import org.compiere.util.DB;
+import java.sql.Timestamp;
 
 /**
  * 	Create Tax Declaration
@@ -93,10 +96,16 @@ public class TaxDeclarationCreate extends SvrProcess
 			if (no != 0)
 				log.config("Delete Acct #" + no);
 		}
-
+		
+		/***sgo 
+		 * - recupera todas las facturas que no esten declaradas en el periodo indicado
+		 * - idea: de la fecha desde, restarle x dias (creo que 90) para atras 
+		 *   para que tome facturas viejas cargadas despues. Dichas facturas
+		 *   deberian tener fecha de conta <> dateinvoiced
+		 */
 		//	Get Invoices
 		String sql = "SELECT * FROM C_Invoice i "
-			+ "WHERE TRUNC(i.DateInvoiced) >= ? AND TRUNC(i.DateInvoiced) <= ? "
+			+ "WHERE ( TRUNC(i.DateInvoiced  ) ) >= ? AND TRUNC(i.DateInvoiced) <= ? "
 			+ " AND Processed='Y'"
 			+ " AND NOT EXISTS (SELECT * FROM C_TaxDeclarationLine tdl "
 				+ "WHERE i.C_Invoice_ID=tdl.C_Invoice_ID)";
@@ -106,7 +115,20 @@ public class TaxDeclarationCreate extends SvrProcess
 		try
 		{
 			pstmt = DB.prepareStatement (sql, get_TrxName());
-			pstmt.setTimestamp(1, m_td.getDateFrom());
+			
+			//tomo los dias para atras permitidos para declarar impuestos de ad_sysconfig
+			int dias = MSysConfig.getIntValue("DIAS_PLAZO_IVA", 0); // defaults to 0
+			dias = dias * -1;
+			
+			//a la fecha dada, le resto x dias
+			GregorianCalendar cal = new GregorianCalendar();
+			cal.setTime(m_td.getDateFrom());
+			cal.add( GregorianCalendar.DATE, dias);
+			
+			
+									
+			//pstmt.setTimestamp(1, m_td.getDateFrom()); original
+			pstmt.setTimestamp(1, new Timestamp(cal.getTime().getTime()) );
 			pstmt.setTimestamp(2, m_td.getDateTo());
 			rs = pstmt.executeQuery ();
 			while (rs.next ())
