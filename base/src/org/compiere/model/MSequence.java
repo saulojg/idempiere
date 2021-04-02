@@ -1218,6 +1218,62 @@ public class MSequence extends X_AD_Sequence
 		return change;
 	}	//	validate
 	
+     /**
+     *      Get Sequence
+     *      @param ctx context
+     *      @param tableName table name
+     *      Compatibilidad Web Orden de Pago Libertya - dREHER
+     * @return
+     */
+    public static MSequence get(Properties ctx, String tableName, boolean isTableID, Integer AD_Client_ID) {
+
+        String	sql	= 	"SELECT * FROM AD_Sequence " + 
+        				" WHERE UPPER(Name) = UPPER(?)" + 
+        				" AND IsTableID = " + (isTableID?"'Y'":"'N'");
+        
+        if (AD_Client_ID != null)
+        	sql = sql + " AND AD_Client_ID = " + AD_Client_ID;
+        MSequence		retValue	= null;
+        PreparedStatement	pstmt		= null;
+
+        try {
+
+            pstmt	= DB.prepareStatement(sql);
+            pstmt.setString(1, tableName.toUpperCase());
+
+            ResultSet	rs	= pstmt.executeQuery();
+
+            if (rs.next()) {
+                retValue	= new MSequence(ctx, rs, null);
+            }
+
+            if (rs.next()) {
+                s_log.log(Level.SEVERE, "More then one sequence for " + tableName);
+            }
+
+            rs.close();
+            pstmt.close();
+            pstmt	= null;
+
+        } catch (Exception e) {
+            s_log.log(Level.SEVERE, "get", e);
+        }
+
+        try {
+
+            if (pstmt != null) {
+                pstmt.close();
+            }
+
+            pstmt	= null;
+
+        } catch (Exception e) {
+            pstmt	= null;
+        }
+
+        return retValue;
+
+    }		// get
 	
 	/**************************************************************************
 	 *	Test
