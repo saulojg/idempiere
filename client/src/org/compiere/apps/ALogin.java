@@ -26,12 +26,19 @@ import javax.swing.event.*;
 
 import org.adempiere.plaf.AdempierePLAF;
 import org.compiere.*;
+import org.compiere.apps.ADialog;
+import org.compiere.apps.AEnv;
+import org.compiere.apps.ConfirmPanel;
+import org.compiere.apps.OnlineHelp;
+import org.compiere.apps.StatusBar;
 import org.compiere.db.*;
 import org.compiere.grid.ed.*;
 import org.compiere.model.*;
 import org.compiere.print.*;
 import org.compiere.swing.*;
 import org.compiere.util.*;
+import org.compiere.utils.LARSucursal;
+
 
 /**
  *	Application Login Window
@@ -69,6 +76,17 @@ public final class ALogin extends CDialog
 	}   //  ALogin
 
 
+	// region Roca
+	private void close(){
+        if (m_isOkSucursal){
+        	log.warning("Ok sucursal, cierro");
+        	dispose();
+        }else
+        	log.warning("Mal sucursal, no puedo cerrar!");
+    } 
+	// endregion Roca
+
+
 	protected static final String RESOURCE = "org.compiere.apps.ALoginRes";
 	private static ResourceBundle res = ResourceBundle.getBundle(RESOURCE);
 	/**	Logger			*/
@@ -102,6 +120,11 @@ public final class ALogin extends CDialog
 	private CLabel titleLabel = new CLabel();
 	private CLabel versionLabel = new CLabel();
 	private CLabel copy1Label = new CLabel();
+	// region Roca
+	//TODO German nuevo 24-09-09
+	private CLabel sucLabel = new CLabel();
+	private VComboBox sucCombo = new VComboBox();
+	// endregion
 	private GridBagLayout connectionLayout = new GridBagLayout();
 	private GridBagLayout defaultPanelLayout = new GridBagLayout();
 	private CLabel languageLabel = new CLabel();
@@ -135,6 +158,8 @@ public final class ALogin extends CDialog
 	private Properties      m_ctx = Env.getCtx();
 	
 	private Login			m_login = null;
+	
+	private boolean			m_isOkSucursal = false; // Roca
 
 	
 	/**************************************************************************
@@ -261,12 +286,23 @@ public final class ALogin extends CDialog
 		orgCombo.addActionListener(this);
 		defaultPanel.add(orgCombo,        new GridBagConstraints(1, 2, 1, 1, 1.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 5, 12), 0, 0));
+		
+		// region Roca
+		//TODO German nuevo 24-09-09
+		sucLabel.setRequestFocusEnabled(false);
+		sucLabel.setText("Sucursal");
+		sucLabel.setLabelFor(sucCombo);
+		sucCombo.addActionListener(this);
+		defaultPanel.add(sucLabel,  new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 12, 5, 5), 0, 0));
+		defaultPanel.add(sucCombo,   new GridBagConstraints(1, 3, 1, 1, 1.0, 0.0,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(5, 0, 5, 12), 0, 0));
+		// endregion Roca
+		
 		dateLabel.setText("Date");
 		dateLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		dateLabel.setLabelFor(dateField);
-		defaultPanel.add(dateLabel,       new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0
+		defaultPanel.add(dateLabel,       new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0
 			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 12, 5, 5), 0, 0));
-		defaultPanel.add(dateField,        new GridBagConstraints(1, 4, 1, 1, 1.0, 0.0
+		defaultPanel.add(dateField,        new GridBagConstraints(1, 5, 1, 1, 1.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(5, 0, 5, 12), 0, 0));
 		//
 		warehouseLabel.setText("Warehouse");
@@ -275,13 +311,13 @@ public final class ALogin extends CDialog
 		printerLabel.setText("Printer");
 		printerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 		printerLabel.setLabelFor(printerField);
-		defaultPanel.add(printerLabel,        new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0
+		
+		defaultPanel.add(printerLabel,        new GridBagConstraints(0, 6, 1, 1, 0.0, 0.0
 			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(0, 12, 12, 5), 0, 0));
-		defaultPanel.add(printerField,        new GridBagConstraints(1, 5, 1, 1, 1.0, 0.0
+		defaultPanel.add(printerField,        new GridBagConstraints(1, 6, 1, 1, 1.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 12, 12), 0, 0));
-		defaultPanel.add(warehouseLabel,  new GridBagConstraints(0, 3, 1, 1, 0.0, 0.0
-			,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 12, 5, 5), 0, 0));
-		defaultPanel.add(warehouseCombo,   new GridBagConstraints(1, 3, 1, 1, 1.0, 0.0
+		defaultPanel.add(warehouseLabel,  new GridBagConstraints(0, 4, 1, 1, 0.0, 0.0,GridBagConstraints.EAST, GridBagConstraints.NONE, new Insets(5, 12, 5, 5), 0, 0));
+		defaultPanel.add(warehouseCombo,   new GridBagConstraints(1, 4, 1, 1, 1.0, 0.0
 			,GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(5, 0, 5, 12), 0, 0));
 		//
 		loginTabPane.add(defaultPanel, res.getString("Defaults"));
@@ -319,6 +355,8 @@ public final class ALogin extends CDialog
 	 */
 	public boolean initLogin()
 	{
+		m_isOkSucursal = false; // Roca
+		
 		m_cc = CConnection.get(Adempiere.getCodeBaseHost());
 		hostField.setValue(m_cc);
 		
@@ -346,6 +384,18 @@ public final class ALogin extends CDialog
 		}
 		return false;
 	}	//	initLogin
+
+	// dREHER, sucursal grabada en properties
+	private String LoadSucFromIni() {
+		System.out.println("Leido desde Properties:" + Ini.getProperty("LAR_Sucursal"));
+		return Ini.getProperty("LAR_Sucursal");
+	}
+	
+	// dREHER, sucursal grupo grabada en properties
+	private String LoadSucGrupoFromIni() {
+		System.out.println("Leido desde Properties:" + Ini.getProperty("LAR_SucursalGrupo_ID"));
+		return Ini.getProperty("LAR_SucursalGrupo_ID");
+	}
 
 	/**
 	 *  Window Events - requestFocus
@@ -448,6 +498,91 @@ public final class ALogin extends CDialog
 				if(!defaultsOK())
 					m_okPressed = false;
 				setCursor(Cursor.getDefaultCursor());
+				// region Roca
+				
+//				dREHER, Guarda ultima sucursal seleccionada
+				KeyNamePair suc = (KeyNamePair)sucCombo.getSelectedItem();
+				
+				if(suc==null){
+					// m_okPressed = false;
+					log.warning("Debe seleccionar una sucursal valida!");
+					// throw new Exception("Debe seleccionar una sucursal valida!");
+					// ADialog.warn (m_WindowNo, this, "Debe seleccionar una sucursal valida!");
+					m_isOkSucursal = false;
+					return;
+				}
+				
+				Ini.setProperty("LAR_Sucursal", suc.getName());
+				m_ctx.setProperty("#LAR_Sucursal", suc.getName());
+				m_isOkSucursal = true;
+				
+				
+				// dREHER, busco el C_Period_ID de la fecha actual y seteo en el entorno global, para poder utilizar en donde se necesite
+				
+				int C_Period_ID = DB.getSQLValue(null, "SELECT getperiodo('" + Env.getContextAsDate(m_ctx, "#Date")  + "')" );
+				m_ctx.setProperty("#C_Period_ID", String.valueOf(C_Period_ID));
+				
+				// dREHER, busco el LAR_SucursalGrupo_ID y lo seteo en el entorno global
+				int LAR_SucursalGrupo_ID = DB.getSQLValue(null, "SELECT LAR_SucursalGrupo_ID FROM LAR_Sucursal WHERE LAR_Sucursal_ID=" + Env.getContextAsInt(m_ctx, "#LAR_Sucursal_ID"));
+				m_ctx.setProperty("#LAR_SucursalGrupo_ID", String.valueOf(LAR_SucursalGrupo_ID));
+				
+				log.info("Seteo en entorno #LAR_SucursalGrupo_ID" + LAR_SucursalGrupo_ID);
+				
+				log.info("Seteo en entorno #C_Period_ID=" + C_Period_ID);
+				
+				
+				String isStorageSSH = Miscfunc.ValueFromSystem("isStoreAttachmentOnSSHFileSystem", "N", true, "Y=Si, N=No");
+				m_ctx.setProperty("#isStoreAttachmentOnSSHFileSystem", isStorageSSH);
+				
+				log.info("Seteo en entorno #isStoreAttachmentOnSSHFileSystem=" + isStorageSSH);
+				
+				String tipoNegocio = Miscfunc.ValueFromSystem("TipoNegocio", "FINANCIERA", true);
+				m_ctx.setProperty("#TIPONEGOCIO", String.valueOf(tipoNegocio));
+				
+				// dREHER 08/07/2015
+				// Se logueo en Adempiere, guardo log del acceso
+				
+				log.info("Comienza el log de ingreso");
+				
+				MUser us = new MUser(Env.getCtx(), Env.getAD_User_ID(Env.getCtx()), null);
+				int C_BPartner_ID = us.getC_BPartner_ID();
+				
+				java.util.Date date = new java.util.Date();
+				Timestamp ahora = new Timestamp(date.getTime());
+				
+				String Equipo = "";
+				InetAddress localHost;
+				try {
+					localHost = InetAddress.getLocalHost();
+					Equipo = localHost.getHostName() + " - " + localHost.getHostAddress();
+					System.out.println(localHost.getHostName());
+					System.out.println(localHost.getHostAddress());
+				} catch (UnknownHostException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				// 09/03/2016 dREHER, solo guardo login si hay un Socio de Negocios asociado
+				if(C_BPartner_ID > 0){
+					X_LAR_Login l = new X_LAR_Login(Env.getCtx(), 0, null);
+					l.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
+					l.setAD_User_ID(Env.getAD_User_ID(Env.getCtx()));
+					l.setAD_Role_ID(Env.getAD_Role_ID(Env.getCtx()));
+					l.setC_BPartner_ID(C_BPartner_ID);
+					l.setDescription("Ingreso al sistema=" + tipoNegocio);
+					l.setEquipo(Equipo);
+					l.setFecha(ahora);
+					l.setLAR_Sucursal_ID(Integer.valueOf(suc.getID()));
+					l.setTipo("L"); // Loguin - ingreso a Adempiere
+					if(!l.save(null)){
+						log.warning("No se pudo guardar log de acceso al sistema");
+					}
+				}
+				
+				log.info("Finaliza el log de ingreso");
+				
+				// Fin de log al sistema
+				// endregion Roca
 			}
 		}
 		else if (e.getActionCommand().equals(ConfirmPanel.A_CANCEL))
@@ -464,6 +599,8 @@ public final class ALogin extends CDialog
 			clientComboChanged();
 		else if (e.getSource() == orgCombo)
 			orgComboChanged();
+		else if (e.getSource() == sucCombo)
+			sucComboChanged();
 		else if ("onlineLoginHelp".equals(e.getActionCommand()))
 			OnlineHelp.openInDefaultBrowser();
 	}	//	actionPerformed
@@ -614,6 +751,7 @@ public final class ALogin extends CDialog
 				statusBar.setStatusLine(txt_UserPwdError, true);
 				userTextField.setBackground(AdempierePLAF.getFieldBackground_Error());
 				passwordField.setBackground(AdempierePLAF.getFieldBackground_Error());
+				confirmPanel.getOKButton().setEnabled(true);
 				return false;
 			}
 		}
@@ -624,6 +762,7 @@ public final class ALogin extends CDialog
 				statusBar.setStatusLine(txt_UserPwdError, true);
 				userTextField.setBackground(AdempierePLAF.getFieldBackground_Error());
 				passwordField.setBackground(AdempierePLAF.getFieldBackground_Error());
+				confirmPanel.getOKButton().setEnabled(true);
 				return false;
 			}
 			else
@@ -738,6 +877,9 @@ public final class ALogin extends CDialog
 		String iniDefault = Ini.getProperty(Ini.P_ORG);
 
 		//  fill orgs
+		// dREHER si tiene acceso a cero, seteo esa org
+		boolean isOrgCero = false;
+		KeyNamePair orgCero = null;
 		for (int i = 0; i < orgs.length; i++)
 		{
 			orgCombo.addItem(orgs[i]);
@@ -745,10 +887,22 @@ public final class ALogin extends CDialog
 				orgValue = orgs[i];
 			if (orgValue2 == null && orgs[i].getKey() != 0)
 				orgValue2 = orgs[i];	//	first non-0 org
+			
+			
+			if(orgs[i].getKey() == 0){
+				isOrgCero = true;
+				orgCero = orgs[i];
+			}
+			
 		}
 		//	Non-0 Org exists and last login was with 0
 		if (orgValue2 != null && orgValue != null && orgValue.getKey() == 0)
 			orgValue = orgValue2;
+		
+		
+		if(isOrgCero)
+			orgValue=orgCero;
+		
 		//	Last Org
 		if (orgValue != null)
 			orgCombo.setSelectedItem(orgValue);
@@ -769,6 +923,10 @@ public final class ALogin extends CDialog
 		if (org == null || m_comboActive)
 			return;
 		log.config(": " + org);
+		
+		KeyNamePair suc = (KeyNamePair)sucCombo.getSelectedItem();
+		log.config(": " + suc);
+		
 		m_comboActive = true;
 		//
 		KeyNamePair[] whs = m_login.getWarehouses(org);
@@ -792,8 +950,113 @@ public final class ALogin extends CDialog
 				warehouseCombo.setSelectedItem(iniValue);
 		}
 		m_comboActive = false;
+		
+		// dREHER
+		fillSucCombo();
+		
 	}	//	orgComboChanged
 	
+	/**
+	 * @author German Wagner
+	 */
+	private void fillSucCombo()
+	{
+		KeyNamePair org = (KeyNamePair)orgCombo.getSelectedItem();
+		m_ctx.setProperty("#AD_Org_ID", org.getID());
+		KeyNamePair sucs[]=LARSucursal.getSucursales(m_ctx);
+		
+		if(sucCombo.getItemCount() > 0)
+			sucCombo.removeAllItems();
+		
+		int suc = 0;
+		
+		// Seteo ultima sucursal grabada en el archivo de propiedades
+		// dREHER
+		String iniDefault = LoadSucFromIni();
+		
+		if(sucs!=null)
+		{
+			for (int i = 0; i < sucs.length; i++){
+				sucCombo.addItem(sucs[i]);
+				
+				if (sucs[i].getName().equals(iniDefault))
+					suc = i;
+			}
+			
+			if(sucCombo.getItemCount() > 0){
+				sucCombo.setSelectedIndex(suc);
+				sucComboChanged();
+			}
+		}
+		
+		// dREHER, seteo nombre de sucursal en el entorno
+		if((suc > -1) && (sucs.length > 0)){
+			m_ctx.setProperty("#LAR_Sucursal", sucs[suc].getName());
+			System.out.println("LAR_Sucursal:" + sucs[suc].getName());	
+			
+			confirmPanel.getOKButton().setEnabled(true);
+			
+		}
+		
+		log.warning("lleno combo sucursales...");
+		
+		// dREHER, sino se llenaron las sucursales, no habilitar boton OK
+		if(sucCombo.getItemCount() <= 0){
+			log.warning("no habilitar boton...");
+				confirmPanel.getOKButton().setEnabled(false);
+		}
+		
+	}
+	
+	/**
+	 * @author German Wagner
+	 */
+	private void sucComboChanged()
+	{
+		KeyNamePair suc = (KeyNamePair)sucCombo.getSelectedItem();
+		if (suc == null || m_comboActive){
+			return;
+		}
+		
+		KeyNamePair org = (KeyNamePair)orgCombo.getSelectedItem();
+
+		m_comboActive = true;
+		m_ctx.setProperty("#LAR_Sucursal_ID", suc.getID());
+		
+		// dREHER, seteo nombre de sucursal en el entorno
+		m_ctx.setProperty("#LAR_Sucursal", suc.getName());
+		
+		
+		// dREHER, busco el LAR_SucursalGrupo_ID y lo seteo en el entorno global
+		int LAR_SucursalGrupo_ID = DB.getSQLValue(null, "SELECT LAR_SucursalGrupo_ID FROM LAR_Sucursal WHERE LAR_Sucursal_ID=" + suc.getID());
+		m_ctx.setProperty("#LAR_SucursalGrupo_ID", String.valueOf(LAR_SucursalGrupo_ID));
+		
+		
+		// dREHER, Detecto cambio de suc, por lo tanto cambiar los almacenes
+		KeyNamePair[] whs = m_login.getWarehouses(org, suc);
+		//	Delete existing warehouse items
+		if (warehouseCombo.getItemCount() > 0){
+			warehouseCombo.removeAllItems();
+			warehouseCombo.setSelectedItem(null);
+		}
+		//  fill warehouses
+		if (whs != null)
+		{
+			//  initial warehouse
+			KeyNamePair iniValue = null;
+			String iniDefault = Ini.getProperty(Ini.P_WAREHOUSE);
+			for (int i = 0; i < whs.length; i++)
+			{
+				warehouseCombo.addItem(whs[i]);
+				if (whs[i].getName().equals(iniDefault))
+					iniValue = whs[i];
+			}
+			if (iniValue != null)
+				warehouseCombo.setSelectedItem(iniValue);
+		}
+
+		m_comboActive = false;
+	}
 	
 	/**
 	 *  Check Version
