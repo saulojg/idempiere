@@ -137,6 +137,41 @@ public class MCurrency extends X_C_Currency
 			+ "," + getDescription()
 			+ ",Precision=" + getStdPrecision() + "/" + getCostingPrecision();
 	}	//	toString
+	
+	public static BigDecimal currencyConvert(BigDecimal amount, int currencyFrom, int currencyTo, Date date, int adOrg, Properties ctx )
+    {
+    	BigDecimal result = null;
+    	try
+    	{
+    		StringBuffer sql = new StringBuffer("SELECT currencyconvert (?, ?, ?, ? ::timestamp, null, ?, ");
+    		if (adOrg > 0)
+    			sql.append( "? )");
+    		else
+    			sql.append( "null )");
+
+    		PreparedStatement pstmt = DB.prepareStatement(sql.toString());
+    		pstmt.setBigDecimal(1, amount);
+    		pstmt.setInt(2, currencyFrom);
+    		pstmt.setInt(3, currencyTo);
+    		//pstmt.setDate(4, new  java.sql.Date(date.getTime()) );
+    		// currencyconvert requiere un timestamp como parametro. En ciertos casos 
+    		// estaba funcionando mal con el Date. 
+    		pstmt.setTimestamp(4, new Timestamp(date.getTime()) ); 
+    		pstmt.setInt(5, Env.getAD_Client_ID(ctx) );
+    		
+    		if (adOrg > 0)
+    			pstmt.setInt(6, adOrg );
+    		
+    		ResultSet rs = pstmt.executeQuery();
+    		if (rs.next())
+    			result = rs.getBigDecimal(1);
+    	}
+    	catch (Exception e ) {
+    		e.printStackTrace();
+    	}
+		return result;
+    }    
+    
 
 
 	/*************************************************************************/

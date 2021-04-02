@@ -19,6 +19,8 @@ package org.compiere.model;
 import java.io.*;
 import java.util.*;
 import java.util.logging.*;
+
+import org.adempiere.utils.SSH.SSHUtil;
 import org.compiere.util.*;
 
 
@@ -30,17 +32,26 @@ import org.compiere.util.*;
  */
 public class MAttachmentEntry
 {
+	// dREHER, sobreescribo para guardar compatibilidad
+	public MAttachmentEntry (String name, byte[] data, int index)
+	{
+		this (name, data, 0, null);
+	}
+	
 	/**
 	 * 	Attachment Entry
 	 * 	@param name name
 	 * 	@param data binary data
 	 * 	@param index optional index
 	 */
-	public MAttachmentEntry (String name, byte[] data, int index)
+	// dREHER, sobreescribo para guardar compatibilidad
+	public MAttachmentEntry (String name, byte[] data, int index, String absolutePath)
 	{
 		super ();
 		setName (name);
 		setData (data);
+		setAbsolutePath(absolutePath);
+		
 		if (index > 0)
 			m_index = index;
 		else
@@ -65,6 +76,16 @@ public class MAttachmentEntry
 		this (name, data, 0);
 	}	//	MAttachmentItem
 	
+	/**
+	 * 	Attachment Entry
+	 * 	@param name name
+	 * 	@param data binary data
+	 */
+	public MAttachmentEntry (String name, byte[] data, String absolutePath)
+	{
+		this (name, data, 0, absolutePath);
+	}	//	MAttachmentItem
+	
 	/**	The Name				*/
 	private String 	m_name = "?";
 	/** The Data				*/
@@ -81,6 +102,18 @@ public class MAttachmentEntry
 	protected CLogger	log = CLogger.getCLogger(getClass());
 	
 	
+	// dREHER - la agrego para poder recuperarla luego mediante FileSystem
+	private String absolutePath = null;
+	
+	
+	public String getAbsolutePath() {
+		return absolutePath;
+	}
+
+	public void setAbsolutePath(String absolutePath) {
+		this.absolutePath = absolutePath;
+	}
+
 	/**
 	 * @return Returns the data.
 	 */
@@ -213,6 +246,16 @@ public class MAttachmentEntry
 	{
 		return getFile (getName());
 	}	//	getFile
+	
+	/**
+	 * 	Get File with default name
+	 *	@return File
+	 */
+	// dREHER
+	public File getFileSSH ()
+	{
+		return getFileSSH (getName());
+	}	//	getFile
 
 	/**
 	 * 	Get File with name
@@ -225,6 +268,20 @@ public class MAttachmentEntry
 			fileName = getName();
 		return getFile (new File(fileName));
 	}	//	getFile
+	
+	/**
+	 * 	Get File with name
+	 *	@param fileName optional file name
+	 *	@return file
+	 */	
+	// dREHER
+	public File getFileSSH (String fileName)
+	{
+		if (fileName == null || fileName.length() == 0)
+			fileName = getName();
+		// SSHUtil.ReadFileFromSSHServer(SFTPHOST, SFTPPORT, SFTPUSER, SFTPPASS, SFTPWORKINGDIR, fileName, fileName)
+		return getFileSSH (new File(fileName));
+	}	//	getFile
 
 	/**
 	 * 	Get File
@@ -232,6 +289,29 @@ public class MAttachmentEntry
 	 *	@return file
 	 */
 	public File getFile (File file)
+	{
+		if (m_data == null || m_data.length == 0)
+			return null;
+		try
+		{
+			FileOutputStream fos = new FileOutputStream(file);
+			fos.write(m_data);
+			fos.close();
+		}
+		catch (IOException ioe)
+		{
+			log.log(Level.SEVERE, "getFile", ioe);
+		}
+		return file;
+	}	//	getFile
+	
+	/**
+	 * 	Get File
+	 *	@param file out file
+	 *	@return file
+	 */
+	// dREHER
+	public File getFileSSH (File file)
 	{
 		if (m_data == null || m_data.length == 0)
 			return null;
@@ -263,7 +343,8 @@ public class MAttachmentEntry
 	 */
 	public boolean isGraphic()
 	{
-		return m_name.endsWith(".gif") || m_name.endsWith(".jpg") || m_name.endsWith(".png");
+		String m_namex = m_name.toLowerCase();
+		return m_namex.endsWith(".gif") || m_namex.endsWith(".jpg") || m_namex.endsWith(".jpeg") || m_namex.endsWith(".png");
 	}	//	isGraphic
 	
 	

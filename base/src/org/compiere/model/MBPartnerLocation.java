@@ -170,8 +170,14 @@ public class MBPartnerLocation extends X_C_BPartner_Location
 		//	Check uniqueness
 		MBPartnerLocation[] locations = getForBPartner(getCtx(), getC_BPartner_ID());
 		boolean unique = locations.length == 0;
-		while (!unique)
+		
+		// dREHER, Para prevenir loop infinito
+		int contador=0;
+		int uniqueNumber = 0;
+		while (!unique) 
 		{
+			contador++;
+			
 			unique = true;
 			for (int i = 0; i < locations.length; i++)
 			{
@@ -181,6 +187,8 @@ public class MBPartnerLocation extends X_C_BPartner_Location
 				if (m_uniqueName.equals(location.getName()))
 				{
 					makeUnique(address);
+					if(contador > 10)
+						m_uniqueName += " (" + String.valueOf(++uniqueNumber).trim() + ")";
 					unique = false;
 					break;
 				}
@@ -256,5 +264,26 @@ public class MBPartnerLocation extends X_C_BPartner_Location
 			m_unique = 4;
 		}
 	}	//	makeUnique
+	
+	
+	/* dREHER, ID del FIN_TipoDomicilio */
+	/** ID Fin_TipoDomicilio
+	@return Identifies a FIN_TipoDomicilio
+	 */
+	public int get_FIN_TipoDomcilio_ID () 
+	{
+		Integer ii = (Integer)get_Value("FIN_TipoDomicilio_ID");
+		if (ii == null)
+			return 0;
+		return ii.intValue();
+	}
+
+	/** Set Partner Location.
+	@param FIN_TipoDomicilio_ID 
+	 */
+	public void set_FIN_TipoDomicilio_ID (int FIN_TipoDomicilio_ID)
+	{
+		set_ValueNoCheck ("FIN_TipoDomicilio_ID", Integer.valueOf(FIN_TipoDomicilio_ID));
+	}
 	
 }	//	MBPartnerLocation

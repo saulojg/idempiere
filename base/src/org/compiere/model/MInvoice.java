@@ -280,6 +280,9 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		setC_BPartner_ID(order.getBill_BPartner_ID());
 		setC_BPartner_Location_ID(order.getBill_Location_ID());
 		setAD_User_ID(order.getBill_User_ID());
+		// Roca
+		int sucID=Integer.valueOf(order.get_ValueAsString("LAR_Sucursal_ID"));
+		set_CustomColumn("LAR_Sucursal_ID", sucID);
 	}	//	MInvoice
 
 	/**
@@ -300,7 +303,30 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		//
 		setSalesRep_ID(ship.getSalesRep_ID());
 		setAD_User_ID(ship.getAD_User_ID());
+		// Roca
+		int sucID=Integer.valueOf(ship.get_ValueAsString("LAR_Sucursal_ID"));
+		set_CustomColumn("LAR_Sucursal_ID", sucID);
 	}	//	MInvoice
+	
+	
+	
+	// 10-06-2016
+	//Sergio
+	// Obetengo el C_BPartner_ID del Cliente ( Para Comisiones )
+	public int getC_BPartnerCliente_ID()
+	{
+		int C_BPartner_ID = -1;
+		
+		try{
+			if(getFIN_BPartnerCredit_ID() > 0)
+				C_BPartner_ID = DB.getSQLValue(null, "SELECT C_BPartner_ID FROM FIN_BPartnerCredit WHERE FIN_BPartnerCredit_ID = " + getFIN_BPartnerCredit_ID());
+		}
+		catch(Exception ex){
+			ex.printStackTrace();
+		}
+		return C_BPartner_ID;
+	}
+	
 	
 	/**
 	 * 	Create Invoice from Batch Line
@@ -907,6 +933,20 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		if (getC_BPartner_Location_ID() == 0)
 			setBPartner(new MBPartner(getCtx(), getC_BPartner_ID(), null));
 
+		
+		try {
+			MBPartner bp = (MBPartner)this.getC_BPartner();
+			if(bp!=null)
+				if(!bp.isActive()){
+					log.saveError("Error", Msg.getMsg(getCtx(), "El Socio de negocios no esta activo! Socio=" + bp.getName()));
+					return false;
+				}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		//	Price List
 		if (getM_PriceList_ID() == 0)
 		{
@@ -1081,9 +1121,10 @@ public class MInvoice extends X_C_Invoice implements DocAction
 				+ "ah.C_Currency_ID, i.C_Currency_ID,ah.DateTrx,COALESCE(i.C_ConversionType_ID,0), al.AD_Client_ID,al.AD_Org_ID)) " 
 			+ "FROM C_AllocationLine al"
 			+ " INNER JOIN C_AllocationHdr ah ON (al.C_AllocationHdr_ID=ah.C_AllocationHdr_ID)"
-			+ " INNER JOIN C_Invoice i ON (al.C_Invoice_ID=i.C_Invoice_ID) "
-			+ "WHERE al.C_Invoice_ID=?"
-			+ " AND ah.IsActive='Y' AND al.IsActive='Y'";
+			+ " INNER JOIN C_Invoice i ON (al.C_Invoice_ID=i.C_Invoice_ID) " 
+			+ " INNER JOIN C_Payment pay ON (pay.C_Payment_ID=al.C_Payment_ID)"
+			+ " WHERE al.C_Invoice_ID=?"
+			+ " AND ah.IsActive='Y' AND al.IsActive='Y' AND ah.DocStatus IN ('CO','CL') AND pay.DocStatus IN ('CO','CL')";
 		PreparedStatement pstmt = null;
 		try
 		{
@@ -1312,8 +1353,28 @@ public class MInvoice extends X_C_Invoice implements DocAction
 	public boolean processIt (String processAction)
 	{
 		m_processMsg = null;
-		DocumentEngine engine = new DocumentEngine (this, getDocStatus());
-		return engine.processIt (processAction, getDocAction());
+		
+		String docStatus = getDocStatus();
+		String docAction = getDocAction();
+		
+		log.info("MInvoice.processIt - Antes de ejecutar DocumentEngine processAction=" + processAction + " docStatus=" + docStatus);
+		
+		if(processAction.equals("--") &&  docStatus.equals("IN")){
+			log.info("dREHER - MInvoice.processIt llego una factura en esta Invalido para completarse...");
+			
+			docStatus = "DR";
+			processAction = "CO";
+			
+		}
+			
+		
+		
+		DocumentEngine engine = new DocumentEngine (this, docStatus);
+		boolean ok = engine.processIt (processAction, docAction);
+		
+		log.info("MInvoice.processIt - Volvio de ejecutar DocumentEngine.processIt ok=" + ok);
+		
+		return ok;
 	}	//	process
 	
 	/**	Process Message 			*/
@@ -1410,15 +1471,26 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		//	Landed Costs
 		if (!isSOTrx())
 		{
-			for (int i = 0; i < lines.length; i++)
-			{
-				MInvoiceLine line = lines[i];
-				String error = line.allocateLandedCosts();
-				if (error != null && error.length() > 0)
+			int C_Charge_ID = this.getC_Charge_ID();
+		
+			// dREHER
+			// if(getDescription() == null || getDescription().toLowerCase().indexOf("comisi") == -1){
+			if( C_Charge_ID != 1000065 && C_Charge_ID != 1000078 && C_Charge_ID != 1000151 ){
+
+				for (int i = 0; i < lines.length; i++)
 				{
-					m_processMsg = error;
-					return DocAction.STATUS_Invalid;
+					MInvoiceLine line = lines[i];
+					String error = line.allocateLandedCosts();
+					if (error != null && error.length() > 0)
+					{
+						m_processMsg = error;
+						log.warning("MInvoice.prepareIt tiene allocations error=" + m_processMsg + ", devuelve IN...");
+						return DocAction.STATUS_Invalid;
+					}
 				}
+
+			}else{
+				log.fine(("Es comision/sueldos, no controlo pagos a cuenta o processed para completar");
 			}
 		}
 		
@@ -2359,5 +2431,102 @@ public class MInvoice extends X_C_Invoice implements DocAction
         setUser1_ID(originalInvoice.getUser1_ID());
         setUser2_ID(originalInvoice.getUser2_ID());
 	}
-	
+
+	public MPayment[] findPayments(String trxName) throws SQLException
+	{
+	    //TODO German CHEQUEAR
+	    MPayment result[]=null;
+	    ArrayList<MPayment> pays = new ArrayList<MPayment>();
+	    String sql=""
+		+"SELECT " 
+		+"	DISTINCT PAY.* " 
+		+"FROM C_Invoice CO  "
+		+"	LEFT JOIN c_allocationline AL " 
+		+"	ON AL.c_invoice_id = CO.c_invoice_id " 
+		+"	INNER JOIN c_payment PAY  "
+		+"	ON ( "
+		+"		PAY.c_invoice_id = CO.c_invoice_id " 
+		+"		OR "
+		+"		PAY.c_payment_id = AL.c_payment_id "
+		+"	) "
+		+"WHERE CO.C_Invoice_ID = "+getC_Invoice_ID();
+
+	    PreparedStatement pstmt;
+	    pstmt = DB.prepareStatement(sql, trxName);
+	    ResultSet rs=null;
+	    try
+	    {
+		rs=pstmt.executeQuery();
+
+		while(rs.next())
+		{
+		    MPayment pay = new MPayment(getCtx(),rs,trxName);
+		    pays.add(pay);
+		}
+	    }
+	    catch (SQLException e)
+	    {
+		throw e;
+	    }finally{
+			DB.close(rs, pstmt);
+			rs = null; pstmt = null;
+		}
+	    
+	    result = new MPayment[pays.size()];
+	    result= pays.toArray(result);
+	    
+	    return result;
+	}
+
+	public MPayment[] findPaymentsDespuesDe(String trxName,
+		Timestamp fechaDesde) throws SQLException
+	{
+	    // TODO Auto-generated method stub
+	    SimpleDateFormat sdf;
+	    String fecha="";
+	    sdf = new SimpleDateFormat("dd/MM/yyyy");
+	    fecha=sdf.format(new Date(fechaDesde.getTime()));
+	    
+	    MPayment result[]=null;
+	    ArrayList<MPayment> pays = new ArrayList<MPayment>();
+	    String sql=""
+		+"SELECT " 
+		+"	DISTINCT PAY.* " 
+		+"FROM C_Invoice CO  "
+		+"	LEFT JOIN c_allocationline AL " 
+		+"	ON AL.c_invoice_id = CO.c_invoice_id " 
+		+"	INNER JOIN c_payment PAY  "
+		+"	ON ( "
+		+"		PAY.c_invoice_id = CO.c_invoice_id " 
+		+"		OR "
+		+"		PAY.c_payment_id = AL.c_payment_id "
+		+"	) "
+		+"WHERE CO.C_Invoice_ID = "+getC_Invoice_ID()
+		+ "	AND PAY.datetrx > to_timestamp('" + fecha+"','dd/MM/YYYY')";
+
+	    PreparedStatement pstmt;
+	    pstmt = DB.prepareStatement(sql, trxName);
+	    ResultSet rs=null;
+	    try
+	    {
+		rs=pstmt.executeQuery();
+
+		while(rs.next())
+		{
+		    MPayment pay = new MPayment(getCtx(),rs,trxName);
+		    pays.add(pay);
+		}
+	    }
+	    catch (SQLException e)
+	    {
+		DB.close(rs, pstmt);
+		throw e;
+	    }
+	    DB.close(rs, pstmt);
+	    
+	    result = new MPayment[pays.size()];
+	    result= pays.toArray(result);
+	    
+	    return result;
+	}
 }	//	MInvoice

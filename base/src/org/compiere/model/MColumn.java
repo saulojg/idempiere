@@ -519,6 +519,28 @@ public class MColumn extends X_AD_Column
 		return retValue;
 	}
 	//end vpj-cd e-evolution
+
+	public static int getTable_ID(Properties ctx, int ad_Column_ID) {
+			
+		int retValue = 0;
+		String SQL = "SELECT AD_Table_ID FROM AD_Column WHERE AD_Column_ID = ?";
+		try
+		{
+			PreparedStatement pstmt = DB.prepareStatement(SQL, null);
+			pstmt.setInt(1, ad_Column_ID);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+				retValue = rs.getInt(1);
+			rs.close();
+			pstmt.close();
+		}
+		catch (SQLException e)
+		{
+			s_log.log(Level.SEVERE, SQL, e);
+			retValue = -1;
+		}
+		return retValue;
+	}
 	
 	
 
