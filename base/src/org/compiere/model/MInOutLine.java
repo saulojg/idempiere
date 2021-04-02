@@ -559,11 +559,18 @@ public class MInOutLine extends X_M_InOutLine
 		//	Order/RMA Line
 		if (getC_OrderLine_ID() == 0 && getM_RMALine_ID() == 0)
 		{
+			/*begin msuarez 09/01/2012 permitir envios sin Orden de venta ROCA
 			if (getParent().isSOTrx())
 			{
 				log.saveError("FillMandatory", Msg.translate(getCtx(), "C_Order_ID"));
 				return false;
+			}*/
+			if (getParent().isSOTrx() && getParent().getC_DocType_ID()!=1000164)
+			{
+				log.saveError("FillMandatory", Msg.translate(getCtx(), "C_Order_ID"));
+				return false;
 			}
+			//end msuarez
 		}
 		
 	//	if (getC_Charge_ID() == 0 && getM_Product_ID() == 0)

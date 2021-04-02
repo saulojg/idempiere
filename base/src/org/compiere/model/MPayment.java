@@ -143,6 +143,11 @@ public final class MPayment extends X_C_Payment
 			setDateTrx (new Timestamp(System.currentTimeMillis()));
 			setDateAcct (getDateTrx());
 			setTenderType(TENDERTYPE_Check);
+
+			// dREHER
+			// this.setlar_sucursal_ID(0);
+			// this.setlar_orgdestino_ID(null);
+			this.setlar_cuentabancaria_ID(0);
 		}
 	}   //  MPayment
 	
@@ -190,6 +195,7 @@ public final class MPayment extends X_C_Payment
 		setC_Charge_ID(0);
 		setC_Project_ID(0);
 		setIsPrepayment(false);
+		this.setlar_cuentabancaria_ID(0); // Roca
 	}	//	resetNew
 
 	/**
@@ -616,6 +622,51 @@ public final class MPayment extends X_C_Payment
 
 		return true;
 	}	//	beforeSave
+
+	// region Roca
+	protected boolean afterSave(boolean newRecord, boolean success)
+	{
+
+		Boolean ok = true;
+		
+		if (success)
+		{
+			
+			// actualiza fecha de autorizacion de vehiculos,depositos,transfrencias,tarjetas para comisiones
+			String estado = this.getDocStatus();
+			if(estado == "CO"){
+								
+				int prID = getLAR_PaymentRule_ID();
+				if(prID > 0)
+				{
+					X_LAR_PaymentRule pr = new X_LAR_PaymentRule(Env.getCtx(),prID,null);
+					if(pr != null)
+					{
+						if(pr.getLAR_PaymentRule_ID() == 1000009 || pr.getLAR_PaymentRuleGroup_ID() == 1000006 ||
+								pr.getLAR_PaymentRule_ID() == 1000004 || pr.getLAR_PaymentRuleGroup_ID() == 1000004 ||
+								pr.getLAR_PaymentRule_ID() == 1000007 || pr.getLAR_PaymentRuleGroup_ID() == 1000005 ||
+								pr.getLAR_PaymentRule_ID() == 1000016 || pr.getLAR_PaymentRuleGroup_ID() == 1000002 ||
+								pr.getLAR_PaymentRule_ID() == 1000018 || pr.getLAR_PaymentRuleGroup_ID() == 1000011){
+													
+							Date fecha = Miscfunc.FechaHOY();
+							String sql = "UPDATE C_Payment SET dateacct='" + Miscfunc.FechaAMD(fecha) + "' WHERE C_Payment_ID=?";
+							int upd = DB.executeUpdate(sql,this.getC_Payment_ID(), get_TrxName());
+							if(upd > -1)
+								log.fine("Se actualizo la fecha de autorizacion de automoviles,tajetas,depositos y transferencias del paymentId=" + this.getC_Payment_ID() + " Fecha=" + fecha);
+							else
+								log.warning("Error al actualizar la fecha de autorizacion de automoviles del paymentId=" + this.getC_Payment_ID() + " Fecha=" + fecha);
+						
+						}	
+					}
+				}			
+			}
+
+		}
+		
+		return ok;
+		
+	}
+	// endregion Roca
 	
 	/**
 	 * 	Get Allocated Amt in Payment Currency
@@ -624,8 +675,10 @@ public final class MPayment extends X_C_Payment
 	public BigDecimal getAllocatedAmt ()
 	{
 		BigDecimal retValue = null;
-		if (getC_Charge_ID() != 0)
-			return getPayAmt();
+		
+		// dREHER que este asociado a un cargo, no significa que este asignado
+		// if (getC_Charge_ID() != 0)
+		// return getPayAmt();
 		//
 		String sql = "SELECT SUM(currencyConvert(al.Amount,"
 				+ "ah.C_Currency_ID, p.C_Currency_ID,ah.DateTrx,p.C_ConversionType_ID, al.AD_Client_ID,al.AD_Org_ID)) "
@@ -1041,6 +1094,10 @@ public final class MPayment extends X_C_Payment
 		
 		documentNo = "";
 		// globalqss - read configuration to assign credit card or check number number for Payments
+		// region Roca
+		// afalcone: IDRA que no modifique el Nro.de Recibo con el Nro.Cheque o
+		// Tarj.Credito (31/01/2008)
+		/*
 		//	Credit Card
 		if (TENDERTYPE_CreditCard.equals(getTenderType()))
 		{
@@ -1077,6 +1134,8 @@ public final class MPayment extends X_C_Payment
 				}
 			}
 		}
+		*/
+		// endregion Roca
 
 		//	Set Document No
 		documentNo = documentNo.trim();
@@ -1532,24 +1591,43 @@ public final class MPayment extends X_C_Payment
 			MOrder order = new MOrder (getCtx(), getC_Order_ID(), get_TrxName());
 			if (DOCSTATUS_WaitingPayment.equals(order.getDocStatus()))
 			{
-				order.setC_Payment_ID(getC_Payment_ID());
-				order.setDocAction(X_C_Order.DOCACTION_WaitComplete);
-				order.set_TrxName(get_TrxName());
-			//	boolean ok = 
-				order.processIt (X_C_Order.DOCACTION_WaitComplete);
-				m_processMsg = order.getProcessMsg();
-				order.save(get_TrxName());
+				// region Roca
+				// COMPLETAR SOLO SI ESTA PAGA POR COMPLETO
+				// calculando saldo abierto
+				try {
+					BigDecimal d = order.calcOpenAmt(get_TrxName());
+
+					if (d.compareTo(Env.ZERO) <= 0) {
+						order.setC_Payment_ID(getC_Payment_ID());
+						order.setDocAction(X_C_Order.DOCACTION_WaitComplete);
+						order.set_TrxName(get_TrxName());
+					//	boolean ok = 
+						order.processIt (X_C_Order.DOCACTION_WaitComplete);
+						m_processMsg = order.getProcessMsg();
+						order.save(get_TrxName());
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+					return "Error calculando saldo abierto de la orden prepaga";
+				}
+				// endregion Roca
+
 				//	Set Invoice
 				MInvoice[] invoices = order.getInvoices();
 				int length = invoices.length;
 				if (length > 0)		//	get last invoice
 					setC_Invoice_ID (invoices[length-1].getC_Invoice_ID());
 				//
+				// region Roca
+				// German comentado para que fuincione sin generar factura ni
+				/*
 				if (getC_Invoice_ID() == 0)
 				{
 					m_processMsg = "@NotFound@ @C_Invoice_ID@";
 					return DocAction.STATUS_Invalid;
 				}
+				*/
+				// endregion Roca
 			}	//	WaitingPayment
 		}
 		
@@ -1639,7 +1717,8 @@ public final class MPayment extends X_C_Payment
 		//	Charge Handling
 		if (getC_Charge_ID() != 0)
 		{
-			setIsAllocated(true);
+			// ROCA // TODO Por ahora no va, no lo muestra en asignaciones.
+			// ROCA setIsAllocated(true);
 		}
 		else
 		{
@@ -1679,8 +1758,166 @@ public final class MPayment extends X_C_Payment
 		//
 		setProcessed(true);
 		setDocAction(DOCACTION_Close);
+		// region Roca
+		// Desde aca chequeo si una recepcion que estoy recibiendo de cheques, asi genero los LAR_ChequePayment
+
+		// Es un cobro, del tipo recepcion en la sucursal destino
+
+		String t = Miscfunc.ValueFromSystem("GenerarPagoPorTransferenciaEntreSucursales", "SI", true).toUpperCase();
+		int C_Charge_ID = getC_Charge_ID();
+		int ID_TransfR 	= Integer.parseInt((Miscfunc.ValueFromSystem("CargoDeTransferenciaDesdeSucursal", "1000071", true)));
+
+		debug("Paso 1");
+
+		if(C_Charge_ID==ID_TransfR && t.equals("SI") && isReceipt()){
+
+			debug("paso 4");
+
+
+			int C_PaymentRecepcion = getRef_Payment_ID();
+
+			MPayment pay = new MPayment(Env.getCtx(), C_PaymentRecepcion, null);
+
+			if(pay!=null && C_PaymentRecepcion > 0){
+
+				debug("paso LAR_TenderType=" + getLAR_TenderType() + " TenderType=" + getTenderType());
+
+				if(getTenderType().equals("K")){
+
+					debug("paso 10");
+
+					// dREHER, si no encuentro cheques en este nuevo payment entonces paso los cheques correspondientes
+					int cheques = DB.getSQLValue(get_TrxName(), "SELECT COUNT(*) FROM LAR_ChequePayment WHERE C_Payment_ID=" + getC_Payment_ID());
+					if(cheques <= 0){
+						// En caso de ser una recepcion de cheques, pasar los cheques a este payment de recepcion
+						String sqlC = "SELECT * FROM LAR_ChequePayment WHERE C_Payment_ID=?" ;
+						PreparedStatement pstmt = null;
+						ResultSet rs = null;
+
+						try{
+
+							pstmt = DB.prepareStatement(sqlC, get_TrxName());
+							pstmt.setInt(1, C_PaymentRecepcion);
+
+							debug("paso 11");
+
+							rs = pstmt.executeQuery();
+							while(rs.next()){
+
+								debug("paso 12");
+
+								MLARChequePayment cp = new MLARChequePayment(Env.getCtx(), rs, get_TrxName());
+
+								debug("paso 13");
+
+								if(cp!=null){
+
+									debug("paso 14");
+
+									MLARChequePayment cpNew = new MLARChequePayment(Env.getCtx(), 0, get_TrxName());
+									if(cpNew != null){
+										
+										debug("paso 14a");
+								
+										cpNew.setAD_Org_ID(getAD_Org_ID());
+										cpNew.setAmount(cp.getAmount());
+										cpNew.setC_Payment_ID(getC_Payment_ID());
+										cpNew.setIsActive(cp.isActive());
+										cpNew.setLAR_Cheque_ID(cp.getLAR_Cheque_ID());
+										
+										debug("paso 14b");
+										if(cpNew.save(get_TrxName())){
+											
+											// 12/08/2015
+											// dREHER
+											// Busco el cheque y lo paso a estado Cartera para que pueda ser utilizado en un pago
+											String upd = "UPDATE LAR_Cheque SET LAR_ChequeEstado='C' WHERE LAR_Cheque_ID=" + cp.getLAR_Cheque_ID();
+											DB.executeUpdate(upd, get_TrxName());
+											
+										}
+
+										debug("Guardo el LAR_ChequePayment del envio pero en la recepcion!");
+
+									}
+								}
+							}
+
+							debug("paso 16");
+
+						}catch(Exception ex){
+							log.warning("Error al pasar cheques a sucursal recepcion... " + ex.toString());
+
+							debug("paso 17");
+
+						}finally{
+							DB.close(rs, pstmt);
+							rs = null; pstmt = null;
+						}
+
+						debug("paso 18");
+
+					} // encontro cheques en la trasnferencia de envio
+
+					debug("paso 19");
+				} // TenderType=K
+
+
+			} // encontro el payment de referencia
+
+			debug("paso 20");
+
+
+		} // SI genera transferencia automatica
+
+
+		debug("paso 24");
+
+		// <-- hasta aca genere los LAR_ChequePayment
+		
+		
+		// dREHER si el pago esta asociado a una Orden de Venta WP, verificar si con este recibo completo, se abona toda la orden y completarla tambien
+		if(isReceipt()){
+			
+			int C_Order_ID = DB.getSQLValue(get_TrxName(), "SELECT al.C_Order_ID FROM C_AllocationLine al " +
+															" INNER JOIN C_AllocationHdr h ON h.C_AllocationHdr_ID=al.C_AllocationHdr_ID " +
+															" WHERE al.C_Payment_ID=? AND al.IsActive='Y' " +
+															" AND h.IsActive='Y' AND h.DocStatus IN ('CO','CL')", getC_Payment_ID());
+			if(C_Order_ID > 0){
+				
+				log.info("Encontro una orden de venta asociada al cobro! C_Order_ID=" + C_Order_ID);
+				
+				MOrder ord = new MOrder(Env.getCtx(), C_Order_ID, get_TrxName());
+				if(ord.getDocStatus().equals("WP")){
+					
+					log.info("La orden de venta esta en espera de pagos WP...");
+					
+					try {
+						if(ord.calcOpenAmt(null).compareTo(Env.ZERO)<=0){
+							
+							log.info("La orden de venta, ya no tiene saldo, COMPLETAR...");
+							
+							ord.completeIt();
+							ord.save(null);
+						}
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		}
+
+		// endregion Roca
 		return DocAction.STATUS_Completed;
 	}	//	completeIt
+
+	// region Roca
+	private void debug(String cadena){
+		if(true)
+			System.out.println("   debug MPayment " + cadena);
+	}
+	// endregion Roca
 	
 	/**
 	 * 	Set the definite document number after completed
@@ -1992,6 +2229,13 @@ public final class MPayment extends X_C_Payment
 		}
 		return ok;
 	}	//	allocatePaySelection
+
+	// region Roca
+	// Solo cambio la visibilidad del metodo original
+	public void LARdeAllocate(){
+		deAllocate();
+	}
+	// endregion Roca
 	
 	/**
 	 * 	De-allocate Payment.
@@ -2013,6 +2257,39 @@ public final class MPayment extends X_C_Payment
 			allocations[i].setDocAction(DocAction.ACTION_Reverse_Correct);
 			allocations[i].processIt(DocAction.ACTION_Reverse_Correct);
 			allocations[i].save();
+			// region Roca
+			// dREHER, recorrer las allocationes y si hay Orders PrePayments, dejarlas en prepay nuevamente
+			
+			MAllocationLine[] lines = allocations[i].getLines(true);
+			for( int x=0; x<lines.length; x++){
+
+				// Si tiene pagos, es porque es una orden del tipo Prepayment
+				
+				int C_Order_ID = lines[x].getC_Order_ID();
+				if(C_Order_ID > 0){
+					MOrder order = new MOrder(Env.getCtx(), C_Order_ID, get_TrxName());
+					if(order!=null){
+						if(order.getDocStatus().equals("CO") && order.isSOTrx()){ // Orden completa y de clientes
+							
+							/*
+							order.setC_Payment_ID(0);
+							order.setDocStatus(X_C_Order.DOCSTATUS_WaitingPayment);
+							order.set_TrxName(get_TrxName());
+							order.processIt(DocAction.ACTION_WaitComplete);
+							m_processMsg = order.getProcessMsg();
+							order.save(get_TrxName());
+							*/
+							
+							DB.executeUpdate("UPDATE C_Order SET DocStatus='WP', DocAction='CO', C_Payment_ID=null WHERE C_Order_ID=" + order.getC_Order_ID(), get_TrxName());
+							
+							
+						}
+					}
+				}
+				
+			}
+			// endregion Roca
+			
 		}
 		
 		// 	Unlink (in case allocation did not get it)
@@ -2397,4 +2674,148 @@ public final class MPayment extends X_C_Payment
 		return getPayAmt();
 	}	//	getApprovalAmt
 	
-}   //  MPayment
+	// region Roca
+	public int getC_AllocationHdr(String trxName)
+	{
+		
+		int C_AllocationHdr_ID = -1;
+	    
+	    String sql="SELECT * FROM c_allocationline WHERE c_payment_id = " + getC_Payment_ID();
+
+	    PreparedStatement pstmt;
+	    pstmt = DB.prepareStatement(sql, trxName);
+	    ResultSet rs=null;
+	    try
+	    {
+	    	rs = pstmt.executeQuery();
+
+	    	if(rs.next())
+	    	{
+	    		C_AllocationHdr_ID = rs.getInt("C_AllocationHdr_ID");
+	    	}
+	    }
+	    catch (SQLException e)
+	    {
+	    	log.warning("Error sql=" + e.toString());
+	    }finally{
+	    	DB.close(rs, pstmt);
+	    	rs=null; pstmt=null;
+	    }
+	    
+	    return C_AllocationHdr_ID;
+	}
+
+	public MAllocationLine[] findAllocationLines(String trxName) throws SQLException
+	{
+	    MAllocationLine[] result;
+	    ArrayList<MAllocationLine> lines = new ArrayList<MAllocationLine>(); 
+	    
+	    String sql="SELECT * FROM c_allocationline WHERE c_payment_id = " + getC_Payment_ID();
+
+	    PreparedStatement pstmt;
+	    pstmt = DB.prepareStatement(sql, trxName);
+	    ResultSet rs=null;
+	    try
+	    {
+	    	rs=pstmt.executeQuery();
+
+	    	while(rs.next())
+	    	{
+	    		lines.add(new MAllocationLine(Env.getCtx(),rs,trxName));
+	    	}
+	    }
+	    catch (SQLException e)
+	    {
+	    	DB.close(rs, pstmt);
+	    	throw e;
+	    }finally{
+	    	DB.close(rs, pstmt);
+	    	rs=null; pstmt=null;
+	    }
+	    
+	    result= new MAllocationLine[lines.size()]; 
+	    result = lines.toArray(result);
+	    return result;
+	}
+	
+	
+	// devuelve verdadero si el pago, es del tipo comisiones
+	public boolean isPagoComisiones(){
+		
+		boolean isPagoCom = false;
+		
+		
+		try {
+			
+				MAllocationLine[] allocs = this.findAllocationLines(null);
+			
+				for(int i=0; i < allocs.length; i++){
+				
+					MAllocationLine x = allocs[i];
+					if(x!=null){
+						
+						MInvoice inv;
+						try {
+							inv = (MInvoice)x.getC_Invoice();
+							if(inv != null){
+								
+								if(String.valueOf(inv.getDescription()).toLowerCase().contains("comision")){
+									
+									isPagoCom = true;
+									break;
+								}
+								
+							}
+							
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						
+					}
+					
+				}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return isPagoCom;
+		
+	}
+
+	// dREHER, leo que cheques de terceros estan asociados al pago
+	public List<MLARCheque> getChequesTerceros() {
+		ArrayList<org.compiere.model.MLARCheque> cheques = new ArrayList<MLARCheque>();
+		
+		String sql = "SELECT * FROM LAR_ChequePayment WHERE C_Payment_ID=?";
+		PreparedStatement pstmt;
+		pstmt = DB.prepareStatement(sql, get_TrxName());
+		ResultSet rs=null;
+		try
+		{
+			pstmt.setInt(1, getC_Payment_ID());
+			rs = pstmt.executeQuery();
+
+			while(rs.next())
+			{
+				cheques.add(new MLARCheque(Env.getCtx(), rs, get_TrxName()));
+			}
+			
+		}
+		catch (SQLException e)
+		{
+			DB.close(rs, pstmt);
+			log.warning("Error al leer cheques asociados al pago " + e.toString());
+		}finally{
+			DB.close(rs, pstmt);
+			rs=null; pstmt=null;
+		}
+
+		return cheques;
+	}
+	// endregion Roca
+} // MPayment

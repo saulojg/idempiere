@@ -201,6 +201,54 @@ public class MBPartner extends X_C_BPartner
 	}	//	get
 
 	/**
+	 * 	Get BPartner with LAR_TipoDocumento_ID and DocumentNo
+	 *	@param ctx context 
+	 *	@param LAR_TipoDocumento_ID value, DocumentNo
+	 *	@return BPartner or null
+	 */
+	public static MBPartner get (Properties ctx, int LAR_TipoDocumento_ID, String DocumentNo)
+	{
+		if (LAR_TipoDocumento_ID == 0)
+			return null;
+		if (DocumentNo == null || DocumentNo.length() == 0)
+			return null;
+		
+		MBPartner retValue = null;
+		int AD_Client_ID = Env.getAD_Client_ID(ctx);
+		String sql = "SELECT * FROM C_BPartner WHERE LAR_TipoDocumento_ID=? AND LAR_DocumentNo=? AND AD_Client_ID=?";
+		PreparedStatement pstmt = null;
+		try
+		{
+			pstmt = DB.prepareStatement (sql, null);
+			pstmt.setInt(1, LAR_TipoDocumento_ID);
+			pstmt.setString(2, DocumentNo);
+			pstmt.setInt(3, AD_Client_ID);
+			ResultSet rs = pstmt.executeQuery ();
+			if (rs.next ())
+				retValue = new MBPartner(ctx, rs, null);
+			rs.close ();
+			pstmt.close ();
+			pstmt = null;
+		}
+		catch (Exception e)
+		{
+			s_log.log(Level.SEVERE, sql, e);
+		}
+		try
+		{
+			if (pstmt != null)
+				pstmt.close ();
+			pstmt = null;
+		}
+		catch (Exception e)
+		{
+			pstmt = null;
+		}
+		return retValue;
+	}	//	get
+	
+	
+	/**
 	 * 	Get Not Invoiced Shipment Value
 	 *	@param C_BPartner_ID partner
 	 *	@return value in accounting currency
@@ -832,6 +880,28 @@ public class MBPartner extends X_C_BPartner
 	 * 	@param calculate if null calculate it
 	 *	@return Open Balance
 	 */
+	public BigDecimal getTotalOpenBalance (boolean calculate, Timestamp fechaDesde, Timestamp fechaHasta)
+	{
+		BigDecimal saldo = Env.ZERO;
+		
+		if(calculate) {
+			
+			saldo = DB.getSQLValueBD(get_TrxName(), "SELECT getBPSaldo(?::numeric, ?::timestamp, ?::timestamp)", new Object[] {this.getC_BPartner_ID(), fechaDesde, fechaHasta});
+			setTotalOpenBalance(saldo);
+			log.info("Calculo saldo desde getBPSaldo.sql=" + saldo);
+		}else
+			return getTotalOpenBalance(false);
+		
+		return saldo;
+	}	//	getTotalOpenBalance
+	
+	
+	
+	/**
+	 * 	Get Total Open Balance
+	 * 	@param calculate if null calculate it
+	 *	@return Open Balance
+	 */
 	public BigDecimal getTotalOpenBalance (boolean calculate)
 	{
 		if (getTotalOpenBalance().signum() == 0 && calculate)
@@ -1054,6 +1124,67 @@ public class MBPartner extends X_C_BPartner
 			insert_Accounting("C_BP_Employee_Acct", "C_AcctSchema_Default", null);
 		}
 
+		/* verifica duplicacion de documento y numero */
+		boolean yaEsta = false;
+		String name = "";
+		
+		String nroDoc = "";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+
+			nroDoc = String.valueOf(this.getLAR_DocumentNo());
+			
+			if(nroDoc=="null")
+				nroDoc = "";
+			
+			int tipoDoc = this.getLAR_TipoDocumento_ID();
+
+			pstmt = null;
+			String sql = "SELECT CBP.name FROM C_BPartner CBP WHERE CBP.LAR_TipoDocumento_ID=? AND TRIM(CBP.LAR_DocumentNo)=?";
+			pstmt = DB.prepareStatement(sql, this.get_TrxName());
+			pstmt.setInt(1, tipoDoc);
+			pstmt.setString(2, nroDoc);
+			rs = pstmt.executeQuery();
+
+			int i = 0;
+			while (rs.next()) {
+				i++;
+				if(i==1)
+					name = rs.getString("name");
+			}
+			if (i > 1) 
+				yaEsta = true;
+			
+			rs.close();
+			pstmt.close();
+			pstmt = null;
+
+		} catch (Exception e) {
+
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+
+		} finally {
+			DB.close(rs, pstmt);
+			rs=null; pstmt=null;
+		}
+
+		if (yaEsta) {
+			if(nroDoc.length() > 0){
+				// ADialog.warn(Env.WINDOW_FIND, null,
+				//	"El documento ya fue registrado a nombre de: \n" + name + "\n"
+				//		+ nroDoc + "\n"
+				//			+ "Por favor, verifique la informacion registrada!");
+				log.saveError("El socio de negocios " + name + " tiene un numero de documento existente!", "");
+				return false;
+			}else
+				log.warning("El socio de negocios " + name + " no tiene numero de documento!");
+		} /* verificacion de documento y numero */
+		
+		
+		
 		//	Value/Name change
 		if (success && !newRecord 
 			&& (is_ValueChanged("Value") || is_ValueChanged("Name")))
@@ -1084,5 +1215,76 @@ public class MBPartner extends X_C_BPartner
 			delete_Tree(MTree_Base.TREETYPE_BPartner);
 		return success;
 	}	//	afterDelete
+	
+// dREHER	
+	public int getLAR_TipoDocumento_ID() {
+		// TODO Auto-generated method stub
+		String lar_tipodocument_id = String.valueOf(super.get_Value("LAR_TipoDocumento_ID"));
+		if(lar_tipodocument_id==null || lar_tipodocument_id=="null"){
+			lar_tipodocument_id = "0";
+			// System.out.println("No se encontro el tipo de documento del BP:" + this.getC_BPartner_ID());
+		}
+		return Integer.parseInt(lar_tipodocument_id);
+	}
 
+	public int getLAR_TipoContribuyente_ID() {
+		// TODO Auto-generated method stub
+		String lar_tipocontribuyent_id = String.valueOf(super.get_Value("LAR_TipoContribuyente_ID")).toString();
+		if(lar_tipocontribuyent_id==null || lar_tipocontribuyent_id=="null"){
+			lar_tipocontribuyent_id = "0";
+			// System.out.println("No se encontro el tipo de contribuyent del BP:" + this.getC_BPartner_ID());
+		}
+		return Integer.parseInt(lar_tipocontribuyent_id);
+	}	
+	
+// dREHER	
+	public String getLAR_DocumentNo() {
+		// TODO Auto-generated method stub
+		return String.valueOf(super.get_Value("LAR_DocumentNo")).toString();
+	}
+	public String getTax_ID() {
+		// TODO Auto-generated method stub
+		return String.valueOf(super.getTaxID());
+	}
+	
+// dREHER
+	public void setLAR_TipoDocumento_ID(int key) {
+		// TODO Auto-generated method stub
+		super.set_Value("LAR_TipoDocumento_ID", key);
+	}
+
+// dREHER
+	public void setLAR_DocumentNo(String value) {
+		super.set_Value("LAR_DocumentNo", value);
+	}
+
+	public void setTax_ID(String value) {
+		super.set_Value("TaxID", value);
+	}
+
+	public void setLAR_TipoContribuyente_ID(int key) {
+		super.set_Value("LAR_TipoContribuyente_ID", key);
+	}
+
+	public void setLAR_Sexo(String value) {
+		super.set_Value("LAR_Sexo", value);
+	}
+	
+	public void setC_BPartner_ID_Import(int idOrig) {
+		super.set_Value("C_BPartner_ID_Import", idOrig);
+		
+	}
+
+	public int getC_BPartner_ID_Import() {
+		int id = 0;
+		try{
+			id = Integer.parseInt(String.valueOf(super.get_Value("C_BPartner_ID_Import")));
+		}catch(Exception ex){}
+		return id; 
+	}
+	
+	public String getLAR_Sexo(){
+		return String.valueOf(super.get_Value("LAR_Sexo"));
+	}
+	
 }	//	MBPartner

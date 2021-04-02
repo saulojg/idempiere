@@ -33,6 +33,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.adempiere.utils.Miscfunc;
 import org.compiere.util.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -800,15 +801,197 @@ public class MAttachment extends X_AD_Attachment
 				setTitle (ZIP);
 			}
 		}
+
+		// region Roca
+		// 30/05/2014
+		// dREHER, permitir setear peso de las imagenes en bytes para los planos de casas
+		int maxBytes = Integer.valueOf(Miscfunc.ValueFromSystem("MaximaBytesParaPlanos", "300000", true));
+		
+		
+		/* dREHER, Verifico que esta trabajando sobre VIV_Casa y realizo los controles correspondientes */
+		int table = this.getAD_Table_ID();
+		int record = this.getRecord_ID();
+		
+		int adjuntos = loadEntradas(table, record);
+		
+		int validar = Env.getContextAsInt(Env.getCtx(), "fromMigra");
+		
+		
+		int forzar = Env.getContextAsInt(Env.getCtx(), "ForzarAttachment");
+		
+		if(validar <= 0){
+			MTable mt = new MTable(Env.getCtx(), table, get_TrxName());
+			if(mt!=null){
+				if(mt.getName().equalsIgnoreCase("VIV_Casa")){
+					
+					if((adjuntos > 0 && newRecord)){
+						log.warning("No se puede agregar mas de un adjunto en la tabla de Casas=VIV_Casa!");
+						return false;
+					}
+					
+					// Solo valida para usuarios q no sean SuperUser
+					if (getEntries() != null && Env.getAD_User_ID(getCtx()) != 100 ){ 
+						if(getEntries().length > 0){
+							MAttachmentEntry me = getEntry(0);
+							if(me != null){
+							
+								log.info("Encontro una entrada, verifica tamaño...");
+								File fileTmp = me.getFile();
+								if( fileTmp != null){
+									double size = fileTmp.length();
+									
+									// Borro el temporal
+									fileTmp.delete();
+									
+									if(size > maxBytes){
+										log.warning("El tamaño de la imagen excede el maximo permitido(" + maxBytes + " bytes) =" + size + ". Suba una imagen JPG");
+										return false;
+									}
+								}
+							}
+						
+						}	
+					}	
+					
+					
+					if(record > -1)
+					{
+						int rr = DB.getSQLValue(get_TrxName(), "SELECT VIV_Casa_ID FROM VIV_Casa WHERE VIV_Casa_ID=" + record);
+						if(rr > 0){
+							MVIVCasa vc = new MVIVCasa(Env.getCtx(), record, get_TrxName());
+							if(vc!=null){
+								int ct_id = vc.getVIV_CasaTemplate_ID();
+								if(ct_id > 0){
+									MVIVCasaTemplate ct = new MVIVCasaTemplate(Env.getCtx(), ct_id, get_TrxName());
+									if(ct!=null){
+										boolean isModificable = ct.isModificable();
+										
+										int id = vc.getVIV_Casa_ID();
+										int Table_ID = vc.get_Table_ID();
+										int ida = lar.utils.LoadZIPImage.LoadIDFromAttach(id, Table_ID);
+										
+										
+										// Validar que solo se pueda modificar una imagen para las casas especiales
+										// o bien que lo haga el SuperUser
+										if(ida>0){
+											MAttachment ma = new MAttachment(Env.getCtx(), ida, null);
+											if (ma.getEntries() != null){ 
+												if(!isModificable && Env.getAD_User_ID(getCtx()) != 100 && forzar != 1){
+													log.warning("No se puede modificar un adjunto manualmente en la tabla de Casas=VIV_Casa del tipo NO Modificable!");
+													return false;
+												}	
+												if(ma.getEntries().length > 1){
+													log.warning("No se pueden agregar mas adjuntos en la tabla de Casas=VIV_Casa!");
+													return false;
+												}
+												
+											}	
+												
+										}	
+										
+										// Validar que solo permita una sola imagen
+										//ida = lar.utils.LoadZIPImage.LoadAttachsFromAttach(id, Table_ID);
+										
+										
+										// TODO: ver luego restriccion, por ahora el SuperUser puede hacerlo!
+										/*if(!isModificable && Env.getAD_User_ID(getCtx()) != 100){
+										//	if(!isModificable){
+												log.warning("No se puede modificar un adjunto manualmente en la tabla de Casas=VIV_Casa del tipo !isModificable!");
+												return false;
+											}*/
+
+									}
+								}
+							}
+						}
+					}// if record id
+				}
+			}
+			
+		}
+		
+		/* Fin de Controles */
+		// endregion Roca
+
 		return saveLOBData();		//	save in BinaryData
 	}	//	beforeSave
 
+	// dREHER, retorna cantidad de entradas para esta tabla
+	private int loadEntradas(int Table_ID, int Record_ID) {
+		return DB.getSQLValue(get_TrxName(), "SELECT COUNT(*) FROM AD_Attachment WHERE AD_Table_ID=" + Table_ID + " AND Record_ID=" + Record_ID);
+	}
+	
+	
 	/**
 	 * 	Executed before Delete operation.
 	 *	@return true if record can be deleted
 	 */
 	protected boolean beforeDelete ()
 	{
+		// region Roca	
+		// dREHER, TODO: ver si la tabla asociada es FIN_BPartnerCredit
+		// guardar en disco los attach
+		//
+		if(this.getAD_Table_ID()==2000096){
+
+			// isStoreAttachmentsOnFileSystem = true;
+			
+			// initAttachmentStoreDetails(this.getCtx(), this.get_TrxName());
+			
+		}
+
+		
+		int forzar = Env.getContextAsInt(Env.getCtx(), "ForzarAttachment");
+		
+		if(Env.getAD_User_ID(getCtx()) == 100 || forzar == 1){
+			System.out.println("Puedo eliminar adjuntos: User=" + Env.getAD_User_ID(getCtx()) + " Forzado=" + forzar);
+			return true;
+		}	
+		
+		/* dREHER, Verifico que esta trabajando sobre VIV_Casa y realizo los controles correspondientes */
+		int table = this.getAD_Table_ID();
+		int record = this.getRecord_ID();
+		
+		int adjuntos = loadEntradas(table, record);
+		
+		int validar = Env.getContextAsInt(Env.getCtx(), "fromMigra");
+		if(validar <= 0){
+			System.out.println("Valido adjuntos sobre Viv_Casa: User=" + Env.getAD_User_ID(getCtx()) + " Forzado=" + forzar);
+			MTable mt = new MTable(Env.getCtx(), table, get_TrxName());
+			if(mt!=null){
+				if(mt.getName().equalsIgnoreCase("VIV_Casa")){
+					MVIVCasa vc = new MVIVCasa(Env.getCtx(), record, get_TrxName());
+					if(vc!=null){
+						
+						if(vc.isProcessed()){
+							log.warning("No se puede eliminar el adjunto de la tabla de Casas=VIV_Casa PROCESADA!");
+							return false;
+						}
+						
+						int ct_id = vc.getVIV_CasaTemplate_ID();
+						if(ct_id > 0){
+							System.out.println("Valido adjuntos sobre Viv_Casa, leo template: User=" + Env.getAD_User_ID(getCtx()) + " Forzado=" + forzar);
+							MVIVCasaTemplate ct = new MVIVCasaTemplate(Env.getCtx(), ct_id, get_TrxName());
+							if(ct!=null){
+								boolean isModificable = ct.isModificable();
+								if(!isModificable){
+									System.out.println("Valido adjuntos sobre Viv_Casa, no es modificable: User=" + Env.getAD_User_ID(getCtx()) + " Forzado=" + forzar + " adjuntos=" + adjuntos + " @deletePlano=" + Env.getContext(Env.getCtx(), "@deletePlano"));
+									if(adjuntos <= 1 &&  ( ("N".compareTo(Env.getContext(Env.getCtx(), "@deletePlano"))==0) || Env.getContext(Env.getCtx(), "@deletePlano")==null || Env.getContext(Env.getCtx(), "@deletePlano")=="") ){
+										log.warning("No se puede eliminar el adjunto de la tabla de Casas=VIV_Casa para un modelo isModificable='N'!");
+										return false;
+									}
+								} 
+									
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		/* Fin de Controles */
+		// endregion Roca
+		
 		if(isStoreAttachmentsOnFileSystem){
 		//delete all attachment files and folder
 		for(int i=0; i<m_items.size(); i++) {

@@ -924,6 +924,12 @@ public class MInOut extends X_M_InOut implements DocAction
 		if (newRecord)
 		{
 			MWarehouse wh = MWarehouse.get(getCtx(), getM_Warehouse_ID());
+			
+			
+			// 17/01/2012 dREHER, si encuentra conflicto setea de nuevo las almacenes
+			if (wh.getAD_Org_ID() != getAD_Org_ID())
+				setAD_Org_ID(wh.getAD_Org_ID());
+				
 			if (wh.getAD_Org_ID() != getAD_Org_ID())
 			{
 				log.saveError("WarehouseOrgConflict", "");
@@ -938,8 +944,10 @@ public class MInOut extends X_M_InOut implements DocAction
             return false;
         }
         
+        	//begin msuarez 09/01/2012 comento para back up de codigo
 		//	Shipment - Needs Order/RMA
-		if (isSOTrx() && getC_Order_ID() == 0 && getM_RMA_ID() == 0)
+	        //ahora permite envios sin necesidad de tener una orden de venta
+		if (!getMovementType().contentEquals(MInOut.MOVEMENTTYPE_CustomerReturns) && this.getC_DocType_ID()!=1000164  && isSOTrx() && getC_Order_ID() == 0 && getM_RMA_ID() == 0)
 		{
 			log.saveError("FillMandatory", Msg.translate(getCtx(), "C_Order_ID"));
 			return false;
@@ -951,8 +959,22 @@ public class MInOut extends X_M_InOut implements DocAction
             MRMA rma = new MRMA(getCtx(), getM_RMA_ID(), get_TrxName());
             MDocType docType = MDocType.get(getCtx(), rma.getC_DocType_ID());
             setC_DocType_ID(docType.getC_DocTypeShipment_ID());
-            setMovementType(MOVEMENTTYPE_CustomerReturns);
+            // ROCA setMovementType(MOVEMENTTYPE_CustomerReturns);
         }
+
+	// region Roca
+        try {
+			MBPartner bp = (MBPartner)this.getC_BPartner();
+			if(bp!=null)
+				if(!bp.isActive()){
+					log.saveError("Error", Msg.getMsg(getCtx(), "El Socio de negocios no esta activo!"));
+					return false;
+				}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	// endregion Roca
         
 		return true;
 	}	//	beforeSave

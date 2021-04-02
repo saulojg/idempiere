@@ -20,6 +20,7 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -27,6 +28,7 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.logging.Level;
 
+import org.compiere.apps.form.LARmodel.exceptions.LAR_Exception;
 import org.compiere.process.DocAction;
 import org.compiere.process.DocumentEngine;
 import org.compiere.util.CLogger;
@@ -53,9 +55,9 @@ public final class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 	public static MAllocationHdr[] getOfPayment (Properties ctx, int C_Payment_ID, String trxName)
 	{
 		String sql = "SELECT * FROM C_AllocationHdr h "
-			+ "WHERE IsActive='Y'"
+			+ "WHERE IsActive='Y' AND DocStatus IN ('CO','CL')" // ROCA
 			+ " AND EXISTS (SELECT * FROM C_AllocationLine l "
-				+ "WHERE h.C_AllocationHdr_ID=l.C_AllocationHdr_ID AND l.C_Payment_ID=?)";
+				+ "WHERE h.C_AllocationHdr_ID=l.C_AllocationHdr_ID AND l.C_Payment_ID=? AND l.IsActive='Y' )"; // ROCA
 		ArrayList<MAllocationHdr> list = new ArrayList<MAllocationHdr>();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -91,7 +93,7 @@ public final class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 	public static MAllocationHdr[] getOfInvoice (Properties ctx, int C_Invoice_ID, String trxName)
 	{
 		String sql = "SELECT * FROM C_AllocationHdr h "
-			+ "WHERE IsActive='Y'"
+			+ "WHERE IsActive='Y' AND DocStatus IN ('CO','CL')" // ROCA
 			+ " AND EXISTS (SELECT * FROM C_AllocationLine l "
 				+ "WHERE h.C_AllocationHdr_ID=l.C_AllocationHdr_ID AND l.C_Invoice_ID=?)";
 		ArrayList<MAllocationHdr> list = new ArrayList<MAllocationHdr>();
@@ -360,6 +362,7 @@ public final class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 	 */
 	public String prepareIt()
 	{
+	    
 		log.info(toString());
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_BEFORE_PREPARE);
 		if (m_processMsg != null)
@@ -389,6 +392,40 @@ public final class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 				m_processMsg = "No Business Partner";
 				return DocAction.STATUS_Invalid;
 			}
+			// region Roca
+			int C_Order_ID= m_lines[i].getC_Order_ID();
+			if (C_Order_ID != 0)
+			{
+			    MOrder order = new MOrder (getCtx(), C_Order_ID, get_TrxName());
+			    if ("WP".equals(order.getDocStatus()))
+			    {
+			    	//TODO COMPLETAR SOLO SI ESTA PAGA POR COMPLETO
+			    	//calculando saldo abierto
+			    	try
+			    	{
+			    		BigDecimal d = order.calcOpenAmt(get_TrxName());
+			    		d=d.subtract(line.getAmount());
+			    		if(d.compareTo(Env.ZERO)<=0)
+			    		{
+			    			order.setC_Payment_ID(m_lines[i].getC_Payment_ID());
+			    			order.setDocAction(X_C_Order.DOCACTION_WaitComplete);
+			    			order.set_TrxName(get_TrxName());
+			    			order.processIt (X_C_Order.DOCACTION_WaitComplete);
+			    			String pm = order.getProcessMsg();
+			    			if((pm!=null)&&(pm.length()>0))
+			    				LAR_Exception.createDialog(pm);
+			    			if(pm!=null)
+			    				order.save(get_TrxName());;
+			    		}
+			    	} 
+			    	catch (SQLException e)
+			    	{
+			    		e.printStackTrace();
+			    		LAR_Exception.createDialog("Error calculando saldo abierto de la orden prepaga");
+			    	}
+			    }	//	WaitingPayment
+			}
+			// endregion Roca
 		}
 		setApprovalAmt(approval);
 		//
@@ -468,6 +505,48 @@ public final class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 
 		setProcessed(true);
 		setDocAction(DOCACTION_Close);
+
+		// region Roca (comment)
+		/*
+		for (int i = 0; i < m_lines.length; i++)
+		{
+
+			int C_Order_ID= m_lines[i].getC_Order_ID();
+			if (C_Order_ID != 0)
+			{
+			    MOrder order = new MOrder (getCtx(), C_Order_ID, get_TrxName());
+			    if ("WP".equals(order.getDocStatus()))
+			    {
+			    	//TODO COMPLETAR SOLO SI ESTA PAGA POR COMPLETO
+			    	//calculando saldo abierto
+			    	try
+			    	{
+			    		BigDecimal d = order.calcOpenAmt(get_TrxName());
+			    		d=d.subtract(m_lines[i].getAmount());
+			    		if(d.compareTo(Env.ZERO)<=0)
+			    		{
+			    			order.setC_Payment_ID(m_lines[i].getC_Payment_ID());
+			    			order.setDocAction(X_C_Order.DOCACTION_Complete);
+			    			order.set_TrxName(get_TrxName());
+			    			order.completeIt();
+			    			String pm = order.getProcessMsg();
+			    			if((pm!=null)&&(pm.length()>0))
+			    				LAR_Exception.createDialog(pm);
+			    			if(pm!=null)
+			    				order.save(get_TrxName());;
+			    		}
+			    	} 
+			    	catch (SQLException e)
+			    	{
+			    		e.printStackTrace();
+			    		LAR_Exception.createDialog("Error calculando saldo abierto de la orden prepaga");
+			    	}
+			    }	//	WaitingPayment
+			}
+			
+		}
+		*/
+		// endregion Roca (comment)
 		return DocAction.STATUS_Completed;
 	}	//	completeIt
 	
@@ -494,6 +573,40 @@ public final class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 		
 		setDocAction(DOCACTION_None);
 
+		// region Roca
+		// dREHER, si anulo y pagaba ordenes de venta q ya estaban completas, las dejo en WP nuevamente
+
+			
+		for (int i = 0; i < m_lines.length; i++)
+		{
+			MAllocationLine line = m_lines[i];
+
+			int C_Order_ID= line.getC_Order_ID();
+			if (C_Order_ID != 0)
+			{
+				MOrder order = new MOrder (getCtx(), C_Order_ID, get_TrxName());
+				if(order != null){
+					if ("CO".equals(order.getDocStatus()))
+					{
+						//calculando saldo abierto
+						try
+						{
+							order.setDocAction(X_C_Order.DOCACTION_Complete);
+							order.setDocStatus(X_C_Order.DOCSTATUS_WaitingPayment);
+							order.set_TrxName(get_TrxName());
+							order.save(get_TrxName());
+						} 
+						catch (Exception e)
+						{
+							e.printStackTrace();
+							LAR_Exception.createDialog("Error ajustando la orden prepaga!");
+						}
+					}	//	WaitingPayment
+				}
+			}
+		}
+		// endregion Roca
+	
 		return retValue;
 	}	//	voidIt
 	

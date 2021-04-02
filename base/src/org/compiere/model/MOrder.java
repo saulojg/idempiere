@@ -89,9 +89,14 @@ public class MOrder extends X_C_Order implements DocAction
 		to.setIsDelivered(false);
 		to.setIsInvoiced(false);
 		to.setIsSelfService(false);
-		to.setIsTransferred (false);
-		to.setPosted (false);
-		to.setProcessed (false);
+		to.setIsTransferred(false);
+		to.setPosted(false);
+		to.setProcessed(false);
+
+		// dREHER
+		to.set_Value("LAR_Sucursal_ID", (Integer) from
+				.get_Value("LAR_Sucursal_ID"));
+
 		if (counter)
 			to.setRef_Order_ID(from.getC_Order_ID());
 		else
@@ -191,6 +196,10 @@ public class MOrder extends X_C_Order implements DocAction
 		setM_Warehouse_ID(project.getM_Warehouse_ID());
 		setM_PriceList_ID(project.getM_PriceList_ID());
 		setC_PaymentTerm_ID(project.getC_PaymentTerm_ID());
+
+		// TODO, dREHER
+		// setLAR_Sucursal_ID(project.getLAR_Sucursal_ID());
+
 		//
 		setIsSOTrx(IsSOTrx);
 		if (IsSOTrx)
@@ -973,18 +982,22 @@ public class MOrder extends X_C_Order implements DocAction
 			if (wh.getAD_Org_ID() != getAD_Org_ID())
 				log.saveWarning("WarehouseOrgConflict", "");
 		}
-		//	Reservations in Warehouse
-		if (!newRecord && is_ValueChanged("M_Warehouse_ID"))
-		{
-			MOrderLine[] lines = getLines(false,null);
-			for (int i = 0; i < lines.length; i++)
-			{
-				if (!lines[i].canChangeWarehouse())
-					return false;
-			}
-		}
-		
-		//	No Partner Info - set Template
+		// Reservations in Warehouse
+		// region Roca
+		//msuarez 07/04/2011 no validar esto cuando cambio el warehouse desde el proceso verificar almacen
+		int validar=0;
+		validar=Env.getContextAsInt(getCtx(), "Validar_Almacen");
+			if(validar!=1)
+				if (!newRecord && is_ValueChanged("M_Warehouse_ID")) {
+					MOrderLine[] lines = getLines(false, null);
+					for (int i = 0; i < lines.length; i++) {
+						if (!lines[i].canChangeWarehouse())
+							return false;
+					}
+				}
+		// endregion
+
+		// No Partner Info - set Template
 		if (getC_BPartner_ID() == 0)
 			setBPartner(MBPartner.getTemplate(getCtx(), getAD_Client_ID()));
 		if (getC_BPartner_Location_ID() == 0)
@@ -1705,7 +1718,8 @@ public class MOrder extends X_C_Order implements DocAction
 		//	Create SO Invoice - Always invoice complete Order
 		if ( MDocType.DOCSUBTYPESO_POSOrder.equals(DocSubTypeSO)
 			|| MDocType.DOCSUBTYPESO_OnCreditOrder.equals(DocSubTypeSO) 	
-			|| MDocType.DOCSUBTYPESO_PrepayOrder.equals(DocSubTypeSO)) 
+			// ROCA TODO comentado para que no genere Invoice si es PrepayOrder ||
+			/*|| MDocType.DOCSUBTYPESO_PrepayOrder.equals(DocSubTypeSO)*/) 
 		{
 			MInvoice invoice = createInvoice (dt, shipment, realTimePOS ? null : getDateOrdered());
 			if (invoice == null)
@@ -1766,6 +1780,8 @@ public class MOrder extends X_C_Order implements DocAction
 	{
 		log.info("For " + dt);
 		MInOut shipment = new MInOut (this, dt.getC_DocTypeShipment_ID(), movementDate);
+		// ROCA dREHER
+		shipment.set_Value("LAR_Sucursal_ID", this.get_Value("LAR_Sucursal_ID"));
 	//	shipment.setDateAcct(getDateAcct());
 		if (!shipment.save(get_TrxName()))
 		{
@@ -1793,6 +1809,8 @@ public class MOrder extends X_C_Order implements DocAction
 			//
 			ioLine.setOrderLine(oLine, M_Locator_ID, MovementQty);
 			ioLine.setQty(MovementQty);
+			ioLine.setC_UOM_ID(oLine.getC_UOM_ID()); // Roca
+
 			if (oLine.getQtyEntered().compareTo(oLine.getQtyOrdered()) != 0)
 				ioLine.setQtyEntered(MovementQty
 					.multiply(oLine.getQtyEntered())
@@ -1826,6 +1844,8 @@ public class MOrder extends X_C_Order implements DocAction
 	{
 		log.info(dt.toString());
 		MInvoice invoice = new MInvoice (this, dt.getC_DocTypeInvoice_ID(), invoiceDate);
+		// dREHER
+		invoice.setLAR_Sucursal_ID((Integer) get_Value("LAR_Sucursal_ID")); // Roca
 		if (!invoice.save(get_TrxName()))
 		{
 			m_processMsg = "Could not create Invoice";
@@ -1880,6 +1900,13 @@ public class MOrder extends X_C_Order implements DocAction
 				else
 					iLine.setQtyEntered(iLine.getQtyInvoiced().multiply(oLine.getQtyEntered())
 						.divide(oLine.getQtyOrdered(), 12, BigDecimal.ROUND_HALF_UP));
+
+				// region Roca
+				// Que no le calcule IVA, 14/11/2017 dREHER, sino la factura sale por otro valor
+				int C_Tax_ID = Integer.valueOf(Miscfunc.ValueFromSystem("SinImpuesto_C_Tax_ID", "1000008", true, "Utilizado para no cargar impuestos..."));
+				iLine.setC_Tax_ID(C_Tax_ID);
+				// endregion Roca
+
 				if (!iLine.save(get_TrxName()))
 				{
 					m_processMsg = "Could not create Invoice Line from Order Line";
@@ -1953,6 +1980,10 @@ public class MOrder extends X_C_Order implements DocAction
 		counter.setDatePromised(getDatePromised());		// default is date ordered 
 		//	Refernces (Should not be required
 		counter.setSalesRep_ID(getSalesRep_ID());
+
+		counter.set_Value("LAR_Sucursal_ID", (Integer) this // Roca
+				.get_Value("LAR_Sucursal_ID")); // Roca
+
 		counter.save(get_TrxName());
 		
 		//	Update copied lines
@@ -2326,5 +2357,192 @@ public class MOrder extends X_C_Order implements DocAction
 	{
 		return getGrandTotal();
 	}	//	getApprovalAmt
+
+	// region Roca
+	public MPayment[] findPayments(String trxName) throws SQLException {
+		MPayment result[] = null;
+		ArrayList<MPayment> pays = new ArrayList<MPayment>();
+		String sql = "" + "SELECT " + "	DISTINCT PAY.* " + "FROM c_order CO  "
+				+ "	LEFT JOIN c_allocationline AL "
+				+ "	ON AL.c_order_id = CO.c_order_id "
+				+ "	INNER JOIN c_payment PAY  " + "	ON ( "
+				+ "		PAY.c_order_id = CO.c_order_id " + "		OR "
+				+ "		PAY.c_payment_id = AL.c_payment_id " + "	) "
+				+ "WHERE CO.C_Order_ID = " + getC_Order_ID();
+
+		PreparedStatement pstmt;
+		pstmt = DB.prepareStatement(sql, trxName);
+		ResultSet rs = null;
+		try {
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				MPayment pay = new MPayment(getCtx(), rs, trxName);
+				pays.add(pay);
+			}
+		} catch (SQLException e) {
+			DB.close(rs, pstmt);
+			throw e;
+		}finally{
+			DB.close(rs, pstmt);
+			rs=null; pstmt=null;
+		}
+
+		result = new MPayment[pays.size()];
+		result = pays.toArray(result);
+
+		return result;
+	}
+
+	public BigDecimal CuantoPago(String trxName) throws SQLException {
+		return CuantoPago(trxName, null);
+	}
 	
+	// dREHER, devuelve cuanto se pago de esta Orden
+	// TODO: verificar si el metodo es correcto
+	public BigDecimal CuantoPago(String trxName, Timestamp timestamp) throws SQLException {
+		BigDecimal pagado = new BigDecimal(0);
+
+		String sql = "" + "SELECT AL.*, AH.datetrx AS FechaPago FROM "
+				+ "	c_allocationline AL "
+				+ "	INNER JOIN c_allocationhdr AH ON AH.c_allocationhdr_id=AL.c_allocationhdr_id "
+				+ " INNER JOIN C_Payment p ON AL.C_Payment_ID=p.C_Payment_ID "
+				+ "WHERE AL.C_Order_ID = " + getC_Order_ID() + " AND AL.isActive='Y' AND AH.DocStatus IN ('CO','CL')"
+				+ " AND p.DocStatus IN ('CO','CL')";
+		
+		if(timestamp != null)
+			sql += " AND AH.DateTrx >=?"; 
+
+		PreparedStatement pstmt;
+		pstmt = DB.prepareStatement(sql, trxName);
+		
+		if(timestamp != null)
+			pstmt.setTimestamp(1, timestamp);
+		
+		ResultSet rs = null;
+		try {
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				pagado = pagado.add(rs.getBigDecimal("amount"));
+				
+			}
+		} catch (SQLException e) {
+			DB.close(rs, pstmt);
+			throw e;
+		}finally{
+			DB.close(rs, pstmt);
+			rs=null; pstmt=null;
+		}
+		return pagado;
+	}
+
+	/**
+	 * Calcula el saldo abierto en base a los pagos asociados a la orden (Para
+	 * orden prepaga)
+	 * 
+	 * @param trxName
+	 * @return
+	 * @throws SQLException
+	 */
+	public BigDecimal calcOpenAmt(String trxName) throws SQLException {
+		BigDecimal result = null;
+		
+		/*
+		String sql = "SELECT max(O.grandtotal)-sum(coalesce(amt,0)) AS openAmt "
+				+ "FROM C_Order O "
+				+ "    LEFT JOIN "
+				+ "    ( "
+				+ "    SELECT "
+				+ "        CASE "
+				+ "            WHEN ALH.docstatus IS NULL THEN "
+				+ "                coalesce(PAY.payamt,0) "
+				+ "            WHEN ALH.docstatus NOT IN ('DR','VO','RE','IN') THEN "
+				+ "                COALESCE(AL.amount, 0) " + "            ELSE "
+				+ "                0 " + "        END AS amt, "
+				+ "        CO.c_order_id " + "    FROM c_order CO  "
+				+ "        LEFT JOIN c_payment PAY "
+				+ "             ON PAY.c_order_id = CO.c_order_id " 
+				+ "        LEFT JOIN c_allocationline AL  "
+				+ "             ON AL.c_order_id = CO.c_order_id " + " "
+				+ "        LEFT JOIN C_Payment pay2 "
+				+ "             ON pay2.C_Payment_ID=AL.C_Payment_ID "
+				+ "        LEFT JOIN c_allocationhdr ALH "
+				+ "             ON ALH.c_allocationhdr_ID = AL.c_allocationhdr_ID "
+				+ " WHERE ("
+				+ " CASE WHEN PAY.C_Payment_ID ISNULL THEN pay2.DocStatus IN ('CO','CL') "
+				+ "                                    ELSE PAY.DocStatus IN ('CO','CL') END "
+				+ " ) "
+				+ "    ) T1 " + "    ON T1.c_order_id=O.c_order_id "
+				+ "WHERE O.c_order_id= " + getC_Order_ID() 
+				+ "GROUP BY T1.c_order_id ";
+		*/
+		
+		// 11/05/2015 se reemplaza sql que calcula deuda de una orden
+		String sql = "SELECT orderopen(" + getC_Order_ID() + ", null);";
+
+		PreparedStatement pstmt;
+		pstmt = DB.prepareStatement(sql, trxName);
+		ResultSet rs = null;
+		try {
+			rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				result = rs.getBigDecimal(1);
+			}
+			
+			if(result == null)
+				result = Env.ZERO;
+			
+			
+		} catch (SQLException e) {
+			DB.close(rs, pstmt);
+			throw e;
+		}finally{
+			DB.close(rs, pstmt);
+			rs=null; pstmt=null;
+		}	
+
+		return result;
+	}
+
+	public MPayment[] anularPaymentAllocations(String trxName) 
+	{
+		
+	    MPayment[] pays=null;
+	    try {
+
+	    	pays = findPayments(trxName);
+
+	    	for(int i=0;i<pays.length;i++)
+	    	{
+	    		MPayment pay = pays[i];
+	    		MAllocationLine[] allocs = pay.findAllocationLines(trxName);
+
+	    		for (int j = 0; j < allocs.length; j++) 
+	    		{
+	    			MAllocationLine alloc = allocs[j];
+	    			if (alloc.getC_Order_ID() == getC_Order_ID()) 
+	    			{
+	    				MAllocationHdr hdr = new MAllocationHdr (Env.getCtx(), alloc.getC_AllocationHdr_ID(), trxName);
+	    				if (hdr.getDocStatus().equals("CO") && hdr.isActive()) 
+	    				{
+	    					hdr.voidIt();
+	    					hdr.save(trxName);
+	    				} 
+	    				else
+	    					continue;
+	    			}
+	    		}
+	    	}
+	    } catch (SQLException e) {
+	    	System.out.println("Error al anular pagos...!");
+	    	e.printStackTrace();
+	    }
+	    
+	    return pays;
+	    
+	}
+
+	// endregion Roca
 }	//	MOrder
