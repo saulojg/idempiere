@@ -34,6 +34,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.adempiere.utils.Miscfunc;
+import org.adempiere.utils.SSH.SSHUtil;
 import org.compiere.util.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -107,6 +108,9 @@ public class MAttachment extends X_AD_Attachment
 	{
 		super (ctx, AD_Attachment_ID, trxName);
 		initAttachmentStoreDetails(ctx, trxName);
+		
+		// dREHER
+		initAttachmentSSHStoreDetails(ctx, trxName);
 
 	}	//	MAttachment
 
@@ -123,6 +127,10 @@ public class MAttachment extends X_AD_Attachment
 		setAD_Table_ID (AD_Table_ID);
 		setRecord_ID (Record_ID);
 		initAttachmentStoreDetails(ctx, trxName);
+		
+		// dREHER
+		initAttachmentSSHStoreDetails(ctx, trxName);
+		
 	}	//	MAttachment
 
 	/**
@@ -135,6 +143,9 @@ public class MAttachment extends X_AD_Attachment
 	{
 		super(ctx, rs, trxName);
 		initAttachmentStoreDetails(ctx, trxName);
+		
+		// dREHER
+		initAttachmentSSHStoreDetails(ctx, trxName);
 	}	//	MAttachment
 	
 	/** Indicator for no data   */
@@ -156,6 +167,16 @@ public class MAttachment extends X_AD_Attachment
 	/** string replaces the attachment root in stored xml file
 	 * to allow the changing of the attachment root. */
 	private final String ATTACHMENT_FOLDER_PLACEHOLDER = "%ATTACHMENT_FOLDER%";
+	
+	/** is this client using the SSH file system for attachments */
+	// dREHER
+	private boolean isStoreAttachmentsOnSSHFileSystem = false;
+	
+	private String SSHServer = "181.30.8.146";
+	private int SSHPort = 1026;
+	private String SSHUserName = "attachment";
+	private String SSHUserPassword = "attachment";
+
 	
 	/**
 	 * Get the isStoreAttachmentsOnFileSystem and attachmentPath for the client.
@@ -275,7 +296,9 @@ public class MAttachment extends X_AD_Attachment
 		{
 			log.log(Level.SEVERE, "(file)", ioe);
 		}
-		return addEntry (name, data);
+		
+		// dREHER, agrego el path como parametro
+		return addEntry (name, data, file.getAbsolutePath());
 	}	//	addEntry
 
 	/**
@@ -284,11 +307,11 @@ public class MAttachment extends X_AD_Attachment
 	 *	@param data data
 	 *	@return true if added
 	 */
-	public boolean addEntry (String name, byte[] data)
+	public boolean addEntry (String name, byte[] data, String absolutePath)
 	{
 		if (name == null || data == null)
 			return false;
-		return addEntry (new MAttachmentEntry (name, data));	//	random index
+		return addEntry (new MAttachmentEntry (name, data, absolutePath));	//	random index
 	}	//	addEntry
 	
 	/**
@@ -355,6 +378,23 @@ public class MAttachment extends X_AD_Attachment
 					}
 				}
 			}
+			
+			//// SSH - dREHER TODO: eliminar atraves de SSH
+			if(isStoreAttachmentsOnSSHFileSystem){
+				//remove files
+				final MAttachmentEntry entry = m_items.get(index);
+				final File file = entry.getFile();
+				log.fine("delete: " + file.getAbsolutePath());
+				if(file !=null && file.exists()){
+					if(!file.delete()){
+						log.warning("unable to delete " + file.getAbsolutePath());
+					}
+				}
+			}
+			
+			//// SSH
+
+			
 			m_items.remove(index);
 			log.config("Index=" + index + " - NewSize=" + m_items.size());
 			return true;
@@ -390,6 +430,13 @@ public class MAttachment extends X_AD_Attachment
 			if(name!=null && isStoreAttachmentsOnFileSystem){
 				name = name.substring(name.lastIndexOf(File.separator)+1);
 			}
+			
+			// dREHER
+			if(name!=null && isStoreAttachmentsOnSSHFileSystem){
+				name = name.substring(name.lastIndexOf(File.separator)+1);
+			}
+
+			
 			return name;
 		}
 		return null;
@@ -463,6 +510,13 @@ public class MAttachment extends X_AD_Attachment
 		if(isStoreAttachmentsOnFileSystem){
 			return saveLOBDataToFileSystem();
 		}
+		
+		// dREHER
+		if(isStoreAttachmentsOnSSHFileSystem){
+			return saveLOBDataToSSHFileSystem();
+		}
+
+		
 		return saveLOBDataToDB();
 	}
 	
@@ -618,6 +672,12 @@ public class MAttachment extends X_AD_Attachment
 		if(isStoreAttachmentsOnFileSystem){
 			return loadLOBDataFromFileSystem();
 		}
+		
+		// dREHER
+		if(isStoreAttachmentsOnSSHFileSystem){
+			return loadLOBDataFromSSHFileSystem();
+		}
+		
 		return loadLOBDataFromDB();
 	}
 	
@@ -792,7 +852,7 @@ public class MAttachment extends X_AD_Attachment
 	 */
 	protected boolean beforeSave (boolean newRecord)
 	{
-		if(isStoreAttachmentsOnFileSystem){
+		if(isStoreAttachmentsOnFileSystem || isStoreAttachmentsOnSSHFileSystem){
 			if (getTitle() == null || !getTitle().equals(XML)) {
 				setTitle (XML);
 			}
@@ -993,23 +1053,44 @@ public class MAttachment extends X_AD_Attachment
 		// endregion Roca
 		
 		if(isStoreAttachmentsOnFileSystem){
-		//delete all attachment files and folder
-		for(int i=0; i<m_items.size(); i++) {
-			final MAttachmentEntry entry = m_items.get(i);
-			final File file = entry.getFile();
-			if(file !=null && file.exists()){
-				if(!file.delete()){
-					log.warning("unable to delete " + file.getAbsolutePath());
+			//delete all attachment files and folder
+			for(int i=0; i<m_items.size(); i++) {
+				final MAttachmentEntry entry = m_items.get(i);
+				final File file = entry.getFile();
+				if(file !=null && file.exists()){
+					if(!file.delete()){
+						log.warning("unable to delete " + file.getAbsolutePath());
+					}
+				}
+			}
+			final File folder = new File(m_attachmentPathRoot + getAttachmentPathSnippet());
+			if(folder.exists()){
+				if(!folder.delete()){
+					log.warning("unable to delete " + folder.getAbsolutePath());
 				}
 			}
 		}
-		final File folder = new File(m_attachmentPathRoot + getAttachmentPathSnippet());
-		if(folder.exists()){
-			if(!folder.delete()){
-				log.warning("unable to delete " + folder.getAbsolutePath());
+		
+		//// SHH
+		
+		if(isStoreAttachmentsOnSSHFileSystem){
+			//delete all attachment files and folder
+			for(int i=0; i<m_items.size(); i++) {
+				final MAttachmentEntry entry = m_items.get(i);
+				final File file = entry.getFile();
+				if(file !=null){
+					SSHUtil.DeleteFileFromSSHServer(SSHServer, SSHPort, SSHUserName, SSHUserPassword, 
+							m_attachmentPathRoot + getAttachmentPathSnippet(), file.getAbsolutePath());
+					// 	log.warning("unable to delete " + file.getAbsolutePath());
+				}
 			}
+			
+			SSHUtil.DeleteDirFromSSHServer(SSHServer, SSHPort, SSHUserName, SSHUserPassword, 
+					m_attachmentPathRoot + getAttachmentPathSnippet());
+			//		log.warning("unable to delete " + folder.getAbsolutePath());
 		}
-		}
+		
+		//// SHH
 		return true;
 	} 	//	beforeDelete
 	
@@ -1115,5 +1196,333 @@ public class MAttachment extends X_AD_Attachment
 		entry.setData(data);
 		return true;
 	}
+	
+	/*public void delete(int table, int record){
+		Env.setContext(Env.getCtx(), "@deletePlano", "Y");
+		
+		Env.setContext(Env.getCtx(), "@deletePlano", "N");
+	}*/
+	
+	
+	// dREHER, desde aca los diferentes metodos para guardar en un FileSystem atraves de SSH
+	/**
+	 * Get the isStoreAttachmentsOnSSHFileSystem and attachmentPath for the client.
+	 * @param ctx
+	 * @param trxName
+	 */
+	private void initAttachmentSSHStoreDetails(Properties ctx, String trxName){
+		final MClient client = new MClient(ctx, this.getAD_Client_ID(), trxName);
+		
+		isStoreAttachmentsOnSSHFileSystem = Env.getContext(getCtx(), "#isStoreAttachmentOnSSHFileSystem").equals("Y");
+
+		log.info("isStoreAttachmentsOnSSHFileSystem=" + isStoreAttachmentsOnSSHFileSystem);
+		
+		if(isStoreAttachmentsOnSSHFileSystem){
+			if(File.separatorChar == '\\'){
+				m_attachmentPathRoot = client.getWindowsAttachmentPath();
+			} else {
+				m_attachmentPathRoot = client.getUnixAttachmentPath(); // En este campo setear el path inicial
+			}
+			if("".equals(m_attachmentPathRoot)){
+				log.severe("no attachmentPath defined");
+			} else if (!m_attachmentPathRoot.endsWith(File.separator)){
+				log.warning("attachment path doesn't end with " + File.separator);
+				m_attachmentPathRoot = m_attachmentPathRoot + File.separator;
+				
+				log.info("Va a crear carpeta destino " + m_attachmentPathRoot);
+				
+				// Creo carpeta destino
+				SSHUtil.MkDirSSHServer(SSHServer, SSHPort, SSHUserName, SSHUserPassword, m_attachmentPathRoot, File.separator);
+				
+				log.info("Creo carpeta destino " + m_attachmentPathRoot);
+				
+			}
+		}
+	}
+	
+	// dREHER guardar el adjunto atraves de SSH on FileSystem remoto
+	/**
+	 * 	Save Entry Data to the SSH file system.
+	 *	@return true if saved
+	 */
+	private boolean saveLOBDataToSSHFileSystem()
+	{
+		if("".equals(m_attachmentPathRoot)){
+			log.severe("no attachmentPath defined");
+			return false;
+		}
+		if (m_items == null || m_items.size() == 0) {
+			setBinaryData(null);
+			return true;
+		}
+		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		try {
+			final DocumentBuilder builder = factory.newDocumentBuilder();
+			final Document document = builder.newDocument();
+			final Element root = document.createElement("attachments");
+			document.appendChild(root);
+			document.setXmlStandalone(true);
+			
+			// create xml entries
+			for (int i = 0; i < m_items.size(); i++) {
+				log.fine(m_items.get(i).toString());
+				
+				File entryFile = null;
+				
+				try{
+					entryFile = m_items.get(i).getFileSSH();
+				}
+				catch(Exception ex){
+					log.warning("Error al leer getFileSSH()=" + ex);
+				}
+				
+				// dREHER, nueva data para recuperar ruta completa
+				String absolutePath = m_items.get(i).getAbsolutePath();
+				
+				if(absolutePath==null){
+					log.warning("No se pudo leer el absolutePath!");
+					continue;
+				}
+				
+				String path = (entryFile==null?absolutePath:entryFile.getAbsolutePath());
+				
+				// if local file - copy to central attachment folder
+				
+				log.fine(path + " - " + m_attachmentPathRoot);
+				if (!path.startsWith(m_attachmentPathRoot)) {
+					
+					log.fine("move file: " + path);
+					// FileChannel in = null;
+					// FileChannel out = null;
+					
+					try {
+						
+						//create destination folder
+						// final File destFolder = new File(m_attachmentPathRoot + File.separator + getAttachmentPathSnippet());
+						// if(!destFolder.exists()){
+						//	if(!destFolder.mkdirs()){
+						//		log.warning("unable to create folder: " + destFolder.getPath());
+						//	}
+						// }
+						
+						final File destFile = new File(m_attachmentPathRoot 
+								+ getAttachmentPathSnippet() + File.separator + entryFile.getName());
+						
+						
+						log.info("destFile=" + m_attachmentPathRoot 
+								+ getAttachmentPathSnippet() + File.separator + entryFile.getName());
+						
+						log.info("entryFile absolute path recuperado=" + absolutePath);
+						
+						// in = new FileInputStream(entryFile).getChannel();
+						// out = new FileOutputStream(destFile).getChannel();
+						// in.transferTo(0, in.size(), out);
+						// in.close();
+						// out.close();
+						
+						// Creo carpeta destino
+						log.info("Va a crear carpeta destino=" + m_attachmentPathRoot + getAttachmentPathSnippet());
+						SSHUtil.MkDirSSHServer(SSHServer, SSHPort, SSHUserName, SSHUserPassword, getAttachmentPathSnippet(), m_attachmentPathRoot );
+						
+						// Subo archivo a carpeta destino
+						log.info("Va a subir archivo destino=" + m_attachmentPathRoot + getAttachmentPathSnippet() + " Archivo=" + absolutePath);
+						SSHUtil.UploadFileToSSHServer(SSHServer, SSHPort, SSHUserName, SSHUserPassword, m_attachmentPathRoot 
+								+ getAttachmentPathSnippet(), absolutePath);
+						
+						// if(entryFile.exists()){
+						//	if(!entryFile.delete()){
+						//		entryFile.deleteOnExit();
+						//	}
+						// }
+						
+						entryFile = destFile;
+
+					//} catch (IOException e) {
+					//	e.printStackTrace();
+					//	log.severe("unable to copy file " + entryFile.getAbsolutePath() + " to "
+					//			+ m_attachmentPathRoot + File.separator + 
+					//			getAttachmentPathSnippet() + File.separator + entryFile.getName());
+					// }
+					}catch (Exception e) {
+						e.printStackTrace();
+						log.severe("unable to copy file " + entryFile.getAbsolutePath() + " to "
+							+ m_attachmentPathRoot + File.separator + 
+							getAttachmentPathSnippet() + File.separator + entryFile.getName());
+					}
+					finally {
+						// if (in != null && in.isOpen()) {
+						//	in.close();
+						// }
+						// if (out != null && out.isOpen()) {
+						//	out.close();
+						// }
+					}
+				}
+				
+				
+				final Element entry = document.createElement("entry");
+				//entry.setAttribute("name", m_items.get(i).getName());
+				entry.setAttribute("name", getEntryName(i));
+				String filePathToStore =  m_items.get(i).getAbsolutePath();     // dREHER entryFile.getAbsolutePath();
+				filePathToStore = filePathToStore.replaceFirst(m_attachmentPathRoot.replaceAll("\\\\","\\\\\\\\"), ATTACHMENT_FOLDER_PLACEHOLDER);
+				log.fine(filePathToStore);
+				entry.setAttribute("file", filePathToStore);
+				root.appendChild(entry);
+			}
+
+			final Source source = new DOMSource(document);
+			final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+			final Result result = new StreamResult(bos);
+			final Transformer xformer = TransformerFactory.newInstance().newTransformer();
+			xformer.transform(source, result);
+			final byte[] xmlData = bos.toByteArray();
+			log.fine(bos.toString());
+			setBinaryData(xmlData);
+			return true;
+			
+		} catch (Exception e) {
+			log.log(Level.SEVERE, "saveSSHLOBData", e);
+		}
+		setBinaryData(null);
+		return false;
+
+	}
+
+	// dREHER, trae la info desde el SSH FileSystem
+	/**
+	 * 	Load Data from file system
+	 *	@return true if success
+	 */
+	private boolean loadLOBDataFromSSHFileSystem(){
+		if("".equals(m_attachmentPathRoot)){
+			log.warning("no attachmentPath defined");
+			return false;
+		}
+		// Reset
+		m_items = new ArrayList<MAttachmentEntry>();
+		//
+		byte[] data = getBinaryData();
+		if (data == null)
+			return true;
+		
+		log.fine("TextFileSize=" + data.length);
+		if (data.length == 0)
+			return true;
+
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+		try {
+			
+			final DocumentBuilder builder = factory.newDocumentBuilder();
+			final Document document = builder.parse(new ByteArrayInputStream(data));
+			final NodeList entries = document.getElementsByTagName("entry");
+			
+			for (int i = 0; i < entries.getLength(); i++) {
+				
+				final Node entryNode = entries.item(i);
+				final NamedNodeMap attributes = entryNode.getAttributes();
+				final Node fileNode = attributes.getNamedItem("file");
+				final Node nameNode = attributes.getNamedItem("name");
+				if(fileNode==null || nameNode==null){
+					log.warning("no filename for entry " + i);
+					m_items = null;
+					return false;
+				}
+				log.info("name: " + nameNode.getNodeValue());
+				
+				String filePath = fileNode.getNodeValue();
+				log.fine("filePath: " + filePath);
+				
+				// dREHER, leo nombre remoto
+				String RemoteFileName = nameNode.getNodeValue();
+				
+				if(filePath!=null){
+					filePath = filePath.replaceFirst(ATTACHMENT_FOLDER_PLACEHOLDER, m_attachmentPathRoot.replaceAll("\\\\","\\\\\\\\"));
+					//just to be shure...
+					String replaceSeparator = File.separator;
+					
+					if(!replaceSeparator.equals("/")){
+						replaceSeparator = "\\\\";
+					}
+					
+					
+					filePath = filePath.replaceAll("/", replaceSeparator);
+					// System.out.println("1) filePath=" + filePath);
+					filePath = filePath.replaceAll("\\\\", replaceSeparator);
+					// System.out.println("2) filePath=" + filePath);
+					
+					
+					// if(File.separatorChar != '\\'){ // dREHER, es Unix
+						
+						// System.out.println("Es Unix");
+						// filePath = "/" + filePath;
+						// filePath = filePath.replaceFirst("/", "\\\\");
+						
+					// }
+					
+				}
+				
+				log.info("RemotefilePath: " + RemoteFileName);
+				
+				String fileNameLocal = System.getProperty("java.io.tmpdir") + File.separator  + "tmpFile.tmp";
+				
+				SSHUtil.ReadFileFromSSHServer(SSHServer, SSHPort, SSHUserName, SSHUserPassword, m_attachmentPathRoot + File.separator
+						+ getAttachmentPathSnippet(), RemoteFileName, fileNameLocal);
+				
+				log.fine("fileNameLocal: " + fileNameLocal);
+				
+				final File file = new File(fileNameLocal);
+				
+				// dREHER, leo desde SSH, si devolvio lectura, agrego entrada, sino error
+				
+				if (file.exists()) {
+					
+					// read files into byte[]
+					final byte[] dataEntry = new byte[(int) file.length()];
+					try {
+						final FileInputStream fileInputStream = new FileInputStream(file);
+						fileInputStream.read(dataEntry);
+						fileInputStream.close();
+					} catch (FileNotFoundException e) {
+						log.severe("File Not Found.");
+						e.printStackTrace();
+					} catch (IOException e1) {
+						log.severe("Error Reading The File.");
+						e1.printStackTrace();
+					}
+					
+					final MAttachmentEntry entry = new MAttachmentEntry(filePath,
+							dataEntry, m_items.size() + 1); // , file.getAbsolutePath()
+					m_items.add(entry);
+					
+				} else {
+					log.severe("file not found: " + file.getAbsolutePath());
+				}
+			}
+
+		} catch (SAXException sxe) {
+			// Error generated during parsing)
+			Exception x = sxe;
+			if (sxe.getException() != null)
+				x = sxe.getException();
+			x.printStackTrace();
+			log.severe(x.getMessage());
+
+		} catch (ParserConfigurationException pce) {
+			// Parser with specified options can't be built
+			pce.printStackTrace();
+			log.severe(pce.getMessage());
+
+		} catch (IOException ioe) {
+			// I/O error
+			ioe.printStackTrace();
+			log.severe(ioe.getMessage());
+		}
+
+		return true;
+
+	}
+	
+	
 
 }	//	MAttachment
