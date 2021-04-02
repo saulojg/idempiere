@@ -617,7 +617,8 @@ public class PackOut extends SvrProcess
 	{
 		Env.setContext(getCtx(), X_AD_Package_Exp_Detail.COLUMNNAME_AD_Table_ID, table_id);
 		Env.setContext(getCtx(), X_AD_Package_Exp_Detail.COLUMNNAME_SQLStatement, sql);
-		dataHandler.create(getCtx(), packOutDocument);
+		if(sql != null)
+			dataHandler.create(getCtx(), packOutDocument);
 		getCtx().remove(X_AD_Package_Exp_Detail.COLUMNNAME_AD_Table_ID);
 		getCtx().remove(X_AD_Package_Exp_Detail.COLUMNNAME_SQLStatement);
 	}

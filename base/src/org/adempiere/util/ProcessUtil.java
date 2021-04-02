@@ -77,7 +77,7 @@ public final class ProcessUtil {
 		String className = pi.getClassName();
 		if (className == null) {
 			MProcess proc = new MProcess(ctx, pi.getAD_Process_ID(), trx.getTrxName());
-			if (proc.getJasperReport() != null)
+			if (proc.getJasperReport() != null && proc.isReport())
 				className = JASPER_STARTER_CLASS;
 		}
 		//Get Class

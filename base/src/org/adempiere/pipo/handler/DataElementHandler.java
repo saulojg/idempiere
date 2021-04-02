@@ -191,6 +191,8 @@ public class DataElementHandler extends AbstractElementHandler {
 							genericPO.set_ValueOfColumn((String)thisValue.get(0), Integer.valueOf((String)thisValue.get(1)));
 						else if (((String)(thisValue.get(2))).equals("Boolean"))
 							genericPO.set_ValueOfColumn((String)thisValue.get(0), new Boolean(((String)thisValue.get(1)).equals("true") ? true : false));
+						if (((String)(thisValue.get(2))).equals("FilePath")) // dREHER
+							genericPO.set_ValueOfColumn((String)thisValue.get(0), (String)thisValue.get(1));
 					}
 				}
 			}
@@ -228,14 +230,14 @@ public class DataElementHandler extends AbstractElementHandler {
 			String isUpdateable = DB.getSQLValueString(getTrxName(ctx), sql.toString(),id);
 			sql = new StringBuffer ("SELECT IsKey FROM AD_column WHERE AD_Column_ID = ?");
 			String isKey = DB.getSQLValueString(getTrxName(ctx), sql.toString(),id);
-			if (("New".equals(objectStatus)) || (isKey.equals("N") && 
-					isUpdateable.equals("Y") &&
-					(!atts.getValue("name").equals("CreatedBy")||!atts.getValue("name").equals("UpdatedBy")))) {
+			if (("New".equals(String.valueOf(objectStatus))) || (String.valueOf(isKey).equals("N") && 
+					String.valueOf(isUpdateable).equals("Y") &&
+					(!String.valueOf(atts.getValue("name")).equals("CreatedBy")||!String.valueOf(atts.getValue("name")).equals("UpdatedBy")))) {
 				if (atts.getValue("value") != null && !atts.getValue("value").equals("null")) {
 					if (atts.getValue("class").equals("String") || atts.getValue("class").equals("Text")
 							|| atts.getValue("class").equals("List")|| atts.getValue("class").equals("Yes-No")				
 							|| atts.getValue("class").equals("Button")
-							|| atts.getValue("class").equals("Memo")|| atts.getValue("class").equals("Text Long")) {
+							|| atts.getValue("class").equals("Memo")|| atts.getValue("class").equals("Text Long") || atts.getValue("class").equals("FilePath")) {
 						genericPO.set_ValueOfColumn(atts.getValue("name").toString(), atts.getValue("value").toString());
 					}
 					else if (atts.getValue("class").equals("Number") || atts.getValue("class").equals("Amount")

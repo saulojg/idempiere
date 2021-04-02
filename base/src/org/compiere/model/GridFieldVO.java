@@ -53,7 +53,7 @@ public class GridFieldVO implements Serializable
 		return sql;
 	}   //  getSQL
 
-	private String InfoFactoryClass = null;
+	public String InfoFactoryClass = null;
 
 	/**
 	 *  Create Field Value Object
@@ -168,6 +168,8 @@ public class GridFieldVO implements Serializable
 				//Info Factory class
 				else if (columnName.equalsIgnoreCase("InfoFactoryClass"))
 					vo.InfoFactoryClass  = rs.getString(i);
+				else if (columnName.equalsIgnoreCase("AD_Chart_ID"))
+					vo.AD_Chart_ID = rs.getInt (i);
 			}
 			if (vo.Header == null)
 				vo.Header = vo.ColumnName;
@@ -283,6 +285,7 @@ public class GridFieldVO implements Serializable
 			//
 			vo.AD_Reference_Value_ID = rs.getInt("AD_Reference_Value_ID");
 			vo.ValidationCode = rs.getString("ValidationCode");
+			vo.AD_Chart_ID = rs.getInt("AD_Chart_ID");
 		}
 		catch (SQLException e)
 		{
@@ -328,6 +331,8 @@ public class GridFieldVO implements Serializable
 		// Genied: For a range parameter the second field 
 		// lookup behaviour should match the first one.
 		voT.AD_Reference_Value_ID = voF.AD_Reference_Value_ID;
+		voT.AD_Chart_ID = voF.AD_Chart_ID;
+		
 		voT.initFinish();
 		
 		return voT;
@@ -499,6 +504,8 @@ public class GridFieldVO implements Serializable
 	/** Collapse By Default * */
 	public boolean IsCollapsedByDefault = false;
 	
+	public int AD_Chart_ID = 0;
+	
 	/**
 	 *  Set Context including contained elements
 	 *  @param newCtx new context
@@ -564,7 +571,7 @@ public class GridFieldVO implements Serializable
 	 *	@param TabReadOnly r/o
 	 *	@return Field or null
 	 */
-	protected GridFieldVO clone(Properties Ctx, int windowNo, int tabNo, 
+	public GridFieldVO clone(Properties Ctx, int windowNo, int tabNo, 
 		int ad_Window_ID, int ad_Tab_ID, 
 		boolean TabReadOnly)
 	{
@@ -617,6 +624,8 @@ public class GridFieldVO implements Serializable
 		//  Process Parameter
 		clone.isRange = isRange;
 		clone.DefaultValue2 = DefaultValue2;
+		
+		clone.AD_Chart_ID = AD_Chart_ID;
 
 		return clone;
 	}	//	clone

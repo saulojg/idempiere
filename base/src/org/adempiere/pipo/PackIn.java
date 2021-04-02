@@ -158,6 +158,13 @@ public class PackIn extends SvrProcess {
 
 		// Create Target directory if required
 		String packageDirectory = adPackageImp.getAD_Package_Dir();
+		log.info("1- Directorio para descompactar paquete..." + packageDirectory);
+		
+		if (packageDirectory == null || packageDirectory.trim().length() == 0) {
+			packageDirectory = DB.getSQLValueString(get_TrxName(), "SELECT AD_Package_Dir FROM AD_Package_Imp_Proc WHERE AD_Package_Imp_Proc_ID=?", p_PackIn_ID);
+		}
+		log.info("2- Directorio para descompactar paquete..." + packageDirectory);
+		
 		if (packageDirectory == null || packageDirectory.trim().length() == 0) {
 			packageDirectory = Adempiere.getAdempiereHome();
 		}
@@ -173,7 +180,17 @@ public class PackIn extends SvrProcess {
 		}
 
 		// Unzip package
-		File zipFilepath = new File(adPackageImp.getAD_Package_Source());
+		
+		
+		String fileNameIn = adPackageImp.getAD_Package_Source();
+		if(fileNameIn==null || fileNameIn=="")
+			fileNameIn = adPackageImp.get_ValueAsString("AD_Package_Source");
+		if(fileNameIn==null || fileNameIn=="")
+			fileNameIn = DB.getSQLValueString(get_TrxName(), "SELECT AD_Package_Source FROM AD_Package_Imp_Proc WHERE AD_Package_Imp_Proc_ID=?", p_PackIn_ID);
+		
+		log.info("Archivo a importar : " + fileNameIn + " AD_Package_Imp_Proc_ID= " + p_PackIn_ID);
+		
+		File zipFilepath = new File(fileNameIn);
 		log.info("zipFilepath->" + zipFilepath);
 		String PackageName = CreateZipFile.getParentDir(zipFilepath);
 		CreateZipFile.unpackFile(zipFilepath, targetDir);

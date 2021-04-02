@@ -86,7 +86,7 @@ public class GridField
 
 
 	/** Max Display Length = 60		*/
-	public static final int MAXDISPLAY_LENGTH = 60;
+	public static final int MAXDISPLAY_LENGTH = 120;  // dREHER
 
 	/** The current value                   */
 	private Object          m_value = null;
@@ -793,11 +793,35 @@ public class GridField
 	{
 		if (m_vo.ColumnSQL != null && m_vo.ColumnSQL.length() > 0)
 		{
+			
+			// dREHER, si contiene variables, las reemplazo antes de devolver String
+			String sqlColumn = "";
+			
 			if (withAS)
-				return m_vo.ColumnSQL + " AS " + m_vo.ColumnName;
+				sqlColumn = m_vo.ColumnSQL + " AS " + m_vo.ColumnName;
 			else
-				return m_vo.ColumnSQL;
-		}
+				sqlColumn =  m_vo.ColumnSQL;
+			
+			if(sqlColumn.indexOf("@") > -1 || sqlColumn.indexOf("#") > -1){
+				sqlColumn = Env.parseContext(m_vo.ctx, m_vo.WindowNo, sqlColumn, true, false);	
+				if(sqlColumn.indexOf("@") > -1 || sqlColumn.indexOf("#") > -1)
+					sqlColumn = Env.parseContext(m_vo.ctx, m_vo.WindowNo, sqlColumn, false, false);
+				
+				if(sqlColumn.indexOf("@") > -1 || sqlColumn.indexOf("#") > -1){
+					log.warning("No pudo parsear columna virtual, devuelve null");
+					sqlColumn = "(SELECT '1') AS " + m_vo.ColumnName;
+				}
+				
+				if(sqlColumn==null || sqlColumn=="")
+					sqlColumn = "(SELECT '1') AS " + m_vo.ColumnName;
+				
+				log.fine("GridField - Encontro variables en la columna SQL, parseo a=" + sqlColumn);
+			}
+			
+			return sqlColumn;
+		}// else
+		//	log.info("GridField - No tiene data SQL devuelvo nombre columna=" + m_vo.ColumnName);
+		
 		return m_vo.ColumnName;
 	}	//	getColumnSQL
 
@@ -1644,4 +1668,13 @@ public class GridField
 	public boolean getIsCollapsedByDefault() {
 		return m_vo.IsCollapsedByDefault;
 	}
+	
+	/** get AD_Chart_ID
+	* @return chart id
+	*/
+	public int getAD_Chart_ID()
+	{
+		return m_vo.AD_Chart_ID;
+	}
+	
 }   //  MField
