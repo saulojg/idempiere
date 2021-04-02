@@ -22,6 +22,7 @@ import java.util.*;
 import java.math.*;
 
 import org.compiere.model.*;
+
 import java.util.logging.*;
 import org.compiere.util.*;
 
@@ -105,6 +106,8 @@ public class ReplenishReport extends SvrProcess
 			createRequisition();
 		else if (p_ReplenishmentCreate.equals("MMM"))
 			createMovements();
+		else if (p_ReplenishmentCreate.equals("MMP"))
+			createPP();
 		return m_info;
 	}	//	doIt
 
@@ -186,11 +189,12 @@ public class ReplenishReport extends SvrProcess
 			sql += "null";
 		else
 			sql += "'" + p_ReplenishmentCreate + "'";
+		//filtro que el producto no este marcado como bom (lo analizo por otro proceso/reporte)
 		sql += " FROM M_Replenish r"
-			+ " INNER JOIN M_Product_PO po ON (r.M_Product_ID=po.M_Product_ID) "
+			+ " INNER JOIN M_Product_PO po ON (r.M_Product_ID=po.M_Product_ID) INNER JOIN m_product p  on  (r.M_Product_ID=p.M_Product_ID) "
 			+ "WHERE po.IsCurrentVendor='Y'"	//	Only Current Vendor
 			+ " AND r.ReplenishType<>'0'"
-			+ " AND po.IsActive='Y' AND r.IsActive='Y'"
+			+ " AND po.IsActive='Y' AND r.IsActive='Y' AND P.IsBom = 'N' "
 			+ " AND r.M_Warehouse_ID=" + p_M_Warehouse_ID;
 		if (p_C_BPartner_ID != 0)
 			sql += " AND po.C_BPartner_ID=" + p_C_BPartner_ID;
@@ -212,8 +216,8 @@ public class ReplenishReport extends SvrProcess
 				sql += "null";
 			else
 				sql += "'" + p_ReplenishmentCreate + "'";
-			sql	+= " FROM M_Replenish r "
-				+ "WHERE r.ReplenishType<>'0' AND r.IsActive='Y'"
+			sql	+= " FROM M_Replenish r INNER JOIN m_product p  on  (r.M_Product_ID=p.M_Product_ID)"
+				+ "WHERE r.ReplenishType<>'0' AND r.IsActive='Y' AND P.IsBom = 'N'"
 				+ " AND r.M_Warehouse_ID=" + p_M_Warehouse_ID
 				+ " AND NOT EXISTS (SELECT * FROM T_Replenish t "
 					+ "WHERE r.M_Product_ID=t.M_Product_ID"
@@ -257,9 +261,10 @@ public class ReplenishReport extends SvrProcess
 
 		//	Set Minimum / Maximum Maintain Level
 		//	X_M_Replenish.REPLENISHTYPE_ReorderBelowMinimumLevel
+		/** ROCA sgo no considero lo reservado **/
 		sql = "UPDATE T_Replenish"
-			+ " SET QtyToOrder = CASE WHEN QtyOnHand - QtyReserved + QtyOrdered <= Level_Min "
-			+ " THEN Level_Max - QtyOnHand + QtyReserved - QtyOrdered "
+			+ " SET QtyToOrder = CASE WHEN QtyOnHand  + QtyOrdered <= Level_Min "
+			+ " THEN Level_Max - QtyOnHand  - QtyOrdered "
 			+ " ELSE 0 END "
 			+ "WHERE ReplenishType='1'" 
 			+ " AND AD_PInstance_ID=" + getAD_PInstance_ID();
@@ -455,6 +460,50 @@ public class ReplenishReport extends SvrProcess
 		m_info = "#" + noReqs + info;
 		log.info(m_info);
 	}	//	createRequisition
+	
+	private void createPP()
+	{
+		int noOrders = 0;
+		String info = "";
+		//
+		MOrder order = null;
+		MWarehouse wh = null;
+		X_T_Replenish[] replenishs = getReplenish("M_WarehouseSource_ID IS NULL");
+		for (int i = 0; i < replenishs.length; i++)
+		{
+			X_T_Replenish replenish = replenishs[i];
+			if (wh == null || wh.getM_Warehouse_ID() != replenish.getM_Warehouse_ID())
+				wh = MWarehouse.get(getCtx(), replenish.getM_Warehouse_ID());
+			//
+			if (order == null 
+				|| order.getC_BPartner_ID() != replenish.getC_BPartner_ID()
+				|| order.getM_Warehouse_ID() != replenish.getM_Warehouse_ID())
+			{
+				order = new MOrder(getCtx(), 0, get_TrxName());
+				order.setIsSOTrx(false);
+				order.setC_DocTypeTarget_ID(p_C_DocType_ID);
+				MBPartner bp = new MBPartner(getCtx(), replenish.getC_BPartner_ID(), get_TrxName());
+				order.setBPartner(bp);
+				order.setSalesRep_ID(getAD_User_ID());
+				order.setDescription(Msg.getMsg(getCtx(), "Replenishment"));
+				//	Set Org/WH
+				order.setAD_Org_ID(wh.getAD_Org_ID());
+				order.setM_Warehouse_ID(wh.getM_Warehouse_ID());
+				if (!order.save())
+					return;
+				log.fine(order.toString());
+				noOrders++;
+				info += " - " + order.getDocumentNo();
+			}
+			MOrderLine line = new MOrderLine (order);
+			line.setM_Product_ID(replenish.getM_Product_ID());
+			line.setQty(replenish.getQtyToOrder());
+			line.setPrice();
+			line.save();
+		}
+		m_info = "#" + noOrders + info;
+		log.info(m_info);
+	}	//	createPP
 
 	/**
 	 * 	Create Inventory Movements
