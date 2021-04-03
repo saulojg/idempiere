@@ -327,9 +327,16 @@ public class MRequisition extends X_M_Requisition implements DocAction
 			return DocAction.STATUS_Invalid;
 		
 		//	Implicit Approval
-		if (!isApproved())
-			approveIt();
-		log.info(toString());
+		
+		// 12/09/2013
+		// dREHER Completar no Implica aprobacion, eso lo dejo para cuando se crea una orden de compra
+		// ya que el circuito queda mejor a mi parecer
+		// El usuario pide material, completa documento, el sector compras aprueba si confirma orden, sino queda sin aprobar...
+		
+		// if (!isApproved())
+		//	approveIt();
+		
+		log.info("MRequisition.completeIt. Saltea aprobacion, se deja para las OC...");
 		
 		//	User Validation
 		String valid = ModelValidationEngine.get().fireDocValidate(this, ModelValidator.TIMING_AFTER_COMPLETE);
@@ -493,15 +500,60 @@ public class MRequisition extends X_M_Requisition implements DocAction
 		if (m_processMsg != null)
 			return false;
 
-	//	setProcessed(false);
-		if (! reverseCorrectIt())
-			return false;
-
+		// dREHER, verifico q no tenga OC asociadas, en caso de ser asi, dejo volver atras, sino NO
+		Boolean sinOC = true;
+		
+		String m_req_id = String.valueOf(this.get_ID());
+		String ad_client_id =  String.valueOf(this.getAD_Client_ID());
+		
+		String sql = "SELECT COUNT(*) AS x FROM M_RequisitionLine WHERE M_Requisition_ID=" + m_req_id + " AND C_OrderLine_ID > 0 AND AD_Client_ID=" + ad_client_id;
+		// System.out.println(sql);
+		PreparedStatement pstmt0 = DB.prepareStatement(sql, null);
+		ResultSet r0 = null;
+		int c = 0;
+		try {
+			r0 = pstmt0.executeQuery();
+			if(r0.next())
+				c = r0.getInt("x");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			if(r0 != null)
+				try {
+					r0.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			if(pstmt0 != null){
+				try {
+					pstmt0.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				pstmt0 = null;
+			}
+		}
+		if(c > 0)
+			sinOC = false;
+		
 		// After reActivate
+		//	setProcessed(false);
+		if(!sinOC)
+			if (! reverseCorrectIt()){
+				// System.out.println("reverseCorrectIt en MRequisition.java:" + m_processMsg);
+				return false;
+			}
+		
 		m_processMsg = ModelValidationEngine.get().fireDocValidate(this,ModelValidator.TIMING_AFTER_REACTIVATE);
 		if (m_processMsg != null)
 			return false;
-
+		
+		// dREHER, fuerzo a que quede en borrador y sin procesar
+		this.setDocStatus(STATUS_Voided);
+		this.setProcessed(false);
+		this.setIsApproved(false); // quito aprobacion
+		this.save();
+		
 		return true;
 	}	//	reActivateIt
 	

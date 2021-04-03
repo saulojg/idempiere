@@ -49,7 +49,9 @@ public class MUOMConversion extends X_C_UOM_Conversion
 		{
 			MUOM uom = MUOM.get (ctx, C_UOM_To_ID);
 			if (uom != null)
-				return uom.round(retValue.multiply(qty), true);
+				// dREHER, el redondeo para muchas unidades no sirve
+				// return uom.round(retValue.multiply(qty), true);
+				return retValue.multiply(qty, new MathContext(5));
 			return retValue.multiply(qty);
 		}
 		return null;

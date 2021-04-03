@@ -165,7 +165,7 @@ public class MUser extends X_AD_User
 		
 		MUser retValue = null;
 		String sql = "SELECT * FROM AD_User "
-			+ "WHERE Name=? AND (Password=? OR Password=?) AND IsActive='Y' AND AD_Client_ID=?";
+			+ "WHERE Name=? AND (Password=? OR Password=? OR Password=MD5(?)) AND IsActive='Y' AND AD_Client_ID=?";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try
@@ -174,7 +174,8 @@ public class MUser extends X_AD_User
 			pstmt.setString (1, name);
 			pstmt.setString (2, password);
 			pstmt.setString(3, SecureEngine.encrypt(password));
-			pstmt.setInt(4, AD_Client_ID);
+			pstmt.setString (4, password);
+			pstmt.setInt(5, AD_Client_ID);
 			rs = pstmt.executeQuery ();
 			if (rs.next ())
 			{
@@ -792,7 +793,30 @@ public class MUser extends X_AD_User
 		return true;
 	}	//	beforeSave
 	
+// dREHER	
+	public void setLAR_DocumentNo(String text) {
+		// TODO Auto-generated method stub
+		
+	}
+
+// dREHER	
+	public void setLAR_DocumentType_ID(int key) {
+		// TODO Auto-generated method stub
+		
+	}
+
+// dREHER
+	public void setTax_ID(String text) {
+		// TODO Auto-generated method stub
+		
+	}
 	
+// dREHER
+	public void setLAR_TipoContribuyente_ID(int key) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	/**
 	 * 	Test
 	 *	@param args ignored
