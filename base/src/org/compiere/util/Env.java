@@ -754,6 +754,12 @@ public final class Env
 	{
 		return Env.getContextAsInt(ctx, "#AD_Client_ID");
 	}	//	getAD_Client_ID
+	
+	
+	public static int getC_Period_ID (Properties ctx)
+	{
+		return Env.getContextAsInt(ctx, "#C_Period_ID");
+	}
 
 	/**
 	 * 	Get Login AD_Org_ID
@@ -774,6 +780,11 @@ public final class Env
 	{
 		return Env.getContextAsInt(ctx, "#AD_User_ID");
 	}	//	getAD_User_ID
+	
+	public static int getLAR_Sucursal_ID (Properties ctx)
+	{
+		return Env.getContextAsInt(ctx, "#LAR_Sucursal_ID");
+	}	//	getLAR_Sucursal_ID
 	
 	/**
 	 * 	Get Login AD_Role_ID
@@ -1071,7 +1082,8 @@ public final class Env
 		}
 		sb.append(getContext(ctx, "#AD_User_Name")).append("@")
 			.append(getContext(ctx, "#AD_Client_Name")).append(".")
-			.append(getContext(ctx, "#AD_Org_Name"))
+			.append(getContext(ctx, "#AD_Org_Name")).append("-")
+			.append(Env.getContext(ctx, "#LAR_Sucursal"))
 			.append(" [").append(CConnection.get().toString()).append("]");
 		return sb.toString();
 	}	//	getHeader

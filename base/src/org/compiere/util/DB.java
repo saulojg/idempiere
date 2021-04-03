@@ -1756,7 +1756,7 @@ public final class DB
 	{
 		String dn = MSequence.getDocumentNo (AD_Client_ID, TableName, trxName, po);
 		if (dn == null)
-			throw new DBException ("No DocumentNo");
+			throw new DBException ("No DocumentNo for table=" + TableName);
 		return dn;
 	}	//	getDocumentNo
 

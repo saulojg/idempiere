@@ -958,6 +958,155 @@ public final class EMail implements Serializable
 		return sb.toString ();
 	}	//	toString
 
+	
+	// dREHER otro metodo para envio de correos
+	public static Boolean sendEmail(String to, String subject, String msg,
+			String fileName, String[] cc){
+		
+		boolean isOk = false;
+		Properties properties = new Properties();
+		Session session;
+		
+		int AD_Client_ID = Env.getAD_Client_ID(Env.getCtx());
+		if(AD_Client_ID <= 0)
+			AD_Client_ID = DB.getSQLValue(null, "SELECT AD_Client_ID FROM AD_Client WHERE AD_Client_ID > 1000 AND IsActive='Y'");
+		if(AD_Client_ID <= 0)
+			AD_Client_ID = 1000000;
+		
+		
+		String portSmtp = Miscfunc.ValueFromSystem("SMTP_PORT", "587", true);
+		String enableTTLS = Miscfunc.ValueFromSystem("SMTP_ENABLETTLS", "N", true);
+		
+		MClient m_client = new MClient(Env.getCtx(), AD_Client_ID, null);
+		MUser from = MUser.get(Env.getCtx(), Env.getAD_User_ID(Env.getCtx()));
+		
+		
+		if(from==null || m_client == null){ // esta corriendo desde una agenda programada, no lee entorno
+			
+			m_client = new MClient(Env.getCtx(), 1000000, null);
+			
+			int idUser = DB.getSQLValue(null, "SELECT AD_User_ID FROM AD_User WHERE Name='SuperUser'");
+			if(idUser<0)
+				idUser=100;
+			
+			from = new MUser(Env.getCtx(), idUser, null);
+			
+			System.out.println("No pudo cargar MClient o MUser, toma datos por defecto. user=" + from);
+			
+		}
+		
+		// Seteo propiedades
+		properties.put("mail.smtp.host", m_client.getSMTPHost());
+		properties.put("mail.smtp.starttls.enable", (enableTTLS=="Y"?"true":"false"));
+		properties.put("mail.smtp.mail.sender", from.getEMail());
+		properties.put("mail.smtp.user", from.getEMail());
+		properties.put("mail.smtp.auth", m_client.isSmtpAuthorization()?"true":"false");
+		properties.put("mail.debug","true");
+		properties.put("mail.smtp.port", portSmtp);
+		properties.put("mail.smtp.socketFactory.port", portSmtp);
+		if(enableTTLS=="Y")
+			properties.put("mail.smtp.socketFactory.class","javax.net.ssl.SSLSocketFactory");
+		else
+			properties.put("mail.smtp.socketFactory.class","");
+		
+		properties.put("mail.smtp.socketFactory.fallback","false");
+		properties.setProperty("mail.smtp.quitwait","false");
+		
+		System.out.println("Seteo propiedades...");
+
+		session = Session.getDefaultInstance(properties);
+		
+		System.out.println("Creo session...");
+		
+		// Realizo envio
+		try{
+			
+			
+			MimeMessage message = new MimeMessage(session);
+			System.out.println("Creo mime..");
+			
+			message.setFrom(new InternetAddress((String)properties.get("mail.smtp.mail.sender")));
+			System.out.println("Seteo sender.." + (String)properties.get("mail.smtp.mail.sender"));
+			
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			System.out.println("Seteo recipient.." + to);
+			
+			if(cc!=null && cc.length > 0){
+				
+				for(int i=0; i<cc.length; i++){
+					if(cc[i]!=null && cc[i]!="" && cc[i].indexOf("@")>-1 && cc[i].indexOf(".") > -1){
+						message.addRecipient(Message.RecipientType.CC, new InternetAddress(cc[i]));
+						System.out.println("Seteo CC.." + cc[i]);
+					}
+				}
+				System.out.println("Seteo CC..");
+				
+			}
+			
+			
+			message.setSubject(String.valueOf(subject));
+			System.out.println("Seteo subject.." + subject);
+			
+			// Creamos un cuerpo del correo con ayuda de la clase BodyPart
+	        BodyPart cuerpoMensaje = new MimeBodyPart();
+			
+			cuerpoMensaje.setText(String.valueOf(msg));
+			System.out.println("Seteo msg.." + msg);
+			
+			 // Creamos un multipart al correo
+	         Multipart multiparte = new MimeMultipart();
+			
+	         // Agregamos el texto al cuerpo del correo multiparte
+	         multiparte.addBodyPart(cuerpoMensaje);
+	         
+	      // Ahora el proceso para adjuntar el archivo
+	         cuerpoMensaje = new MimeBodyPart();
+	         String nombreArchivo = fileName;
+	         DataSource fuente = new FileDataSource(nombreArchivo);
+	         cuerpoMensaje.setDataHandler(new DataHandler(fuente));
+	         cuerpoMensaje.setFileName(nombreArchivo);
+	         multiparte.addBodyPart(cuerpoMensaje);
+	 
+	         // Asignamos al mensaje todas las partes que creamos anteriormente
+	         message.setContent(multiparte);
+	         
+	        /* 
+			message.setContent(message,"text/plain");
+			System.out.println("Seteo texto text/plain");
+			
+			// message.setFileName(fileName);
+			message.saveChanges();
+			System.out.println("Guardo message");
+			*/
+	         
+			Transport t = session.getTransport("smtp");
+			System.out.println("Creo transporte smtp");
+
+			System.out.println("Conectando transporte host=" +m_client.getSMTPHost()+" user="+(String)properties.get("mail.smtp.user") + " pw=" + from.getEMailUserPW().trim());
+			t.connect(m_client.getSMTPHost(), (String)properties.get("mail.smtp.user"), from.getEMailUserPW().trim());
+			System.out.println("Conecto transporte host=" +m_client.getSMTPHost()+" user="+(String)properties.get("mail.smtp.user") + " pw=" + from.getEMailUserPW().trim());
+			
+			t.sendMessage(message, message.getAllRecipients());
+			System.out.println("Envio a todos los recipients");
+			
+			t.close();
+			
+			System.out.println("Cerro tansporte...");
+			
+			isOk = true;
+			
+		}catch (MessagingException me){
+                        //Aqui se deberia o mostrar un mensaje de error o en lugar
+                        //de no hacer nada con la excepcion, lanzarla para que el modulo
+                        //superior la capture y avise al usuario con un popup, por ejemplo.
+			isOk = false;
+			System.out.println("Excepcion de envio ex=" + me.getLocalizedMessage());
+		}
+		
+		return isOk;
+		
+	}
+	
 	/**************************************************************************
 	 *  Test.
 	 *  java -cp CTools.jar;CClient.jar org.compiere.util.EMail main info@adempiere.org jjanke@adempiere.org "My Subject"  "My Message"
