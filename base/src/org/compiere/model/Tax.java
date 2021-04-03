@@ -535,6 +535,22 @@ public class Tax
 		MLocation lTo = new MLocation (ctx, billToC_Location_ID, null); 
 		log.finer("From=" + lFrom);
 		log.finer("To=" + lTo);
+
+//		Default Tax, first evaluation default tax, dREHER - Apr' 09
+		for (int i = 0; i < taxes.length; i++)
+		{
+			MTax tax = taxes[i];
+			if (!tax.isDefault() || !tax.isActive()
+				|| tax.getParent_Tax_ID() != 0)	//	user parent tax
+				continue;
+			if (IsSOTrx && MTax.SOPOTYPE_PurchaseTax.equals(tax.getSOPOType()))
+				continue;
+			if (!IsSOTrx && MTax.SOPOTYPE_SalesTax.equals(tax.getSOPOType()))
+				continue;
+			log.fine("get (default) - " + tax);
+			return tax.getC_Tax_ID();
+		}	//	for all taxes
+		
 		
 		for (int i = 0; i < taxes.length; i++)
 		{
@@ -595,21 +611,6 @@ public class Tax
 			}
 		}	//	for all taxes
 
-		//	Default Tax
-		for (int i = 0; i < taxes.length; i++)
-		{
-			MTax tax = taxes[i];
-			if (!tax.isDefault() || !tax.isActive()
-				|| tax.getParent_Tax_ID() != 0)	//	user parent tax
-				continue;
-			if (IsSOTrx && MTax.SOPOTYPE_PurchaseTax.equals(tax.getSOPOType()))
-				continue;
-			if (!IsSOTrx && MTax.SOPOTYPE_SalesTax.equals(tax.getSOPOType()))
-				continue;
-			log.fine("get (default) - " + tax);
-			return tax.getC_Tax_ID();
-		}	//	for all taxes
-		
 		log.saveError("TaxNotFound", "");
 		return 0;
 	}	//	get

@@ -350,8 +350,28 @@ public class POInfo implements Serializable
 	{
 		if (index < 0 || index >= m_columns.length)
 			return null;
-		if (m_columns[index].ColumnSQL != null && m_columns[index].ColumnSQL.length() > 0)
-			return m_columns[index].ColumnSQL + " AS " + m_columns[index].ColumnName;
+		
+		if (m_columns[index].ColumnSQL != null && m_columns[index].ColumnSQL.length() > 0){
+			
+			// dREHER, si es columna virtual, parsear variables de contexto
+			String sqlColumn = m_columns[index].ColumnSQL + " AS " + m_columns[index].ColumnName;
+			if(sqlColumn.indexOf("@") > -1 || sqlColumn.indexOf("#") > -1){
+				sqlColumn = Env.parseContext(m_ctx, 0, sqlColumn, false, false);	
+				
+				if(sqlColumn.indexOf("@") > -1 || sqlColumn.indexOf("#") > -1){
+					CLogger.get().log(Level.FINE, "No pudo parsear columna virtual, devuelve null");
+					sqlColumn = "(SELECT '1') AS " + m_columns[index].ColumnName;
+				}
+				
+				if(sqlColumn==null || sqlColumn=="")
+					sqlColumn = "(SELECT '1') AS " + m_columns[index].ColumnName;
+				
+				CLogger.get().log(Level.FINE, "GridField - Encontro variables en la columna SQL, parseo a=" + sqlColumn);
+			}
+			
+			return sqlColumn;
+		}
+		
 		return m_columns[index].ColumnName;
 	}   //  getColumnSQL
 

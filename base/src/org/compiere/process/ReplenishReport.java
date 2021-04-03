@@ -93,8 +93,21 @@ public class ReplenishReport extends SvrProcess
 		prepareTable();
 		fillTable(wh);
 		//
-		if (p_ReplenishmentCreate == null)
-			return "OK";
+		if (p_ReplenishmentCreate == null){
+			
+			StringBuffer sb = new  StringBuffer();
+			sb.append("Las condiciones para generar solo el informe de faltantes son:<br>\n");
+			sb.append("* En la ventana de productos:<br>\n"); 
+			sb.append(" 1) Completar dentro del tab 'Reabastecer' los valores mínimo y máximo para cada depósito y<br>\n");
+			sb.append("la forma 'Reodenar por debajo del stock mínimo<br><br>\n\n");
+			sb.append("* En la ventana de productos:<br>\n");
+			sb.append(" 1) Completar dentro del tab 'Compras' el proveedor por defecto<br>\n");
+			
+			log.info(sb.toString());
+			
+			return sb.toString();
+		}
+		
 		//
 		MDocType dt = MDocType.get(getCtx(), p_C_DocType_ID);
 		if (!dt.getDocBaseType().equals(p_ReplenishmentCreate))

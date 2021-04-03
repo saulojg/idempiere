@@ -19,6 +19,7 @@ package org.compiere.process;
 import java.sql.*;
 import java.util.logging.*;
 
+import org.adempiere.utils.Miscfunc;
 import org.compiere.model.*;
 import org.compiere.util.*;
 
@@ -59,7 +60,23 @@ public class RequisitionPOCreate extends SvrProcess
 	private MOrder		m_order = null;
 	/** Order Line			*/
 	private MOrderLine	m_orderLine = null;
+
+	// region Roca
+
+	private boolean isComplete = false;
+
+	// dREHER, agregue como parametro el BP para los casos en q se hagan los OC
+	// consolidadas, todos las lineas al mismo BP
+	private int p_BPartner_ID = 0;
 	
+	private int p_LAR_Sucursal_ID = 0;
+	
+	private int AD_User_ID = 0; // es el usuario de la requisicion, avisar cuando se creo orden de compra (SE CONFIRMO LA REQUISICION)
+
+	private MRequisition reqM = null;
+
+	// endregion Roca
+
 	/**
 	 *  Prepare - e.g., get Parameters.
 	 */
@@ -95,6 +112,12 @@ public class RequisitionPOCreate extends SvrProcess
 				p_M_Requisition_ID = para[i].getParameterAsInt();
 			else if (name.equals("ConsolidateDocument"))
 				p_ConsolidateDocument = "Y".equals(para[i].getParameter());
+			else if (name.equals("C_BPartner"))
+				p_BPartner_ID = para[i].getParameterAsInt();
+			else if (name.equals("LAR_Sucursal_ID"))
+				p_LAR_Sucursal_ID = para[i].getParameterAsInt();
+			else if (name.equals("IsComplete"))
+				isComplete = "Y".equals(para[i].getParameter());
 			else
 				log.log(Level.SEVERE, "Unknown Parameter: " + name);
 		}
@@ -107,6 +130,12 @@ public class RequisitionPOCreate extends SvrProcess
 	 */
 	protected String doIt() throws Exception
 	{
+		// dREHER, asegurar la organizacion
+		if(p_AD_Org_ID==0 && Env.getAD_Org_ID(getCtx())!=0)
+			p_AD_Org_ID = Env.getAD_Org_ID(getCtx());
+		else if(p_AD_Org_ID==0 && Env.getAD_Org_ID(getCtx())==0)	
+				return "Debe ingresar la Organización o loguearse en una!";
+
 		//	Specific
 		if (p_M_Requisition_ID != 0)
 		{
@@ -114,6 +143,24 @@ public class RequisitionPOCreate extends SvrProcess
 			MRequisition req = new MRequisition(getCtx(), p_M_Requisition_ID, get_TrxName());
 			if (!MRequisition.DOCSTATUS_Completed.equals(req.getDocStatus()))
 				throw new AdempiereUserError("@DocStatus@ = " + req.getDocStatus());
+			// region Roca
+			log.info("Verifica si ya fue aprobada anteriormente, proceso RequisitionPOCreate...");
+			
+			// dREHER, la aprobacion la hago desde esta ventana, cuando se creo la OC para que se notifique
+			// al usuario que creo la Requisicion, no antes...
+			if(req.isApproved())
+				throw new AdempiereUserError("@IsApproved@ = "
+						+ req.isApproved());
+			
+			log.info("Carga usuario y req, proceso RequisitionPOCreate...");
+			
+			// dREHER, guardo el usuario para la notificacion de la aceptacion de la requisicion y la requisicion en si...
+			AD_User_ID = req.getAD_User_ID();
+			p_AD_User_ID = req.getAD_User_ID();
+			reqM = req;
+			
+			log.info("Procesa las lineas, proceso RequisitionPOCreate...");
+			// endregion Roca
 			MRequisitionLine[] lines = req.getLines();
 			for (int i = 0; i < lines.length; i++)
 			{
@@ -254,6 +301,12 @@ public class RequisitionPOCreate extends SvrProcess
 		if (!p_ConsolidateDocument
 			&& rLine.getM_Requisition_ID() != m_M_Requisition_ID)
 			closeOrder();
+		
+		// en caso de que la requisicion no tenga AD_Org_ID, le asigno la del
+		// parametro
+		if(rLine.getAD_Org_ID()==0)
+			rLine.setAD_Org_ID(p_AD_Org_ID);
+
 		if (m_orderLine == null
 			|| rLine.getM_Product_ID() != m_M_Product_ID
 			|| rLine.getM_AttributeSetInstance_ID() != m_M_AttributeSetInstance_ID
@@ -261,6 +314,22 @@ public class RequisitionPOCreate extends SvrProcess
 			newLine(rLine);
 
 		//	Update Order Line
+
+		// region Roca
+		// dREHER, trae la descripcion desde la requisicion
+		m_orderLine.setDescription(rLine.getDescription());
+		m_orderLine.setAD_Org_ID(p_AD_Org_ID);
+		
+		Double tasaIva = Double.parseDouble(Miscfunc.ValueFromSystem("TasaIVADefault", "21.00", true));
+		
+		int C_Tax_ID = DB.getSQLValue(get_TrxName(), "SELECT C_Tax_ID FROM C_Tax WHERE IsActive='Y' AND AD_Client_ID=" + Env.getAD_Client_ID(getCtx()) +
+				" AND rate=" + tasaIva);
+		if(C_Tax_ID > -1)
+			m_orderLine.setC_Tax_ID(C_Tax_ID);
+		
+		m_orderLine.setPriceActual(rLine.getPriceActual());
+		// endregion Roca
+
 		m_orderLine.setQty(m_orderLine.getQtyOrdered().add(rLine.getQty()));
 		//	Update Requisition Line
 		rLine.setC_OrderLine_ID(m_orderLine.getC_OrderLine_ID());
@@ -292,9 +361,46 @@ public class RequisitionPOCreate extends SvrProcess
 		if (!p_ConsolidateDocument)
 			m_order.setDescription(Msg.getElement(getCtx(), "M_Requisition_ID") 
 				+ ": " + rLine.getParent().getDocumentNo());
-		
+		// region Roca
+
+		//Added by WG
+		m_order.set_ValueOfColumn("LAR_Sucursal_ID", p_LAR_Sucursal_ID);
+		// default po document type
+
+		// dREHER, siempre guardar este numero
+		// original -->> if (!p_ConsolidateDocument)
+
+		m_order.setDescription(Msg.getElement(getCtx(), "M_Requisition_ID")
+				+ ": " + rLine.getParent().getDocumentNo());
+
+		// endregion Roca
+
 		//	Prepare Save
 		m_M_Requisition_ID = rLine.getM_Requisition_ID();
+
+		// region Roca
+		m_order.setM_Warehouse_ID(rLine.getParent().getM_Warehouse_ID());
+		
+		// Si eligio una Organizacion, setear la correspondiente
+		if (p_AD_Org_ID != 0)
+			m_order.setAD_Org_ID(p_AD_Org_ID);
+		
+		// setear comprador desde la requisicion
+		// si no le llega como parametro del proceso
+		int AD_User_ID = rLine.getParent().getAD_User_ID();
+		if(p_AD_User_ID > 0)
+				AD_User_ID = p_AD_User_ID;
+		m_order.setSalesRep_ID(AD_User_ID);
+		
+		// si eligio sucursal, setear la correspondiente, sino tomarla desde la req
+		if (p_LAR_Sucursal_ID != 0)
+			m_order.setLAR_Sucursal_ID(p_LAR_Sucursal_ID);
+		else
+			m_order.setLAR_Sucursal_ID(Integer.parseInt(rLine.getParent().get_ValueAsString("LAR_Sucursal_ID")));
+		
+		log.info("Va a guardar la Orden generada!");
+		// endregion Roca
+
 		if (!m_order.save())
 			throw new AdempiereSystemError("Cannot save Order");
 	}	//	newOrder
@@ -314,6 +420,59 @@ public class RequisitionPOCreate extends SvrProcess
 		{
 			m_order.load(get_TrxName());
 			addLog(0, null, m_order.getGrandTotal(), m_order.getDocumentNo());
+
+			// region Roca
+			reqM.setIsApproved(true);
+			reqM.save(get_TrxName());
+			
+			log.info("Creo O.C. apruebo la requisicion ID=" + reqM.getM_Requisition_ID());
+			
+			// commit();
+			
+			// Notificar al usuario que la creo
+			if(AD_User_ID > 0){
+				MUser user = new MUser(Env.getCtx(), AD_User_ID, get_TrxName());
+				int C_BPartner_ID = user.getC_BPartner_ID();
+				
+				Miscfunc.SendGenericNote("Req # " + reqM.getDocumentNo() + " ha sido aprobada!", 
+						"Se creo la O.C. # " + m_order.getDocumentNo() + "\nFecha=" + Miscfunc.FechaDMALocale(m_order.getDateOrdered()), 
+						C_BPartner_ID , 
+						-1, 
+						AD_User_ID, 
+						user.getName());
+				
+				log.info("Creo nota para el usuario " + user.getName());
+				
+			}
+			
+			String message = "Se creo la Orden de Compra # <b>" + m_order.getDocumentNo() + "</b><br>";
+			String result = "??";
+			if(!isComplete){
+
+				if(Miscfunc.confirm("Completa Orden de Compra? - Documento # " + m_order.getDocumentNo() + " - Total " + m_order.getGrandTotal())){
+					result = m_order.completeIt();
+					m_order.save(get_TrxName());
+				}
+				
+			}else{
+				log.info("Mando a completar la Orden sin preguntar!");
+				
+				result = m_order.completeIt();
+				m_order.save(get_TrxName());
+			}
+
+			if(result.equals(DocAction.ACTION_Invalidate))
+				message += " Quedo en estado NO VALIDO!";
+			else if(result.equals(DocAction.ACTION_Prepare))
+				message += " Quedo en estado Preparada!";
+			else if(result.equals(DocAction.ACTION_Complete))
+				message += " Quedo en estado Completa!";
+			else
+				message += " Quedo en estado <b>" + result;
+			
+			Miscfunc.ShowMessage(message);
+
+			// endregion Roca
 		}
 		m_order = null;
 		m_orderLine = null;
@@ -335,6 +494,12 @@ public class RequisitionPOCreate extends SvrProcess
 
 		//	Get Business Partner
 		int C_BPartner_ID = rLine.getC_BPartner_ID();
+
+		
+		 // dREHER, igualar BP, asi todos salen con la misma, se envio como parametro el ID del BP 
+		 if(p_ConsolidateDocument && p_BPartner_ID != 0) 
+			 C_BPartner_ID = p_BPartner_ID; 
+		
 		if (C_BPartner_ID != 0)
 			;
 		else if (rLine.getC_Charge_ID() != 0)
@@ -362,7 +527,10 @@ public class RequisitionPOCreate extends SvrProcess
 			if (C_BPartner_ID == 0)
 				throw new AdempiereUserError("No Vendor for " + product.getName());
 		}
-
+		// dREHER, si es consolidado fuerzo a vuelva a leer el producto
+		if(p_ConsolidateDocument) 
+			product = MProduct.get(getCtx(),
+			rLine.getM_Product_ID());
 		//	New Order - Different Vendor
 		if (m_order == null 
 			|| m_order.getC_BPartner_ID() != C_BPartner_ID)
@@ -387,6 +555,15 @@ public class RequisitionPOCreate extends SvrProcess
 		//	Prepare Save
 		m_M_Product_ID = rLine.getM_Product_ID();
 		m_M_AttributeSetInstance_ID = rLine.getM_AttributeSetInstance_ID();
+
+		// dREHER, por las dudas, debe tener una unidad de medida de compra
+		if (m_orderLine.getC_UOM_ID() == 0) {
+			product = MProduct.get(getCtx(), m_M_Product_ID);
+			int C_UOM_ID = product.getC_UOM_ID();
+			m_orderLine.setC_UOM_ID(C_UOM_ID);
+		}
+
+		log.info("Guardo la linea de la orden!");
 		if (!m_orderLine.save())
 			throw new AdempiereSystemError("Cannot save Order Line");
 	}	//	newLine

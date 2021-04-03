@@ -945,7 +945,7 @@ public abstract class PO
 	 *  Get Column Count
 	 *  @return column count
 	 */
-	protected int get_ColumnCount()
+	public int get_ColumnCount()
 	{
 		return p_info.getColumnCount();
 	}   //  getColumnCount
@@ -955,7 +955,7 @@ public abstract class PO
 	 *  @param index index
 	 *  @return ColumnName
 	 */
-	protected String get_ColumnName (int index)
+	public String get_ColumnName (int index)
 	{
 		return p_info.getColumnName (index);
 	}   //  getColumnName
@@ -3639,5 +3639,168 @@ public abstract class PO
 		for (PO line : lines)
 			line.set_TrxName(trxName);
 	}
+
+	/**
+	 * Get Integer Value
+	 * @param columnName
+	 * @return int value
+	 */
+	public int get_ValueAsInt (String columnName)
+	{
+		int idx = get_ColumnIndex(columnName);
+		if (idx < 0)
+		{
+			return 0;
+		}
+		return get_ValueAsInt(idx);
+	}
 	
+	/**
+	 * Get value as Boolean 
+	 * @param columnName
+	 * @return boolean value
+	 */
+	public boolean get_ValueAsBoolean(String columnName)
+	{
+		Object oo = get_Value(columnName);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
+	/**
+	 * 	Get JSON representation
+	 * 	@param noComment do not add comment
+	 * 	@return JSON document
+	 * 	@autor dREHER
+	 */
+	public String get_JSONDocument(){
+		return get_JSONDocument(new String[]{});
+	}
+	
+	
+	/**
+	 * 	Get JSON representation
+	 * 	@param noComment do not add comment
+	 * 	@return JSON document
+	 * 	@autor dREHER
+	 */
+	public String get_JSONDocument(String[] customs)
+	{
+		String json = "{";
+		
+		//	Columns
+		int size = get_ColumnCount();
+		for (int i = 0; i < size; i++)
+		{
+			if (p_info.isVirtualColumn(i))
+				continue;
+		
+			//
+			Object value = get_Value(i);
+			
+			//	Display Type
+			int dt = p_info.getColumnDisplayType(i);
+			
+			String valor = "";
+			
+			//  Based on class of definition, not class of value
+			Class<?> c = p_info.getColumnClass(i);
+			if (value == null || value.equals (Null.NULL)){
+				valor = null;
+				
+				log.info("Nombre de la columna nula:" + p_info.getColumnName(i) + " clase=" + p_info.getColumnClass(i));
+				
+				if(!p_info.getColumnName(i).toUpperCase().endsWith("_ID") && p_info.isColumnMandatory(i)){
+					if(c == BigDecimal.class)
+						valor = "0.00";
+					else if( c == Integer.class)
+						valor = "0";
+					else if( c == Double.class)
+						valor = "0.0";
+					else if(p_info.getColumnClass(i) == Boolean.class)
+						valor = "\"N\"";
+					
+				}
+
+			}
+			
+			else if (c == Object.class)
+				valor = "\"" + value.toString() + "\"";
+			
+			else if (value instanceof Integer || value instanceof BigDecimal)
+				valor = (value.toString()==null||value.toString()==""?"0":value.toString());
+			
+			else if (c == Boolean.class)
+			{
+				boolean bValue = false;
+				if (value instanceof Boolean)
+					bValue = ((Boolean)value).booleanValue();
+				else
+					bValue = "Y".equals(value);
+				valor = "\"" + (bValue ? "Y" : "N") + "\"";
+			}
+			
+			else if (value instanceof Timestamp)
+				valor = "\"" + value.toString() + "\"";
+			
+			else if (c == String.class)
+				valor = "\"" + ((String)value) + "\"";
+				
+			else if (DisplayType.isLOB(dt))
+				valor = "\"" + value.toString() + "\"";
+			
+			else
+				valor = "\"" + value.toString() + "\"";
+			//
+			
+			if(valor != null && !valor.isEmpty()){
+				if(i > 0)
+					json += ",";
+			
+				json += "\"" + p_info.getColumnName(i) + "\":";
+				json += valor;
+				
+			}
+			
+		}
+		
+		//	Custom Columns
+		if (m_custom != null)
+		{
+			Iterator<String> it = m_custom.keySet().iterator();
+			while (it.hasNext())
+			{
+				String columnName = (String)it.next();
+//				
+				json += ",";
+				
+				json += "\"" + columnName + "\":";
+				
+				
+				String value = (String)m_custom.get(columnName);
+				//
+				
+				if (value != null)
+					json += "\"" + value.toString() + "\"";
+				
+			}
+			m_custom = null;
+		}
+		
+		for(String s: customs){
+			
+			json += "," + s;
+		}
+		
+		
+		json += "}";
+		
+		return json;
+	}	//	getDocument
+
 }   //  PO

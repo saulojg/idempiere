@@ -42,6 +42,7 @@ import org.compiere.model.MJournalBatch;
 import org.compiere.model.MMovement;
 import org.compiere.model.MOrder;
 import org.compiere.model.MPayment;
+import org.compiere.model.MRequisition;  // dREHER, para poder revertir requisiciones completadas
 import org.compiere.model.X_C_Order;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
@@ -626,7 +627,7 @@ public class DocumentEngine implements DocAction
 	{
 		if (isInvalid())
 			return new String[] {ACTION_Prepare, ACTION_Invalidate, 
-				ACTION_Unlock, ACTION_Void};
+				ACTION_Unlock, ACTION_Void, ACTION_Complete}; // dREHER 11/06/2014 agregue que se pueda completar
 
 		if (isDrafted())
 			return new String[] {ACTION_Prepare, ACTION_Invalidate, ACTION_Complete, 
@@ -1033,6 +1034,51 @@ public class DocumentEngine implements DocAction
 				options[index++] = DocumentEngine.ACTION_Reverse_Correct;
 			}
 		}
+		// dREHER, agregue la posibilidad de revertir la requision, sino tiene OC todavia		
+		else if(AD_Table_ID == MRequisition.Table_ID )
+		{ 
+			Boolean sinOC = true;
+			
+			String m_req_id = String.valueOf(Record_ID);
+			String ad_client_id =  String.valueOf(Env.getAD_Client_ID(Env.getCtx()));
+		
+			String sql = "SELECT COUNT(*) AS x FROM M_RequisitionLine WHERE M_Requisition_ID=" + m_req_id + " AND C_OrderLine_ID > 0 AND AD_Client_ID=" + ad_client_id;
+			System.out.println(sql);
+			PreparedStatement pstmt0 = DB.prepareStatement(sql, null);
+			ResultSet r0 = null;
+			int c = 0;
+			try {
+				r0 = pstmt0.executeQuery();
+				if(r0.next())
+					c = r0.getInt("x");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally{
+				if(r0 != null)
+					try {
+						r0.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				if(pstmt0 != null){
+					try {
+						pstmt0.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					pstmt0 = null;
+				}
+			}
+			if(c > 0)
+				sinOC = false;
+			
+			//			Complete                    ..  CO
+			if (docStatus.equals(DocumentEngine.STATUS_Completed) && sinOC)
+			{
+				options[index++] = DocumentEngine.ACTION_ReActivate;
+			}
+		}		
+		
 		return index;
 	}
 	

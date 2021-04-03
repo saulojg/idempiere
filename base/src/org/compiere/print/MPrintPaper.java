@@ -147,8 +147,13 @@ public class MPrintPaper extends X_AD_PrintPaper
 			float x = getSizeX().floatValue();
 			float y = getSizeY().floatValue();
 			if (x > 0 && y > 0)
-			{
-				m_mediaSize = new MediaSize(x, y, getUnitsInt(), MediaSizeName.A);
+			{// dREHER, si da error, levantar por default en A4 / Oficio
+				try{
+					m_mediaSize = new MediaSize(x, y, getUnitsInt(), MediaSizeName.A);
+				}catch(Exception ex){
+					m_mediaSize = getMediaSizeDefault();
+				}
+				
 				log.fine("Size=" + m_mediaSize);
 			}
 		}
