@@ -96,6 +96,17 @@ public class MProductPricing
 		//	Set UOM, Prod.Category
 		if (!m_calculated)
 			setBaseInfo();
+		
+		// dREHER, si envio un BP calcular desde el BP
+		if(m_C_BPartner_ID > 0){
+			// System.out.println("tiene un BP, calculo primero por lista de precios!!!");
+			if(m_PriceStd.compareTo(Env.ZERO)==0){
+				calculatePL();
+				// System.out.println("tiene un BP, calculo ahora por bp!!!");
+				m_calculated = calculateFromBP();
+			}
+		}
+		
 		//	User based Discount
 		if (m_calculated)
 			calculateDiscount();
@@ -104,6 +115,63 @@ public class MProductPricing
 		m_found = new Boolean (m_calculated);
 		return m_calculated;
 	}	//	calculatePrice
+
+	// dREHER, calcula precio desde el BP
+	private boolean calculateFromBP() {
+		
+		if (m_M_Product_ID == 0)
+			return false;
+		
+		String sql = "SELECT " + 
+				"priceLastPO, priceList, pricePO FROM m_product_PO WHERE ad_client_id = ? AND ad_org_id in (0, ?) AND isActive = 'Y' AND " +
+				"m_product_id=? AND c_bpartner_id=?";
+		m_calculated = false;
+		try
+		{
+			
+			// System.out.println("Calcula precio segun el BP:" + m_C_BPartner_ID + " prod:" + m_M_Product_ID);
+			
+			PreparedStatement pstmt = DB.prepareStatement(sql, null);
+			pstmt.setInt(1, Env.getAD_Client_ID(Env.getCtx()));
+			pstmt.setInt(2, Env.getAD_Org_ID(Env.getCtx()));
+			pstmt.setInt(3, m_M_Product_ID);
+			pstmt.setInt(4, m_C_BPartner_ID);
+			ResultSet rs = pstmt.executeQuery();
+			if (rs.next())
+			{
+				m_PriceStd = rs.getBigDecimal(1);
+				if (rs.wasNull())
+					m_PriceStd = Env.ZERO;
+				
+				m_PriceList = rs.getBigDecimal(2);
+				if (rs.wasNull())
+					m_PriceList = Env.ZERO;
+				
+				if(m_PriceStd.compareTo(Env.ZERO)==0)
+					m_PriceStd = m_PriceList;
+				
+				m_PriceLimit = rs.getBigDecimal(3);
+				if (rs.wasNull())
+					m_PriceLimit = Env.ZERO;
+				
+				// System.out.println("Encontro precio de este proveedor:" + m_PriceStd + " : " + m_PriceList + " : " + m_PriceLimit);
+			}
+			
+			
+			
+			log.fine("M_PriceList_Version_ID=" + m_M_PriceList_Version_ID + " - " + m_PriceStd);
+			m_calculated = true;
+			rs.close();
+			pstmt.close();
+		}
+		catch (Exception e)
+		{
+			log.log(Level.SEVERE, sql, e); 
+			m_calculated = false;
+		}
+			
+		return m_calculated;
+	}
 
 	/**
 	 * 	Calculate Price based on Price List Version
@@ -114,9 +182,9 @@ public class MProductPricing
 		if (m_M_Product_ID == 0 || m_M_PriceList_Version_ID == 0)
 			return false;
 		//
-		String sql = "SELECT bomPriceStd(p.M_Product_ID,pv.M_PriceList_Version_ID) AS PriceStd,"	//	1
-			+ " bomPriceList(p.M_Product_ID,pv.M_PriceList_Version_ID) AS PriceList,"		//	2
-			+ " bomPriceLimit(p.M_Product_ID,pv.M_PriceList_Version_ID) AS PriceLimit,"	//	3
+		String sql = "SELECT bomPriceStdPO(p.M_Product_ID,pv.M_PriceList_Version_ID,?) AS PriceStd,"	//	1
+			+ " bomPriceListPO(p.M_Product_ID,pv.M_PriceList_Version_ID,?) AS PriceList,"		//	2
+			+ " bomPriceLimitPO(p.M_Product_ID,pv.M_PriceList_Version_ID,?) AS PriceLimit,"	//	3
 			+ " p.C_UOM_ID,pv.ValidFrom,pl.C_Currency_ID,p.M_Product_Category_ID,"	//	4..7
 			+ " pl.EnforcePriceLimit, pl.IsTaxIncluded "	// 8..9
 			+ "FROM M_Product p"
@@ -130,8 +198,11 @@ public class MProductPricing
 		try
 		{
 			PreparedStatement pstmt = DB.prepareStatement(sql, null);
-			pstmt.setInt(1, m_M_Product_ID);
-			pstmt.setInt(2, m_M_PriceList_Version_ID);
+			pstmt.setInt(1, m_C_BPartner_ID);
+			pstmt.setInt(2, m_C_BPartner_ID);
+			pstmt.setInt(3, m_C_BPartner_ID);
+			pstmt.setInt(4, m_M_Product_ID);
+			pstmt.setInt(5, m_M_PriceList_Version_ID);
 			ResultSet rs = pstmt.executeQuery();
 			if (rs.next())
 			{
@@ -176,7 +247,7 @@ public class MProductPricing
 			return false;
 
 		//	Get Price List
-		/**
+		/** Estaba comentado, dREHER */
 		if (m_M_PriceList_ID == 0)
 		{
 			String sql = "SELECT M_PriceList_ID, IsTaxIncluded "
@@ -215,7 +286,8 @@ public class MProductPricing
 				pstmt = null;
 			}
 		}
-		/** **/
+		/** Fin de lo q estaba comentado dREHER **/
+		
 		if (m_M_PriceList_ID == 0)
 		{
 			log.log(Level.SEVERE, "No PriceList");
@@ -224,9 +296,9 @@ public class MProductPricing
 		}
 
 		//	Get Prices for Price List
-		String sql = "SELECT bomPriceStd(p.M_Product_ID,pv.M_PriceList_Version_ID) AS PriceStd,"	//	1
-			+ " bomPriceList(p.M_Product_ID,pv.M_PriceList_Version_ID) AS PriceList,"		//	2
-			+ " bomPriceLimit(p.M_Product_ID,pv.M_PriceList_Version_ID) AS PriceLimit,"	//	3
+		String sql = "SELECT bomPriceStd(p.M_Product_ID,pv.M_PriceList_Version_ID,?) AS PriceStd,"	//	1
+			+ " bomPriceListPO(p.M_Product_ID,pv.M_PriceList_Version_ID,?) AS PriceList,"		//	2
+			+ " bomPriceLimit(p.M_Product_ID,pv.M_PriceList_Version_ID,?) AS PriceLimit,"	//	3
 			+ " p.C_UOM_ID,pv.ValidFrom,pl.C_Currency_ID,p.M_Product_Category_ID,pl.EnforcePriceLimit "	// 4..8
 			+ "FROM M_Product p"
 			+ " INNER JOIN M_ProductPrice pp ON (p.M_Product_ID=pp.M_Product_ID)"
@@ -242,8 +314,11 @@ public class MProductPricing
 		try
 		{
 			PreparedStatement pstmt = DB.prepareStatement(sql, null);
-			pstmt.setInt(1, m_M_Product_ID);
-			pstmt.setInt(2, m_M_PriceList_ID);
+			pstmt.setInt(1, m_C_BPartner_ID);
+			pstmt.setInt(2, m_C_BPartner_ID);
+			pstmt.setInt(3, m_C_BPartner_ID);
+			pstmt.setInt(4, m_M_Product_ID);
+			pstmt.setInt(5, m_M_PriceList_ID);
 			ResultSet rs = pstmt.executeQuery();
 			while (!m_calculated && rs.next())
 			{
@@ -296,9 +371,9 @@ public class MProductPricing
 		if (m_M_Product_ID == 0 || m_M_PriceList_ID == 0)
 			return false;
 		//
-		String sql = "SELECT bomPriceStd(p.M_Product_ID,pv.M_PriceList_Version_ID) AS PriceStd,"	//	1
-			+ " bomPriceList(p.M_Product_ID,pv.M_PriceList_Version_ID) AS PriceList,"		//	2
-			+ " bomPriceLimit(p.M_Product_ID,pv.M_PriceList_Version_ID) AS PriceLimit,"	//	3
+		String sql = "SELECT bomPriceStd(p.M_Product_ID,pv.M_PriceList_Version_ID,?) AS PriceStd,"	//	1
+			+ " bomPriceListPO(p.M_Product_ID,pv.M_PriceList_Version_ID,?) AS PriceList,"		//	2
+			+ " bomPriceLimit(p.M_Product_ID,pv.M_PriceList_Version_ID,?) AS PriceLimit,"	//	3
 			+ " p.C_UOM_ID,pv.ValidFrom,pl.C_Currency_ID,p.M_Product_Category_ID,"	//	4..7
 			+ " pl.EnforcePriceLimit, pl.IsTaxIncluded "	// 8..9
 			+ "FROM M_Product p"
@@ -316,8 +391,11 @@ public class MProductPricing
 		try
 		{
 			PreparedStatement pstmt = DB.prepareStatement(sql, null);
-			pstmt.setInt(1, m_M_Product_ID);
-			pstmt.setInt(2, m_M_PriceList_ID);
+			pstmt.setInt(1, m_C_BPartner_ID);
+			pstmt.setInt(2, m_C_BPartner_ID);
+			pstmt.setInt(3, m_C_BPartner_ID);
+			pstmt.setInt(4, m_M_Product_ID);
+			pstmt.setInt(5, m_M_PriceList_ID);
 			ResultSet rs = pstmt.executeQuery();
 			while (!m_calculated && rs.next())
 			{

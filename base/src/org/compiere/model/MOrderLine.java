@@ -294,6 +294,11 @@ public class MOrderLine extends X_C_OrderLine
 		//	Calculate Discount
 		setDiscount(m_productPrice.getDiscount());
 		//	Set UOM
+
+		// dREHER, revisar Unidad de medida, si es diferente a la del producto
+		// recalcular cantidad y montos
+		convertUOM();
+
 		setC_UOM_ID(m_productPrice.getC_UOM_ID());
 	}	//	setPrice
 
@@ -341,6 +346,15 @@ public class MOrderLine extends X_C_OrderLine
 		BigDecimal bd = getPriceActual().multiply(getQtyOrdered()); 
 		if (bd.scale() > getPrecision())
 			bd = bd.setScale(getPrecision(), BigDecimal.ROUND_HALF_UP);
+
+		// dREHER, si se entro un precio q tome ese aunque no tengo precio en la
+		// lista de precios
+		if (bd.compareTo(BigDecimal.ZERO) == 0) {
+			bd = this.getPriceEntered().multiply(getQtyOrdered());
+			if (bd.scale() > getPrecision())
+				bd = bd.setScale(getPrecision(), BigDecimal.ROUND_HALF_UP);
+		}
+
 		super.setLineNetAmt (bd);
 	}	//	setLineNetAmt
 	
@@ -951,4 +965,76 @@ public class MOrderLine extends X_C_OrderLine
 		return no == 1;
 	}	//	updateHeaderTax
 	
-}	//	MOrderLine
+	// dREHER, si es una orden de venta, setear la unidad de medida del
+	// producto
+	// segun las unidades de medida y su conversion
+	// solo para ordenes de venta
+	private void convertUOM() {
+		
+		if (m_IsSOTrx) {
+
+			// System.out
+			// 		.println("MOrderLine -> Es orden de venta, convertir unidades");
+
+			// System.out.println("Es orden de venta, linea 1");
+
+			MProduct mp = new MProduct(Env.getCtx(), getM_Product_ID(),
+					get_TrxName());
+
+			// System.out.println("Es orden de venta, unidad prod:"
+			// 		+ mp.getC_UOM_ID() + " unidad linea: "
+			// 		+ oline.getC_UOM_ID());
+
+			if (mp.getC_UOM_ID() != getC_UOM_ID()) {
+				BigDecimal qtyC = MUOMConversion.convert(Env.getCtx(), mp
+						.getC_UOM_ID(), getC_UOM_ID(), getQtyEntered());
+
+				// System.out.println("Es orden de venta, unidad diferente");
+
+				BigDecimal priNet = getLineNetAmt();
+
+				BigDecimal qtyCz = MUOMConversion.convert(Env.getCtx(), mp
+						.getC_UOM_ID(), getC_UOM_ID(), new BigDecimal(1));
+
+				BigDecimal priC = qtyC.multiply(getPriceEntered(),
+						new MathContext(8));
+				if (qtyCz.compareTo(BigDecimal.ZERO) > 0)
+					priC = priC.divide(qtyCz, new MathContext(8));
+
+				// dREHER
+				// System.out.println("antes:" + oline.getQtyEntered() + ","
+				// 		+ oline.getQtyInvoiced() + ", "
+				// 		+ oline.getPriceEntered() + ", " + qtyC + ", " + priC);
+
+				if (qtyC == null || qtyC.compareTo(new BigDecimal(0)) <= 0) {
+					qtyC = getQtyEntered();
+					priC = getPriceEntered();
+				}
+
+				System.out.println("qtyC:" + qtyC + ", " + priC + "# " + qtyCz
+						+ " | " + priNet);
+				setQtyEntered(qtyC);
+				setQtyInvoiced(qtyC);
+				setQtyOrdered(qtyC);
+
+				int precision = 8;
+				setPriceEntered(priC.divide(qtyC, new MathContext(8))
+						.setScale(precision, BigDecimal.ROUND_HALF_UP));
+				setPrice(priC.divide(qtyC, new MathContext(8)).setScale(
+						precision, BigDecimal.ROUND_HALF_UP));
+				setLineNetAmt(priC.multiply(qtyC, new MathContext(8)).setScale(
+						precision, BigDecimal.ROUND_HALF_UP));
+
+				setC_UOM_ID(mp.getC_UOM_ID());
+				// save();
+
+				// System.out.println("despues:" + oline.getQtyEntered() + ", "
+				// 		+ oline.getQtyInvoiced() + ", "
+				// 		+ oline.getPriceEntered());
+			}
+
+		}
+
+	}
+
+} // MOrderLine

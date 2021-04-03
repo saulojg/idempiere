@@ -188,4 +188,39 @@ public class MProductBOM extends X_M_Product_BOM
 		return success;
 	}	//	afterSave
 	
+	
+	// dREHER, antes de guardar verifica que no se pueda ingresar como parte
+	// de un BOM el mismo producto PADRE!, las formulas de calculo de costos
+	// no contemplan esto y quedan en bucle infinito
+	protected boolean beforeSave (boolean newRecord)
+	{
+		boolean success = true;
+		
+		//	Product Line was changed
+		if (newRecord || is_ValueChanged("M_ProductBOM_ID"))
+		{
+			
+			// M_Product_ID = the parent 
+		 	// M_ProductBOM_ID = the BOM line product
+			
+			if(this.getM_Product_ID() == this.getM_ProductBOM_ID()){
+				
+				success = false;
+				s_log.log(Level.SEVERE, "No se puede incluir el producto PADRE dentro del mismo BOM! [M_Product_ID=" + this.getM_Product_ID() + "]  [M_ProductBOM_ID="+this.getM_ProductBOM_ID()+"]" );
+				log.saveError("Error","No se puede incluir el producto PADRE dentro del mismo BOM! [M_Product_ID=" + this.getM_Product_ID() + "]  [M_ProductBOM_ID="+this.getM_ProductBOM_ID()+"]");
+				//	Invalidate BOM
+				MProduct product = new MProduct (getCtx(), getM_Product_ID(), get_TrxName());
+				if (get_TrxName() != null)
+					product.load(get_TrxName());
+				if (product.isVerified())
+				{
+					product.setIsVerified(false);
+					product.save(get_TrxName());
+				}
+				//	Invalidate Products where BOM is used
+			}
+		}
+		return success;
+	}	//	beforeSave
+	
 }	//	MProductBOM

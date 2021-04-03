@@ -76,8 +76,14 @@ public final class MLookup extends Lookup implements Serializable
 	public static final String  INACTIVE_S = "~";
 	/** Inactive Marker End         */
 	public static final String  INACTIVE_E = "~";
+	
+	// dREHER, valor original 10000
+	// Bajo a 1800 ya que sino el Memory Java explota...
+	// 14/09/2017
+	
 	/** Number of max rows to load	*/
-	private static final int	MAX_ROWS = 10000;
+	private static final int	MAX_ROWS = 1800; 
+	
 	/**	Indicator for Null			*/
 	private static Integer 		MINUS_ONE = new Integer(-1);
 

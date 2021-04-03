@@ -19,7 +19,10 @@ package org.compiere.model;
 import java.sql.*;
 import java.util.*;
 import java.util.logging.*;
+
 import org.compiere.util.*;
+import org.compiere.model.MLookup;
+import org.compiere.model.MColumn;
 
 /**
  *  Create MLookups
@@ -36,6 +39,11 @@ public class MLookupFactory
 	/** Table Reference Cache				*/
 	private static CCache<String,MLookupInfo> s_cacheRefTable = new CCache<String,MLookupInfo>("AD_Ref_Table", 30, 60);	//	1h
 
+	 public static MLookup get(Properties ctx, int WindowNo, int TabNo, String columnName, String tableName, int AD_Reference_ID) {
+			return get(ctx, WindowNo, TabNo,
+					MColumn.getColumn_ID(tableName,columnName),
+					AD_Reference_ID);
+	    }
 	
 	/**
 	 *  Create MLookup

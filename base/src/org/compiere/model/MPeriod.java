@@ -161,14 +161,133 @@ public class MPeriod extends X_C_Period
 		if (period == null)
 		{
 			s_log.warning("No Period for " + DateAcct + " (" + DocBaseType + ")");
-			return false;
+			
+			// dREHER, crearlo en forma automatica
+			
+			if(createPeriodo(DateAcct)){
+			
+				period = MPeriod.get(ctx, DateAcct);
+				if(period != null)
+					openPeriodo(period);
+				else
+					s_log.warning("No pudo leer el periodo creado automaticamente!");
+			}
+			 
 		}
 		boolean open = period.isOpen(DocBaseType, DateAcct);
-		if (!open)
+		if (!open){
 			s_log.warning(period.getName()
 				+ ": Not open for " + DocBaseType + " (" + DateAcct + ")");
+		
+			// dREHER, agregue auto apertura de periodos
+
+			open = openPeriodo(period);
+		
+		}
+		
+		
 		return open;
 	}	//	isOpen
+
+	// dREHER, abro el periodo en forma automatica
+	private static boolean openPeriodo(MPeriod period) {
+		boolean open = false;
+		
+		StringBuffer sql = new StringBuffer ("UPDATE C_PeriodControl ");
+		sql.append("SET PeriodStatus='");
+		//	Open
+		sql.append (MPeriodControl.PERIODSTATUS_Open);
+		//
+		sql.append("', PeriodAction='N', Updated=SysDate,UpdatedBy=").append("100");
+		//	WHERE
+		sql.append(" WHERE C_Period_ID=").append(period.getC_Period_ID())
+			.append(" AND PeriodStatus<>'P'")
+			.append(" AND PeriodStatus<>'").append("O").append("'");
+			
+		int no = DB.executeUpdate(sql.toString(), null);
+		
+		CacheMgt.get().reset("C_PeriodControl", 0);
+		CacheMgt.get().reset("C_Period", period.getC_Period_ID());
+
+		if(no > 0){
+			open = true;
+			s_log.warning("Se abrieron los periodos del año " + period.getName() + " en forma automatica!");
+		}
+		
+		return open;
+		
+	}
+
+	/*
+	 * dREHER, crear el periodo que no existe en forma automatica
+	 * 
+	 */
+	public static boolean createPeriodo(Timestamp DateAcct){
+		boolean created = false;
+		
+		MClient mc = new MClient(Env.getCtx(), Env.getAD_Client_ID(Env
+				.getCtx()), null);
+		
+		if (mc != null) {
+			
+			int C_Calendar_ID = DB.getSQLValue(null, "SELECT C_Calendar_ID FROM C_Calendar WHERE AD_Client_ID=" + mc.getAD_Client_ID());
+			
+			MCalendar cal = new MCalendar(Env.getCtx(), C_Calendar_ID, null);
+			
+			String anio = String.valueOf(1900 + DateAcct.getYear());
+			
+			if (cal != null) {
+				
+				String sql = "SELECT C_Year_ID FROM C_Year WHERE FiscalYear='" + anio + "' AND IsActive='Y'";
+				int C_Year_ID = DB.getSQLValue(null, sql);
+				
+				if(C_Year_ID <= 0) {
+					C_Year_ID = 0;
+					
+					System.out.println("Busco periodo activo. sql= " + sql);
+					
+					sql = "SELECT C_Year_ID FROM C_Year WHERE FiscalYear='" + anio + "' AND IsActive='N'";
+					C_Year_ID = DB.getSQLValue(null, sql);
+					
+					System.out.println("Busco periodo inactivo. sql= " + sql);
+					
+				}
+				
+				if(C_Year_ID <= 0) 
+					C_Year_ID = 0;
+				
+				System.out.println("Encontro C_Year_ID=" + C_Year_ID);
+				
+				
+				if(C_Year_ID > -1) {
+					
+					MYear y = new MYear(Env.getCtx(), C_Year_ID, null);
+					if (y != null) {
+
+						System.out.println("Se va a crear Año :" + anio);
+						
+						y.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
+						y.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
+						y.setC_Calendar_ID(cal.getC_Calendar_ID());
+						y.setDescription("Año : " + anio + " creado automaticamente!");
+						y.setFiscalYear(anio);
+						y.setIsActive(true);
+						if (y.save(null)) {
+
+							if(y.createStdPeriods(null)){
+								created = true;
+								s_log.warning("Se crearon los periodos del año " + anio + " en forma automatica!");
+							}
+
+						}
+					}
+				}
+			}
+		}
+		
+		return created;
+	}
+	
 	
 	/**
 	 * 	Find first Year Period of DateAcct based on Client Calendar

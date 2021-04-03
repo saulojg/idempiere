@@ -19,6 +19,9 @@ package org.compiere.model;
 import java.math.*;
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
+
+import org.compiere.util.DisplayType;
 
 /**
  *  Process Instance Parameter Model
@@ -187,5 +190,58 @@ public class MPInstancePara extends X_AD_PInstance_Para
 		setParameterName(parameterName);
 		setP_Number(new BigDecimal(iParameter));
 	}	//	setParameter
+	
+	/**
+     * Set parameter by process parameter display type
+     * @param displayType process parameter display type
+     * @param value value to set
+     */
+    public void setParameter(int displayType,Object value,boolean isTo){
+    	// Verify display type and obtain column name
+    	String columnName = "";
+    	Object realValue = value;
+    	// Si es de tipo fecha
+    	if(DisplayType.isDate(displayType)){
+    		columnName = "P_Date";
+    		if(value instanceof Integer){
+    			realValue = new Timestamp(((Date)value).getTime());
+    		}
+    		else{
+    			realValue = (Timestamp)value;
+    		}    		
+    	}
+    	// Si es de tipo numerico
+    	else if(DisplayType.isNumeric(displayType) || DisplayType.isID(displayType)){
+    		columnName = "P_Number";
+    		if(value instanceof Integer){
+    			realValue = new BigDecimal((Integer)value);
+    		}
+    		else if(value instanceof BigDecimal){
+    			realValue = (BigDecimal)value;
+    		}
+    		else if(value instanceof String){
+    			realValue = new BigDecimal((String)value);
+    		}
+    	}
+    	// Si es de tipo texto
+    	else if(DisplayType.isText(displayType) || (DisplayType.YesNo == displayType) || (DisplayType.List == displayType)){
+    		columnName = "P_String";
+    		realValue = (String)value;
+    	}
+    	// Si es si/no
+    	/*else if(DisplayType.YesNo == displayType){
+    		columnName = "P_String";
+    		realValue = new String((Boolean)value?"Y":"N");
+    	}*/
+
+    	// Si es para TO, o sea, es el TO del rango
+    	if(isTo){
+    		columnName = columnName+"_To";
+    	}
+    	
+    	// Seteo el valor
+    	this.set_Value(columnName, realValue);
+    }		// setParameter
+    
 	
 }	//	MPInstance_Para

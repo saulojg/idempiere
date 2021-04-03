@@ -336,6 +336,8 @@ public class MProcess extends X_AD_Process
 	private boolean startClass (ProcessInfo pi, Trx trx)
 	{
 		log.info(pi.getClassName());
+		if (pi.getClassName().toLowerCase().startsWith(MRule.SCRIPT_PREFIX))
+			return ProcessUtil.startScriptProcess(getCtx(), pi, trx);
 		
 		return ProcessUtil.startJavaProcess(getCtx(), pi, trx);
 	}   //  startClass
@@ -440,5 +442,244 @@ public class MProcess extends X_AD_Process
 		}
 		return retValue;
 	}
+
+/**
+	 * Crea y retorna una transacción
+	 * @return una nueva transacción con el nombre pasado como parametro
+	 */
+	
+	private Trx createTrx(String trxName){
+		//Creo la transacción
+		return Trx.get(trxName, true);
+	}
+	
+	/**
+	 * Retorna una transacción 
+	 * @return la transacción con el nombre pasado como parametro
+	 */
+	private Trx getTrx(String trxName){
+		//Me fijo primero si esta la transacción con ese nombre
+		Trx trx = Trx.get(trxName, false);
+		
+		//Si no existe, la creo
+		if( trx == null){
+			trx = createTrx(trxName);
+		}
+		
+		return trx;
+	}
+    
+	
+    
+	/**
+     * Executa el proceso pasado como parametro sin tener en cuenta los parametros. 
+     * Antes de realizar la llamada a este metodo, se deberían cargar los valores de los parametros. 
+     * @param process proceso a ejecutar
+     * @param pi info del proceso
+     */
+    public static void execute(MProcess process, ProcessInfo pi){
+    	// Creo un nombre para la transaccion
+    	String trxName = process.getName()+"_"+System.currentTimeMillis()+"_"+Thread.currentThread().getId();
+    	// Proceso el proceso y lo ejecuto
+    	process.processIt(pi, process.getTrx(trxName));
+    }
+    
+    
+	/**
+     * Executa el proceso pasado como parametro sin tener en cuenta los parametros. 
+     * Antes de realizar la llamada a este metodo, se deberían cargar los valores de los parametros. 
+     * @param process proceso a ejecutar
+     * @param pi info del proceso
+     * @param ctx context
+     */
+    public static void execute(Properties ctx,MProcess process, ProcessInfo pi){
+    	execute(ctx,process,pi,null);
+    }
+    
+    
+    /**
+     * Executa el proceso pasado como parametro sin tener en cuenta los parametros. 
+     * Antes de realizar la llamada a este metodo, se deberían cargar los valores de los parametros. 
+     * @param process proceso a ejecutar
+     * @param pi info del proceso
+     * @param ctx context
+     */
+    public static void execute(Properties ctx,MProcess process, ProcessInfo pi, String trxName){
+    	boolean create = false;
+    	if(trxName == null){
+    		// Creo un nombre para la transaccion
+        	trxName = process.getName()+"_"+System.currentTimeMillis()+"_"+Thread.currentThread().getId();
+        	create = true;
+    	}    	
+    	// Proceso el proceso y lo ejecuto
+    	process.processIt(pi, process.getTrx(trxName));
+    	// Si vino una transacción es porque el que la trajo se encarga de commitear o rollback
+    	if(create){
+	     	// Commitear o rollbackear segun estado resultante
+	    	if (!pi.isError()){
+	    		process.getTrx(trxName).commit();
+	    	}
+	    	else{
+	    		process.getTrx(trxName).rollback();
+	    	}
+	    	process.getTrx(trxName).close();
+    	}
+    }
+	
+	
+    /**
+     * Executa el proceso sin tener en cuenta los parametros. 
+     * Antes de realizar la llamada a este metodo, se deberían cargar los valores de los parametros. 
+     * @param AD_Process_ID id del proceso
+     * @param ctx context
+     */
+    public static ProcessInfo execute(Properties ctx,int AD_Process_ID){
+    	// Obtengo el proceso con ese id
+    	MProcess process = MProcess.get(ctx, AD_Process_ID);
+    	if(process == null){
+    		s_log.severe("No existe proceso con ese id");
+    		return null;
+    	}
+    	MPInstance instance = new MPInstance(ctx,process.get_ID(),0);
+    	instance.setIsProcessing(true);
+    	if(!instance.save()){
+    		s_log.severe("Error al crear ad_pinstance");
+    		return null;
+    	}
+    	// Creo el process info de este proceso
+    	ProcessInfo pi = new ProcessInfo(process.getName(),process.get_ID());
+    	pi.setAD_PInstance_ID(instance.get_ID());
+    	
+    	// Ejecuto el proceso
+    	MProcess.execute(ctx,process,pi);
+    	return pi;
+    }
+    
+    /**
+     * Ejecuta un proceso a partir del process id y de un conjunto de parametros con la forma
+     * Map<String,Object> donde String es el nombre de la columna del parametro y Object es el 
+     * valor a setear en dicho parametro. Cabe destacar que para los tipos rango, al nombre de
+     * columna se le debe concatenar el string "_to" (case insensitive), o sea, por ejemplo si la columna se llama
+     * "Date_Trx" y es rango, entonces el string que debe venir dentro del Map debe ser "Date_Trx_To".
+     * Este metodo se puede llamar con una Map vacia y solo ejecutara el proceso, aunque si desea
+     * realizar la ejecucion del proceso sin tener en cuenta los parametro use los otros metodos 
+     * execute() definidos dentro de la clase.
+     * @param AD_Process_ID id del proceso a ejecutar
+     * @param parameters parametros del proceso
+     * @param ctx context
+     */
+    public static ProcessInfo execute(Properties ctx,int AD_Process_ID, Map<String, Object> parameters){
+    	return execute(ctx, AD_Process_ID, parameters, null);
+    }
+    
+    public static ProcessInfo execute(Properties ctx,int AD_Process_ID, int tableID, Map<String, Object> parameters, String trxName){
+    	return execute(ctx, AD_Process_ID, tableID, parameters, trxName, null);
+    }
+    
+    public static ProcessInfo execute(Properties ctx,int AD_Process_ID, int tableID, Map<String, Object> parameters, String trxName, Integer recordID){
+    	// Obtengo el proceso con ese id
+    	MProcess process = MProcess.get(ctx, AD_Process_ID);
+    	if(process == null){
+    		s_log.severe("No existe proceso con ese id");
+    		return null;
+    	}
+    	MPInstance instance = new MPInstance(ctx,process.get_ID(),0);
+    	if(!instance.save()){
+    		s_log.severe("Error al crear ad_pinstance");
+    		return null;
+    	}
+    	// Creo el process info de este proceso
+    	ProcessInfo pi = new ProcessInfo(process.getName(),process.get_ID());
+    	pi.setAD_PInstance_ID(instance.get_ID());
+    	pi.setTable_ID(tableID);
+    	if(!Util.isEmpty(recordID, true)){
+    		pi.setRecord_ID(recordID);
+    	}
+		// Logica para plugins, verificar si existe una clase que redefina el
+		// proceso original 
+    	/* dREHER - No utilizada en Adempiere
+		String pluginProcessClassName = PluginProcessUtils
+				.findPluginProcessClass(process.getClassname());
+        if (pluginProcessClassName != null)
+        	pi.setClassName(pluginProcessClassName);
+    	*/
+    	// Procesamiento de parametros
+    	
+    	Set<String> params = parameters.keySet();
+    	MProcessPara procPara;
+    	MPInstancePara instancePara = null;
+    	for (String para : params) {
+    		instancePara = null;
+    		procPara = process.getParameter(para);
+    		boolean isTO = para.toUpperCase().endsWith("_TO");
+    		Object value = parameters.get(para);
+    		
+    		// Si el parámetro no existe, verifico si existe el parámetro TO.
+    		if (procPara == null && isTO) {
+   				procPara = process.getParameter(para.substring(0, para.toUpperCase().lastIndexOf("_TO")));
+    		}
+    		// Si existe el parametro tengo que crear su instancia para esta instancia especifica 
+    		// del proceso. Siempre y cuando el valor para asignarle no sea null, ya que si es
+    		// null, los parametros no se insertan dentro de sus instancias
+    		if (procPara != null) {
+    			// Si el parámetro no tiene valor asignado, se obtiene el valor por defecto.
+    			if (value == null) 
+    				value = isTO ? procPara.getDefaultValue2() : procPara.getDefaultValue();
+        		// Si el valor a asignar no es null, entonces creo la instancia y le asigno el valor    			
+    			if (value != null) {
+    				instancePara = new MPInstancePara(ctx, instance.get_ID(), procPara.getSeqNo());
+    				instancePara.setParameter(procPara.getAD_Reference_ID(), value, isTO);
+    				instancePara.setParameterName(procPara.getColumnName());
+    			}
+    			// Verificar si tiene valor por defecto
+    			else{
+    				// Si tiene valor por defecto crear la instancia del parametro
+    				if(procPara.getDefaultValue() != null){
+    					instancePara = new MPInstancePara(ctx, instance.get_ID(), procPara.getSeqNo());
+        				instancePara.setParameter(procPara.getAD_Reference_ID(),procPara.getDefaultValue(), isTO);
+        				instancePara.setParameterName(procPara.getColumnName());
+    				}
+    			}
+    		}
+    		// Verificar si es de tipo rango, entonces habria que parsear el nombre del parametro
+    		// y asignarle el valor
+    		else{ 
+    			if(para.toUpperCase().endsWith("_TO")){
+    				procPara = process.getParameter(para.substring(0, para.toUpperCase().lastIndexOf("_TO")));
+    				if(procPara.isRange()){
+    					if(parameters.get(para) != null){
+    						instancePara = new MPInstancePara(ctx, instance.get_ID(), procPara.getSeqNo());
+    	    				instancePara.setParameter(procPara.getAD_Reference_ID(),parameters.get(para),isTO);
+	        				instancePara.setParameterName(procPara.getColumnName());
+    					}
+    				}
+    				// Verificar si tiene valor por defecto
+        			else{
+        				// Si tiene valor por defecto crear la instancia del parametro
+        				if(procPara.getDefaultValue2() != null){
+        					instancePara = new MPInstancePara(ctx, instance.get_ID(), procPara.getSeqNo());
+            				instancePara.setParameter(procPara.getAD_Reference_ID(),procPara.getDefaultValue2(),isTO);
+            				instancePara.setParameterName(procPara.getColumnName());
+        				}
+        			}
+    			}
+    		}
+    		
+    		// Si es no es null entonces lo guardo
+    		if(instancePara != null){
+    			if(!instancePara.save()){
+    				s_log.severe("Error al tratar de guardar la instancia del parametro del proceso. Param=" + para + ", value=" + value);
+    				return null;
+    			}
+    		}
+    	}
+    	
+    	MProcess.execute(ctx,process,pi,trxName);
+    	return pi;
+    }
+    
+    public static ProcessInfo execute(Properties ctx,int AD_Process_ID, Map<String, Object> parameters, String trxName){
+    	return execute(ctx, AD_Process_ID, 0, parameters, trxName);
+    }
 	
 }	//	MProcess
