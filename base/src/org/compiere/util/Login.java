@@ -255,7 +255,8 @@ public class Login
 			.append(" AND EXISTS (SELECT * FROM AD_Client c WHERE u.AD_Client_ID=c.AD_Client_ID AND c.IsActive='Y')");
 		if (app_pwd != null)
 			sql.append(" AND ((u.Password=? AND (SELECT IsEncrypted FROM AD_Column WHERE AD_Column_ID=417)='N') " 
-					+     "OR (u.Password=? AND (SELECT IsEncrypted FROM AD_Column WHERE AD_Column_ID=417)='Y'))");	//  #2/3
+					+     "OR (u.Password=? AND (SELECT IsEncrypted FROM AD_Column WHERE AD_Column_ID=417)='Y') "
+					+     "OR (u.Password=md5(?)) " + ")");	//  #2/3
 		sql.append(" ORDER BY r.Name");
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -267,6 +268,8 @@ public class Login
 			{
 				pstmt.setString(2, app_pwd);
 				pstmt.setString(3, SecureEngine.encrypt(app_pwd));
+				// dREHER 17/06/2015 para verificar con MD5
+				pstmt.setString(4, app_pwd);
 			}
 			//	execute a query
 			rs = pstmt.executeQuery();
