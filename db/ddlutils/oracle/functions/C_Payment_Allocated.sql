@@ -26,6 +26,8 @@ RETURN NUMBER
  
  ************************************************************************/
 AS
+	v_Precision         NUMBER := 0;
+    v_Min            	NUMBER := 0;
 	v_AllocatedAmt		NUMBER := 0;
     v_PayAmt            NUMBER;
 	CURSOR	Cur_Alloc	IS
@@ -36,13 +38,20 @@ AS
           AND   a.IsActive='Y';
 		--  AND	al.C_Invoice_ID IS NOT NULL;
 BEGIN
+	SELECT StdPrecision
+	    INTO v_Precision
+	    FROM C_Currency
+	    WHERE C_Currency_ID = p_C_Currency_ID;
+
+	SELECT POWER(1/10,v_Precision) INTO v_Min FROM DUAL;
+	
     --  Charge - nothing available
     SELECT MAX(PayAmt) 
       INTO v_PayAmt
     FROM C_Payment 
     WHERE C_Payment_ID=p_C_Payment_ID AND C_Charge_ID > 0;
     IF (v_PayAmt IS NOT NULL) THEN
-        RETURN 0;
+        RETURN v_PayAmt;
     END IF;
     
 	--	Calculate Allocated Amount
@@ -50,8 +59,15 @@ BEGIN
 		v_AllocatedAmt := v_AllocatedAmt
 			+ currencyConvert(a.Amount, a.C_Currency_ID, p_C_Currency_ID, a.DateTrx, null, a.AD_Client_ID, a.AD_Org_ID);
 	END LOOP;
-	--	Round to penny
-	v_AllocatedAmt := ROUND(NVL(v_AllocatedAmt,0), 2);
+	
+	--	Ignore Rounding
+	IF (v_AllocatedAmt > -v_Min AND v_AllocatedAmt < v_Min) THEN
+		v_AllocatedAmt := 0;
+	END IF;
+
+	--	Round to currency precision
+	v_AllocatedAmt := ROUND(COALESCE(v_AllocatedAmt,0), v_Precision);
+	
 	RETURN	v_AllocatedAmt;
 END paymentAllocated;
 /

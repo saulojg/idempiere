@@ -1,6 +1,6 @@
-CREATE OR REPLACE FUNCTION bomPriceList
-( 
-	Product_ID 				IN NUMBER,
+CREATE OR REPLACE FUNCTION BOMPRICELIST
+(
+	Product_ID 		IN NUMBER,
 	PriceList_Version_ID	IN NUMBER
 )
 RETURN NUMBER
@@ -23,27 +23,30 @@ AS
 	--	Get BOM Product info
 	CURSOR CUR_BOM IS
 		SELECT b.M_ProductBOM_ID, b.BOMQty, p.IsBOM
-		FROM M_Product_BOM b, M_Product p
+		FROM M_PRODUCT_BOM b, M_PRODUCT p
 		WHERE b.M_ProductBOM_ID=p.M_Product_ID
-		  AND b.M_Product_ID=Product_ID;
+		  AND b.M_Product_ID=Product_ID
+		  AND b.M_ProductBOM_ID != Product_ID
+		  AND b.IsActive='Y';
 	--
 BEGIN
 	--	Try to get price from pricelist directly
 	SELECT	COALESCE (SUM(PriceList), 0)
-      INTO	v_Price
-   	FROM	M_ProductPrice
+	INTO	v_Price
+   	FROM	M_PRODUCTPRICE
 	WHERE M_PriceList_Version_ID=PriceList_Version_ID AND M_Product_ID=Product_ID;
 --	DBMS_OUTPUT.PUT_LINE('Price=' || Price);
 
 	--	No Price - Check if BOM
 	IF (v_Price = 0) THEN
 		FOR bom IN CUR_BOM LOOP
-			v_ProductPrice := bomPriceList (bom.M_ProductBOM_ID, PriceList_Version_ID);
+			v_ProductPrice := Bompricelist (bom.M_ProductBOM_ID, PriceList_Version_ID);
 			v_Price := v_Price + (bom.BOMQty * v_ProductPrice);
 		--	DBMS_OUTPUT.PUT_LINE('Qry=' || bom.BOMQty || ' @ ' || v_ProductPrice || ', Price=' || v_Price);
 		END LOOP;	--	BOM
 	END IF;
 	--
 	RETURN v_Price;
-END bomPriceList;
+END Bompricelist;
 /
+

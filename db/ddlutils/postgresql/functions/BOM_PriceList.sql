@@ -1,48 +1,37 @@
-/*
- *This file is part of Adempiere ERP Bazaar
- *http://www.adempiere.org
- *
- *Copyright (C) 2006 Timo Kontro
- *Copyright (C) 1999-2006 ComPiere, inc
- *
- *This program is free software; you can redistribute it and/or
- *modify it under the terms of the GNU General Public License
- *as published by the Free Software Foundation; either version 2
- *of the License, or (at your option) any later version.
- *
- *This program is distributed in the hope that it will be useful,
- *but WITHOUT ANY WARRANTY; without even the implied warranty of
- *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *GNU General Public License for more details.
- *
- *You should have received a copy of the GNU General Public License
- *along with this program; if not, write to the Free Software
- *Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.of 
- */
+CREATE OR REPLACE FUNCTION bompricelist (in product_id numeric, in pricelist_version_id numeric) RETURNS numeric AS
+$BODY$
+DECLARE
+	v_Price	NUMERIC;
+	v_ProductPrice	NUMERIC;
+	bom RECORD;
 
-/*
- * Loops recursively through bom and returns sum of list prices (pricelist).
- */
-CREATE OR REPLACE FUNCTION bompricelist(
-    IN NUMERIC, -- $1 product id
-    IN NUMERIC  -- $2 pricelist version id
-) RETURNS NUMERIC AS 
-$$
-  DECLARE
-    price        NUMERIC;
-    productprice NUMERIC;
-    boms         RECORD;
-  BEGIN
-    SELECT COALESCE(t.PriceList, 0) INTO price FROM m_productprice as t
-      WHERE t.m_pricelist_version_id = $2 AND t.m_product_id = $1;
-    IF price = 0 THEN
-      FOR boms IN SELECT t.m_productbom_id, t.bomqty 
-          FROM m_product_bom as t
-          WHERE t.m_product_id = $1 LOOP
-        productprice := bompricelist(boms.m_productbom_id, $2);
-        price := price + (boms.bomqty * productprice);
-      END LOOP;
-    END IF;
-    return price;
-  END;
-$$ LANGUAGE plpgsql STABLE STRICT;
+BEGIN
+	--	Try to get price from pricelist directly
+	SELECT	COALESCE (SUM(PriceList), 0)
+	INTO	v_Price
+	FROM	M_ProductPrice
+	WHERE M_PriceList_Version_ID=PriceList_Version_ID AND M_Product_ID=Product_ID;
+
+	--	No Price - Check if BOM
+	IF (v_Price = 0) THEN
+		FOR bom IN  
+			SELECT b.M_ProductBOM_ID, b.BOMQty, p.IsBOM
+			FROM M_Product_BOM b, M_Product p
+			WHERE b.M_ProductBOM_ID=p.M_Product_ID
+			AND b.M_Product_ID=Product_ID
+			AND b.M_ProductBOM_ID != Product_ID
+			AND b.IsActive='Y'
+		LOOP
+			v_ProductPrice := bomPriceList (bom.M_ProductBOM_ID, PriceList_Version_ID);
+			v_Price := v_Price + (bom.BOMQty * v_ProductPrice);
+		END LOOP;
+	END IF;
+	--
+	RETURN v_Price;
+	
+END;
+
+$BODY$
+LANGUAGE 'plpgsql' STABLE
+;
+

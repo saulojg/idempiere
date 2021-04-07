@@ -31,8 +31,10 @@ $$
 DECLARE
 datepart VARCHAR;
 datetime TIMESTAMP WITH TIME ZONE;
+offsetdays INTEGER;
 BEGIN
 	datepart = $2;
+	offsetdays = 0;
 	IF $2 IN ('') THEN
 		datepart = 'millennium';
 	ELSEIF $2 IN ('') THEN
@@ -54,7 +56,9 @@ BEGIN
 	ELSEIF $2 IN ('DDD','DD','J') THEN
 		datepart = 'day';
 	ELSEIF $2 IN ('DAY','DY','D') THEN
-		datepart = 'day';
+		datepart = 'week';
+		-- move to sunday to make it compatible with oracle and SQLJ
+		offsetdays = -1;
 	ELSEIF $2 IN ('HH','HH12','HH24') THEN
 		datepart = 'hour';
 	ELSEIF $2 IN ('MI') THEN
@@ -67,6 +71,7 @@ BEGIN
 		datepart = 'microseconds';
 	END IF;
 	datetime = date_trunc(datepart, $1); 
-RETURN cast(datetime as date);
+RETURN cast(datetime as date) + offsetdays;
 END;
-$$ LANGUAGE plpgsql;
+$$ LANGUAGE plpgsql IMMUTABLE;
+

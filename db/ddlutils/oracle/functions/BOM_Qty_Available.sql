@@ -1,7 +1,7 @@
-CREATE OR REPLACE FUNCTION bomQtyAvailable
-( 
+CREATE OR REPLACE FUNCTION BOMQTYAVAILABLE
+(
 	Product_ID 		IN NUMBER,
-    Warehouse_ID	IN NUMBER,
+	Warehouse_ID		IN NUMBER,
 	Locator_ID		IN NUMBER	--	Only used, if warehouse is null
 )
 RETURN NUMBER
@@ -15,7 +15,8 @@ RETURN NUMBER
  */
 AS
 BEGIN
-	RETURN bomQtyOnHand(Product_ID, Warehouse_ID, Locator_ID)
+	RETURN bomQtyOnHandForReservation(Product_ID, Warehouse_ID, Locator_ID)
 		- bomQtyReserved(Product_ID, Warehouse_ID, Locator_ID);
 END bomQtyAvailable;
 /
+
