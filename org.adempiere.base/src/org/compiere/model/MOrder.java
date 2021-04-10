@@ -2955,46 +2955,13 @@ public class MOrder extends X_C_Order implements DocAction
 			retValue = retValue.add(invoicePaid);
 		return retValue;
 	}
-	
-	public MPayment[] findPayments(String trxName) throws SQLException {
-		MPayment result[] = null;
-		ArrayList<MPayment> pays = new ArrayList<MPayment>();
-		String sql = "" + "SELECT " + "	DISTINCT PAY.* " + "FROM c_order CO  "
-				+ "	LEFT JOIN c_allocationline AL "
-				+ "	ON AL.c_order_id = CO.c_order_id "
-				+ "	INNER JOIN c_payment PAY  " + "	ON ( "
-				+ "		PAY.c_order_id = CO.c_order_id " + "		OR "
-				+ "		PAY.c_payment_id = AL.c_payment_id " + "	) "
-				+ "WHERE CO.C_Order_ID = " + getC_Order_ID();
-
-		PreparedStatement pstmt;
-		pstmt = DB.prepareStatement(sql, trxName);
-		ResultSet rs = null;
-		try {
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				MPayment pay = new MPayment(getCtx(), rs, trxName);
-				pays.add(pay);
-			}
-		} catch (SQLException e) {
-			DB.close(rs, pstmt);
-			throw e;
-		}finally{
-			DB.close(rs, pstmt);
-			rs=null; pstmt=null;
-		}
-
-		result = new MPayment[pays.size()];
-		result = pays.toArray(result);
-
-		return result;
-	}
 
 	public BigDecimal CuantoPago(String trxName) throws SQLException {
 		return CuantoPago(trxName, null);
 	}
 	
+	// region Roca
+
 	// dREHER, devuelve cuanto se pago de esta Orden
 	// TODO: verificar si el metodo es correcto
 	public BigDecimal CuantoPago(String trxName, Timestamp timestamp) throws SQLException {
@@ -3094,5 +3061,12 @@ public class MOrder extends X_C_Order implements DocAction
 
 		return result;
 	}
-	
+
+
+	public void setOrderType(String type) {
+		set_Value("OrderType", type);
+	}
+
+	// endregion Roca
+
 }	//	MOrder

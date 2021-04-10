@@ -3346,79 +3346,6 @@ public class MPayment extends X_C_Payment
 		return C_AllocationHdr_ID;
 	}
 
-	public MAllocationLine[] findAllocationLines(String trxName) throws SQLException {
-		MAllocationLine[] result;
-		ArrayList<MAllocationLine> lines = new ArrayList<MAllocationLine>();
-
-		String sql = "SELECT * FROM c_allocationline WHERE c_payment_id = " + getC_Payment_ID();
-
-		PreparedStatement pstmt;
-		pstmt = DB.prepareStatement(sql, trxName);
-		ResultSet rs = null;
-		try {
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				lines.add(new MAllocationLine(Env.getCtx(), rs, trxName));
-			}
-		} catch (SQLException e) {
-			DB.close(rs, pstmt);
-			throw e;
-		} finally {
-			DB.close(rs, pstmt);
-			rs = null;
-			pstmt = null;
-		}
-
-		result = new MAllocationLine[lines.size()];
-		result = lines.toArray(result);
-		return result;
-	}
-
-	// devuelve verdadero si el pago, es del tipo comisiones
-	public boolean isPagoComisiones() {
-
-		boolean isPagoCom = false;
-
-		try {
-
-			MAllocationLine[] allocs = this.findAllocationLines(null);
-
-			for (int i = 0; i < allocs.length; i++) {
-
-				MAllocationLine x = allocs[i];
-				if (x != null) {
-
-					MInvoice inv;
-					try {
-						inv = (MInvoice) x.getC_Invoice();
-						if (inv != null) {
-
-							if (String.valueOf(inv.getDescription()).toLowerCase().contains("comision")) {
-
-								isPagoCom = true;
-								break;
-							}
-
-						}
-
-					} catch (Exception e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-
-				}
-
-			}
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return isPagoCom;
-
-	}
 
 	// dREHER, leo que cheques de terceros estan asociados al pago
 	public List<MLARCheque> getChequesTerceros() {
@@ -3451,6 +3378,11 @@ public class MPayment extends X_C_Payment
 
 	public int getLAR_Sucursal_ID() {
 		return get_ValueAsInt("LAR_Sucursal_ID");
+	}
+
+
+	public int getAD_User_ID() {
+		return get_ValueAsInt("AD_User_ID");
 	}
 	
 	// endregion Roca

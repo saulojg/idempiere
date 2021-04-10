@@ -56,7 +56,7 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 			setLAR_Cheque_ID (0);
 			setProcessed (false);
 			setTipoCheque (null);
-// P
+// T
         } */
     }
 
@@ -287,8 +287,8 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 		return ii.intValue();
 	}
 
-	/** CuentaDeposito_ID AD_Reference_ID=2000021 */
-	public static final int CUENTADEPOSITO_ID_AD_Reference_ID=2000021;
+	/** CuentaDeposito_ID AD_Reference_ID=2000013 */
+	public static final int CUENTADEPOSITO_ID_AD_Reference_ID=2000013;
 	/** Set CuentaDeposito_ID.
 		@param CuentaDeposito_ID CuentaDeposito_ID	  */
 	public void setCuentaDeposito_ID (int CuentaDeposito_ID)
@@ -309,8 +309,8 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 		return ii.intValue();
 	}
 
-	/** CuentaEmision_ID AD_Reference_ID=2000021 */
-	public static final int CUENTAEMISION_ID_AD_Reference_ID=2000021;
+	/** CuentaEmision_ID AD_Reference_ID=2000013 */
+	public static final int CUENTAEMISION_ID_AD_Reference_ID=2000013;
 	/** Set CuentaEmision_ID.
 		@param CuentaEmision_ID CuentaEmision_ID	  */
 	public void setCuentaEmision_ID (int CuentaEmision_ID)
@@ -349,6 +349,53 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 	public String getCuentaNo () 
 	{
 		return (String)get_Value(COLUMNNAME_CuentaNo);
+	}
+
+	/** Set DeQuien.
+		@param DeQuien DeQuien	  */
+	public void setDeQuien (String DeQuien)
+	{
+
+		if (DeQuien != null && DeQuien.length() > 60)
+		{
+			log.warning("Length > 60 - truncated");
+			DeQuien = DeQuien.substring(0, 60);
+		}
+		set_Value (COLUMNNAME_DeQuien, DeQuien);
+	}
+
+	/** Get DeQuien.
+		@return DeQuien	  */
+	public String getDeQuien () 
+	{
+		return (String)get_Value(COLUMNNAME_DeQuien);
+	}
+
+	/** Set Detalle.
+		@param Detalle Detalle	  */
+	public void setDetalle (String Detalle)
+	{
+		throw new IllegalArgumentException ("Detalle is virtual column");	}
+
+	/** Get Detalle.
+		@return Detalle	  */
+	public String getDetalle () 
+	{
+		return (String)get_Value(COLUMNNAME_Detalle);
+	}
+
+	/** Set FechaAcreditado.
+		@param FechaAcreditado FechaAcreditado	  */
+	public void setFechaAcreditado (Timestamp FechaAcreditado)
+	{
+		set_Value (COLUMNNAME_FechaAcreditado, FechaAcreditado);
+	}
+
+	/** Get FechaAcreditado.
+		@return FechaAcreditado	  */
+	public Timestamp getFechaAcreditado () 
+	{
+		return (Timestamp)get_Value(COLUMNNAME_FechaAcreditado);
 	}
 
 	/** Set FechaCobro.
@@ -435,6 +482,27 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 		return ii.intValue();
 	}
 
+	/** Set isAcreditado.
+		@param isAcreditado isAcreditado	  */
+	public void setisAcreditado (boolean isAcreditado)
+	{
+		set_Value (COLUMNNAME_isAcreditado, Boolean.valueOf(isAcreditado));
+	}
+
+	/** Get isAcreditado.
+		@return isAcreditado	  */
+	public boolean isAcreditado () 
+	{
+		Object oo = get_Value(COLUMNNAME_isAcreditado);
+		if (oo != null) 
+		{
+			 if (oo instanceof Boolean) 
+				 return ((Boolean)oo).booleanValue(); 
+			return "Y".equals(oo);
+		}
+		return false;
+	}
+
 	/** Set Selected.
 		@param IsSelected Selected	  */
 	public void setIsSelected (boolean IsSelected)
@@ -456,8 +524,8 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 		return false;
 	}
 
-	/** LAR_Banco_ID AD_Reference_ID=2000024 */
-	public static final int LAR_BANCO_ID_AD_Reference_ID=2000024;
+	/** LAR_Banco_ID AD_Reference_ID=2000009 */
+	public static final int LAR_BANCO_ID_AD_Reference_ID=2000009;
 	/** Set LAR_Banco_ID.
 		@param LAR_Banco_ID LAR_Banco_ID	  */
 	public void setLAR_Banco_ID (int LAR_Banco_ID)
@@ -477,8 +545,8 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 		return ii.intValue();
 	}
 
-	/** LAR_ChequeEstado AD_Reference_ID=2000025 */
-	public static final int LAR_CHEQUEESTADO_AD_Reference_ID=2000025;
+	/** LAR_ChequeEstado AD_Reference_ID=2000010 */
+	public static final int LAR_CHEQUEESTADO_AD_Reference_ID=2000010;
 	/** Anulado = A */
 	public static final String LAR_CHEQUEESTADO_Anulado = "A";
 	/** En cartera = C */
@@ -500,7 +568,7 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 	public void setLAR_ChequeEstado (String LAR_ChequeEstado)
 	{
 		if (LAR_ChequeEstado == null) throw new IllegalArgumentException ("LAR_ChequeEstado is mandatory");
-		if (LAR_ChequeEstado.equals("A") || LAR_ChequeEstado.equals("C") || LAR_ChequeEstado.equals("D") || LAR_ChequeEstado.equals("E") || LAR_ChequeEstado.equals("F") || LAR_ChequeEstado.equals("R") || LAR_ChequeEstado.equals("S") || LAR_ChequeEstado.equals("T")); else throw new IllegalArgumentException ("LAR_ChequeEstado Invalid value - " + LAR_ChequeEstado + " - Reference_ID=2000025 - A - C - D - E - F - R - S - T");
+		if (LAR_ChequeEstado.equals("A") || LAR_ChequeEstado.equals("C") || LAR_ChequeEstado.equals("D") || LAR_ChequeEstado.equals("E") || LAR_ChequeEstado.equals("F") || LAR_ChequeEstado.equals("R") || LAR_ChequeEstado.equals("S") || LAR_ChequeEstado.equals("T")); else throw new IllegalArgumentException ("LAR_ChequeEstado Invalid value - " + LAR_ChequeEstado + " - Reference_ID=2000010 - A - C - D - E - F - R - S - T");
 		if (LAR_ChequeEstado.length() > 1)
 		{
 			log.warning("Length > 1 - truncated");
@@ -637,6 +705,26 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 		return false;
 	}
 
+	/** Set Receptor.
+		@param Receptor Receptor	  */
+	public void setReceptor (String Receptor)
+	{
+
+		if (Receptor != null && Receptor.length() > 60)
+		{
+			log.warning("Length > 60 - truncated");
+			Receptor = Receptor.substring(0, 60);
+		}
+		set_Value (COLUMNNAME_Receptor, Receptor);
+	}
+
+	/** Get Receptor.
+		@return Receptor	  */
+	public String getReceptor () 
+	{
+		return (String)get_Value(COLUMNNAME_Receptor);
+	}
+
 	/** Set Sucursal.
 		@param Sucursal Sucursal	  */
 	public void setSucursal (String Sucursal)
@@ -657,8 +745,8 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 		return (String)get_Value(COLUMNNAME_Sucursal);
 	}
 
-	/** TipoCheque AD_Reference_ID=2000026 */
-	public static final int TIPOCHEQUE_AD_Reference_ID=2000026;
+	/** TipoCheque AD_Reference_ID=2000011 */
+	public static final int TIPOCHEQUE_AD_Reference_ID=2000011;
 	/** Propio = P */
 	public static final String TIPOCHEQUE_Propio = "P";
 	/** Terceros = T */
@@ -668,7 +756,7 @@ public class X_LAR_Cheque extends PO implements I_LAR_Cheque, I_Persistent
 	public void setTipoCheque (String TipoCheque)
 	{
 		if (TipoCheque == null) throw new IllegalArgumentException ("TipoCheque is mandatory");
-		if (TipoCheque.equals("P") || TipoCheque.equals("T")); else throw new IllegalArgumentException ("TipoCheque Invalid value - " + TipoCheque + " - Reference_ID=2000026 - P - T");
+		if (TipoCheque.equals("P") || TipoCheque.equals("T")); else throw new IllegalArgumentException ("TipoCheque Invalid value - " + TipoCheque + " - Reference_ID=2000011 - P - T");
 		if (TipoCheque.length() > 1)
 		{
 			log.warning("Length > 1 - truncated");

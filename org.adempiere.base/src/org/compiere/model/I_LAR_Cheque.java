@@ -46,7 +46,7 @@ public interface I_LAR_Cheque
     /** TableName=LAR_Cheque */
     public static final String Table_Name = "LAR_Cheque";
 
-    /** AD_Table_ID=2000062 */
+    /** AD_Table_ID=2000067 */
     public static final int Table_ID = MTable.getTable_ID(Table_Name);
 
     KeyNamePair Model = new KeyNamePair(Table_ID, Table_Name);
@@ -166,6 +166,33 @@ public interface I_LAR_Cheque
 	/** Get CuentaNo	  */
 	public String getCuentaNo();
 
+    /** Column name DeQuien */
+    public static final String COLUMNNAME_DeQuien = "DeQuien";
+
+	/** Set DeQuien	  */
+	public void setDeQuien (String DeQuien);
+
+	/** Get DeQuien	  */
+	public String getDeQuien();
+
+    /** Column name Detalle */
+    public static final String COLUMNNAME_Detalle = "Detalle";
+
+	/** Set Detalle	  */
+	public void setDetalle (String Detalle);
+
+	/** Get Detalle	  */
+	public String getDetalle();
+
+    /** Column name FechaAcreditado */
+    public static final String COLUMNNAME_FechaAcreditado = "FechaAcreditado";
+
+	/** Set FechaAcreditado	  */
+	public void setFechaAcreditado (Timestamp FechaAcreditado);
+
+	/** Get FechaAcreditado	  */
+	public Timestamp getFechaAcreditado();
+
     /** Column name FechaCobro */
     public static final String COLUMNNAME_FechaCobro = "FechaCobro";
 
@@ -210,6 +237,15 @@ public interface I_LAR_Cheque
 
 	/** Get IN_BPartner_ID	  */
 	public int getIN_BPartner_ID();
+
+    /** Column name isAcreditado */
+    public static final String COLUMNNAME_isAcreditado = "isAcreditado";
+
+	/** Set isAcreditado	  */
+	public void setisAcreditado (boolean isAcreditado);
+
+	/** Get isAcreditado	  */
+	public boolean isAcreditado();
 
     /** Column name IsSelected */
     public static final String COLUMNNAME_IsSelected = "IsSelected";
@@ -288,6 +324,15 @@ public interface I_LAR_Cheque
 	  * The document has been processed
 	  */
 	public boolean isProcessed();
+
+    /** Column name Receptor */
+    public static final String COLUMNNAME_Receptor = "Receptor";
+
+	/** Set Receptor	  */
+	public void setReceptor (String Receptor);
+
+	/** Get Receptor	  */
+	public String getReceptor();
 
     /** Column name Sucursal */
     public static final String COLUMNNAME_Sucursal = "Sucursal";

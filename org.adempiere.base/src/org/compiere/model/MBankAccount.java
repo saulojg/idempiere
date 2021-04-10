@@ -228,4 +228,8 @@ public class MBankAccount extends X_C_BankAccount implements ImmutablePOSupport
 		return this;
 	}
 
+	public String getTenderType() {
+		return get_ValueAsString("TenderType");
+	}
+
 }	//	MBankAccount

@@ -5,11 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Level;
 
 import org.adempiere.utils.ConstantesAD;
+import org.adempiere.util.Miscfunc;
 import org.compiere.util.*;
+import org.compiere.process.*;
+import org.jfree.util.Log;
 
 /**
  * 	LAR Cheques User Model
@@ -129,6 +133,36 @@ public class MLARCheque extends X_LAR_Cheque
 		boolean isCobrado = false;
 		boolean isPagado = false;
 		
+		try 
+		{
+
+			boolean isAcreditado = this.isAcreditado();
+			if(isAcreditado){
+				String sql = "SELECT C_Payment_ID FROM LAR_ChequePayment WHERE LAR_Cheque_ID=? AND IsActive='Y'";
+				int C_Payment_ID = DB.getSQLValue(get_TrxName(), sql, this.getLAR_Cheque_ID());
+				if(C_Payment_ID > 0){
+					Date fecha = this.getFechaAcreditado();
+					sql = "UPDATE C_Payment SET dateacct='" + Miscfunc.FechaAMD(fecha) + "' WHERE C_Payment_ID=?";
+					int upd = DB.executeUpdate(sql,C_Payment_ID, get_TrxName());
+					if(upd > -1)
+						log.fine("Se actualizo la fecha contable del paymentId=" + C_Payment_ID + " Fecha=" + fecha);
+					else
+						log.warning("Error al actualizar la fecha contable del paymentId=" + C_Payment_ID + " Fecha=" + fecha);
+				}
+			}
+			
+		}
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+			return false;
+
+		} finally 
+		{
+
+		}
+		
+		
 		
 		
 		//begin msuarez -> si un cheque es rechazado, se debe generar una nueva orden de venta con el monto del cheque
@@ -217,9 +251,9 @@ public class MLARCheque extends X_LAR_Cheque
 
 						mo.setGrandTotal(monto);					
 
-						// mo.setAD_User_ID(payment.getAD_User_ID()); // 20210406 sg campo descontinuado por iDempiere
+						mo.setAD_User_ID(payment.getAD_User_ID());
 
-						//mo.setOrderType(MOrder.DocSubTypeSO_Prepay); // 20210406 sg campo descontinuado por iDempiere
+						mo.setOrderType(MOrder.DocSubTypeSO_Prepay);
 						mo.setC_DocType_ID(1000028);//AprobarVenta.findPrePayOrderDocType(this.get_TrxName()));
 						mo.setC_DocTypeTarget_ID(1000028);//findPrePayOrderDocType(trxName));
 						// asigno la sucursal de la venta (FINBPartnerCredit) a la órden de
@@ -431,7 +465,7 @@ public class MLARCheque extends X_LAR_Cheque
 		
 	}//end obtenerPayment
 	
-	
+	// region Roca
 		
 		public static void createLine(MOrder mo, String trxName) throws SQLException {
 		    MOrderLine mol = new MOrderLine(mo);
@@ -485,53 +519,51 @@ public class MLARCheque extends X_LAR_Cheque
 		 * @throws AdempiereSystemError
 		 */
 		public static boolean completeInvoice(MInvoice i, String trxName)
-				throws AdempiereSystemError {
+			throws AdempiereSystemError {
 
-			boolean ok = false;
-			// Dreher, VERIFICO Q SEA ORDER VALIDA
-			if (i != null) {
-				// Utilizo metodo MSequence
-				String docNo = MSequence.getDocumentNo(i.getC_DocType_ID(),
-						trxName, true);
-				if (docNo != null)
-					i.setDocumentNo(docNo);
-				i.setDocAction("CO");
-				String complete = i.completeIt();
-				i.setDocStatus(complete); // completar documento
-				ok = i.save(trxName);
-				if (!ok)
-					throw new AdempiereSystemError("- No se pudo guardar la notade debito");
+		boolean ok = false;
+		// Dreher, VERIFICO Q SEA ORDER VALIDA
+		if (i != null) {
+			// Utilizo metodo MSequence
+			String docNo = MSequence.getDocumentNo(i.getC_DocType_ID(),
+					trxName, true);
+			if (docNo != null)
+				i.setDocumentNo(docNo);
+			i.setDocAction("CO");
+			String complete = i.completeIt();
+			i.setDocStatus(complete); // completar documento
+			ok = i.save(trxName);
+			if (!ok)
+				throw new AdempiereSystemError("- No se pudo guardar la notade debito");
 
-			} else
-				throw new AdempiereSystemError("- No se orden valida");
+		} else
+			throw new AdempiereSystemError("- No se orden valida");
 
-			return ok;
+		return ok;
+	}
+	
+	private void UpdateProcessed(String data, int LAR_Cheque_ID) {
+
+		PreparedStatement pstmt=null;
+		String sql = "UPDATE LAR_Cheque SET processed='" + data
+		+ "' WHERE LAR_Cheque_ID="
+		+ LAR_Cheque_ID;
+
+		try {
+			pstmt = DB.prepareStatement(sql, this
+					.get_TrxName());
+			int z = pstmt.executeUpdate();
+			
+		} // try
+		catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		private void UpdateProcessed(String data, int LAR_Cheque_ID) {
+		finally{
+			DB.close(pstmt);
+			pstmt = null;
+		}
 
-			PreparedStatement pstmt=null;
-			String sql = "UPDATE LAR_Cheque SET processed='" + data
-			+ "' WHERE LAR_Cheque_ID="
-			+ LAR_Cheque_ID;
-
-			try {
-				pstmt = DB.prepareStatement(sql, this
-						.get_TrxName());
-				int z = pstmt.executeUpdate();
-				
-			} // try
-			catch (SQLException e) {
-				e.printStackTrace();
-			}
-			finally{
-				DB.close(pstmt);
-				pstmt = null;
-			}
-
-		}//UpdateProcessed
-		
-		
+	}//UpdateProcessed
 
 	/**
 	 * 	Before Save
@@ -563,22 +595,33 @@ public class MLARCheque extends X_LAR_Cheque
 				log.log(Level.SEVERE, "Estado Cheque ("+LAR_ChequeEstado+") incompatible con Tipo Cheque:"+TipoCheque);
 				ok = false;
 			}
-
+			
+			
+			// dREHER 28/09/2018
+			// SI es un cobro de cheque de terceros que tiene vencimiento mayor a 90 dias de hoy y no tiene Financiacion Con Cheques, romper aca y devolver mensaje de excepcion
+			// dREHER 28/03/2019 Si pasa por aca para rechazar un cheque o para usarlo en un pago que no controle lo de los dias...
+			if(!LAR_ChequeEstado.equals("R") && !LAR_ChequeEstado.equals("T")){
+				int C_Payment_ID = obtenerPayment(this.getLAR_Cheque_ID(), true, null);
+				String sql = "SELECT IsOkChequeTercero(?::numeric, ?::timestamp)";
+				String okCheque = DB.getSQLValueString(get_TrxName(), sql , new Object[]{C_Payment_ID, this.getFechaCobro()});
+				log.info("sql IsOkChequeTercero. sql= " + sql + " C_Payment_ID=" + C_Payment_ID + " FechaCobro=" + this.getFechaCobro());
+				if(okCheque==null || !okCheque.equalsIgnoreCase("Y")){
+					Log.info("Error: " + okCheque);
+					throw new Exception ("Error al registrar cheque. " + okCheque);
+				}
+			}
 		
 		}
-		catch(Exception ex)
-		{
+		catch(Exception ex){
+	
 			ok = false;
 		}
-		
-				
-		
+	
 		return ok;
 	}
-	
-	
-	
-	
+
+	// endregion Roca
+
 	/**	Logger	*/
 	private static CLogger s_log = CLogger.getCLogger (MLARCheque.class);
 
