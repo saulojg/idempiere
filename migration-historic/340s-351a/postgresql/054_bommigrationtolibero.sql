@@ -615,11 +615,11 @@ FROM PP_Product_BOM b	-- BOM lines
     LEFT OUTER JOIN M_Locator l ON (iol.M_Locator_ID=l.M_Locator_ID);
 
 
-DROP FUNCTION bomqtyavailable(integer, integer, integer, integer);
+DROP FUNCTION IF EXISTS bomqtyavailable(integer, integer, integer, integer);
 DROP FUNCTION bomqtyavailable(numeric, numeric, numeric, numeric);
-DROP FUNCTION bomqtyonhand(integer, integer, integer, integer);
-DROP FUNCTION bomqtyonhand(numeric, numeric, numeric, numeric);
-DROP FUNCTION bomqtyordered(integer, integer, integer, integer);
-DROP FUNCTION bomqtyordered(numeric, numeric, numeric, numeric);
-DROP FUNCTION bomqtyreserved(integer, integer, integer, integer);
-DROP FUNCTION bomqtyreserved(numeric, numeric, numeric, numeric);
+DROP FUNCTION IF EXISTS bomqtyonhand(integer, integer, integer, integer);
+DROP FUNCTION IF EXISTS bomqtyonhand(numeric, numeric, numeric, numeric);
+DROP FUNCTION IF EXISTS bomqtyordered(integer, integer, integer, integer);
+DROP FUNCTION IF EXISTS bomqtyordered(numeric, numeric, numeric, numeric);
+DROP FUNCTION IF EXISTS bomqtyreserved(integer, integer, integer, integer);
+DROP FUNCTION IF EXISTS bomqtyreserved(numeric, numeric, numeric, numeric);
