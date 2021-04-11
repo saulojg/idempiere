@@ -20,7 +20,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- 8/05/2008 16:31:53
 -- Generated_Order_ID
-ALTER TABLE C_Order ADD COLUMN Link_Order_ID NUMERIC(10)
+-- ALTER TABLE C_Order ADD COLUMN Link_Order_ID NUMERIC(10)
 ;
 
 -- 8/05/2008 16:58:30
@@ -45,6 +45,6 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- 8/05/2008 16:59:21
 -- Generated_Order_ID
-ALTER TABLE C_OrderLine ADD COLUMN Link_OrderLine_ID NUMERIC(10)
+-- ALTER TABLE C_OrderLine ADD COLUMN Link_OrderLine_ID NUMERIC(10)
 ;
 
