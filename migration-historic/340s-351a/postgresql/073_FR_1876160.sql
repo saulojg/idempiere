@@ -16,7 +16,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Jan 20, 2008 8:28:44 PM CST
 -- [ 1875623 ] Add the reference in Replenish Report to Distribution Order
-ALTER TABLE M_Warehouse ADD COLUMN IsInTransit CHAR(1) DEFAULT 'N' CHECK (IsInTransit IN ('Y','N'))
+-- ALTER TABLE M_Warehouse ADD COLUMN IsInTransit CHAR(1) DEFAULT 'N' CHECK (IsInTransit IN ('Y','N'))
 ;
 
 -- Jan 20, 2008 8:29:13 PM CST
