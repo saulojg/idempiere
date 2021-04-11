@@ -15,7 +15,7 @@ INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Refe
 INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=56187 AND EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language!=l.AD_Language OR tt.AD_Column_ID!=t.AD_Column_ID)
 ;
 
-ALTER TABLE AD_Column ADD COLUMN IsAllowLogging CHAR(1) DEFAULT 'Y' CHECK (IsAllowLogging IN ('Y','N'))
+-- ALTER TABLE AD_Column ADD COLUMN IsAllowLogging CHAR(1) DEFAULT 'Y' CHECK (IsAllowLogging IN ('Y','N'))
 ;
 
 INSERT INTO AD_Field (AD_Client_ID,AD_Column_ID,AD_Field_ID,AD_Org_ID,AD_Tab_ID,Created,CreatedBy,Description,DisplayLength,EntityType,IsActive,IsCentrallyMaintained,IsDisplayed,IsEncrypted,IsFieldOnly,IsHeading,IsReadOnly,IsSameLine,Name,SeqNo,SortNo,Updated,UpdatedBy) VALUES (0,56187,56317,0,101,TO_TIMESTAMP('2008-07-23 16:57:53','YYYY-MM-DD HH24:MI:SS'),100,'Determine if a column must be recorded into the change log',0,'D','Y','Y','Y','N','N','N','N','N','IsAllowLogging',370,0,TO_TIMESTAMP('2008-07-23 16:57:53','YYYY-MM-DD HH24:MI:SS'),100)
