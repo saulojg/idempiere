@@ -160,11 +160,11 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 ;
 
 -- Oct 31, 2012 10:19:08 AM COT
-ALTER TABLE PA_DashboardPreference ADD COLUMN PA_DashboardPreference_UU VARCHAR(36) DEFAULT NULL 
+-- ALTER TABLE PA_DashboardPreference ADD COLUMN PA_DashboardPreference_UU VARCHAR(36) DEFAULT NULL 
 ;
 
 -- Oct 31, 2012 10:19:08 AM COT
-CREATE UNIQUE INDEX PA_DashboardPreference_UU_idx ON pa_dashboardpreference(PA_DashboardPreference_UU)
+-- CREATE UNIQUE INDEX PA_DashboardPreference_UU_idx ON pa_dashboardpreference(PA_DashboardPreference_UU)
 ;
 
 -- Oct 31, 2012 10:19:08 AM COT

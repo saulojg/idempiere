@@ -1,3 +1,7 @@
+INSERT INTO adempiere.a_asset_type(
+	a_asset_type_id, name, value, ad_client_id, ad_org_id, isactive, created, createdby, updated, updatedby, description, isowned, isinposession, isdepreciable, a_asset_type_uu)
+	VALUES (1, 'General', 'General', 0, 0, 'Y', now(), 0, now(), 0, '', 'N', 'N', 'N', null);
+
 ALTER TABLE A_Asset ADD CONSTRAINT AAssetClass_AAsset FOREIGN KEY (A_Asset_Class_ID) REFERENCES A_Asset_Class DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE A_Asset ADD CONSTRAINT AAssetType_AAsset FOREIGN KEY (A_Asset_Type_ID) REFERENCES A_Asset_Type DEFERRABLE INITIALLY DEFERRED;
@@ -266,11 +270,11 @@ ALTER TABLE PA_DashboardContent ADD CONSTRAINT ADRole_PADashboardContent FOREIGN
 
 ALTER TABLE PA_DashboardContent ADD CONSTRAINT ADUser_PADashboardContent FOREIGN KEY (AD_User_ID) REFERENCES AD_User DEFERRABLE INITIALLY DEFERRED;
 
-ALTER TABLE PA_DashboardPreference ADD CONSTRAINT ADRole_PADashboardPreference FOREIGN KEY (AD_Role_ID) REFERENCES AD_Role DEFERRABLE INITIALLY DEFERRED;
+-- ALTER TABLE PA_DashboardPreference ADD CONSTRAINT ADRole_PADashboardPreference FOREIGN KEY (AD_Role_ID) REFERENCES AD_Role DEFERRABLE INITIALLY DEFERRED;
 
-ALTER TABLE PA_DashboardPreference ADD CONSTRAINT ADUser_PADashboardPreference FOREIGN KEY (AD_User_ID) REFERENCES AD_User DEFERRABLE INITIALLY DEFERRED;
+-- ALTER TABLE PA_DashboardPreference ADD CONSTRAINT ADUser_PADashboardPreference FOREIGN KEY (AD_User_ID) REFERENCES AD_User DEFERRABLE INITIALLY DEFERRED;
 
-ALTER TABLE PA_DashboardPreference ADD CONSTRAINT PADashboardContent_PADashPref FOREIGN KEY (PA_DashboardContent_ID) REFERENCES PA_DashboardContent DEFERRABLE INITIALLY DEFERRED;
+-- ALTER TABLE PA_DashboardPreference ADD CONSTRAINT PADashboardContent_PADashPref FOREIGN KEY (PA_DashboardContent_ID) REFERENCES PA_DashboardContent DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE R_RequestProcessor ADD CONSTRAINT ADSchedule_RRequestProcessor FOREIGN KEY (AD_Schedule_ID) REFERENCES AD_Schedule DEFERRABLE INITIALLY DEFERRED;
 

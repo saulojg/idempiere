@@ -20,7 +20,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Jul 30, 2012 5:47:39 PM SGT
 -- Move the Menu to be a Portlet
-ALTER TABLE PA_DashboardContent ADD COLUMN IsShowInDashboard CHAR(1) DEFAULT 'Y' CHECK (IsShowInDashboard IN ('Y','N')) NOT NULL
+-- ALTER TABLE PA_DashboardContent ADD COLUMN IsShowInDashboard CHAR(1) DEFAULT 'Y' CHECK (IsShowInDashboard IN ('Y','N')) NOT NULL
 ;
 
 -- Jul 30, 2012 5:48:10 PM SGT
@@ -70,7 +70,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Aug 2, 2012 10:50:42 AM SGT
 -- Move the Menu to be a Portlet
-ALTER TABLE PA_DashboardContent ADD COLUMN AD_Process_ID NUMERIC(10) DEFAULT NULL 
+--ALTER TABLE PA_DashboardContent ADD COLUMN AD_Process_ID NUMERIC(10) DEFAULT NULL 
 ;
 
 -- Aug 2, 2012 10:51:45 AM SGT
@@ -95,7 +95,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Aug 2, 2012 10:52:41 AM SGT
 -- Move the Menu to be a Portlet
-ALTER TABLE PA_DashboardContent ADD COLUMN IsEmbedReportContent CHAR(1) DEFAULT 'N' CHECK (IsEmbedReportContent IN ('Y','N')) NOT NULL
+-- ALTER TABLE PA_DashboardContent ADD COLUMN IsEmbedReportContent CHAR(1) DEFAULT 'N' CHECK (IsEmbedReportContent IN ('Y','N')) NOT NULL
 ;
 
 -- Aug 2, 2012 10:53:50 AM SGT
@@ -120,7 +120,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Aug 2, 2012 10:54:37 AM SGT
 -- Move the Menu to be a Portlet
-ALTER TABLE PA_DashboardContent ADD COLUMN ProcessParameters VARCHAR(2000) DEFAULT NULL 
+-- ALTER TABLE PA_DashboardContent ADD COLUMN ProcessParameters VARCHAR(2000) DEFAULT NULL 
 ;
 
 -- Aug 2, 2012 10:55:12 AM SGT
@@ -305,7 +305,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Aug 3, 2012 10:41:25 AM SGT
 -- Move the Menu to be a Portlet
-ALTER TABLE PA_DashboardContent ADD COLUMN IsCollapsedByDefault CHAR(1) DEFAULT 'N' CHECK (IsCollapsedByDefault IN ('Y','N')) NOT NULL
+--ALTER TABLE PA_DashboardContent ADD COLUMN IsCollapsedByDefault CHAR(1) DEFAULT 'N' CHECK (IsCollapsedByDefault IN ('Y','N')) NOT NULL
 ;
 
 -- Aug 3, 2012 10:42:03 AM SGT

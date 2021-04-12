@@ -20,7 +20,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Aug 30, 2012 3:46:16 PM SGT
 -- IDEMPIERE-373 Implement User Locking
-ALTER TABLE AD_User ADD COLUMN IsLocked CHAR(1) DEFAULT 'N' CHECK (IsLocked IN ('Y','N')) NOT NULL
+-- ALTER TABLE AD_User ADD COLUMN IsLocked CHAR(1) DEFAULT 'N' CHECK (IsLocked IN ('Y','N')) NOT NULL
 ;
 
 -- Aug 30, 2012 3:46:30 PM SGT
@@ -80,7 +80,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Aug 30, 2012 3:48:56 PM SGT
 -- IDEMPIERE-373 Implement User Locking
-ALTER TABLE AD_User ADD COLUMN FailedLoginCount NUMERIC(10) DEFAULT '0' NOT NULL
+-- ALTER TABLE AD_User ADD COLUMN FailedLoginCount NUMERIC(10) DEFAULT '0' NOT NULL
 ;
 
 -- Aug 30, 2012 3:49:19 PM SGT
@@ -135,7 +135,7 @@ UPDATE AD_Column SET EntityType='D',Updated=TO_TIMESTAMP('2012-08-30 15:50:19','
 
 -- Aug 30, 2012 3:50:21 PM SGT
 -- IDEMPIERE-373 Implement User Locking
-ALTER TABLE AD_User ADD COLUMN DateLastLogin TIMESTAMP DEFAULT NULL 
+-- ALTER TABLE AD_User ADD COLUMN DateLastLogin TIMESTAMP DEFAULT NULL 
 ;
 
 -- Aug 30, 2012 3:51:46 PM SGT

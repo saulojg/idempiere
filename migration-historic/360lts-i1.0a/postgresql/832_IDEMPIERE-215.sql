@@ -38,6 +38,9 @@ DELETE FROM AD_TreeNodeMM WHERE Node_ID=314 AND EXISTS (SELECT * FROM AD_Tree t 
 DELETE FROM AD_Process_Trl WHERE AD_Process_ID=183
 ;
 
+-- Orbital Software
+delete from ad_pinstance where ad_process_id = 183;
+
 -- Apr 4, 2012 11:04:48 AM MYT
 -- IDEMPIERE-215 Costing: Remove M_Product_Costing
 DELETE FROM AD_Process WHERE AD_Process_ID=183
@@ -45,7 +48,7 @@ DELETE FROM AD_Process WHERE AD_Process_ID=183
 
 -- Apr 4, 2012 11:04:55 AM MYT
 -- IDEMPIERE-215 Costing: Remove M_Product_Costing
-DELETE FROM AD_ReportView WHERE AD_ReportView_ID=125
+--DELETE FROM AD_ReportView WHERE AD_ReportView_ID=125
 ;
 
 -- Apr 4, 2012 11:05:21 AM MYT
@@ -55,7 +58,8 @@ DELETE FROM AD_Table_Trl WHERE AD_Table_ID=479
 
 -- Apr 4, 2012 11:05:22 AM MYT
 -- IDEMPIERE-215 Costing: Remove M_Product_Costing
-DELETE FROM AD_Table WHERE AD_Table_ID=479
+-- DELETE FROM AD_Table WHERE AD_Table_ID=479
+update ad_table set isactive = 'N' WHERE AD_Table_ID=479
 ;
 
 -- Apr 4, 2012 11:05:22 AM MYT
@@ -64,7 +68,7 @@ DROP VIEW RV_Product_Costing;
 
 -- Apr 4, 2012 11:05:22 AM MYT
 -- IDEMPIERE-215 Costing: Remove M_Product_Costing
-DROP TABLE M_Product_Costing;
+-- DROP TABLE M_Product_Costing;
 
 -- Apr 4, 2012 11:05:22 AM MYT
 -- IDEMPIERE-215 Costing: Remove M_Product_Costing

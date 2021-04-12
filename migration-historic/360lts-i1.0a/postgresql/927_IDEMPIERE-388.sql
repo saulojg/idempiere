@@ -54,12 +54,12 @@ UPDATE AD_Column SET IsMandatory='Y',Updated=TO_TIMESTAMP('2012-10-08 22:15:49',
 
 -- Oct 8, 2012 10:15:51 PM COT
 -- IDEMPIERE-388 Enable port and TLS configuration for email
-ALTER TABLE AD_Client ADD COLUMN IsSecureSMTP CHAR(1) DEFAULT 'N' CHECK (IsSecureSMTP IN ('Y','N')) NOT NULL
+-- ALTER TABLE AD_Client ADD COLUMN IsSecureSMTP CHAR(1) DEFAULT 'N' CHECK (IsSecureSMTP IN ('Y','N')) NOT NULL
 ;
 
 -- Oct 8, 2012 10:16:24 PM COT
 -- IDEMPIERE-388 Enable port and TLS configuration for email
-ALTER TABLE AD_Client ADD COLUMN SMTPPort NUMERIC(10) DEFAULT NULL 
+-- ALTER TABLE AD_Client ADD COLUMN SMTPPort NUMERIC(10) DEFAULT NULL 
 ;
 
 SELECT register_migration_script('927_IDEMPIERE-388.sql') FROM dual

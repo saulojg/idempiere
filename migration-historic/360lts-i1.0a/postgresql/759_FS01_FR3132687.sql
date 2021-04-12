@@ -646,7 +646,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 ;
 
 -- Dec 8, 2010 5:18:59 PM COT
-ALTER TABLE C_Order ADD COLUMN IsPayScheduleValid CHAR(1) DEFAULT 'N' CHECK (IsPayScheduleValid IN ('Y','N')) NOT NULL
+--ALTER TABLE C_Order ADD COLUMN IsPayScheduleValid CHAR(1) DEFAULT 'N' CHECK (IsPayScheduleValid IN ('Y','N')) NOT NULL
 ;
 
 -- Dec 8, 2010 5:21:06 PM COT

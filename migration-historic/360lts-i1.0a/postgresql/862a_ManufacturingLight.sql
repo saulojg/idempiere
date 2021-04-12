@@ -60,7 +60,7 @@ If the document type of your document has no automatic document sequence defined
 INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=59961 AND NOT EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Column_ID=t.AD_Column_ID)
 ;
 
-ALTER TABLE M_Production ADD COLUMN DocumentNo VARCHAR(30) NOT NULL
+ALTER TABLE M_Production ADD COLUMN DocumentNo VARCHAR(30) -- NOT NULL
 ;
 
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Reference_Value_ID,AD_Table_ID,Callout,ColumnName,Created,CreatedBy,Description,EntityType,FieldLength,Help,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsSyncDatabase,IsTranslated,IsUpdateable,Name,ReadOnlyLogic,Updated,UpdatedBy,Version) VALUES (0,59962,454,0,30,211,325,'org.compiere.model.CalloutProduction.product','M_Product_ID',TO_TIMESTAMP('2011-07-27 15:14:32','YYYY-MM-DD HH24:MI:SS'),100,'Product, Service, Item','D',22,'Identifies an item which is either purchased or sold in this organization.','Y','N','N','N','N','Y','N','Y','Y','N','Y','Product','@IsCreated@=''Y''',TO_TIMESTAMP('2011-07-27 15:14:32','YYYY-MM-DD HH24:MI:SS'),100,0)
@@ -69,7 +69,7 @@ INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Refe
 INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=59962 AND NOT EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Column_ID=t.AD_Column_ID)
 ;
 
-ALTER TABLE M_Production ADD COLUMN M_Product_ID NUMERIC(10) NOT NULL
+ALTER TABLE M_Production ADD COLUMN M_Product_ID NUMERIC(10) -- NOT NULL
 ;
 
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,Description,EntityType,FieldLength,Help,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsSyncDatabase,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,59963,448,0,31,325,'M_Locator_ID',TO_TIMESTAMP('2011-07-27 15:14:34','YYYY-MM-DD HH24:MI:SS'),100,'Warehouse Locator','D',10,'The Locator indicates where in a Warehouse a product is located.','Y','N','N','N','N','Y','N','N','Y','N','Y','Locator',TO_TIMESTAMP('2011-07-27 15:14:34','YYYY-MM-DD HH24:MI:SS'),100,0)
@@ -78,7 +78,7 @@ INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Refe
 INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=59963 AND NOT EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Column_ID=t.AD_Column_ID)
 ;
 
-ALTER TABLE M_Production ADD COLUMN M_Locator_ID NUMERIC(10) NOT NULL
+ALTER TABLE M_Production ADD COLUMN M_Locator_ID NUMERIC(10) -- NOT NULL
 ;
 
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,DefaultValue,Description,EntityType,FieldLength,Help,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsSyncDatabase,IsTranslated,IsUpdateable,Name,ReadOnlyLogic,Updated,UpdatedBy,Version) VALUES (0,59964,1343,0,12,325,'ProductionQty',TO_TIMESTAMP('2011-07-27 15:14:35','YYYY-MM-DD HH24:MI:SS'),100,'0','Quantity of products to produce','D',10,'The Production Quantity identifies the number of products to produce','Y','N','N','N','N','Y','N','N','Y','N','Y','Production Quantity','@IsCreated@=''Y''',TO_TIMESTAMP('2011-07-27 15:14:35','YYYY-MM-DD HH24:MI:SS'),100,0)
@@ -132,10 +132,10 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 ALTER TABLE M_Production ADD COLUMN C_OrderLine_ID NUMERIC(10) DEFAULT NULL 
 ;
 
-INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,ColumnSQL,Created,CreatedBy,Description,EntityType,FieldLength,Help,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsSyncDatabase,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,61942,187,0,19,325,'C_BPartner_ID','(SELECT o.C_BPartner_ID FROM C_Order o INNER JOIN C_OrderLine ol ON (ol.C_Order_ID=o.C_Order_ID) WHERE ol.C_OrderLine_ID=M_Production.C_OrderLine_ID)',TO_TIMESTAMP('2011-07-27 15:14:48','YYYY-MM-DD HH24:MI:SS'),100,'Identifies a Business Partner','U',10,'A Business Partner is anyone with whom you transact.  This can include Vendor, Customer, Employee or Salesperson','Y','N','N','N','N','N','N','N','Y','N','N','Business Partner ',TO_TIMESTAMP('2011-07-27 15:14:48','YYYY-MM-DD HH24:MI:SS'),100,0)
+-- INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,ColumnSQL,Created,CreatedBy,Description,EntityType,FieldLength,Help,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsSyncDatabase,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,61942,187,0,19,325,'C_BPartner_ID','(SELECT o.C_BPartner_ID FROM C_Order o INNER JOIN C_OrderLine ol ON (ol.C_Order_ID=o.C_Order_ID) WHERE ol.C_OrderLine_ID=M_Production.C_OrderLine_ID)',TO_TIMESTAMP('2011-07-27 15:14:48','YYYY-MM-DD HH24:MI:SS'),100,'Identifies a Business Partner','U',10,'A Business Partner is anyone with whom you transact.  This can include Vendor, Customer, Employee or Salesperson','Y','N','N','N','N','N','N','N','Y','N','N','Business Partner ',TO_TIMESTAMP('2011-07-27 15:14:48','YYYY-MM-DD HH24:MI:SS'),100,0)
 ;
 
-INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=61942 AND NOT EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Column_ID=t.AD_Column_ID)
+-- INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=61942 AND NOT EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Column_ID=t.AD_Column_ID)
 ;
 
 INSERT INTO AD_Process (AccessLevel,AD_Client_ID,AD_Org_ID,AD_Process_ID,Classname,Created,CreatedBy,Description,EntityType,Help,IsActive,IsBetaFunctionality,IsDirectPrint,IsReport,Name,ShowHelp,Statistic_Count,Statistic_Seconds,Updated,UpdatedBy,Value,WorkflowValue) VALUES ('3',0,0,53226,'org.compiere.process.ProductionCreate',TO_TIMESTAMP('2011-07-27 15:14:50','YYYY-MM-DD HH24:MI:SS'),100,'Create production lines','D','Create Production will generate the production lines.','Y','N','N','N','Create Production','Y',0,0,TO_TIMESTAMP('2011-07-27 15:14:50','YYYY-MM-DD HH24:MI:SS'),100,'M_Production_Create',NULL)
@@ -204,7 +204,7 @@ INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Refe
 INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=59960 AND NOT EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Column_ID=t.AD_Column_ID)
 ;
 
-ALTER TABLE M_ProductionLine ADD COLUMN M_Production_ID NUMERIC(10) NOT NULL
+ALTER TABLE M_ProductionLine ADD COLUMN M_Production_ID NUMERIC(10) -- NOT NULL
 ;
 
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,Description,EntityType,FieldLength,Help,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsSyncDatabase,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,59967,1568,0,12,326,'PlannedQty',TO_TIMESTAMP('2011-07-27 15:15:21','YYYY-MM-DD HH24:MI:SS'),100,'Planned quantity for this project','D',10,'The Planned Quantity indicates the anticipated quantity for this project or project line','Y','N','N','N','N','N','N','N','Y','N','Y','Planned Quantity',TO_TIMESTAMP('2011-07-27 15:15:21','YYYY-MM-DD HH24:MI:SS'),100,0)
@@ -213,7 +213,7 @@ INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Refe
 INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=59967 AND NOT EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Column_ID=t.AD_Column_ID)
 ;
 
-ALTER TABLE M_ProductionLine ADD COLUMN PlannedQty NUMERIC DEFAULT NULL 
+ALTER TABLE M_ProductionLine ADD COLUMN PlannedQty NUMERIC -- DEFAULT NULL 
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,55236,0,'QtyUsed',TO_TIMESTAMP('2011-07-27 15:15:22','YYYY-MM-DD HH24:MI:SS'),100,'U','Y','Quantity Used','Quantity Used in production',TO_TIMESTAMP('2011-07-27 15:15:22','YYYY-MM-DD HH24:MI:SS'),100)
@@ -1712,12 +1712,12 @@ INSERT INTO AD_Field (AD_Client_ID,AD_Column_ID,AD_Field_ID,AD_Org_ID,AD_Tab_ID,
 INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Description,Help,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Field_ID, t.Description,t.Help,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=59822 AND NOT EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Field_ID=t.AD_Field_ID)
 ;
 
-INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,ColumnSQL,Created,CreatedBy,Description,EntityType,FieldLength,Help,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsSyncDatabase,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,61999,620,0,10,383,'Value','(SELECT p.Value FROM M_Product p WHERE p.M_Product_ID=M_Product_BOM.M_ProductBOM_ID)',TO_TIMESTAMP('2011-07-27 15:21:25','YYYY-MM-DD HH24:MI:SS'),100,'Search key for the record in the format required - must be unique','U',22,'A search key allows you a fast method of finding a particular record.
+/*INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,ColumnSQL,Created,CreatedBy,Description,EntityType,FieldLength,Help,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsSyncDatabase,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,61999,620,0,10,383,'Value','(SELECT p.Value FROM M_Product p WHERE p.M_Product_ID=M_Product_BOM.M_ProductBOM_ID)',TO_TIMESTAMP('2011-07-27 15:21:25','YYYY-MM-DD HH24:MI:SS'),100,'Search key for the record in the format required - must be unique','U',22,'A search key allows you a fast method of finding a particular record.
 If you leave the search key empty, the system automatically creates a numeric number.  The document sequence used for this fallback number is defined in the "Maintain Sequence" window with the name "DocumentNo_<TableName>", where TableName is the actual name of the table (e.g. C_Order).','Y','N','N','N','N','N','N','Y','Y','N','N','Search Key',TO_TIMESTAMP('2011-07-27 15:21:25','YYYY-MM-DD HH24:MI:SS'),100,0)
 ;
 
 INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=61999 AND NOT EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Column_ID=t.AD_Column_ID)
-;
+;*/
 
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,ColumnSQL,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsSyncDatabase,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,62000,55243,0,19,383,'M_PartType_ID','(SELECT p.M_PartType_ID FROM M_Product p WHERE p.M_Product_ID=M_Product_BOM.M_ProductBOM_ID)',TO_TIMESTAMP('2011-07-27 15:21:27','YYYY-MM-DD HH24:MI:SS'),100,'U',10,'Y','N','N','N','N','N','N','N','Y','N','N','Part Type',TO_TIMESTAMP('2011-07-27 15:21:27','YYYY-MM-DD HH24:MI:SS'),100,0)
 ;

@@ -16,7 +16,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 ;
 
 -- Feb 8, 2012 5:49:09 PM COT
-ALTER TABLE AD_System ADD COLUMN LastMigrationScriptApplied VARCHAR(255) DEFAULT NULL 
+-- ALTER TABLE AD_System ADD COLUMN LastMigrationScriptApplied VARCHAR(255) DEFAULT NULL 
 ;
 
 -- Feb 8, 2012 5:51:34 PM COT

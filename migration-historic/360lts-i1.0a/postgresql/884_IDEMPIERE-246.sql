@@ -40,14 +40,14 @@ INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTran
 
 -- Aug 21, 2012 12:35:10 PM COT
 -- IDEMPIERE-246 Integrate Manufacturing Light
-INSERT INTO AD_Field (IsEncrypted,AD_Tab_ID,DisplayLength,IsDisplayed,IsSameLine,IsHeading,AD_Column_ID,IsFieldOnly,IsCentrallyMaintained,AD_Field_ID,IsReadOnly,Help,EntityType,Description,Name,UpdatedBy,AD_Org_ID,IsActive,Created,AD_Client_ID,CreatedBy,Updated) VALUES ('N',317,22,'Y','N','N',61999,'N','Y',200291,'N','A search key allows you a fast method of finding a particular record.
+/*INSERT INTO AD_Field (IsEncrypted,AD_Tab_ID,DisplayLength,IsDisplayed,IsSameLine,IsHeading,AD_Column_ID,IsFieldOnly,IsCentrallyMaintained,AD_Field_ID,IsReadOnly,Help,EntityType,Description,Name,UpdatedBy,AD_Org_ID,IsActive,Created,AD_Client_ID,CreatedBy,Updated) VALUES ('N',317,22,'Y','N','N',61999,'N','Y',200291,'N','A search key allows you a fast method of finding a particular record.
 If you leave the search key empty, the system automatically creates a numeric number.  The document sequence used for this fallback number is defined in the "Maintain Sequence" window with the name "DocumentNo_<TableName>", where TableName is the actual name of the table (e.g. C_Order).','U','Search key for the record in the format required - must be unique','Search Key',100,0,'Y',TO_TIMESTAMP('2012-08-21 12:35:09','YYYY-MM-DD HH24:MI:SS'),0,100,TO_TIMESTAMP('2012-08-21 12:35:09','YYYY-MM-DD HH24:MI:SS'))
 ;
 
 -- Aug 21, 2012 12:35:10 PM COT
 -- IDEMPIERE-246 Integrate Manufacturing Light
 INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Field_ID, t.Help,t.Description,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=200291 AND NOT EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Field_ID=t.AD_Field_ID)
-;
+;*/
 
 -- Aug 21, 2012 12:35:10 PM COT
 -- IDEMPIERE-246 Integrate Manufacturing Light

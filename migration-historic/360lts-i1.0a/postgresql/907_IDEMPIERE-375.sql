@@ -25,7 +25,7 @@ UPDATE AD_Column SET EntityType='D',Updated=TO_TIMESTAMP('2012-09-10 17:10:45','
 
 -- Sep 10, 2012 5:12:01 PM SGT
 -- IDEMPIERE-375 Implement Forgot my Password
-ALTER TABLE AD_User ADD COLUMN IsExpired CHAR(1) DEFAULT 'N' CHECK (IsExpired IN ('Y','N')) NOT NULL
+-- ALTER TABLE AD_User ADD COLUMN IsExpired CHAR(1) DEFAULT 'N' CHECK (IsExpired IN ('Y','N')) NOT NULL
 ;
 
 -- Sep 10, 2012 5:12:30 PM SGT

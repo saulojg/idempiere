@@ -30,7 +30,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Jun 14, 2010 2:53:29 PM CEST
 -- FR 3015882 - Copy process for product
-ALTER TABLE M_Product ADD COLUMN CopyFrom CHAR(1) DEFAULT NULL 
+-- ALTER TABLE M_Product ADD COLUMN CopyFrom CHAR(1) DEFAULT NULL 
 ;
 
 -- Jun 14, 2010 2:58:52 PM CEST

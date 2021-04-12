@@ -1775,7 +1775,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 ;
 
 -- Dec 8, 2010 9:46:59 PM COT
-ALTER TABLE C_Order ADD COLUMN C_CashPlanLine_ID NUMERIC(10) DEFAULT NULL 
+-- ALTER TABLE C_Order ADD COLUMN C_CashPlanLine_ID NUMERIC(10) DEFAULT NULL 
 ;
 
 -- Dec 8, 2010 9:48:11 PM COT

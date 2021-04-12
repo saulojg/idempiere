@@ -20,7 +20,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Oct 15, 2012 6:22:45 PM IST
 -- IDEMPIERE-389 Adding server name on AD_Session
-ALTER TABLE AD_Session ADD COLUMN ServerName VARCHAR(80) DEFAULT NULL 
+-- ALTER TABLE AD_Session ADD COLUMN ServerName VARCHAR(80) DEFAULT NULL 
 ;
 
 SELECT register_migration_script('934_IDEMPIERE-389.sql') FROM dual

@@ -40126,7 +40126,7 @@ INSERT INTO t_alter_column values('a_asset','M_Product_ID','NUMERIC(10)',null,nu
 
 -- Jun 14, 2012 3:50:20 PM WIT
 -- I forgot to set the DICTIONARY_ID_COMMENTS System Configurator
-INSERT INTO t_alter_column values('a_asset','M_Product_ID',null,'NOT NULL',null)
+-- INSERT INTO t_alter_column values('a_asset','M_Product_ID',null,'NOT NULL',null)
 ;
 
 -- Jun 14, 2012 3:51:15 PM WIT

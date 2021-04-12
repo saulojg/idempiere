@@ -66,7 +66,7 @@ UPDATE AD_Column SET DefaultValue='Y',Updated=TO_TIMESTAMP('2012-09-05 14:26:43'
 ;
 
 -- Sep 11, 2012 6:56:24 PM COT
-ALTER TABLE AD_Role ADD COLUMN IsMasterRole CHAR(1) DEFAULT 'N' CHECK (IsMasterRole IN ('Y','N')) NOT NULL
+-- ALTER TABLE AD_Role ADD COLUMN IsMasterRole CHAR(1) DEFAULT 'N' CHECK (IsMasterRole IN ('Y','N')) NOT NULL
 ;
 
 -- Sep 11, 2012 6:56:46 PM COT

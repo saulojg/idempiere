@@ -30,7 +30,7 @@ INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTran
 
 -- Oct 19, 2012 2:09:37 PM MYT
 -- IDEMPIERE-234 Configure Toolbar
-ALTER TABLE AD_Column ADD COLUMN IsToolbarButton CHAR(1) DEFAULT 'Y' CHECK (IsToolbarButton IN ('Y','N')) NOT NULL
+-- ALTER TABLE AD_Column ADD COLUMN IsToolbarButton CHAR(1) DEFAULT 'Y' CHECK (IsToolbarButton IN ('Y','N')) NOT NULL
 ;
 
 UPDATE AD_Column SET IsToolbarButton='N' WHERE AD_Reference_ID != 28;

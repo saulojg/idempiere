@@ -438,10 +438,10 @@ INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,60388,54482,0,10,101,'AD_Column_UU',TO_TIMESTAMP('2011-03-29 10:41:15','YYYY-MM-DD HH24:MI:SS'),100,'D',36,'Y','N','N','N','N','N','N','N','N','Y','AD_Column_UU',TO_TIMESTAMP('2011-03-29 10:41:15','YYYY-MM-DD HH24:MI:SS'),100,1.00)
 ;
 
-ALTER TABLE AD_Column ADD COLUMN AD_Column_UU VARCHAR(36) DEFAULT NULL 
+-- ALTER TABLE AD_Column ADD COLUMN AD_Column_UU VARCHAR(36) DEFAULT NULL 
 ;
 
-CREATE UNIQUE INDEX AD_Column_UU_idx ON ad_column(AD_Column_UU)
+-- CREATE UNIQUE INDEX AD_Column_UU_idx ON ad_column(AD_Column_UU)
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,54483,0,'AD_Column_Access_UU',TO_TIMESTAMP('2011-03-29 10:41:17','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','AD_Column_Access_UU','AD_Column_Access_UU',TO_TIMESTAMP('2011-03-29 10:41:17','YYYY-MM-DD HH24:MI:SS'),100)
@@ -522,10 +522,10 @@ INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,60395,54489,0,10,276,'AD_Element_UU',TO_TIMESTAMP('2011-03-29 10:41:28','YYYY-MM-DD HH24:MI:SS'),100,'D',36,'Y','N','N','N','N','N','N','N','N','Y','AD_Element_UU',TO_TIMESTAMP('2011-03-29 10:41:28','YYYY-MM-DD HH24:MI:SS'),100,1.00)
 ;
 
-ALTER TABLE AD_Element ADD COLUMN AD_Element_UU VARCHAR(36) DEFAULT NULL 
+-- ALTER TABLE AD_Element ADD COLUMN AD_Element_UU VARCHAR(36) DEFAULT NULL 
 ;
 
-CREATE UNIQUE INDEX AD_Element_UU_idx ON ad_element(AD_Element_UU)
+-- CREATE UNIQUE INDEX AD_Element_UU_idx ON ad_element(AD_Element_UU)
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,54490,0,'AD_Element_Trl_UU',TO_TIMESTAMP('2011-03-29 10:41:29','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','AD_Element_Trl_UU','AD_Element_Trl_UU',TO_TIMESTAMP('2011-03-29 10:41:29','YYYY-MM-DD HH24:MI:SS'),100)
@@ -786,10 +786,10 @@ INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,60417,54511,0,10,53147,'AD_HouseKeeping_UU',TO_TIMESTAMP('2011-03-29 10:42:09','YYYY-MM-DD HH24:MI:SS'),100,'D',36,'Y','N','N','N','N','N','N','N','N','Y','AD_HouseKeeping_UU',TO_TIMESTAMP('2011-03-29 10:42:09','YYYY-MM-DD HH24:MI:SS'),100,1.00)
 ;
 
-ALTER TABLE AD_HouseKeeping ADD COLUMN AD_HouseKeeping_UU VARCHAR(36) DEFAULT NULL 
+-- ALTER TABLE AD_HouseKeeping ADD COLUMN AD_HouseKeeping_UU VARCHAR(36) DEFAULT NULL 
 ;
 
-CREATE UNIQUE INDEX AD_HouseKeeping_UU_idx ON ad_housekeeping(AD_HouseKeeping_UU)
+-- CREATE UNIQUE INDEX AD_HouseKeeping_UU_idx ON ad_housekeeping(AD_HouseKeeping_UU)
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,54512,0,'AD_Image_UU',TO_TIMESTAMP('2011-03-29 10:42:13','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','AD_Image_UU','AD_Image_UU',TO_TIMESTAMP('2011-03-29 10:42:13','YYYY-MM-DD HH24:MI:SS'),100)
@@ -1470,10 +1470,10 @@ INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,60474,54568,0,10,102,'AD_Reference_UU',TO_TIMESTAMP('2011-03-29 10:43:49','YYYY-MM-DD HH24:MI:SS'),100,'D',36,'Y','N','N','N','N','N','N','N','N','Y','AD_Reference_UU',TO_TIMESTAMP('2011-03-29 10:43:49','YYYY-MM-DD HH24:MI:SS'),100,1.00)
 ;
 
-ALTER TABLE AD_Reference ADD COLUMN AD_Reference_UU VARCHAR(36) DEFAULT NULL 
+-- ALTER TABLE AD_Reference ADD COLUMN AD_Reference_UU VARCHAR(36) DEFAULT NULL 
 ;
 
-CREATE UNIQUE INDEX AD_Reference_UU_idx ON ad_reference(AD_Reference_UU)
+-- CREATE UNIQUE INDEX AD_Reference_UU_idx ON ad_reference(AD_Reference_UU)
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,54569,0,'AD_Reference_Trl_UU',TO_TIMESTAMP('2011-03-29 10:43:50','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','AD_Reference_Trl_UU','AD_Reference_Trl_UU',TO_TIMESTAMP('2011-03-29 10:43:50','YYYY-MM-DD HH24:MI:SS'),100)
@@ -1662,10 +1662,10 @@ INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,60490,54584,0,10,53222,'AD_Role_Included_UU',TO_TIMESTAMP('2011-03-29 10:44:21','YYYY-MM-DD HH24:MI:SS'),100,'D',36,'Y','N','N','N','N','N','N','N','N','Y','AD_Role_Included_UU',TO_TIMESTAMP('2011-03-29 10:44:21','YYYY-MM-DD HH24:MI:SS'),100,1.00)
 ;
 
-ALTER TABLE AD_Role_Included ADD COLUMN AD_Role_Included_UU VARCHAR(36) DEFAULT NULL 
+-- ALTER TABLE AD_Role_Included ADD COLUMN AD_Role_Included_UU VARCHAR(36) DEFAULT NULL 
 ;
 
-CREATE UNIQUE INDEX AD_Role_Included_UU_idx ON ad_role_included(AD_Role_Included_UU)
+-- CREATE UNIQUE INDEX AD_Role_Included_UU_idx ON ad_role_included(AD_Role_Included_UU)
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,54585,0,'AD_Role_OrgAccess_UU',TO_TIMESTAMP('2011-03-29 10:44:22','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','AD_Role_OrgAccess_UU','AD_Role_OrgAccess_UU',TO_TIMESTAMP('2011-03-29 10:44:22','YYYY-MM-DD HH24:MI:SS'),100)
@@ -1842,10 +1842,10 @@ INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,60505,54599,0,10,100,'AD_Table_UU',TO_TIMESTAMP('2011-03-29 10:44:50','YYYY-MM-DD HH24:MI:SS'),100,'D',36,'Y','N','N','N','N','N','N','N','N','Y','AD_Table_UU',TO_TIMESTAMP('2011-03-29 10:44:50','YYYY-MM-DD HH24:MI:SS'),100,1.00)
 ;
 
-ALTER TABLE AD_Table ADD COLUMN AD_Table_UU VARCHAR(36) DEFAULT NULL 
+-- ALTER TABLE AD_Table ADD COLUMN AD_Table_UU VARCHAR(36) DEFAULT NULL 
 ;
 
-CREATE UNIQUE INDEX AD_Table_UU_idx ON ad_table(AD_Table_UU)
+-- CREATE UNIQUE INDEX AD_Table_UU_idx ON ad_table(AD_Table_UU)
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,54600,0,'AD_Table_Access_UU',TO_TIMESTAMP('2011-03-29 10:44:51','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','AD_Table_Access_UU','AD_Table_Access_UU',TO_TIMESTAMP('2011-03-29 10:44:51','YYYY-MM-DD HH24:MI:SS'),100)
@@ -2394,10 +2394,10 @@ INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,60551,54645,0,10,105,'AD_Window_UU',TO_TIMESTAMP('2011-03-29 10:46:22','YYYY-MM-DD HH24:MI:SS'),100,'D',36,'Y','N','N','N','N','N','N','N','N','Y','AD_Window_UU',TO_TIMESTAMP('2011-03-29 10:46:22','YYYY-MM-DD HH24:MI:SS'),100,1.00)
 ;
 
-ALTER TABLE AD_Window ADD COLUMN AD_Window_UU VARCHAR(36) DEFAULT NULL 
+-- ALTER TABLE AD_Window ADD COLUMN AD_Window_UU VARCHAR(36) DEFAULT NULL 
 ;
 
-CREATE UNIQUE INDEX AD_Window_UU_idx ON ad_window(AD_Window_UU)
+-- CREATE UNIQUE INDEX AD_Window_UU_idx ON ad_window(AD_Window_UU)
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,54646,0,'AD_Window_Access_UU',TO_TIMESTAMP('2011-03-29 10:46:24','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','AD_Window_Access_UU','AD_Window_Access_UU',TO_TIMESTAMP('2011-03-29 10:46:24','YYYY-MM-DD HH24:MI:SS'),100)
@@ -7350,10 +7350,10 @@ INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,60964,55058,0,10,50010,'PA_DashboardContent_UU',TO_TIMESTAMP('2011-03-29 10:58:27','YYYY-MM-DD HH24:MI:SS'),100,'D',36,'Y','N','N','N','N','N','N','N','N','Y','PA_DashboardContent_UU',TO_TIMESTAMP('2011-03-29 10:58:27','YYYY-MM-DD HH24:MI:SS'),100,1.00)
 ;
 
-ALTER TABLE PA_DashboardContent ADD COLUMN PA_DashboardContent_UU VARCHAR(36) DEFAULT NULL 
+-- ALTER TABLE PA_DashboardContent ADD COLUMN PA_DashboardContent_UU VARCHAR(36) DEFAULT NULL 
 ;
 
-CREATE UNIQUE INDEX PA_DashboardContent_UU_idx ON pa_dashboardcontent(PA_DashboardContent_UU)
+-- CREATE UNIQUE INDEX PA_DashboardContent_UU_idx ON pa_dashboardcontent(PA_DashboardContent_UU)
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,55059,0,'PA_DashboardContent_Trl_UU',TO_TIMESTAMP('2011-03-29 10:58:29','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','PA_DashboardContent_Trl_UU','PA_DashboardContent_Trl_UU',TO_TIMESTAMP('2011-03-29 10:58:29','YYYY-MM-DD HH24:MI:SS'),100)

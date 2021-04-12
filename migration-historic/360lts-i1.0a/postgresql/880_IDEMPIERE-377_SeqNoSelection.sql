@@ -50,7 +50,7 @@ UPDATE AD_Field SET Name='Selection Column Sequence', Description='Selection Col
 
 -- Aug 20, 2012 11:18:28 PM IST
 -- Add search sequence support for search dialog
-ALTER TABLE AD_Column ADD COLUMN SeqNoSelection NUMERIC(10) DEFAULT NULL 
+-- ALTER TABLE AD_Column ADD COLUMN SeqNoSelection NUMERIC(10) DEFAULT NULL 
 ;
 
 -- Aug 20, 2012 11:19:29 PM IST

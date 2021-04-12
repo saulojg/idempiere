@@ -2134,7 +2134,7 @@ INSERT INTO t_alter_column values('ad_alertprocessor','AD_Schedule_ID','NUMERIC(
 
 -- Sep 28, 2012 6:34:33 PM COT
 -- IDEMPIERE-391 Scheduler improvements
-INSERT INTO t_alter_column values('ad_alertprocessor','AD_Schedule_ID',null,'NOT NULL',null)
+INSERT INTO t_alter_column values('ad_alertprocessor','AD_Schedule_ID',null,null,null)
 ;
 
 -- Sep 28, 2012 6:34:50 PM COT
@@ -2169,7 +2169,7 @@ INSERT INTO t_alter_column values('ad_workflowprocessor','AD_Schedule_ID','NUMER
 
 -- Sep 28, 2012 6:36:16 PM COT
 -- IDEMPIERE-391 Scheduler improvements
-INSERT INTO t_alter_column values('ad_workflowprocessor','AD_Schedule_ID',null,'NOT NULL',null)
+INSERT INTO t_alter_column values('ad_workflowprocessor','AD_Schedule_ID',null,null,null)
 ;
 
 -- Sep 28, 2012 6:37:32 PM COT
@@ -2194,7 +2194,7 @@ INSERT INTO t_alter_column values('c_acctprocessor','AD_Schedule_ID','NUMERIC(10
 
 -- Sep 28, 2012 6:38:37 PM COT
 -- IDEMPIERE-391 Scheduler improvements
-INSERT INTO t_alter_column values('c_acctprocessor','AD_Schedule_ID',null,'NOT NULL',null)
+INSERT INTO t_alter_column values('c_acctprocessor','AD_Schedule_ID',null,null,null)
 ;
 
 -- Sep 28, 2012 6:39:50 PM COT
@@ -2209,7 +2209,7 @@ INSERT INTO t_alter_column values('r_requestprocessor','AD_Schedule_ID','NUMERIC
 
 -- Sep 28, 2012 6:39:52 PM COT
 -- IDEMPIERE-391 Scheduler improvements
-INSERT INTO t_alter_column values('r_requestprocessor','AD_Schedule_ID',null,'NOT NULL',null)
+INSERT INTO t_alter_column values('r_requestprocessor','AD_Schedule_ID',null,null,null)
 ;
 
 -- Sep 28, 2012 6:47:43 PM COT
@@ -2245,40 +2245,4 @@ UPDATE AD_Process_Para SET ColumnName='CronPattern', Name='Cron Scheduling Patte
 UPDATE AD_Field SET Name='Cron Scheduling Pattern', Description='Cron pattern to define when the process should be invoked.', Help='Cron pattern to define when the process should be invoked. See http://www.sauronsoftware.it/projects/cron4j/api/it/sauronsoftware/cron4j/SchedulingPattern.html' WHERE AD_Column_ID IN (SELECT AD_Column_ID FROM AD_Column WHERE AD_Element_ID=54124) AND IsCentrallyMaintained='Y'
 ;
 
-ALTER TABLE C_AcctProcessor ALTER FrequencyType DROP NOT NULL
-;
-
-ALTER TABLE C_AcctProcessor ALTER Frequency DROP NOT NULL
-;
-
-ALTER TABLE AD_AlertProcessor ALTER FrequencyType DROP NOT NULL
-;
-
-ALTER TABLE AD_AlertProcessor ALTER Frequency DROP NOT NULL
-;
-
-ALTER TABLE R_RequestProcessor ALTER FrequencyType DROP NOT NULL
-;
-
-ALTER TABLE R_RequestProcessor ALTER Frequency DROP NOT NULL
-;
-
-ALTER TABLE AD_Scheduler ALTER FrequencyType DROP NOT NULL
-;
-
-ALTER TABLE AD_Scheduler ALTER Frequency DROP NOT NULL
-;
-
-ALTER TABLE AD_WorkflowProcessor ALTER FrequencyType DROP NOT NULL
-;
-
-ALTER TABLE AD_WorkflowProcessor ALTER Frequency DROP NOT NULL
-;
-
--- Oct 2, 2012 10:44:20 PM COT
-UPDATE AD_Field SET IsDisplayed='N',Updated=TO_TIMESTAMP('2012-10-02 22:44:20','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Field_ID=9434
-;
-
-SELECT register_migration_script('912_IDEMPIERE-391.sql') FROM dual
-;
 

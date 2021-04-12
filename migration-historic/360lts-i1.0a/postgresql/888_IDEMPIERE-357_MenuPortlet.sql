@@ -428,7 +428,7 @@ UPDATE AD_Column SET IsMandatory='Y',Updated=TO_TIMESTAMP('2012-08-22 17:26:23',
 
 -- Aug 22, 2012 5:26:53 PM SGT
 -- Move the Menu to be a Portlet
-CREATE TABLE PA_DashboardPreference (AD_Client_ID NUMERIC(10) NOT NULL, AD_Org_ID NUMERIC(10) NOT NULL, AD_Role_ID NUMERIC(10) DEFAULT 0 NOT NULL, AD_User_ID NUMERIC(10) DEFAULT 0 NOT NULL, ColumnNo NUMERIC(10) DEFAULT 1, Created TIMESTAMP NOT NULL, CreatedBy NUMERIC(10) NOT NULL, IsActive CHAR(1) CHECK (IsActive IN ('Y','N')) NOT NULL, IsCollapsedByDefault CHAR(1) DEFAULT 'N' CHECK (IsCollapsedByDefault IN ('Y','N')) NOT NULL, IsShowInDashboard CHAR(1) DEFAULT 'Y' CHECK (IsShowInDashboard IN ('Y','N')) NOT NULL, Line NUMERIC DEFAULT NULL , PA_DashboardContent_ID NUMERIC(10) NOT NULL, PA_DashboardPreference_ID NUMERIC(10) NOT NULL, Updated TIMESTAMP NOT NULL, UpdatedBy NUMERIC(10) NOT NULL, CONSTRAINT PA_DashboardPreference_Key PRIMARY KEY (PA_DashboardPreference_ID))
+-- CREATE TABLE PA_DashboardPreference (AD_Client_ID NUMERIC(10) NOT NULL, AD_Org_ID NUMERIC(10) NOT NULL, AD_Role_ID NUMERIC(10) DEFAULT 0 NOT NULL, AD_User_ID NUMERIC(10) DEFAULT 0 NOT NULL, ColumnNo NUMERIC(10) DEFAULT 1, Created TIMESTAMP NOT NULL, CreatedBy NUMERIC(10) NOT NULL, IsActive CHAR(1) CHECK (IsActive IN ('Y','N')) NOT NULL, IsCollapsedByDefault CHAR(1) DEFAULT 'N' CHECK (IsCollapsedByDefault IN ('Y','N')) NOT NULL, IsShowInDashboard CHAR(1) DEFAULT 'Y' CHECK (IsShowInDashboard IN ('Y','N')) NOT NULL, Line NUMERIC DEFAULT NULL , PA_DashboardContent_ID NUMERIC(10) NOT NULL, PA_DashboardPreference_ID NUMERIC(10) NOT NULL, Updated TIMESTAMP NOT NULL, UpdatedBy NUMERIC(10) NOT NULL, CONSTRAINT PA_DashboardPreference_Key PRIMARY KEY (PA_DashboardPreference_ID))
 ;
 
 -- Aug 22, 2012 5:27:18 PM SGT

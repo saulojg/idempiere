@@ -25,7 +25,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Aug 7, 2012 5:28:45 PM SGT
 -- Move the Menu to be a Portlet
-ALTER TABLE PA_DashboardContent ADD COLUMN AD_User_ID NUMERIC(10) DEFAULT NULL 
+-- ALTER TABLE PA_DashboardContent ADD COLUMN AD_User_ID NUMERIC(10) DEFAULT NULL 
 ;
 
 -- Aug 7, 2012 5:29:23 PM SGT
@@ -40,7 +40,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Aug 7, 2012 5:29:26 PM SGT
 -- Move the Menu to be a Portlet
-ALTER TABLE PA_DashboardContent ADD COLUMN AD_Role_ID NUMERIC(10) DEFAULT NULL 
+-- ALTER TABLE PA_DashboardContent ADD COLUMN AD_Role_ID NUMERIC(10) DEFAULT NULL 
 ;
 
 -- Aug 7, 2012 5:29:50 PM SGT
