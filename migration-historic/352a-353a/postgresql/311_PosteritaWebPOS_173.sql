@@ -1243,7 +1243,7 @@ INSERT INTO ad_column(ad_column_id, ad_client_id, ad_org_id, isactive, created, 
 -- 1.7.3/postgresql/006_PackSize_MProduct.sql
 -----------------------------
 -- The Units Per Pack indicates the no of units of a product packed together.
-ALTER TABLE M_Product ADD COLUMN UnitsPerPack numeric(10,0) not null default 1;
+-- ALTER TABLE M_Product ADD COLUMN UnitsPerPack numeric(10,0) not null default 1;
 
 -- AD Element --
 INSERT INTO ad_element(ad_element_id, ad_client_id, ad_org_id, isactive, created, createdby, updated, updatedby, columnname, entitytype, name, printname, description, help, po_name, po_printname, po_description, po_help)
@@ -1306,18 +1306,18 @@ INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Description,Help,Name, IsTran
 
 -- Aug 26, 2008 11:51:40 AM MUT
 -- Default comment for updating dictionary
-INSERT INTO AD_Field (AD_Client_ID,AD_Column_ID,AD_Field_ID,AD_Org_ID,AD_Tab_ID,Created,CreatedBy,DisplayLength,EntityType,IsActive,IsCentrallyMaintained,IsDisplayed,IsEncrypted,IsFieldOnly,IsHeading,IsReadOnly,IsSameLine,Name,Updated,UpdatedBy) 
-VALUES (0,13705,52053,0,330,now(),100,10,'D','Y','Y','Y','N','N','N','N','N','Referenced Payment',now(),100)
+-- INSERT INTO AD_Field (AD_Client_ID,AD_Column_ID,AD_Field_ID,AD_Org_ID,AD_Tab_ID,Created,CreatedBy,DisplayLength,EntityType,IsActive,IsCentrallyMaintained,IsDisplayed,IsEncrypted,IsFieldOnly,IsHeading,IsReadOnly,IsSameLine,Name,Updated,UpdatedBy) 
+--VALUES (0,13705,52053,0,330,now(),100,10,'D','Y','Y','Y','N','N','N','N','N','Referenced Payment',now(),100)
 ;
 
 -- Aug 26, 2008 11:51:40 AM MUT
 -- Default comment for updating dictionary
-INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Description,Help,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Field_ID, t.Description,t.Help,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=52053 AND EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language!=l.AD_Language OR tt.AD_Field_ID!=t.AD_Field_ID)
+-- INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Description,Help,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Field_ID, t.Description,t.Help,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=52053 AND EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language!=l.AD_Language OR tt.AD_Field_ID!=t.AD_Field_ID)
 ;
 
 -- Aug 26, 2008 11:52:11 AM MUT
 -- Default comment for updating dictionary
-UPDATE AD_Field SET SeqNo=0,IsDisplayed='N' WHERE AD_Field_ID=52053
+-- UPDATE AD_Field SET SeqNo=0,IsDisplayed='N' WHERE AD_Field_ID=52053
 ;
 
 -- Aug 26, 2008 11:52:11 AM MUT

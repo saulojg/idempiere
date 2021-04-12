@@ -10,7 +10,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- 2008-nov-11 09:02:26 CET
 -- [ 2257170 ] Implement shipper and freight category functionality
-alter table c_order add m_freightcategory_id numeric(10) default null;
+-- alter table c_order add m_freightcategory_id numeric(10) default null;
 ALTER TABLE c_order ADD FOREIGN KEY (m_freightcategory_id) REFERENCES m_freightcategory (m_freightcategory_id)
    ON UPDATE NO ACTION ON DELETE NO ACTION
    DEFERRABLE INITIALLY DEFERRED;

@@ -20,7 +20,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Dec 10, 2008 3:05:47 PM SGT
 -- Allow user to control the dashboard panel to be static or collapsible
-ALTER TABLE PA_DashboardContent ADD COLUMN IsCollapsible CHAR(1) DEFAULT 'Y' CHECK (IsCollapsible IN ('Y','N')) NOT NULL
+-- ALTER TABLE PA_DashboardContent ADD COLUMN IsCollapsible CHAR(1) DEFAULT 'Y' CHECK (IsCollapsible IN ('Y','N')) NOT NULL
 ;
 
 -- Dec 10, 2008 3:06:04 PM SGT

@@ -40,15 +40,15 @@ INSERT INTO AD_TreeNodeMM (AD_Client_ID,AD_Org_ID, IsActive,Created,CreatedBy,Up
 ;
 
 -- Aug 1, 2008 2:23:09 PM COT
-INSERT INTO AD_Reference (AD_Client_ID,AD_Org_ID,AD_Reference_ID,Created,CreatedBy,EntityType,IsActive,IsOrderByValue,Name,Updated,UpdatedBy,ValidationType) VALUES (0,0,53283,TO_TIMESTAMP('2008-08-01 14:23:08','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','N','C_BankAccount',TO_TIMESTAMP('2008-08-01 14:23:08','YYYY-MM-DD HH24:MI:SS'),100,'T')
+-- INSERT INTO AD_Reference (AD_Client_ID,AD_Org_ID,AD_Reference_ID,Created,CreatedBy,EntityType,IsActive,IsOrderByValue,Name,Updated,UpdatedBy,ValidationType) VALUES (0,0,53283,TO_TIMESTAMP('2008-08-01 14:23:08','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','N','C_BankAccount',TO_TIMESTAMP('2008-08-01 14:23:08','YYYY-MM-DD HH24:MI:SS'),100,'T')
 ;
 
 -- Aug 1, 2008 2:23:09 PM COT
-INSERT INTO AD_Reference_Trl (AD_Language,AD_Reference_ID, Description,Help,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Reference_ID, t.Description,t.Help,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Reference t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Reference_ID=53283 AND EXISTS (SELECT * FROM AD_Reference_Trl tt WHERE tt.AD_Language!=l.AD_Language OR tt.AD_Reference_ID!=t.AD_Reference_ID)
+-- INSERT INTO AD_Reference_Trl (AD_Language,AD_Reference_ID, Description,Help,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Reference_ID, t.Description,t.Help,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Reference t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Reference_ID=53283 AND EXISTS (SELECT * FROM AD_Reference_Trl tt WHERE tt.AD_Language!=l.AD_Language OR tt.AD_Reference_ID!=t.AD_Reference_ID)
 ;
 
 -- Aug 1, 2008 2:23:49 PM COT
-INSERT INTO AD_Ref_Table (AD_Client_ID,AD_Display,AD_Key,AD_Org_ID,AD_Reference_ID,AD_Table_ID,Created,CreatedBy,EntityType,IsActive,IsValueDisplayed,Updated,UpdatedBy) VALUES (0,3074,3077,0,53283,297,TO_TIMESTAMP('2008-08-01 14:23:49','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','N',TO_TIMESTAMP('2008-08-01 14:23:49','YYYY-MM-DD HH24:MI:SS'),100)
+-- INSERT INTO AD_Ref_Table (AD_Client_ID,AD_Display,AD_Key,AD_Org_ID,AD_Reference_ID,AD_Table_ID,Created,CreatedBy,EntityType,IsActive,IsValueDisplayed,Updated,UpdatedBy) VALUES (0,3074,3077,0,53283,297,TO_TIMESTAMP('2008-08-01 14:23:49','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','N',TO_TIMESTAMP('2008-08-01 14:23:49','YYYY-MM-DD HH24:MI:SS'),100)
 ;
 
 -- Aug 1, 2008 2:24:43 PM COT
@@ -210,7 +210,7 @@ UPDATE AD_Process_Para_Trl SET IsTranslated='Y',Name='Nombre',Updated=TO_TIMESTA
 set client_encoding='LATIN1';
 
 -- Aug 1, 2008 2:34:24 PM COT
-UPDATE AD_Process_Para_Trl SET IsTranslated='Y',Name='Descripción',Updated=TO_TIMESTAMP('2008-08-01 14:34:24','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Process_Para_ID=53237 AND AD_Language LIKE 'es_%'
+UPDATE AD_Process_Para_Trl SET IsTranslated='Y',Name='Descripci\F3n',Updated=TO_TIMESTAMP('2008-08-01 14:34:24','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Process_Para_ID=53237 AND AD_Language LIKE 'es_%'
 ;
 
 -- Aug 1, 2008 2:34:31 PM COT

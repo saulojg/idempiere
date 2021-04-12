@@ -252,12 +252,12 @@ DELETE FROM AD_Process_Para WHERE AD_Process_Para_ID=53194
 
 -- Jul 8, 2008 7:59:52 PM CDT
 -- Forecast
-DELETE FROM AD_Element_Trl WHERE AD_Element_ID=53653
+-- DELETE FROM AD_Element_Trl WHERE AD_Element_ID=53653
 ;
 
 -- Jul 8, 2008 7:59:52 PM CDT
 -- Forecast
-DELETE FROM AD_Element WHERE AD_Element_ID=53653
+-- DELETE FROM AD_Element WHERE AD_Element_ID=53653
 ;
 
 -- Jul 8, 2008 7:59:46 PM CDT

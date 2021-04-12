@@ -10,7 +10,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Dec 8, 2008 9:46:03 PM COT
 -- [ adempiere-Feature Requests-2408411 ] Add AD_Workflow.IsBetaFunctionality
-ALTER TABLE AD_Workflow ADD COLUMN IsBetaFunctionality CHAR(1) DEFAULT 'N' CHECK (IsBetaFunctionality IN ('Y','N')) NOT NULL
+-- ALTER TABLE AD_Workflow ADD COLUMN IsBetaFunctionality CHAR(1) DEFAULT 'N' CHECK (IsBetaFunctionality IN ('Y','N')) NOT NULL
 ;
 
 -- Dec 8, 2008 9:47:56 PM COT

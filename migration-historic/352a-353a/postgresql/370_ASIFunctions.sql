@@ -581,8 +581,10 @@ END;
 $BODY$
   LANGUAGE 'plpgsql' ;
 
-
-
+/* Orbital Software */
+DROP VIEW adempiere.rv_warehouseprice;
+DROP VIEW adempiere.rv_pp_order_bomline;
+DROP FUNCTION adempiere.bomqtyonhand(numeric, numeric, numeric);
 
 /*
  *This file is part of Adempiere ERP Bazaar

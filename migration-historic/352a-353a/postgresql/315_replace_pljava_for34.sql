@@ -1,16 +1,16 @@
-DROP FUNCTION adempiereproperties();
+DROP FUNCTION IF EXISTS adempiereproperties();
 
-DROP FUNCTION adempiereproperty(p_key character varying);
+DROP FUNCTION IF EXISTS adempiereproperty(p_key character varying);
 
-DROP FUNCTION adempiereversion();
+DROP FUNCTION IF EXISTS adempiereversion();
 
-DROP FUNCTION bomqtyavailable(m_product_id numeric, m_attributesetinstance_id numeric, m_warehouse_id numeric, m_locator_id numeric);
+DROP FUNCTION IF EXISTS bomqtyavailable(m_product_id numeric, m_attributesetinstance_id numeric, m_warehouse_id numeric, m_locator_id numeric);
 
-DROP FUNCTION bomqtyonhand(m_product_id numeric, m_attributesetinstance_id numeric, m_warehouse_id numeric, m_locator_id numeric);
+DROP FUNCTION IF EXISTS bomqtyonhand(m_product_id numeric, m_attributesetinstance_id numeric, m_warehouse_id numeric, m_locator_id numeric);
 
-DROP FUNCTION bomqtyordered(m_product_id numeric, m_attributesetinstance_id numeric, m_warehouse_id numeric, m_locator_id numeric);
+DROP FUNCTION IF EXISTS bomqtyordered(m_product_id numeric, m_attributesetinstance_id numeric, m_warehouse_id numeric, m_locator_id numeric);
 
-DROP FUNCTION bomqtyreserved(m_product_id numeric, m_attributesetinstance_id numeric, m_warehouse_id numeric, m_locator_id numeric);
+DROP FUNCTION IF EXISTS bomqtyreserved(m_product_id numeric, m_attributesetinstance_id numeric, m_warehouse_id numeric, m_locator_id numeric);
 
 -- DROP FUNCTION documentno(p_mpc_mrp_id numeric);   -- you can enable this line for 340
 

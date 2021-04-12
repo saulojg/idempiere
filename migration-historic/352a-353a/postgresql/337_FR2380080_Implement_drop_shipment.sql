@@ -8,7 +8,7 @@ Insert into AD_Column (AD_COLUMN_ID,AD_CLIENT_ID,AD_ORG_ID,ISACTIVE,CREATED,UPDA
 
 -- 7/05/2008 11:35:44
 -- Drop shipment
-ALTER TABLE C_Order ADD DropShip_BPartner_ID NUMERIC(10)
+-- ALTER TABLE C_Order ADD DropShip_BPartner_ID NUMERIC(10)
 ;
 
 -- 7/05/2008 11:40:02
@@ -27,7 +27,7 @@ null,'N',0,'N','N',null,null,null,null,'N',53459,null,'N','N',null,null,null);
 
 -- 7/05/2008 11:41:42
 -- Drop shipment
-ALTER TABLE C_Order ADD DropShip_Location_ID NUMERIC(10)
+-- ALTER TABLE C_Order ADD DropShip_Location_ID NUMERIC(10)
 ;
 
 -- INSERTING 
@@ -43,7 +43,7 @@ COLUMNSQL,MANDATORYLOGIC,INFOFACTORYCLASS)
 
 -- 7/05/2008 11:42:43
 -- Drop shipment
-ALTER TABLE C_Order ADD DropShip_User_ID NUMERIC(10)
+-- ALTER TABLE C_Order ADD DropShip_User_ID NUMERIC(10)
 ;
 
 -- 7/05/2008 11:46:47

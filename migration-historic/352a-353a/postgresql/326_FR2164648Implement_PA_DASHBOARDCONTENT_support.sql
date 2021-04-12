@@ -5,12 +5,12 @@ UPDATE AD_Column SET DefaultValue='@#AD_Org_ID@', IsMandatory='Y',Updated=TO_TIM
 
 -- Nov 19, 2008 3:55:41 PM SGT
 -- [ 2164648 ] FR:Implement PA_DASHBOARDCONTENT support
-ALTER TABLE PA_DashboardContent ADD COLUMN ColumnNo NUMERIC(10) DEFAULT '1' 
+-- ALTER TABLE PA_DashboardContent ADD COLUMN ColumnNo NUMERIC(10) DEFAULT '1' 
 ;
 
 -- Nov 19, 2008 4:00:41 PM SGT
 -- [ 2164648 ] FR:Implement PA_DASHBOARDCONTENT support
-ALTER TABLE PA_DashboardContent ADD COLUMN ZulFilePath VARCHAR(255)
+-- ALTER TABLE PA_DashboardContent ADD COLUMN ZulFilePath VARCHAR(255)
 ;
 
 -- Nov 19, 2008 4:57:13 PM SGT
