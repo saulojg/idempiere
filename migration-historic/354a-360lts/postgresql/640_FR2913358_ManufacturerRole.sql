@@ -29,7 +29,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 -- FR [2913358] BPartner role - Manufacturer
 -- https://sourceforge.net/tracker/?func=detail&aid=2913358&group_id=176962&atid=883808
 
-ALTER TABLE C_BPartner ADD COLUMN IsManufacturer CHAR(1) DEFAULT NULL CHECK (IsManufacturer IN ('Y','N'))
+-- ALTER TABLE C_BPartner ADD COLUMN IsManufacturer CHAR(1) DEFAULT NULL CHECK (IsManufacturer IN ('Y','N'))
 ;
 
 -- Nov 29, 2009 12:21:44 AM CET

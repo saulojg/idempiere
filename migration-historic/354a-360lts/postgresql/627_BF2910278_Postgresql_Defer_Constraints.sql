@@ -1,1400 +1,1400 @@
--- drop constraints defined as non-deferred
+-- drop constraint if existss defined as non-deferred
 
-ALTER TABLE a_asset DROP CONSTRAINT aparentasset_aasset CASCADE;
+ALTER TABLE a_asset drop constraint if exists aparentasset_aasset CASCADE;
 
-ALTER TABLE a_asset DROP CONSTRAINT cbpartnersr_aasset CASCADE;
+ALTER TABLE a_asset drop constraint if exists cbpartnersr_aasset CASCADE;
 
-ALTER TABLE a_asset DROP CONSTRAINT cproject_aasset CASCADE;
+ALTER TABLE a_asset drop constraint if exists cproject_aasset CASCADE;
 
-ALTER TABLE a_asset DROP CONSTRAINT leasebpartner_aasset CASCADE;
+ALTER TABLE a_asset drop constraint if exists leasebpartner_aasset CASCADE;
 
-ALTER TABLE a_asset DROP CONSTRAINT minoutline_aasset CASCADE;
+ALTER TABLE a_asset drop constraint if exists minoutline_aasset CASCADE;
 
-ALTER TABLE a_asset_acct DROP CONSTRAINT aassetspread_aassetacct CASCADE;
+ALTER TABLE a_asset_acct drop constraint if exists aassetspread_aassetacct CASCADE;
 
-ALTER TABLE a_asset_acct DROP CONSTRAINT adepreciationconv_aassetacct CASCADE;
+ALTER TABLE a_asset_acct drop constraint if exists adepreciationconv_aassetacct CASCADE;
 
-ALTER TABLE a_asset_acct DROP CONSTRAINT adepreciationmethod_aassetacct CASCADE;
+ALTER TABLE a_asset_acct drop constraint if exists adepreciationmethod_aassetacct CASCADE;
 
-ALTER TABLE a_asset_acct DROP CONSTRAINT adepreciationtableheader_aasse CASCADE;
+ALTER TABLE a_asset_acct drop constraint if exists adepreciationtableheader_aasse CASCADE;
 
-ALTER TABLE a_asset_addition DROP CONSTRAINT cinvoice_aassetaddition CASCADE;
+ALTER TABLE a_asset_addition drop constraint if exists cinvoice_aassetaddition CASCADE;
 
-ALTER TABLE a_asset_addition DROP CONSTRAINT gljournalbatch_aassetaddition CASCADE;
+ALTER TABLE a_asset_addition drop constraint if exists gljournalbatch_aassetaddition CASCADE;
 
-ALTER TABLE a_asset_change DROP CONSTRAINT adepreciationtableheader_aass2 CASCADE;
+ALTER TABLE a_asset_change drop constraint if exists adepreciationtableheader_aass2 CASCADE;
 
-ALTER TABLE a_asset_change DROP CONSTRAINT aduser_aassetchange CASCADE;
+ALTER TABLE a_asset_change drop constraint if exists aduser_aassetchange CASCADE;
 
-ALTER TABLE a_asset_change DROP CONSTRAINT aparentasset_aassetchange CASCADE;
+ALTER TABLE a_asset_change drop constraint if exists aparentasset_aassetchange CASCADE;
 
-ALTER TABLE a_asset_change DROP CONSTRAINT cacctschema_aassetchange CASCADE;
+ALTER TABLE a_asset_change drop constraint if exists cacctschema_aassetchange CASCADE;
 
-ALTER TABLE a_asset_change DROP CONSTRAINT cbpartnerlocation_aassetchange CASCADE;
+ALTER TABLE a_asset_change drop constraint if exists cbpartnerlocation_aassetchange CASCADE;
 
-ALTER TABLE a_asset_change DROP CONSTRAINT clocation_aassetchange CASCADE;
+ALTER TABLE a_asset_change drop constraint if exists clocation_aassetchange CASCADE;
 
-ALTER TABLE a_asset_disposed DROP CONSTRAINT aassettrade_aassetdisposed CASCADE;
+ALTER TABLE a_asset_disposed drop constraint if exists aassettrade_aassetdisposed CASCADE;
 
-ALTER TABLE a_asset_disposed DROP CONSTRAINT cperiod_aassetdisposed CASCADE;
+ALTER TABLE a_asset_disposed drop constraint if exists cperiod_aassetdisposed CASCADE;
 
-ALTER TABLE a_asset_group_acct DROP CONSTRAINT adepreciationtableheader_aass3 CASCADE;
+ALTER TABLE a_asset_group_acct drop constraint if exists adepreciationtableheader_aass3 CASCADE;
 
-ALTER TABLE a_asset_reval_entry DROP CONSTRAINT cacctschema_aassetrevalentry CASCADE;
+ALTER TABLE a_asset_reval_entry drop constraint if exists cacctschema_aassetrevalentry CASCADE;
 
-ALTER TABLE a_asset_reval_entry DROP CONSTRAINT ccurrency_aassetrevalentry CASCADE;
+ALTER TABLE a_asset_reval_entry drop constraint if exists ccurrency_aassetrevalentry CASCADE;
 
-ALTER TABLE a_asset_reval_entry DROP CONSTRAINT cdoctype_aassetrevalentry CASCADE;
+ALTER TABLE a_asset_reval_entry drop constraint if exists cdoctype_aassetrevalentry CASCADE;
 
-ALTER TABLE a_asset_reval_entry DROP CONSTRAINT cperiod_aassetrevalentry CASCADE;
+ALTER TABLE a_asset_reval_entry drop constraint if exists cperiod_aassetrevalentry CASCADE;
 
-ALTER TABLE a_asset_reval_entry DROP CONSTRAINT glcategory_aassetrevalentry CASCADE;
+ALTER TABLE a_asset_reval_entry drop constraint if exists glcategory_aassetrevalentry CASCADE;
 
-ALTER TABLE a_asset_split DROP CONSTRAINT cperiod_aassetsplit CASCADE;
+ALTER TABLE a_asset_split drop constraint if exists cperiod_aassetsplit CASCADE;
 
-ALTER TABLE a_asset_transfer DROP CONSTRAINT cacctschema_aassettransfer CASCADE;
+ALTER TABLE a_asset_transfer drop constraint if exists cacctschema_aassettransfer CASCADE;
 
-ALTER TABLE a_asset_transfer DROP CONSTRAINT cperiod_aassettransfer CASCADE;
+ALTER TABLE a_asset_transfer drop constraint if exists cperiod_aassettransfer CASCADE;
 
-ALTER TABLE a_depreciation_build DROP CONSTRAINT aendasset_adepreciationbuild CASCADE;
+ALTER TABLE a_depreciation_build drop constraint if exists aendasset_adepreciationbuild CASCADE;
 
-ALTER TABLE a_depreciation_build DROP CONSTRAINT astartasset_adepreciationbuild CASCADE;
+ALTER TABLE a_depreciation_build drop constraint if exists astartasset_adepreciationbuild CASCADE;
 
-ALTER TABLE a_depreciation_build DROP CONSTRAINT cperiod_adepreciationbuild CASCADE;
+ALTER TABLE a_depreciation_build drop constraint if exists cperiod_adepreciationbuild CASCADE;
 
-ALTER TABLE a_depreciation_entry DROP CONSTRAINT cacctschema_adepreciationentry CASCADE;
+ALTER TABLE a_depreciation_entry drop constraint if exists cacctschema_adepreciationentry CASCADE;
 
-ALTER TABLE a_depreciation_entry DROP CONSTRAINT ccurrency_adepreciationentry CASCADE;
+ALTER TABLE a_depreciation_entry drop constraint if exists ccurrency_adepreciationentry CASCADE;
 
-ALTER TABLE a_depreciation_entry DROP CONSTRAINT cdoctype_adepreciationentry CASCADE;
+ALTER TABLE a_depreciation_entry drop constraint if exists cdoctype_adepreciationentry CASCADE;
 
-ALTER TABLE a_depreciation_entry DROP CONSTRAINT cperiod_adepreciationentry CASCADE;
+ALTER TABLE a_depreciation_entry drop constraint if exists cperiod_adepreciationentry CASCADE;
 
-ALTER TABLE a_depreciation_entry DROP CONSTRAINT glcategory_adepreciationentry CASCADE;
+ALTER TABLE a_depreciation_entry drop constraint if exists glcategory_adepreciationentry CASCADE;
 
-ALTER TABLE a_depreciation_forecast DROP CONSTRAINT aendasset_adepreciationforecas CASCADE;
+ALTER TABLE a_depreciation_forecast drop constraint if exists aendasset_adepreciationforecas CASCADE;
 
-ALTER TABLE a_depreciation_forecast DROP CONSTRAINT astartasset_adepreciationforec CASCADE;
+ALTER TABLE a_depreciation_forecast drop constraint if exists astartasset_adepreciationforec CASCADE;
 
-ALTER TABLE ad_archive DROP CONSTRAINT cbpartner_adarchive CASCADE;
+ALTER TABLE ad_archive drop constraint if exists cbpartner_adarchive CASCADE;
 
-ALTER TABLE ad_client DROP CONSTRAINT adlangu_adclient CASCADE;
+ALTER TABLE ad_client drop constraint if exists adlangu_adclient CASCADE;
 
-ALTER TABLE ad_client DROP CONSTRAINT adreplicationstrategy_adclient CASCADE;
+ALTER TABLE ad_client drop constraint if exists adreplicationstrategy_adclient CASCADE;
 
-ALTER TABLE ad_clientinfo DROP CONSTRAINT adtreeactivity_adclientinfo CASCADE;
+ALTER TABLE ad_clientinfo drop constraint if exists adtreeactivity_adclientinfo CASCADE;
 
-ALTER TABLE ad_clientinfo DROP CONSTRAINT adtreecampaign_adclientinfo CASCADE;
+ALTER TABLE ad_clientinfo drop constraint if exists adtreecampaign_adclientinfo CASCADE;
 
-ALTER TABLE ad_clientinfo DROP CONSTRAINT cbpartnercashtrx_adclientinfo CASCADE;
+ALTER TABLE ad_clientinfo drop constraint if exists cbpartnercashtrx_adclientinfo CASCADE;
 
-ALTER TABLE ad_clientinfo DROP CONSTRAINT mproductfreight_adclientinfo CASCADE;
+ALTER TABLE ad_clientinfo drop constraint if exists mproductfreight_adclientinfo CASCADE;
 
-ALTER TABLE ad_column DROP CONSTRAINT entityt_adcolumn CASCADE;
+ALTER TABLE ad_column drop constraint if exists entityt_adcolumn CASCADE;
 
-ALTER TABLE ad_document_action_access DROP CONSTRAINT adreflist_addocumentactionacce CASCADE;
+ALTER TABLE ad_document_action_access drop constraint if exists adreflist_addocumentactionacce CASCADE;
 
-ALTER TABLE ad_document_action_access DROP CONSTRAINT adrole_addocumentactionaccess CASCADE;
+ALTER TABLE ad_document_action_access drop constraint if exists adrole_addocumentactionaccess CASCADE;
 
-ALTER TABLE ad_document_action_access DROP CONSTRAINT cdoctype_addocumentactionacces CASCADE;
+ALTER TABLE ad_document_action_access drop constraint if exists cdoctype_addocumentactionacces CASCADE;
 
-ALTER TABLE ad_element DROP CONSTRAINT entityt_adelement CASCADE;
+ALTER TABLE ad_element drop constraint if exists entityt_adelement CASCADE;
 
-ALTER TABLE ad_error DROP CONSTRAINT adlangu_aderror CASCADE;
+ALTER TABLE ad_error drop constraint if exists adlangu_aderror CASCADE;
 
-ALTER TABLE ad_field DROP CONSTRAINT adreference_adfield CASCADE;
+ALTER TABLE ad_field drop constraint if exists adreference_adfield CASCADE;
 
-ALTER TABLE ad_field DROP CONSTRAINT adreferencevalue_adfield CASCADE;
+ALTER TABLE ad_field drop constraint if exists adreferencevalue_adfield CASCADE;
 
-ALTER TABLE ad_field DROP CONSTRAINT advalrule_adfield CASCADE;
+ALTER TABLE ad_field drop constraint if exists advalrule_adfield CASCADE;
 
-ALTER TABLE ad_field DROP CONSTRAINT entityt_adfield CASCADE;
+ALTER TABLE ad_field drop constraint if exists entityt_adfield CASCADE;
 
-ALTER TABLE ad_field DROP CONSTRAINT includedtab_adfield CASCADE;
+ALTER TABLE ad_field drop constraint if exists includedtab_adfield CASCADE;
 
-ALTER TABLE ad_fieldgroup DROP CONSTRAINT entityt_adfieldgroup CASCADE;
+ALTER TABLE ad_fieldgroup drop constraint if exists entityt_adfieldgroup CASCADE;
 
-ALTER TABLE ad_form DROP CONSTRAINT entityt_adform CASCADE;
+ALTER TABLE ad_form drop constraint if exists entityt_adform CASCADE;
 
-ALTER TABLE ad_housekeeping DROP CONSTRAINT adtable_adhousekeeping CASCADE;
+ALTER TABLE ad_housekeeping drop constraint if exists adtable_adhousekeeping CASCADE;
 
-ALTER TABLE ad_image DROP CONSTRAINT entityt_adimage CASCADE;
+ALTER TABLE ad_image drop constraint if exists entityt_adimage CASCADE;
 
-ALTER TABLE ad_infocolumn DROP CONSTRAINT entityt_adinfocolumn CASCADE;
+ALTER TABLE ad_infocolumn drop constraint if exists entityt_adinfocolumn CASCADE;
 
-ALTER TABLE ad_infowindow DROP CONSTRAINT entityt_adinfowindow CASCADE;
+ALTER TABLE ad_infowindow drop constraint if exists entityt_adinfowindow CASCADE;
 
-ALTER TABLE ad_menu DROP CONSTRAINT entityt_admenu CASCADE;
+ALTER TABLE ad_menu drop constraint if exists entityt_admenu CASCADE;
 
-ALTER TABLE ad_message DROP CONSTRAINT entityt_admessage CASCADE;
+ALTER TABLE ad_message drop constraint if exists entityt_admessage CASCADE;
 
-ALTER TABLE ad_modelvalidator DROP CONSTRAINT entityt_admodelvalidator CASCADE;
+ALTER TABLE ad_modelvalidator drop constraint if exists entityt_admodelvalidator CASCADE;
 
-ALTER TABLE ad_org DROP CONSTRAINT ad_org__ad_repli_ad_replica CASCADE;
+ALTER TABLE ad_org drop constraint if exists ad_org__ad_repli_ad_replica CASCADE;
 
-ALTER TABLE ad_orginfo DROP CONSTRAINT cbank_adorginfo CASCADE;
+ALTER TABLE ad_orginfo drop constraint if exists cbank_adorginfo CASCADE;
 
-ALTER TABLE ad_orginfo DROP CONSTRAINT ccalendar_adorginfo CASCADE;
+ALTER TABLE ad_orginfo drop constraint if exists ccalendar_adorginfo CASCADE;
 
-ALTER TABLE ad_orginfo DROP CONSTRAINT ccashbook_adorginfo CASCADE;
+ALTER TABLE ad_orginfo drop constraint if exists ccashbook_adorginfo CASCADE;
 
-ALTER TABLE ad_orginfo DROP CONSTRAINT dropshipwarehouse_adorginfo CASCADE;
+ALTER TABLE ad_orginfo drop constraint if exists dropshipwarehouse_adorginfo CASCADE;
 
-ALTER TABLE ad_orgtype DROP CONSTRAINT adprintcolor_adorgtype CASCADE;
+ALTER TABLE ad_orgtype drop constraint if exists adprintcolor_adorgtype CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT adform_adpackageexpcommon CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists adform_adpackageexpcommon CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT adimpformat_adpackageexpcommon CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists adimpformat_adpackageexpcommon CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT admenu_adpackageexpcommon CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists admenu_adpackageexpcommon CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT adprocess_adpackageexpcommon CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists adprocess_adpackageexpcommon CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT adreportview_adpackageexpcommo CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists adreportview_adpackageexpcommo CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT adrole_adpackageexpcommon CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists adrole_adpackageexpcommon CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT adtable_adpackageexpcommon CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists adtable_adpackageexpcommon CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT adwindow_adpackageexpcommon CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists adwindow_adpackageexpcommon CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT adworkbench_adpackageexpcommon CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists adworkbench_adpackageexpcommon CASCADE;
 
-ALTER TABLE ad_package_exp_common DROP CONSTRAINT adworkflow_adpackageexpcommon CASCADE;
+ALTER TABLE ad_package_exp_common drop constraint if exists adworkflow_adpackageexpcommon CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adform_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adform_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adimpformat_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adimpformat_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT admenu_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists admenu_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT admessage_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists admessage_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT admodval_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists admodval_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adprintformat_adpackageexpdeta CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adprintformat_adpackageexpdeta CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adprocess_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adprocess_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adreference_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adreference_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adreportview_adpackageexpdetai CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adreportview_adpackageexpdetai CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adrole_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adrole_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adtable_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adtable_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adwindow_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adwindow_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adworkbench_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adworkbench_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_exp_detail DROP CONSTRAINT adworkflow_adpackageexpdetail CASCADE;
+ALTER TABLE ad_package_exp_detail drop constraint if exists adworkflow_adpackageexpdetail CASCADE;
 
-ALTER TABLE ad_package_imp_backup DROP CONSTRAINT adcolumn_adpackageimpbackup CASCADE;
+ALTER TABLE ad_package_imp_backup drop constraint if exists adcolumn_adpackageimpbackup CASCADE;
 
-ALTER TABLE ad_package_imp_backup DROP CONSTRAINT adreference_adpackageimpbackup CASCADE;
+ALTER TABLE ad_package_imp_backup drop constraint if exists adreference_adpackageimpbackup CASCADE;
 
-ALTER TABLE ad_printform DROP CONSTRAINT distribordermailtext_adprintfo CASCADE;
+ALTER TABLE ad_printform drop constraint if exists distribordermailtext_adprintfo CASCADE;
 
-ALTER TABLE ad_printform DROP CONSTRAINT distriborderprintformat_adprin CASCADE;
+ALTER TABLE ad_printform drop constraint if exists distriborderprintformat_adprin CASCADE;
 
-ALTER TABLE ad_printform DROP CONSTRAINT manufordermailtext_adprintform CASCADE;
+ALTER TABLE ad_printform drop constraint if exists manufordermailtext_adprintform CASCADE;
 
-ALTER TABLE ad_printform DROP CONSTRAINT manuforderprintformat_adprintf CASCADE;
+ALTER TABLE ad_printform drop constraint if exists manuforderprintformat_adprintf CASCADE;
 
-ALTER TABLE ad_printformat DROP CONSTRAINT jasperprocess_adprintformat CASCADE;
+ALTER TABLE ad_printformat drop constraint if exists jasperprocess_adprintformat CASCADE;
 
-ALTER TABLE ad_printtableformat DROP CONSTRAINT adimage_adprinttableformat CASCADE;
+ALTER TABLE ad_printtableformat drop constraint if exists adimage_adprinttableformat CASCADE;
 
-ALTER TABLE ad_process DROP CONSTRAINT adform_adprocess CASCADE;
+ALTER TABLE ad_process drop constraint if exists adform_adprocess CASCADE;
 
-ALTER TABLE ad_process DROP CONSTRAINT adworkflow_adprocess CASCADE;
+ALTER TABLE ad_process drop constraint if exists adworkflow_adprocess CASCADE;
 
-ALTER TABLE ad_process DROP CONSTRAINT entityt_adprocess CASCADE;
+ALTER TABLE ad_process drop constraint if exists entityt_adprocess CASCADE;
 
-ALTER TABLE ad_process_para DROP CONSTRAINT entityt_adprocesspara CASCADE;
+ALTER TABLE ad_process_para drop constraint if exists entityt_adprocesspara CASCADE;
 
-ALTER TABLE ad_ref_list DROP CONSTRAINT entityt_adreflist CASCADE;
+ALTER TABLE ad_ref_list drop constraint if exists entityt_adreflist CASCADE;
 
-ALTER TABLE ad_ref_table DROP CONSTRAINT adwindow_adreftable CASCADE;
+ALTER TABLE ad_ref_table drop constraint if exists adwindow_adreftable CASCADE;
 
-ALTER TABLE ad_ref_table DROP CONSTRAINT entityt_adreftable CASCADE;
+ALTER TABLE ad_ref_table drop constraint if exists entityt_adreftable CASCADE;
 
-ALTER TABLE ad_reference DROP CONSTRAINT entityt_adreference CASCADE;
+ALTER TABLE ad_reference drop constraint if exists entityt_adreference CASCADE;
 
-ALTER TABLE ad_registration DROP CONSTRAINT ccurrency_adregistration CASCADE;
+ALTER TABLE ad_registration drop constraint if exists ccurrency_adregistration CASCADE;
 
-ALTER TABLE ad_replication DROP CONSTRAINT remoteclient_adreplication CASCADE;
+ALTER TABLE ad_replication drop constraint if exists remoteclient_adreplication CASCADE;
 
-ALTER TABLE ad_replication DROP CONSTRAINT remoteorg_adreplication CASCADE;
+ALTER TABLE ad_replication drop constraint if exists remoteorg_adreplication CASCADE;
 
-ALTER TABLE ad_replicationdocument DROP CONSTRAINT adtable_adreplicationdocument CASCADE;
+ALTER TABLE ad_replicationdocument drop constraint if exists adtable_adreplicationdocument CASCADE;
 
-ALTER TABLE ad_replicationdocument DROP CONSTRAINT cdoctype_adreplicationdocument CASCADE;
+ALTER TABLE ad_replicationdocument drop constraint if exists cdoctype_adreplicationdocument CASCADE;
 
-ALTER TABLE ad_replicationstrategy DROP CONSTRAINT entityt_adreplicationstrategy CASCADE;
+ALTER TABLE ad_replicationstrategy drop constraint if exists entityt_adreplicationstrategy CASCADE;
 
-ALTER TABLE ad_replicationstrategy DROP CONSTRAINT expprocessor_adreplicationstra CASCADE;
+ALTER TABLE ad_replicationstrategy drop constraint if exists expprocessor_adreplicationstra CASCADE;
 
-ALTER TABLE ad_replicationtable DROP CONSTRAINT entityt_adreplicationtable CASCADE;
+ALTER TABLE ad_replicationtable drop constraint if exists entityt_adreplicationtable CASCADE;
 
-ALTER TABLE ad_reportview DROP CONSTRAINT entityt_adreportview CASCADE;
+ALTER TABLE ad_reportview drop constraint if exists entityt_adreportview CASCADE;
 
-ALTER TABLE ad_role DROP CONSTRAINT adtreeorg_adrole CASCADE;
+ALTER TABLE ad_role drop constraint if exists adtreeorg_adrole CASCADE;
 
-ALTER TABLE ad_rule DROP CONSTRAINT entityt_adrule CASCADE;
+ALTER TABLE ad_rule drop constraint if exists entityt_adrule CASCADE;
 
-ALTER TABLE ad_searchdefinition DROP CONSTRAINT adcolumn_adsearchdefinition CASCADE;
+ALTER TABLE ad_searchdefinition drop constraint if exists adcolumn_adsearchdefinition CASCADE;
 
-ALTER TABLE ad_searchdefinition DROP CONSTRAINT adtable_adsearchdefinition CASCADE;
+ALTER TABLE ad_searchdefinition drop constraint if exists adtable_adsearchdefinition CASCADE;
 
-ALTER TABLE ad_searchdefinition DROP CONSTRAINT adwindow_adsearchdefinition CASCADE;
+ALTER TABLE ad_searchdefinition drop constraint if exists adwindow_adsearchdefinition CASCADE;
 
-ALTER TABLE ad_searchdefinition DROP CONSTRAINT powindow_adsearchdefinition CASCADE;
+ALTER TABLE ad_searchdefinition drop constraint if exists powindow_adsearchdefinition CASCADE;
 
-ALTER TABLE ad_session DROP CONSTRAINT adrole_adsession CASCADE;
+ALTER TABLE ad_session drop constraint if exists adrole_adsession CASCADE;
 
-ALTER TABLE ad_sysconfig DROP CONSTRAINT entityt_adsysconfig CASCADE;
+ALTER TABLE ad_sysconfig drop constraint if exists entityt_adsysconfig CASCADE;
 
-ALTER TABLE ad_tab DROP CONSTRAINT entityt_adtab CASCADE;
+ALTER TABLE ad_tab drop constraint if exists entityt_adtab CASCADE;
 
-ALTER TABLE ad_tab DROP CONSTRAINT parentcolumn_adtab CASCADE;
+ALTER TABLE ad_tab drop constraint if exists parentcolumn_adtab CASCADE;
 
-ALTER TABLE ad_table DROP CONSTRAINT entityt_adtable CASCADE;
+ALTER TABLE ad_table drop constraint if exists entityt_adtable CASCADE;
 
-ALTER TABLE ad_table_scriptvalidator DROP CONSTRAINT adrule_adtablescriptvalidator CASCADE;
+ALTER TABLE ad_table_scriptvalidator drop constraint if exists adrule_adtablescriptvalidator CASCADE;
 
-ALTER TABLE ad_table_scriptvalidator DROP CONSTRAINT adtable_adtablescriptvalidator CASCADE;
+ALTER TABLE ad_table_scriptvalidator drop constraint if exists adtable_adtablescriptvalidator CASCADE;
 
-ALTER TABLE ad_task DROP CONSTRAINT entityt_adtask CASCADE;
+ALTER TABLE ad_task drop constraint if exists entityt_adtask CASCADE;
 
-ALTER TABLE ad_user DROP CONSTRAINT cjob_aduser CASCADE;
+ALTER TABLE ad_user drop constraint if exists cjob_aduser CASCADE;
 
-ALTER TABLE ad_userdef_win DROP CONSTRAINT adlangu_aduserdefwin CASCADE;
+ALTER TABLE ad_userdef_win drop constraint if exists adlangu_aduserdefwin CASCADE;
 
-ALTER TABLE ad_userquery DROP CONSTRAINT adtab_aduserquery CASCADE;
+ALTER TABLE ad_userquery drop constraint if exists adtab_aduserquery CASCADE;
 
-ALTER TABLE ad_val_rule DROP CONSTRAINT entityt_advalrule CASCADE;
+ALTER TABLE ad_val_rule drop constraint if exists entityt_advalrule CASCADE;
 
-ALTER TABLE ad_wf_activity DROP CONSTRAINT adtable_adwfactivity CASCADE;
+ALTER TABLE ad_wf_activity drop constraint if exists adtable_adwfactivity CASCADE;
 
-ALTER TABLE ad_wf_activity DROP CONSTRAINT adworkflow_adwfactivity CASCADE;
+ALTER TABLE ad_wf_activity drop constraint if exists adworkflow_adwfactivity CASCADE;
 
-ALTER TABLE ad_wf_nextcondition DROP CONSTRAINT entityt_adwfnextcondition CASCADE;
+ALTER TABLE ad_wf_nextcondition drop constraint if exists entityt_adwfnextcondition CASCADE;
 
-ALTER TABLE ad_wf_node DROP CONSTRAINT adcolumn_adwfnode CASCADE;
+ALTER TABLE ad_wf_node drop constraint if exists adcolumn_adwfnode CASCADE;
 
-ALTER TABLE ad_wf_node DROP CONSTRAINT cbpartner_adwfnode CASCADE;
+ALTER TABLE ad_wf_node drop constraint if exists cbpartner_adwfnode CASCADE;
 
-ALTER TABLE ad_wf_node DROP CONSTRAINT entityt_adwfnode CASCADE;
+ALTER TABLE ad_wf_node drop constraint if exists entityt_adwfnode CASCADE;
 
-ALTER TABLE ad_wf_node DROP CONSTRAINT rmailtext_adwfnode CASCADE;
+ALTER TABLE ad_wf_node drop constraint if exists rmailtext_adwfnode CASCADE;
 
-ALTER TABLE ad_wf_node DROP CONSTRAINT sresource_adwfnode CASCADE;
+ALTER TABLE ad_wf_node drop constraint if exists sresource_adwfnode CASCADE;
 
-ALTER TABLE ad_wf_node_para DROP CONSTRAINT entityt_adwfnodepara CASCADE;
+ALTER TABLE ad_wf_node_para drop constraint if exists entityt_adwfnodepara CASCADE;
 
-ALTER TABLE ad_wf_nodenext DROP CONSTRAINT entityt_adwfnodenext CASCADE;
+ALTER TABLE ad_wf_nodenext drop constraint if exists entityt_adwfnodenext CASCADE;
 
-ALTER TABLE ad_wf_process DROP CONSTRAINT adtable_adwfprocess CASCADE;
+ALTER TABLE ad_wf_process drop constraint if exists adtable_adwfprocess CASCADE;
 
-ALTER TABLE ad_wf_process DROP CONSTRAINT adwfprocess_adwfprocess CASCADE;
+ALTER TABLE ad_wf_process drop constraint if exists adwfprocess_adwfprocess CASCADE;
 
-ALTER TABLE ad_wf_responsible DROP CONSTRAINT entityt_adwfresponsible CASCADE;
+ALTER TABLE ad_wf_responsible drop constraint if exists entityt_adwfresponsible CASCADE;
 
-ALTER TABLE ad_window DROP CONSTRAINT entityt_adwindow CASCADE;
+ALTER TABLE ad_window drop constraint if exists entityt_adwindow CASCADE;
 
-ALTER TABLE ad_workbench DROP CONSTRAINT adcolumn_adworkbench CASCADE;
+ALTER TABLE ad_workbench drop constraint if exists adcolumn_adworkbench CASCADE;
 
-ALTER TABLE ad_workbench DROP CONSTRAINT entityt_adworkbench CASCADE;
+ALTER TABLE ad_workbench drop constraint if exists entityt_adworkbench CASCADE;
 
-ALTER TABLE ad_workbenchwindow DROP CONSTRAINT entityt_adworkbenchwindow CASCADE;
+ALTER TABLE ad_workbenchwindow drop constraint if exists entityt_adworkbenchwindow CASCADE;
 
-ALTER TABLE ad_workflow DROP CONSTRAINT adtable_adworkflow CASCADE;
+ALTER TABLE ad_workflow drop constraint if exists adtable_adworkflow CASCADE;
 
-ALTER TABLE ad_workflow DROP CONSTRAINT adwfnode_adworkflow CASCADE;
+ALTER TABLE ad_workflow drop constraint if exists adwfnode_adworkflow CASCADE;
 
-ALTER TABLE ad_workflow DROP CONSTRAINT entityt_adworkflow CASCADE;
+ALTER TABLE ad_workflow drop constraint if exists entityt_adworkflow CASCADE;
 
-ALTER TABLE ad_workflow DROP CONSTRAINT sresource_adworkflow CASCADE;
+ALTER TABLE ad_workflow drop constraint if exists sresource_adworkflow CASCADE;
 
-ALTER TABLE asp_clientexception DROP CONSTRAINT adfield_aspclientexception CASCADE;
+ALTER TABLE asp_clientexception drop constraint if exists adfield_aspclientexception CASCADE;
 
-ALTER TABLE asp_clientexception DROP CONSTRAINT adform_aspclientexception CASCADE;
+ALTER TABLE asp_clientexception drop constraint if exists adform_aspclientexception CASCADE;
 
-ALTER TABLE asp_clientexception DROP CONSTRAINT adprocess_aspclientexception CASCADE;
+ALTER TABLE asp_clientexception drop constraint if exists adprocess_aspclientexception CASCADE;
 
-ALTER TABLE asp_clientexception DROP CONSTRAINT adprocesspara_aspclientexcepti CASCADE;
+ALTER TABLE asp_clientexception drop constraint if exists adprocesspara_aspclientexcepti CASCADE;
 
-ALTER TABLE asp_clientexception DROP CONSTRAINT adtab_aspclientexception CASCADE;
+ALTER TABLE asp_clientexception drop constraint if exists adtab_aspclientexception CASCADE;
 
-ALTER TABLE asp_clientexception DROP CONSTRAINT adtask_aspclientexception CASCADE;
+ALTER TABLE asp_clientexception drop constraint if exists adtask_aspclientexception CASCADE;
 
-ALTER TABLE asp_clientexception DROP CONSTRAINT adwfnode_aspclientexception CASCADE;
+ALTER TABLE asp_clientexception drop constraint if exists adwfnode_aspclientexception CASCADE;
 
-ALTER TABLE asp_clientexception DROP CONSTRAINT adwindow_aspclientexception CASCADE;
+ALTER TABLE asp_clientexception drop constraint if exists adwindow_aspclientexception CASCADE;
 
-ALTER TABLE asp_clientexception DROP CONSTRAINT adworkflow_aspclientexception CASCADE;
+ALTER TABLE asp_clientexception drop constraint if exists adworkflow_aspclientexception CASCADE;
 
-ALTER TABLE asp_clientlevel DROP CONSTRAINT asplevel_aspclientlevel CASCADE;
+ALTER TABLE asp_clientlevel drop constraint if exists asplevel_aspclientlevel CASCADE;
 
-ALTER TABLE asp_clientlevel DROP CONSTRAINT aspmodule_aspclientlevel CASCADE;
+ALTER TABLE asp_clientlevel drop constraint if exists aspmodule_aspclientlevel CASCADE;
 
-ALTER TABLE asp_field DROP CONSTRAINT adfield_aspfield CASCADE;
+ALTER TABLE asp_field drop constraint if exists adfield_aspfield CASCADE;
 
-ALTER TABLE asp_field DROP CONSTRAINT asptab_aspfield CASCADE;
+ALTER TABLE asp_field drop constraint if exists asptab_aspfield CASCADE;
 
-ALTER TABLE asp_form DROP CONSTRAINT adform_aspform CASCADE;
+ALTER TABLE asp_form drop constraint if exists adform_aspform CASCADE;
 
-ALTER TABLE asp_form DROP CONSTRAINT asplevel_aspform CASCADE;
+ALTER TABLE asp_form drop constraint if exists asplevel_aspform CASCADE;
 
-ALTER TABLE asp_level DROP CONSTRAINT aspmodule_asplevel CASCADE;
+ALTER TABLE asp_level drop constraint if exists aspmodule_asplevel CASCADE;
 
-ALTER TABLE asp_process DROP CONSTRAINT adprocess_aspprocess CASCADE;
+ALTER TABLE asp_process drop constraint if exists adprocess_aspprocess CASCADE;
 
-ALTER TABLE asp_process DROP CONSTRAINT asplevel_aspprocess CASCADE;
+ALTER TABLE asp_process drop constraint if exists asplevel_aspprocess CASCADE;
 
-ALTER TABLE asp_process_para DROP CONSTRAINT adprocesspara_aspprocesspara CASCADE;
+ALTER TABLE asp_process_para drop constraint if exists adprocesspara_aspprocesspara CASCADE;
 
-ALTER TABLE asp_process_para DROP CONSTRAINT aspprocess_aspprocesspara CASCADE;
+ALTER TABLE asp_process_para drop constraint if exists aspprocess_aspprocesspara CASCADE;
 
-ALTER TABLE asp_tab DROP CONSTRAINT adtab_asptab CASCADE;
+ALTER TABLE asp_tab drop constraint if exists adtab_asptab CASCADE;
 
-ALTER TABLE asp_tab DROP CONSTRAINT aspwindow_asptab CASCADE;
+ALTER TABLE asp_tab drop constraint if exists aspwindow_asptab CASCADE;
 
-ALTER TABLE asp_task DROP CONSTRAINT adtask_asptask CASCADE;
+ALTER TABLE asp_task drop constraint if exists adtask_asptask CASCADE;
 
-ALTER TABLE asp_task DROP CONSTRAINT asplevel_asptask CASCADE;
+ALTER TABLE asp_task drop constraint if exists asplevel_asptask CASCADE;
 
-ALTER TABLE asp_window DROP CONSTRAINT adwindow_aspwindow CASCADE;
+ALTER TABLE asp_window drop constraint if exists adwindow_aspwindow CASCADE;
 
-ALTER TABLE asp_window DROP CONSTRAINT asplevel_aspwindow CASCADE;
+ALTER TABLE asp_window drop constraint if exists asplevel_aspwindow CASCADE;
 
-ALTER TABLE asp_workflow DROP CONSTRAINT adworkflow_aspworkflow CASCADE;
+ALTER TABLE asp_workflow drop constraint if exists adworkflow_aspworkflow CASCADE;
 
-ALTER TABLE asp_workflow DROP CONSTRAINT asplevel_aspworkflow CASCADE;
+ALTER TABLE asp_workflow drop constraint if exists asplevel_aspworkflow CASCADE;
 
-ALTER TABLE b_bid DROP CONSTRAINT aduser_bbid CASCADE;
+ALTER TABLE b_bid drop constraint if exists aduser_bbid CASCADE;
 
-ALTER TABLE b_buyerfunds DROP CONSTRAINT aduser_bbuyerfunds CASCADE;
+ALTER TABLE b_buyerfunds drop constraint if exists aduser_bbuyerfunds CASCADE;
 
-ALTER TABLE b_offer DROP CONSTRAINT aduser_boffer CASCADE;
+ALTER TABLE b_offer drop constraint if exists aduser_boffer CASCADE;
 
-ALTER TABLE b_sellerfunds DROP CONSTRAINT aduser_bsellerfunds CASCADE;
+ALTER TABLE b_sellerfunds drop constraint if exists aduser_bsellerfunds CASCADE;
 
-ALTER TABLE c_acctprocessor DROP CONSTRAINT adtable_cacctprocessor CASCADE;
+ALTER TABLE c_acctprocessor drop constraint if exists adtable_cacctprocessor CASCADE;
 
-ALTER TABLE c_acctprocessor DROP CONSTRAINT cacctschema_cacctprocessor CASCADE;
+ALTER TABLE c_acctprocessor drop constraint if exists cacctschema_cacctprocessor CASCADE;
 
-ALTER TABLE c_acctschema DROP CONSTRAINT adorgonly_cacctschema CASCADE;
+ALTER TABLE c_acctschema drop constraint if exists adorgonly_cacctschema CASCADE;
 
-ALTER TABLE c_acctschema_element DROP CONSTRAINT adcolumn_cacctschemaelement CASCADE;
+ALTER TABLE c_acctschema_element drop constraint if exists adcolumn_cacctschemaelement CASCADE;
 
-ALTER TABLE c_bp_group DROP CONSTRAINT adprintcolor_cbpgroup CASCADE;
+ALTER TABLE c_bp_group drop constraint if exists adprintcolor_cbpgroup CASCADE;
 
-ALTER TABLE c_bp_group DROP CONSTRAINT cdunning_cbpgroup CASCADE;
+ALTER TABLE c_bp_group drop constraint if exists cdunning_cbpgroup CASCADE;
 
-ALTER TABLE c_bpartner DROP CONSTRAINT ctaxgroup_cbpartner CASCADE;
+ALTER TABLE c_bpartner drop constraint if exists ctaxgroup_cbpartner CASCADE;
 
-ALTER TABLE c_cashline DROP CONSTRAINT cpayment_ccashline CASCADE;
+ALTER TABLE c_cashline drop constraint if exists cpayment_ccashline CASCADE;
 
-ALTER TABLE c_channel DROP CONSTRAINT adprintcolor_cchannel CASCADE;
+ALTER TABLE c_channel drop constraint if exists adprintcolor_cchannel CASCADE;
 
-ALTER TABLE c_charge DROP CONSTRAINT cbpartner_ccharge CASCADE;
+ALTER TABLE c_charge drop constraint if exists cbpartner_ccharge CASCADE;
 
-ALTER TABLE c_charge DROP CONSTRAINT cchargetype_ccharge CASCADE;
+ALTER TABLE c_charge drop constraint if exists cchargetype_ccharge CASCADE;
 
-ALTER TABLE c_charge_trl DROP CONSTRAINT adlangu_cchargetrl CASCADE;
+ALTER TABLE c_charge_trl drop constraint if exists adlangu_cchargetrl CASCADE;
 
-ALTER TABLE c_charge_trl DROP CONSTRAINT ccharge_cchargetrl CASCADE;
+ALTER TABLE c_charge_trl drop constraint if exists ccharge_cchargetrl CASCADE;
 
-ALTER TABLE c_chargetype_doctype DROP CONSTRAINT cchargetype_cchargetypedoctype CASCADE;
+ALTER TABLE c_chargetype_doctype drop constraint if exists cchargetype_cchargetypedoctype CASCADE;
 
-ALTER TABLE c_chargetype_doctype DROP CONSTRAINT cdoctype_cchargetypedoctype CASCADE;
+ALTER TABLE c_chargetype_doctype drop constraint if exists cdoctype_cchargetypedoctype CASCADE;
 
-ALTER TABLE c_country DROP CONSTRAINT ccountry_ccountry CASCADE;
+ALTER TABLE c_country drop constraint if exists ccountry_ccountry CASCADE;
 
-ALTER TABLE c_doctype DROP CONSTRAINT cdoctypedifference_cdoctype CASCADE;
+ALTER TABLE c_doctype drop constraint if exists cdoctypedifference_cdoctype CASCADE;
 
-ALTER TABLE c_doctype DROP CONSTRAINT definitesequence_cdoctype CASCADE;
+ALTER TABLE c_doctype drop constraint if exists definitesequence_cdoctype CASCADE;
 
-ALTER TABLE c_dunningrunentry DROP CONSTRAINT aduser_cdunningrunentry CASCADE;
+ALTER TABLE c_dunningrunentry drop constraint if exists aduser_cdunningrunentry CASCADE;
 
-ALTER TABLE c_dunningrunentry DROP CONSTRAINT cbpartnerlocation_cdunningrune CASCADE;
+ALTER TABLE c_dunningrunentry drop constraint if exists cbpartnerlocation_cdunningrune CASCADE;
 
-ALTER TABLE c_dunningrunentry DROP CONSTRAINT salesrep_cdunningrunentry CASCADE;
+ALTER TABLE c_dunningrunentry drop constraint if exists salesrep_cdunningrunentry CASCADE;
 
-ALTER TABLE c_dunningrunline DROP CONSTRAINT cinvoicepayschedule_cdunningru CASCADE;
+ALTER TABLE c_dunningrunline drop constraint if exists cinvoicepayschedule_cdunningru CASCADE;
 
-ALTER TABLE c_invoice DROP CONSTRAINT cdunninglevel_cinvoice CASCADE;
+ALTER TABLE c_invoice drop constraint if exists cdunninglevel_cinvoice CASCADE;
 
-ALTER TABLE c_invoice DROP CONSTRAINT mrma_cinvoice CASCADE;
+ALTER TABLE c_invoice drop constraint if exists mrma_cinvoice CASCADE;
 
-ALTER TABLE c_invoice DROP CONSTRAINT reversal_cinvoice CASCADE;
+ALTER TABLE c_invoice drop constraint if exists reversal_cinvoice CASCADE;
 
-ALTER TABLE c_invoiceline DROP CONSTRAINT aassetgroup_cinvoiceline CASCADE;
+ALTER TABLE c_invoiceline drop constraint if exists aassetgroup_cinvoiceline CASCADE;
 
-ALTER TABLE c_invoiceline DROP CONSTRAINT mrmaline_cinvoiceline CASCADE;
+ALTER TABLE c_invoiceline drop constraint if exists mrmaline_cinvoiceline CASCADE;
 
-ALTER TABLE c_order DROP CONSTRAINT cpos_corder CASCADE;
+ALTER TABLE c_order drop constraint if exists cpos_corder CASCADE;
 
-ALTER TABLE c_order DROP CONSTRAINT dropshipbpartner_corder CASCADE;
+ALTER TABLE c_order drop constraint if exists dropshipbpartner_corder CASCADE;
 
-ALTER TABLE c_order DROP CONSTRAINT dropshiplocation_corder CASCADE;
+ALTER TABLE c_order drop constraint if exists dropshiplocation_corder CASCADE;
 
-ALTER TABLE c_order DROP CONSTRAINT dropshipuser_corder CASCADE;
+ALTER TABLE c_order drop constraint if exists dropshipuser_corder CASCADE;
 
-ALTER TABLE c_order DROP CONSTRAINT linkorder_corder CASCADE;
+ALTER TABLE c_order drop constraint if exists linkorder_corder CASCADE;
 
-ALTER TABLE c_order DROP CONSTRAINT mfreightcategory_order CASCADE;
+ALTER TABLE c_order drop constraint if exists mfreightcategory_order CASCADE;
 
-ALTER TABLE c_orderline DROP CONSTRAINT linkorderline_corderline CASCADE;
+ALTER TABLE c_orderline drop constraint if exists linkorderline_corderline CASCADE;
 
-ALTER TABLE c_orderline DROP CONSTRAINT mpromotion_corderline CASCADE;
+ALTER TABLE c_orderline drop constraint if exists mpromotion_corderline CASCADE;
 
-ALTER TABLE c_orderline DROP CONSTRAINT ppcostcollector_corderline CASCADE;
+ALTER TABLE c_orderline drop constraint if exists ppcostcollector_corderline CASCADE;
 
-ALTER TABLE c_payment DROP CONSTRAINT c_payment__c_cashbo_c_cashbook CASCADE;
+ALTER TABLE c_payment drop constraint if exists c_payment__c_cashbo_c_cashbook CASCADE;
 
-ALTER TABLE c_payment DROP CONSTRAINT cinvoice_cpayment CASCADE;
+ALTER TABLE c_payment drop constraint if exists cinvoice_cpayment CASCADE;
 
-ALTER TABLE c_payment DROP CONSTRAINT corder_cpayment CASCADE;
+ALTER TABLE c_payment drop constraint if exists corder_cpayment CASCADE;
 
-ALTER TABLE c_payment DROP CONSTRAINT refpayment_cpayment CASCADE;
+ALTER TABLE c_payment drop constraint if exists refpayment_cpayment CASCADE;
 
-ALTER TABLE c_payment DROP CONSTRAINT reversal_cpayment CASCADE;
+ALTER TABLE c_payment drop constraint if exists reversal_cpayment CASCADE;
 
-ALTER TABLE c_payselectioncheck DROP CONSTRAINT cbpbankaccount_cpayselectionch CASCADE;
+ALTER TABLE c_payselectioncheck drop constraint if exists cbpbankaccount_cpayselectionch CASCADE;
 
-ALTER TABLE c_pos DROP CONSTRAINT cbankaccount_cpos CASCADE;
+ALTER TABLE c_pos drop constraint if exists cbankaccount_cpos CASCADE;
 
-ALTER TABLE c_pos DROP CONSTRAINT cbpartnercashtrx_cpos CASCADE;
+ALTER TABLE c_pos drop constraint if exists cbpartnercashtrx_cpos CASCADE;
 
-ALTER TABLE c_pos DROP CONSTRAINT cdoctype_cpos CASCADE;
+ALTER TABLE c_pos drop constraint if exists cdoctype_cpos CASCADE;
 
-ALTER TABLE c_poskey DROP CONSTRAINT adprintcolor_cposkey CASCADE;
+ALTER TABLE c_poskey drop constraint if exists adprintcolor_cposkey CASCADE;
 
-ALTER TABLE c_project DROP CONSTRAINT cbpartnersr_cproject CASCADE;
+ALTER TABLE c_project drop constraint if exists cbpartnersr_cproject CASCADE;
 
-ALTER TABLE c_salesregion DROP CONSTRAINT salesrep_csalesregion CASCADE;
+ALTER TABLE c_salesregion drop constraint if exists salesrep_csalesregion CASCADE;
 
-ALTER TABLE c_tax DROP CONSTRAINT adrule_ctax CASCADE;
+ALTER TABLE c_tax drop constraint if exists adrule_ctax CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT adorgtype_ctaxdefinition CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists adorgtype_ctaxdefinition CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT cbpartner_ctaxdefinition CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists cbpartner_ctaxdefinition CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT cbpgroup_ctaxdefinition CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists cbpgroup_ctaxdefinition CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT ctax_ctaxdefinition CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists ctax_ctaxdefinition CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT ctaxbase_ctaxdefinition CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists ctaxbase_ctaxdefinition CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT ctaxcategory_ctaxdefinition CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists ctaxcategory_ctaxdefinition CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT ctaxgroup_ctaxdefinition CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists ctaxgroup_ctaxdefinition CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT ctaxtype_ctaxdefinition CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists ctaxtype_ctaxdefinition CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT mproduct_ctaxdefinition CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists mproduct_ctaxdefinition CASCADE;
 
-ALTER TABLE c_taxdefinition DROP CONSTRAINT mproductcategory_ctaxdefinitio CASCADE;
+ALTER TABLE c_taxdefinition drop constraint if exists mproductcategory_ctaxdefinitio CASCADE;
 
-ALTER TABLE c_uom_conversion DROP CONSTRAINT mproduct_cuomconversion CASCADE;
+ALTER TABLE c_uom_conversion drop constraint if exists mproduct_cuomconversion CASCADE;
 
-ALTER TABLE c_validcombination DROP CONSTRAINT csubacct_cvalidcombination CASCADE;
+ALTER TABLE c_validcombination drop constraint if exists csubacct_cvalidcombination CASCADE;
 
-ALTER TABLE c_withholding DROP CONSTRAINT benefici_cwithholding CASCADE;
+ALTER TABLE c_withholding drop constraint if exists benefici_cwithholding CASCADE;
 
-ALTER TABLE cm_newschannel DROP CONSTRAINT adlangu_cmnewschannel CASCADE;
+ALTER TABLE cm_newschannel drop constraint if exists adlangu_cmnewschannel CASCADE;
 
-ALTER TABLE dd_networkdistribution DROP CONSTRAINT mchangenotice_ddnetworkdistrib CASCADE;
+ALTER TABLE dd_networkdistribution drop constraint if exists mchangenotice_ddnetworkdistrib CASCADE;
 
-ALTER TABLE dd_networkdistributionline DROP CONSTRAINT ddnetworkdistribution_ddnetwor CASCADE;
+ALTER TABLE dd_networkdistributionline drop constraint if exists ddnetworkdistribution_ddnetwor CASCADE;
 
-ALTER TABLE dd_networkdistributionline DROP CONSTRAINT mshipper_ddnetworkdistribution CASCADE;
+ALTER TABLE dd_networkdistributionline drop constraint if exists mshipper_ddnetworkdistribution CASCADE;
 
-ALTER TABLE dd_networkdistributionline DROP CONSTRAINT mwarehouse_ddnetworkdistributi CASCADE;
+ALTER TABLE dd_networkdistributionline drop constraint if exists mwarehouse_ddnetworkdistributi CASCADE;
 
-ALTER TABLE dd_networkdistributionline DROP CONSTRAINT mwarehousesource_ddnetworkdist CASCADE;
+ALTER TABLE dd_networkdistributionline drop constraint if exists mwarehousesource_ddnetworkdist CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT adorgtrx_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists adorgtrx_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT aduser_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists aduser_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT cactivity_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists cactivity_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT cbpartner_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists cbpartner_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT cbpartnerlocation_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists cbpartnerlocation_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT ccampaign_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists ccampaign_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT ccharge_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists ccharge_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT cdoctype_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists cdoctype_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT cinvoice_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists cinvoice_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT corder_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists corder_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT cproject_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists cproject_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT mshipper_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists mshipper_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT mwarehouse_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists mwarehouse_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT salesrep_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists salesrep_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT user1_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists user1_ddorder CASCADE;
 
-ALTER TABLE dd_order DROP CONSTRAINT user2_ddorder CASCADE;
+ALTER TABLE dd_order drop constraint if exists user2_ddorder CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT adorgtrx_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists adorgtrx_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT cactivity_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists cactivity_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT ccampaign_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists ccampaign_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT ccharge_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists ccharge_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT cproject_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists cproject_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT cuom_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists cuom_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT ddorder_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists ddorder_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT mlocator_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists mlocator_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT mlocatorto_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists mlocatorto_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT mproduct_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists mproduct_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT user1_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists user1_ddorderline CASCADE;
 
-ALTER TABLE dd_orderline DROP CONSTRAINT user2_ddorderline CASCADE;
+ALTER TABLE dd_orderline drop constraint if exists user2_ddorderline CASCADE;
 
-ALTER TABLE exp_format DROP CONSTRAINT adtable_expformat CASCADE;
+ALTER TABLE exp_format drop constraint if exists adtable_expformat CASCADE;
 
-ALTER TABLE exp_formatline DROP CONSTRAINT adcolumn_expformatline CASCADE;
+ALTER TABLE exp_formatline drop constraint if exists adcolumn_expformatline CASCADE;
 
-ALTER TABLE exp_formatline DROP CONSTRAINT expembeddedformat_expformatlin CASCADE;
+ALTER TABLE exp_formatline drop constraint if exists expembeddedformat_expformatlin CASCADE;
 
-ALTER TABLE exp_formatline DROP CONSTRAINT expformat_expformatline CASCADE;
+ALTER TABLE exp_formatline drop constraint if exists expformat_expformatline CASCADE;
 
-ALTER TABLE exp_processor DROP CONSTRAINT expprocessortype_expprocessor CASCADE;
+ALTER TABLE exp_processor drop constraint if exists expprocessortype_expprocessor CASCADE;
 
-ALTER TABLE exp_processorparameter DROP CONSTRAINT expprocessor_expprocessorparam CASCADE;
+ALTER TABLE exp_processorparameter drop constraint if exists expprocessor_expprocessorparam CASCADE;
 
-ALTER TABLE fact_acct DROP CONSTRAINT csubacct_factacct CASCADE;
+ALTER TABLE fact_acct drop constraint if exists csubacct_factacct CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT account_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists account_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT cacctschema_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists cacctschema_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT cactivity_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists cactivity_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT cbpartner_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists cbpartner_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT ccampaign_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists ccampaign_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT cperiod_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists cperiod_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT cproject_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists cproject_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT cprojectphase_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists cprojectphase_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT cprojecttask_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists cprojecttask_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT csalesregion_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists csalesregion_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT csubacct_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists csubacct_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT glbudget_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists glbudget_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT mproduct_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists mproduct_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT pareportcube_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists pareportcube_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT user1_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists user1_factacctsummary CASCADE;
 
-ALTER TABLE fact_acct_summary DROP CONSTRAINT user2_factacctsummary CASCADE;
+ALTER TABLE fact_acct_summary drop constraint if exists user2_factacctsummary CASCADE;
 
-ALTER TABLE gl_journal DROP CONSTRAINT reversal_gljournal CASCADE;
+ALTER TABLE gl_journal drop constraint if exists reversal_gljournal CASCADE;
 
-ALTER TABLE gl_journalbatch DROP CONSTRAINT reversal_gljournalbatch CASCADE;
+ALTER TABLE gl_journalbatch drop constraint if exists reversal_gljournalbatch CASCADE;
 
-ALTER TABLE gl_journalline DROP CONSTRAINT aasset_gljournalline CASCADE;
+ALTER TABLE gl_journalline drop constraint if exists aasset_gljournalline CASCADE;
 
-ALTER TABLE gl_journalline DROP CONSTRAINT aassetgroup_gljournalline CASCADE;
+ALTER TABLE gl_journalline drop constraint if exists aassetgroup_gljournalline CASCADE;
 
-ALTER TABLE hr_attribute DROP CONSTRAINT adrule_hrattribute CASCADE;
+ALTER TABLE hr_attribute drop constraint if exists adrule_hrattribute CASCADE;
 
-ALTER TABLE hr_attribute DROP CONSTRAINT cbpartner_hrattribute CASCADE;
+ALTER TABLE hr_attribute drop constraint if exists cbpartner_hrattribute CASCADE;
 
-ALTER TABLE hr_attribute DROP CONSTRAINT hrconcept_hrattribute CASCADE;
+ALTER TABLE hr_attribute drop constraint if exists hrconcept_hrattribute CASCADE;
 
-ALTER TABLE hr_attribute DROP CONSTRAINT hrdepartment_hrattribute CASCADE;
+ALTER TABLE hr_attribute drop constraint if exists hrdepartment_hrattribute CASCADE;
 
-ALTER TABLE hr_attribute DROP CONSTRAINT hremployee_hrattribute CASCADE;
+ALTER TABLE hr_attribute drop constraint if exists hremployee_hrattribute CASCADE;
 
-ALTER TABLE hr_attribute DROP CONSTRAINT hrjob_hrattribute CASCADE;
+ALTER TABLE hr_attribute drop constraint if exists hrjob_hrattribute CASCADE;
 
-ALTER TABLE hr_attribute DROP CONSTRAINT hrpayroll_hrattribute CASCADE;
+ALTER TABLE hr_attribute drop constraint if exists hrpayroll_hrattribute CASCADE;
 
-ALTER TABLE hr_concept DROP CONSTRAINT adreference_hrconcept CASCADE;
+ALTER TABLE hr_concept drop constraint if exists adreference_hrconcept CASCADE;
 
-ALTER TABLE hr_concept DROP CONSTRAINT hrconceptcategory_hrconcept CASCADE;
+ALTER TABLE hr_concept drop constraint if exists hrconceptcategory_hrconcept CASCADE;
 
-ALTER TABLE hr_concept DROP CONSTRAINT hrdepartment_hrconcept CASCADE;
+ALTER TABLE hr_concept drop constraint if exists hrdepartment_hrconcept CASCADE;
 
-ALTER TABLE hr_concept DROP CONSTRAINT hrjob_hrconcept CASCADE;
+ALTER TABLE hr_concept drop constraint if exists hrjob_hrconcept CASCADE;
 
-ALTER TABLE hr_concept DROP CONSTRAINT hrpayroll_hrconcept CASCADE;
+ALTER TABLE hr_concept drop constraint if exists hrpayroll_hrconcept CASCADE;
 
-ALTER TABLE hr_concept_acct DROP CONSTRAINT cacctschema_hrconceptacct CASCADE;
+ALTER TABLE hr_concept_acct drop constraint if exists cacctschema_hrconceptacct CASCADE;
 
-ALTER TABLE hr_concept_acct DROP CONSTRAINT cbpgroup_hrconceptacct CASCADE;
+ALTER TABLE hr_concept_acct drop constraint if exists cbpgroup_hrconceptacct CASCADE;
 
-ALTER TABLE hr_concept_acct DROP CONSTRAINT hrconcept_hrconceptacct CASCADE;
+ALTER TABLE hr_concept_acct drop constraint if exists hrconcept_hrconceptacct CASCADE;
 
-ALTER TABLE hr_concept_acct DROP CONSTRAINT user1_hrconceptacct CASCADE;
+ALTER TABLE hr_concept_acct drop constraint if exists user1_hrconceptacct CASCADE;
 
-ALTER TABLE hr_contract DROP CONSTRAINT cbpartner_hrcontract CASCADE;
+ALTER TABLE hr_contract drop constraint if exists cbpartner_hrcontract CASCADE;
 
-ALTER TABLE hr_contract DROP CONSTRAINT ccampaign_hrcontract CASCADE;
+ALTER TABLE hr_contract drop constraint if exists ccampaign_hrcontract CASCADE;
 
-ALTER TABLE hr_contract DROP CONSTRAINT cproject_hrcontract CASCADE;
+ALTER TABLE hr_contract drop constraint if exists cproject_hrcontract CASCADE;
 
-ALTER TABLE hr_department DROP CONSTRAINT activity_hrdepartment CASCADE;
+ALTER TABLE hr_department drop constraint if exists activity_hrdepartment CASCADE;
 
-ALTER TABLE hr_employee DROP CONSTRAINT cactivity_hremployee CASCADE;
+ALTER TABLE hr_employee drop constraint if exists cactivity_hremployee CASCADE;
 
-ALTER TABLE hr_employee DROP CONSTRAINT cbpartner_hremployee CASCADE;
+ALTER TABLE hr_employee drop constraint if exists cbpartner_hremployee CASCADE;
 
-ALTER TABLE hr_employee DROP CONSTRAINT hrdepartment_hremployee CASCADE;
+ALTER TABLE hr_employee drop constraint if exists hrdepartment_hremployee CASCADE;
 
-ALTER TABLE hr_employee DROP CONSTRAINT hrjob_hremployee CASCADE;
+ALTER TABLE hr_employee drop constraint if exists hrjob_hremployee CASCADE;
 
-ALTER TABLE hr_employee DROP CONSTRAINT hrpayroll_hremployee CASCADE;
+ALTER TABLE hr_employee drop constraint if exists hrpayroll_hremployee CASCADE;
 
-ALTER TABLE hr_job DROP CONSTRAINT hrdepartment_hrjob CASCADE;
+ALTER TABLE hr_job drop constraint if exists hrdepartment_hrjob CASCADE;
 
-ALTER TABLE hr_job DROP CONSTRAINT nextjob_hrjob CASCADE;
+ALTER TABLE hr_job drop constraint if exists nextjob_hrjob CASCADE;
 
-ALTER TABLE hr_job DROP CONSTRAINT supervisor_hrjob CASCADE;
+ALTER TABLE hr_job drop constraint if exists supervisor_hrjob CASCADE;
 
-ALTER TABLE hr_list DROP CONSTRAINT hrdepartment_hrlist CASCADE;
+ALTER TABLE hr_list drop constraint if exists hrdepartment_hrlist CASCADE;
 
-ALTER TABLE hr_list DROP CONSTRAINT hremployee_hrlist CASCADE;
+ALTER TABLE hr_list drop constraint if exists hremployee_hrlist CASCADE;
 
-ALTER TABLE hr_list DROP CONSTRAINT hrlisttype_hrlist CASCADE;
+ALTER TABLE hr_list drop constraint if exists hrlisttype_hrlist CASCADE;
 
-ALTER TABLE hr_list DROP CONSTRAINT hrpayroll_hrlist CASCADE;
+ALTER TABLE hr_list drop constraint if exists hrpayroll_hrlist CASCADE;
 
-ALTER TABLE hr_listline DROP CONSTRAINT hrlistversion_hrlistline CASCADE;
+ALTER TABLE hr_listline drop constraint if exists hrlistversion_hrlistline CASCADE;
 
-ALTER TABLE hr_listversion DROP CONSTRAINT hrlist_hrlistversion CASCADE;
+ALTER TABLE hr_listversion drop constraint if exists hrlist_hrlistversion CASCADE;
 
-ALTER TABLE hr_listversion DROP CONSTRAINT hrlistbase_hrlistversion CASCADE;
+ALTER TABLE hr_listversion drop constraint if exists hrlistbase_hrlistversion CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT adorgtrx_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists adorgtrx_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT adrule_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists adrule_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT cactivity_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists cactivity_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT cbpartner_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists cbpartner_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT ccampaign_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists ccampaign_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT cproject_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists cproject_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT cprojectphase_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists cprojectphase_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT cprojecttask_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists cprojecttask_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT hrconcept_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists hrconcept_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT hrconceptcategory_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists hrconceptcategory_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT hrdepartment_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists hrdepartment_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT hrjob_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists hrjob_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT hrprocess_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists hrprocess_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT ppcostcollector_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists ppcostcollector_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT user1_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists user1_hrmovement CASCADE;
 
-ALTER TABLE hr_movement DROP CONSTRAINT user2_hrmovement CASCADE;
+ALTER TABLE hr_movement drop constraint if exists user2_hrmovement CASCADE;
 
-ALTER TABLE hr_payroll DROP CONSTRAINT adprintformat_hrpayroll CASCADE;
+ALTER TABLE hr_payroll drop constraint if exists adprintformat_hrpayroll CASCADE;
 
-ALTER TABLE hr_payroll DROP CONSTRAINT ccharge_hrpayroll CASCADE;
+ALTER TABLE hr_payroll drop constraint if exists ccharge_hrpayroll CASCADE;
 
-ALTER TABLE hr_payroll DROP CONSTRAINT hrcontract_hrpayroll CASCADE;
+ALTER TABLE hr_payroll drop constraint if exists hrcontract_hrpayroll CASCADE;
 
-ALTER TABLE hr_payrollconcept DROP CONSTRAINT adrule_hrpayrollconcept CASCADE;
+ALTER TABLE hr_payrollconcept drop constraint if exists adrule_hrpayrollconcept CASCADE;
 
-ALTER TABLE hr_payrollconcept DROP CONSTRAINT hrconcept_hrpayrollconcept CASCADE;
+ALTER TABLE hr_payrollconcept drop constraint if exists hrconcept_hrpayrollconcept CASCADE;
 
-ALTER TABLE hr_payrollconcept DROP CONSTRAINT hrpayroll_hrpayrollconcept CASCADE;
+ALTER TABLE hr_payrollconcept drop constraint if exists hrpayroll_hrpayrollconcept CASCADE;
 
-ALTER TABLE hr_period DROP CONSTRAINT cperiod_hrperiod CASCADE;
+ALTER TABLE hr_period drop constraint if exists cperiod_hrperiod CASCADE;
 
-ALTER TABLE hr_period DROP CONSTRAINT cyear_hrperiod CASCADE;
+ALTER TABLE hr_period drop constraint if exists cyear_hrperiod CASCADE;
 
-ALTER TABLE hr_period DROP CONSTRAINT hrpayroll_hrperiod CASCADE;
+ALTER TABLE hr_period drop constraint if exists hrpayroll_hrperiod CASCADE;
 
-ALTER TABLE hr_period DROP CONSTRAINT hryear_hrperiod CASCADE;
+ALTER TABLE hr_period drop constraint if exists hryear_hrperiod CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT adprintformat_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists adprintformat_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT adworkflow_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists adworkflow_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT cbpartner_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists cbpartner_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT ccharge_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists ccharge_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT cdoctype_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists cdoctype_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT cdoctypetarget_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists cdoctypetarget_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT cpayselection_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists cpayselection_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT hrdepartment_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists hrdepartment_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT hremployee_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists hremployee_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT hrjob_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists hrjob_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT hrpayroll_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists hrpayroll_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT hrperiod_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists hrperiod_hrprocess CASCADE;
 
-ALTER TABLE hr_process DROP CONSTRAINT reversal_hrprocess CASCADE;
+ALTER TABLE hr_process drop constraint if exists reversal_hrprocess CASCADE;
 
-ALTER TABLE hr_year DROP CONSTRAINT cyear_hryear CASCADE;
+ALTER TABLE hr_year drop constraint if exists cyear_hryear CASCADE;
 
-ALTER TABLE hr_year DROP CONSTRAINT hrpayroll_hryear CASCADE;
+ALTER TABLE hr_year drop constraint if exists hrpayroll_hryear CASCADE;
 
-ALTER TABLE i_asset DROP CONSTRAINT aassetgroup_iasset CASCADE;
+ALTER TABLE i_asset drop constraint if exists aassetgroup_iasset CASCADE;
 
-ALTER TABLE i_asset DROP CONSTRAINT adepreciationtableheader_iasse CASCADE;
+ALTER TABLE i_asset drop constraint if exists adepreciationtableheader_iasse CASCADE;
 
-ALTER TABLE i_asset DROP CONSTRAINT cacctschema_iasset CASCADE;
+ALTER TABLE i_asset drop constraint if exists cacctschema_iasset CASCADE;
 
-ALTER TABLE i_asset DROP CONSTRAINT cbpartner_iasset CASCADE;
+ALTER TABLE i_asset drop constraint if exists cbpartner_iasset CASCADE;
 
-ALTER TABLE i_asset DROP CONSTRAINT cbpartnerlocation_iasset CASCADE;
+ALTER TABLE i_asset drop constraint if exists cbpartnerlocation_iasset CASCADE;
 
-ALTER TABLE i_asset DROP CONSTRAINT clocation_iasset CASCADE;
+ALTER TABLE i_asset drop constraint if exists clocation_iasset CASCADE;
 
-ALTER TABLE i_asset DROP CONSTRAINT mlocator_iasset CASCADE;
+ALTER TABLE i_asset drop constraint if exists mlocator_iasset CASCADE;
 
-ALTER TABLE i_asset DROP CONSTRAINT mproduct_iasset CASCADE;
+ALTER TABLE i_asset drop constraint if exists mproduct_iasset CASCADE;
 
-ALTER TABLE i_bpartner DROP CONSTRAINT rinterestarea_ibpartner CASCADE;
+ALTER TABLE i_bpartner drop constraint if exists rinterestarea_ibpartner CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT account_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists account_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT adorgdoc_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists adorgdoc_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT adorgtrx_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists adorgtrx_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT cacctschema_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists cacctschema_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT cactivity_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists cactivity_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT cbpartner_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists cbpartner_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT ccampaign_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists ccampaign_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT ccurrency_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists ccurrency_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT cdoctype_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists cdoctype_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT cperiod_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists cperiod_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT cproject_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists cproject_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT csalesregion_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists csalesregion_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT cuom_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists cuom_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT cvalidcombination_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists cvalidcombination_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT glbudget_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists glbudget_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT glcategory_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists glcategory_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT gljournal_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists gljournal_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT gljournalbatch_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists gljournalbatch_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT gljournalline_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists gljournalline_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT mproduct_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists mproduct_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT user1_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists user1_ifajournal CASCADE;
 
-ALTER TABLE i_fajournal DROP CONSTRAINT user2_ifajournal CASCADE;
+ALTER TABLE i_fajournal drop constraint if exists user2_ifajournal CASCADE;
 
-ALTER TABLE i_gljournal DROP CONSTRAINT cuom_igljournal CASCADE;
+ALTER TABLE i_gljournal drop constraint if exists cuom_igljournal CASCADE;
 
-ALTER TABLE i_invoice DROP CONSTRAINT ccharge_iinvoice CASCADE;
+ALTER TABLE i_invoice drop constraint if exists ccharge_iinvoice CASCADE;
 
-ALTER TABLE i_order DROP CONSTRAINT ccharge_iorder CASCADE;
+ALTER TABLE i_order drop constraint if exists ccharge_iorder CASCADE;
 
-ALTER TABLE i_payment DROP CONSTRAINT ccurrency_ipayment CASCADE;
+ALTER TABLE i_payment drop constraint if exists ccurrency_ipayment CASCADE;
 
-ALTER TABLE i_pricelist DROP CONSTRAINT cbpartner_ipricelist CASCADE;
+ALTER TABLE i_pricelist drop constraint if exists cbpartner_ipricelist CASCADE;
 
-ALTER TABLE i_pricelist DROP CONSTRAINT ccurrency_ipricelist CASCADE;
+ALTER TABLE i_pricelist drop constraint if exists ccurrency_ipricelist CASCADE;
 
-ALTER TABLE i_pricelist DROP CONSTRAINT cuom_ipricelist CASCADE;
+ALTER TABLE i_pricelist drop constraint if exists cuom_ipricelist CASCADE;
 
-ALTER TABLE i_pricelist DROP CONSTRAINT mpricelist_ipricelist CASCADE;
+ALTER TABLE i_pricelist drop constraint if exists mpricelist_ipricelist CASCADE;
 
-ALTER TABLE i_pricelist DROP CONSTRAINT mpricelistversion_ipricelist CASCADE;
+ALTER TABLE i_pricelist drop constraint if exists mpricelistversion_ipricelist CASCADE;
 
-ALTER TABLE i_pricelist DROP CONSTRAINT mproduct_ipricelist CASCADE;
+ALTER TABLE i_pricelist drop constraint if exists mproduct_ipricelist CASCADE;
 
-ALTER TABLE imp_processor DROP CONSTRAINT impprocessortype_impprocessor CASCADE;
+ALTER TABLE imp_processor drop constraint if exists impprocessortype_impprocessor CASCADE;
 
-ALTER TABLE imp_processorlog DROP CONSTRAINT impprocessor_impprocessorlog CASCADE;
+ALTER TABLE imp_processorlog drop constraint if exists impprocessor_impprocessorlog CASCADE;
 
-ALTER TABLE imp_processorparameter DROP CONSTRAINT impprocessor_impprocessorparam CASCADE;
+ALTER TABLE imp_processorparameter drop constraint if exists impprocessor_impprocessorparam CASCADE;
 
-ALTER TABLE k_synonym DROP CONSTRAINT adlangu_ksynonym CASCADE;
+ALTER TABLE k_synonym drop constraint if exists adlangu_ksynonym CASCADE;
 
-ALTER TABLE m_changerequest DROP CONSTRAINT mfixchangenotice_mchangereques CASCADE;
+ALTER TABLE m_changerequest drop constraint if exists mfixchangenotice_mchangereques CASCADE;
 
-ALTER TABLE m_changerequest DROP CONSTRAINT ppproductbom_mchangerequest CASCADE;
+ALTER TABLE m_changerequest drop constraint if exists ppproductbom_mchangerequest CASCADE;
 
-ALTER TABLE m_costdetail DROP CONSTRAINT ppcostcollector_mcostdetail CASCADE;
+ALTER TABLE m_costdetail drop constraint if exists ppcostcollector_mcostdetail CASCADE;
 
-ALTER TABLE m_forecast DROP CONSTRAINT mpricelist_mforecast CASCADE;
+ALTER TABLE m_forecast drop constraint if exists mpricelist_mforecast CASCADE;
 
-ALTER TABLE m_forecastline DROP CONSTRAINT mwarehouse_mforecastline CASCADE;
+ALTER TABLE m_forecastline drop constraint if exists mwarehouse_mforecastline CASCADE;
 
-ALTER TABLE m_inout DROP CONSTRAINT cinvoice_minout CASCADE;
+ALTER TABLE m_inout drop constraint if exists cinvoice_minout CASCADE;
 
-ALTER TABLE m_inout DROP CONSTRAINT dropshipbpartner_minout CASCADE;
+ALTER TABLE m_inout drop constraint if exists dropshipbpartner_minout CASCADE;
 
-ALTER TABLE m_inout DROP CONSTRAINT dropshiplocation_minout CASCADE;
+ALTER TABLE m_inout drop constraint if exists dropshiplocation_minout CASCADE;
 
-ALTER TABLE m_inout DROP CONSTRAINT dropshipuser_minout CASCADE;
+ALTER TABLE m_inout drop constraint if exists dropshipuser_minout CASCADE;
 
-ALTER TABLE m_inout DROP CONSTRAINT mrma_minout CASCADE;
+ALTER TABLE m_inout drop constraint if exists mrma_minout CASCADE;
 
-ALTER TABLE m_inout DROP CONSTRAINT reversal_minout CASCADE;
+ALTER TABLE m_inout drop constraint if exists reversal_minout CASCADE;
 
-ALTER TABLE m_inoutconfirm DROP CONSTRAINT cinvoice_minoutconfirm CASCADE;
+ALTER TABLE m_inoutconfirm drop constraint if exists cinvoice_minoutconfirm CASCADE;
 
-ALTER TABLE m_inoutconfirm DROP CONSTRAINT minventory_minoutconfirm CASCADE;
+ALTER TABLE m_inoutconfirm drop constraint if exists minventory_minoutconfirm CASCADE;
 
-ALTER TABLE m_inoutline DROP CONSTRAINT mrmaline_minoutline CASCADE;
+ALTER TABLE m_inoutline drop constraint if exists mrmaline_minoutline CASCADE;
 
-ALTER TABLE m_inoutline DROP CONSTRAINT reversalline_minoutline CASCADE;
+ALTER TABLE m_inoutline drop constraint if exists reversalline_minoutline CASCADE;
 
-ALTER TABLE m_inoutlineconfirm DROP CONSTRAINT cinvoiceline_minoutlineconfirm CASCADE;
+ALTER TABLE m_inoutlineconfirm drop constraint if exists cinvoiceline_minoutlineconfirm CASCADE;
 
-ALTER TABLE m_inoutlineconfirm DROP CONSTRAINT minventoryline_minoutlineconfi CASCADE;
+ALTER TABLE m_inoutlineconfirm drop constraint if exists minventoryline_minoutlineconfi CASCADE;
 
-ALTER TABLE m_inventory DROP CONSTRAINT cdoctype_minventory CASCADE;
+ALTER TABLE m_inventory drop constraint if exists cdoctype_minventory CASCADE;
 
-ALTER TABLE m_inventory DROP CONSTRAINT reversal_minventory CASCADE;
+ALTER TABLE m_inventory drop constraint if exists reversal_minventory CASCADE;
 
-ALTER TABLE m_inventoryline DROP CONSTRAINT reversalline_minventoryline CASCADE;
+ALTER TABLE m_inventoryline drop constraint if exists reversalline_minventoryline CASCADE;
 
-ALTER TABLE m_movement DROP CONSTRAINT aduser_mmovement CASCADE;
+ALTER TABLE m_movement drop constraint if exists aduser_mmovement CASCADE;
 
-ALTER TABLE m_movement DROP CONSTRAINT cbpartner_mmovement CASCADE;
+ALTER TABLE m_movement drop constraint if exists cbpartner_mmovement CASCADE;
 
-ALTER TABLE m_movement DROP CONSTRAINT ccharge_mmovement CASCADE;
+ALTER TABLE m_movement drop constraint if exists ccharge_mmovement CASCADE;
 
-ALTER TABLE m_movement DROP CONSTRAINT cdoctype_mmovement CASCADE;
+ALTER TABLE m_movement drop constraint if exists cdoctype_mmovement CASCADE;
 
-ALTER TABLE m_movement DROP CONSTRAINT ddorder_mmovement CASCADE;
+ALTER TABLE m_movement drop constraint if exists ddorder_mmovement CASCADE;
 
-ALTER TABLE m_movement DROP CONSTRAINT mshipper_mmovement CASCADE;
+ALTER TABLE m_movement drop constraint if exists mshipper_mmovement CASCADE;
 
-ALTER TABLE m_movement DROP CONSTRAINT reversal_mmovement CASCADE;
+ALTER TABLE m_movement drop constraint if exists reversal_mmovement CASCADE;
 
-ALTER TABLE m_movement DROP CONSTRAINT salesrep_mmovement CASCADE;
+ALTER TABLE m_movement drop constraint if exists salesrep_mmovement CASCADE;
 
-ALTER TABLE m_movementline DROP CONSTRAINT ddorderline_mmovementline CASCADE;
+ALTER TABLE m_movementline drop constraint if exists ddorderline_mmovementline CASCADE;
 
-ALTER TABLE m_movementline DROP CONSTRAINT reversalline_mmovementline CASCADE;
+ALTER TABLE m_movementline drop constraint if exists reversalline_mmovementline CASCADE;
 
-ALTER TABLE m_pricelist_version DROP CONSTRAINT mpricelistversionbase_mpriceli CASCADE;
+ALTER TABLE m_pricelist_version drop constraint if exists mpricelistversionbase_mpriceli CASCADE;
 
-ALTER TABLE m_product DROP CONSTRAINT salesrep_mproduct CASCADE;
+ALTER TABLE m_product drop constraint if exists salesrep_mproduct CASCADE;
 
-ALTER TABLE m_product_category DROP CONSTRAINT adprintcolor_mproductcategory CASCADE;
+ALTER TABLE m_product_category drop constraint if exists adprintcolor_mproductcategory CASCADE;
 
-ALTER TABLE m_product_category DROP CONSTRAINT mproductcat_parentcat CASCADE;
+ALTER TABLE m_product_category drop constraint if exists mproductcat_parentcat CASCADE;
 
-ALTER TABLE m_productpricevendorbreak DROP CONSTRAINT cbpartner_mproductpricevendorb CASCADE;
+ALTER TABLE m_productpricevendorbreak drop constraint if exists cbpartner_mproductpricevendorb CASCADE;
 
-ALTER TABLE m_productpricevendorbreak DROP CONSTRAINT mpricelistversion_mproductpric CASCADE;
+ALTER TABLE m_productpricevendorbreak drop constraint if exists mpricelistversion_mproductpric CASCADE;
 
-ALTER TABLE m_productpricevendorbreak DROP CONSTRAINT mproduct_mproductpricevendorbr CASCADE;
+ALTER TABLE m_productpricevendorbreak drop constraint if exists mproduct_mproductpricevendorbr CASCADE;
 
-ALTER TABLE m_promotion DROP CONSTRAINT ccampaign_mpromotion CASCADE;
+ALTER TABLE m_promotion drop constraint if exists ccampaign_mpromotion CASCADE;
 
-ALTER TABLE m_promotiondistribution DROP CONSTRAINT mpromotion_mpromotiondistribut CASCADE;
+ALTER TABLE m_promotiondistribution drop constraint if exists mpromotion_mpromotiondistribut CASCADE;
 
-ALTER TABLE m_promotiondistribution DROP CONSTRAINT mpromotionline_mpromotiondistr CASCADE;
+ALTER TABLE m_promotiondistribution drop constraint if exists mpromotionline_mpromotiondistr CASCADE;
 
-ALTER TABLE m_promotiongroupline DROP CONSTRAINT mproduct_mpromotiongroupline CASCADE;
+ALTER TABLE m_promotiongroupline drop constraint if exists mproduct_mpromotiongroupline CASCADE;
 
-ALTER TABLE m_promotiongroupline DROP CONSTRAINT mpromotiongroup_mpromotiongrou CASCADE;
+ALTER TABLE m_promotiongroupline drop constraint if exists mpromotiongroup_mpromotiongrou CASCADE;
 
-ALTER TABLE m_promotionline DROP CONSTRAINT mpromotion_mpromotionline CASCADE;
+ALTER TABLE m_promotionline drop constraint if exists mpromotion_mpromotionline CASCADE;
 
-ALTER TABLE m_promotionline DROP CONSTRAINT mpromotiongroup_mpromotionline CASCADE;
+ALTER TABLE m_promotionline drop constraint if exists mpromotiongroup_mpromotionline CASCADE;
 
-ALTER TABLE m_promotionprecondition DROP CONSTRAINT cactivity_mpromotionpreconditi CASCADE;
+ALTER TABLE m_promotionprecondition drop constraint if exists cactivity_mpromotionpreconditi CASCADE;
 
-ALTER TABLE m_promotionprecondition DROP CONSTRAINT cbpartner_mpromotionpreconditi CASCADE;
+ALTER TABLE m_promotionprecondition drop constraint if exists cbpartner_mpromotionpreconditi CASCADE;
 
-ALTER TABLE m_promotionprecondition DROP CONSTRAINT cbpgroup_mpromotionpreconditio CASCADE;
+ALTER TABLE m_promotionprecondition drop constraint if exists cbpgroup_mpromotionpreconditio CASCADE;
 
-ALTER TABLE m_promotionprecondition DROP CONSTRAINT mpricelist_mpromotionprecondit CASCADE;
+ALTER TABLE m_promotionprecondition drop constraint if exists mpricelist_mpromotionprecondit CASCADE;
 
-ALTER TABLE m_promotionprecondition DROP CONSTRAINT mpromotion_mpromotionprecondit CASCADE;
+ALTER TABLE m_promotionprecondition drop constraint if exists mpromotion_mpromotionprecondit CASCADE;
 
-ALTER TABLE m_promotionprecondition DROP CONSTRAINT mwarehouse_mpromotionprecondit CASCADE;
+ALTER TABLE m_promotionprecondition drop constraint if exists mwarehouse_mpromotionprecondit CASCADE;
 
-ALTER TABLE m_promotionreward DROP CONSTRAINT ccharge_mpromotionreward CASCADE;
+ALTER TABLE m_promotionreward drop constraint if exists ccharge_mpromotionreward CASCADE;
 
-ALTER TABLE m_promotionreward DROP CONSTRAINT mpromotion_mpromotionreward CASCADE;
+ALTER TABLE m_promotionreward drop constraint if exists mpromotion_mpromotionreward CASCADE;
 
-ALTER TABLE m_promotionreward DROP CONSTRAINT mpromotiondistribution_mpromot CASCADE;
+ALTER TABLE m_promotionreward drop constraint if exists mpromotiondistribution_mpromot CASCADE;
 
-ALTER TABLE m_promotionreward DROP CONSTRAINT mtargetdistribution_mpromotion CASCADE;
+ALTER TABLE m_promotionreward drop constraint if exists mtargetdistribution_mpromotion CASCADE;
 
-ALTER TABLE m_replenish DROP CONSTRAINT mlocator_mreplenish CASCADE;
+ALTER TABLE m_replenish drop constraint if exists mlocator_mreplenish CASCADE;
 
-ALTER TABLE m_replenish DROP CONSTRAINT mwarehousesource_mreplenish CASCADE;
+ALTER TABLE m_replenish drop constraint if exists mwarehousesource_mreplenish CASCADE;
 
-ALTER TABLE m_requisition DROP CONSTRAINT cdoctype_mrequisition CASCADE;
+ALTER TABLE m_requisition drop constraint if exists cdoctype_mrequisition CASCADE;
 
-ALTER TABLE m_requisitionline DROP CONSTRAINT cbpartner_mrequisitionline CASCADE;
+ALTER TABLE m_requisitionline drop constraint if exists cbpartner_mrequisitionline CASCADE;
 
-ALTER TABLE m_requisitionline DROP CONSTRAINT ccharge_mrequisitionline CASCADE;
+ALTER TABLE m_requisitionline drop constraint if exists ccharge_mrequisitionline CASCADE;
 
-ALTER TABLE m_requisitionline DROP CONSTRAINT corderline_mrequisitionline CASCADE;
+ALTER TABLE m_requisitionline drop constraint if exists corderline_mrequisitionline CASCADE;
 
-ALTER TABLE m_requisitionline DROP CONSTRAINT cuom_mrequisitionline CASCADE;
+ALTER TABLE m_requisitionline drop constraint if exists cuom_mrequisitionline CASCADE;
 
-ALTER TABLE m_rma DROP CONSTRAINT cbpartner_mrma CASCADE;
+ALTER TABLE m_rma drop constraint if exists cbpartner_mrma CASCADE;
 
-ALTER TABLE m_rma DROP CONSTRAINT ccurrency_mrma CASCADE;
+ALTER TABLE m_rma drop constraint if exists ccurrency_mrma CASCADE;
 
-ALTER TABLE m_rma DROP CONSTRAINT cdoctype_mrma CASCADE;
+ALTER TABLE m_rma drop constraint if exists cdoctype_mrma CASCADE;
 
-ALTER TABLE m_rma DROP CONSTRAINT corder_mrma CASCADE;
+ALTER TABLE m_rma drop constraint if exists corder_mrma CASCADE;
 
-ALTER TABLE m_rma DROP CONSTRAINT mrmatype_mrma CASCADE;
+ALTER TABLE m_rma drop constraint if exists mrmatype_mrma CASCADE;
 
-ALTER TABLE m_rma DROP CONSTRAINT refrma_mrma CASCADE;
+ALTER TABLE m_rma drop constraint if exists refrma_mrma CASCADE;
 
-ALTER TABLE m_rma DROP CONSTRAINT salesrep_mrma CASCADE;
+ALTER TABLE m_rma drop constraint if exists salesrep_mrma CASCADE;
 
-ALTER TABLE m_rmaline DROP CONSTRAINT ccharge_mrmaline CASCADE;
+ALTER TABLE m_rmaline drop constraint if exists ccharge_mrmaline CASCADE;
 
-ALTER TABLE m_rmaline DROP CONSTRAINT refrmaline_mrmaline CASCADE;
+ALTER TABLE m_rmaline drop constraint if exists refrmaline_mrmaline CASCADE;
 
-ALTER TABLE m_transaction DROP CONSTRAINT ppcostcollector_mtransaction CASCADE;
+ALTER TABLE m_transaction drop constraint if exists ppcostcollector_mtransaction CASCADE;
 
-ALTER TABLE m_warehouse DROP CONSTRAINT mwarehousesource_mwarehouse CASCADE;
+ALTER TABLE m_warehouse drop constraint if exists mwarehousesource_mwarehouse CASCADE;
 
-ALTER TABLE pa_colorschema DROP CONSTRAINT entityt_pacolorschema CASCADE;
+ALTER TABLE pa_colorschema drop constraint if exists entityt_pacolorschema CASCADE;
 
-ALTER TABLE pa_dashboardcontent DROP CONSTRAINT adwindow_padashboardcontent CASCADE;
+ALTER TABLE pa_dashboardcontent drop constraint if exists adwindow_padashboardcontent CASCADE;
 
-ALTER TABLE pa_dashboardcontent DROP CONSTRAINT pagoal_padashboardcontent CASCADE;
+ALTER TABLE pa_dashboardcontent drop constraint if exists pagoal_padashboardcontent CASCADE;
 
-ALTER TABLE pa_goal DROP CONSTRAINT adrole_pagoal CASCADE;
+ALTER TABLE pa_goal drop constraint if exists adrole_pagoal CASCADE;
 
-ALTER TABLE pa_measure DROP CONSTRAINT cprojecttype_pameasure CASCADE;
+ALTER TABLE pa_measure drop constraint if exists cprojecttype_pameasure CASCADE;
 
-ALTER TABLE pa_measure DROP CONSTRAINT rrequesttype_pameasure CASCADE;
+ALTER TABLE pa_measure drop constraint if exists rrequesttype_pameasure CASCADE;
 
-ALTER TABLE pa_measurecalc DROP CONSTRAINT adtable_pameasurecalc CASCADE;
+ALTER TABLE pa_measurecalc drop constraint if exists adtable_pameasurecalc CASCADE;
 
-ALTER TABLE pa_measurecalc DROP CONSTRAINT entityt_pameasurecalc CASCADE;
+ALTER TABLE pa_measurecalc drop constraint if exists entityt_pameasurecalc CASCADE;
 
-ALTER TABLE pa_report DROP CONSTRAINT jasperprocess_pareport CASCADE;
+ALTER TABLE pa_report drop constraint if exists jasperprocess_pareport CASCADE;
 
-ALTER TABLE pa_report DROP CONSTRAINT pareportcube_pareport CASCADE;
+ALTER TABLE pa_report drop constraint if exists pareportcube_pareport CASCADE;
 
-ALTER TABLE pa_reportcolumn DROP CONSTRAINT adorgtrx_pareportcolumn CASCADE;
+ALTER TABLE pa_reportcolumn drop constraint if exists adorgtrx_pareportcolumn CASCADE;
 
-ALTER TABLE pa_reportcube DROP CONSTRAINT ccalendar_pareportcube CASCADE;
+ALTER TABLE pa_reportcube drop constraint if exists ccalendar_pareportcube CASCADE;
 
-ALTER TABLE pa_reportsource DROP CONSTRAINT adorgtrx_pareportsource CASCADE;
+ALTER TABLE pa_reportsource drop constraint if exists adorgtrx_pareportsource CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT adorgtrx_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists adorgtrx_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT aduser_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists aduser_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT cactivity_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists cactivity_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT ccampaign_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists ccampaign_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT cdoctype_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists cdoctype_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT cdoctypetarget_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists cdoctypetarget_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT cproject_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists cproject_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT cuom_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists cuom_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT mproduct_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists mproduct_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT mwarehouse_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists mwarehouse_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT pporder_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists pporder_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT pporderbomline_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists pporderbomline_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT ppordernode_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists ppordernode_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT pporderworkflow_ppcostcollecto CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists pporderworkflow_ppcostcollecto CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT reversal_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists reversal_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT sresource_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists sresource_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT user1_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists user1_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collector DROP CONSTRAINT user2_ppcostcollector CASCADE;
+ALTER TABLE pp_cost_collector drop constraint if exists user2_ppcostcollector CASCADE;
 
-ALTER TABLE pp_cost_collectorma DROP CONSTRAINT ppcostcollector_ppcostcollectorma CASCADE;
+ALTER TABLE pp_cost_collectorma drop constraint if exists ppcostcollector_ppcostcollectorma CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT cbpartner_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists cbpartner_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT corder_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists corder_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT corderline_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists corderline_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT ddorder_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists ddorder_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT ddorderline_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists ddorderline_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT mforecast_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists mforecast_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT mforecastline_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists mforecastline_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT mproduct_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists mproduct_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT mrequisition_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists mrequisition_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT mrequisitionline_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists mrequisitionline_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT mwarehouse_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists mwarehouse_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT planner_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists planner_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT pporder_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists pporder_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT pporderbomline_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists pporderbomline_ppmrp CASCADE;
 
-ALTER TABLE pp_mrp DROP CONSTRAINT sresource_ppmrp CASCADE;
+ALTER TABLE pp_mrp drop constraint if exists sresource_ppmrp CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT adorgtrx_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists adorgtrx_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT adworkflow_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists adworkflow_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT cactivity_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists cactivity_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT ccampaign_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists ccampaign_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT cdoctype_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists cdoctype_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT cdoctypetarget_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists cdoctypetarget_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT corderline_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists corderline_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT cproject_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists cproject_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT cuom_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists cuom_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT mproduct_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists mproduct_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT mwarehouse_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists mwarehouse_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT planner_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists planner_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT ppproductbom_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists ppproductbom_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT sresource_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists sresource_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT user1_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists user1_pporder CASCADE;
 
-ALTER TABLE pp_order DROP CONSTRAINT user2_pporder CASCADE;
+ALTER TABLE pp_order drop constraint if exists user2_pporder CASCADE;
 
-ALTER TABLE pp_order_bom DROP CONSTRAINT cuom_pporderbom CASCADE;
+ALTER TABLE pp_order_bom drop constraint if exists cuom_pporderbom CASCADE;
 
-ALTER TABLE pp_order_bom DROP CONSTRAINT mchangenotice_pporderbom CASCADE;
+ALTER TABLE pp_order_bom drop constraint if exists mchangenotice_pporderbom CASCADE;
 
-ALTER TABLE pp_order_bom DROP CONSTRAINT mproduct_pporderbom CASCADE;
+ALTER TABLE pp_order_bom drop constraint if exists mproduct_pporderbom CASCADE;
 
-ALTER TABLE pp_order_bom DROP CONSTRAINT pporder_pporderbom CASCADE;
+ALTER TABLE pp_order_bom drop constraint if exists pporder_pporderbom CASCADE;
 
-ALTER TABLE pp_order_bom_trl DROP CONSTRAINT adlangu_pporderbomtrl CASCADE;
+ALTER TABLE pp_order_bom_trl drop constraint if exists adlangu_pporderbomtrl CASCADE;
 
-ALTER TABLE pp_order_bom_trl DROP CONSTRAINT pporderbom_pporderbomtrl CASCADE;
+ALTER TABLE pp_order_bom_trl drop constraint if exists pporderbom_pporderbomtrl CASCADE;
 
-ALTER TABLE pp_order_bomline DROP CONSTRAINT aduser_pporderbomline CASCADE;
+ALTER TABLE pp_order_bomline drop constraint if exists aduser_pporderbomline CASCADE;
 
-ALTER TABLE pp_order_bomline DROP CONSTRAINT cuom_pporderbomline CASCADE;
+ALTER TABLE pp_order_bomline drop constraint if exists cuom_pporderbomline CASCADE;
 
-ALTER TABLE pp_order_bomline DROP CONSTRAINT mchangenotice_pporderbomline CASCADE;
+ALTER TABLE pp_order_bomline drop constraint if exists mchangenotice_pporderbomline CASCADE;
 
-ALTER TABLE pp_order_bomline DROP CONSTRAINT mproduct_pporderbomline CASCADE;
+ALTER TABLE pp_order_bomline drop constraint if exists mproduct_pporderbomline CASCADE;
 
-ALTER TABLE pp_order_bomline DROP CONSTRAINT mwarehouse_pporderbomline CASCADE;
+ALTER TABLE pp_order_bomline drop constraint if exists mwarehouse_pporderbomline CASCADE;
 
-ALTER TABLE pp_order_bomline DROP CONSTRAINT pporder_pporderbomline CASCADE;
+ALTER TABLE pp_order_bomline drop constraint if exists pporder_pporderbomline CASCADE;
 
-ALTER TABLE pp_order_bomline DROP CONSTRAINT pporderbom_pporderbomline CASCADE;
+ALTER TABLE pp_order_bomline drop constraint if exists pporderbom_pporderbomline CASCADE;
 
-ALTER TABLE pp_order_bomline_trl DROP CONSTRAINT adlangu_pporderbomlinetrl CASCADE;
+ALTER TABLE pp_order_bomline_trl drop constraint if exists adlangu_pporderbomlinetrl CASCADE;
 
-ALTER TABLE pp_order_bomline_trl DROP CONSTRAINT pporderbomline_pporderbomlinet CASCADE;
+ALTER TABLE pp_order_bomline_trl drop constraint if exists pporderbomline_pporderbomlinet CASCADE;
 
-ALTER TABLE pp_order_cost DROP CONSTRAINT adworkflow_ppordercost CASCADE;
+ALTER TABLE pp_order_cost drop constraint if exists adworkflow_ppordercost CASCADE;
 
-ALTER TABLE pp_order_cost DROP CONSTRAINT cacctschema_ppordercost CASCADE;
+ALTER TABLE pp_order_cost drop constraint if exists cacctschema_ppordercost CASCADE;
 
-ALTER TABLE pp_order_cost DROP CONSTRAINT mcostelement_ppordercost CASCADE;
+ALTER TABLE pp_order_cost drop constraint if exists mcostelement_ppordercost CASCADE;
 
-ALTER TABLE pp_order_cost DROP CONSTRAINT mcosttype_ppordercost CASCADE;
+ALTER TABLE pp_order_cost drop constraint if exists mcosttype_ppordercost CASCADE;
 
-ALTER TABLE pp_order_cost DROP CONSTRAINT mproduct_ppordercost CASCADE;
+ALTER TABLE pp_order_cost drop constraint if exists mproduct_ppordercost CASCADE;
 
-ALTER TABLE pp_order_cost DROP CONSTRAINT pporder_ppordercost CASCADE;
+ALTER TABLE pp_order_cost drop constraint if exists pporder_ppordercost CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adcolumn_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adcolumn_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adform_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adform_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adimage_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adimage_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adprocess_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adprocess_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adtask_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adtask_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adwfblock_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adwfblock_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adwfnode_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adwfnode_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adwfresponsible_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adwfresponsible_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adwindow_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adwindow_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT adworkflow_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists adworkflow_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT cbpartner_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists cbpartner_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT entityt_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists entityt_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT pporder_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists pporder_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT pporderworkflow_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists pporderworkflow_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT sresource_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists sresource_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node DROP CONSTRAINT workflow_ppordernode CASCADE;
+ALTER TABLE pp_order_node drop constraint if exists workflow_ppordernode CASCADE;
 
-ALTER TABLE pp_order_node_asset DROP CONSTRAINT aasset_ppordernodeasset CASCADE;
+ALTER TABLE pp_order_node_asset drop constraint if exists aasset_ppordernodeasset CASCADE;
 
-ALTER TABLE pp_order_node_asset DROP CONSTRAINT pporder_ppordernodeasset CASCADE;
+ALTER TABLE pp_order_node_asset drop constraint if exists pporder_ppordernodeasset CASCADE;
 
-ALTER TABLE pp_order_node_asset DROP CONSTRAINT ppordernode_ppordernodeasset CASCADE;
+ALTER TABLE pp_order_node_asset drop constraint if exists ppordernode_ppordernodeasset CASCADE;
 
-ALTER TABLE pp_order_node_asset DROP CONSTRAINT pporderworkflow_ppordernodeass CASCADE;
+ALTER TABLE pp_order_node_asset drop constraint if exists pporderworkflow_ppordernodeass CASCADE;
 
-ALTER TABLE pp_order_node_product DROP CONSTRAINT mproduct_ppordernodeproduct CASCADE;
+ALTER TABLE pp_order_node_product drop constraint if exists mproduct_ppordernodeproduct CASCADE;
 
-ALTER TABLE pp_order_node_product DROP CONSTRAINT pporder_ppordernodeproduct CASCADE;
+ALTER TABLE pp_order_node_product drop constraint if exists pporder_ppordernodeproduct CASCADE;
 
-ALTER TABLE pp_order_node_product DROP CONSTRAINT ppordernode_ppordernodeproduct CASCADE;
+ALTER TABLE pp_order_node_product drop constraint if exists ppordernode_ppordernodeproduct CASCADE;
 
-ALTER TABLE pp_order_node_product DROP CONSTRAINT pporderworkflow_ppordernodepro CASCADE;
+ALTER TABLE pp_order_node_product drop constraint if exists pporderworkflow_ppordernodepro CASCADE;
 
-ALTER TABLE pp_order_node_trl DROP CONSTRAINT adlangu_ppordernodetrl CASCADE;
+ALTER TABLE pp_order_node_trl drop constraint if exists adlangu_ppordernodetrl CASCADE;
 
-ALTER TABLE pp_order_nodenext DROP CONSTRAINT adwfnext_ppordernodenext CASCADE;
+ALTER TABLE pp_order_nodenext drop constraint if exists adwfnext_ppordernodenext CASCADE;
 
-ALTER TABLE pp_order_nodenext DROP CONSTRAINT adwfnode_ppordernodenext CASCADE;
+ALTER TABLE pp_order_nodenext drop constraint if exists adwfnode_ppordernodenext CASCADE;
 
-ALTER TABLE pp_order_nodenext DROP CONSTRAINT entityt_ppordernodenext CASCADE;
+ALTER TABLE pp_order_nodenext drop constraint if exists entityt_ppordernodenext CASCADE;
 
-ALTER TABLE pp_order_nodenext DROP CONSTRAINT pporder_ppordernodenext CASCADE;
+ALTER TABLE pp_order_nodenext drop constraint if exists pporder_ppordernodenext CASCADE;
 
-ALTER TABLE pp_order_nodenext DROP CONSTRAINT ppordernext_ppordernodenext CASCADE;
+ALTER TABLE pp_order_nodenext drop constraint if exists ppordernext_ppordernodenext CASCADE;
 
-ALTER TABLE pp_order_nodenext DROP CONSTRAINT ppordernode_ppordernodenext CASCADE;
+ALTER TABLE pp_order_nodenext drop constraint if exists ppordernode_ppordernodenext CASCADE;
 
-ALTER TABLE pp_order_workflow DROP CONSTRAINT adtable_pporderworkflow CASCADE;
+ALTER TABLE pp_order_workflow drop constraint if exists adtable_pporderworkflow CASCADE;
 
-ALTER TABLE pp_order_workflow DROP CONSTRAINT adwfnode_pporderworkflow CASCADE;
+ALTER TABLE pp_order_workflow drop constraint if exists adwfnode_pporderworkflow CASCADE;
 
-ALTER TABLE pp_order_workflow DROP CONSTRAINT adwfresponsible_pporderworkflo CASCADE;
+ALTER TABLE pp_order_workflow drop constraint if exists adwfresponsible_pporderworkflo CASCADE;
 
-ALTER TABLE pp_order_workflow DROP CONSTRAINT adworkflow_pporderworkflow CASCADE;
+ALTER TABLE pp_order_workflow drop constraint if exists adworkflow_pporderworkflow CASCADE;
 
-ALTER TABLE pp_order_workflow DROP CONSTRAINT adworkflowprocessor_pporderwor CASCADE;
+ALTER TABLE pp_order_workflow drop constraint if exists adworkflowprocessor_pporderwor CASCADE;
 
-ALTER TABLE pp_order_workflow DROP CONSTRAINT entityt_pporderworkflow CASCADE;
+ALTER TABLE pp_order_workflow drop constraint if exists entityt_pporderworkflow CASCADE;
 
-ALTER TABLE pp_order_workflow DROP CONSTRAINT pporder_pporderworkflow CASCADE;
+ALTER TABLE pp_order_workflow drop constraint if exists pporder_pporderworkflow CASCADE;
 
-ALTER TABLE pp_order_workflow DROP CONSTRAINT ppordernode_pporderworkflow CASCADE;
+ALTER TABLE pp_order_workflow drop constraint if exists ppordernode_pporderworkflow CASCADE;
 
-ALTER TABLE pp_order_workflow DROP CONSTRAINT sresource_pporderworkflow CASCADE;
+ALTER TABLE pp_order_workflow drop constraint if exists sresource_pporderworkflow CASCADE;
 
-ALTER TABLE pp_order_workflow_trl DROP CONSTRAINT adlangu_pporderworkflowtrl CASCADE;
+ALTER TABLE pp_order_workflow_trl drop constraint if exists adlangu_pporderworkflowtrl CASCADE;
 
-ALTER TABLE pp_order_workflow_trl DROP CONSTRAINT pporderworkflow_pporderworkflo CASCADE;
+ALTER TABLE pp_order_workflow_trl drop constraint if exists pporderworkflow_pporderworkflo CASCADE;
 
-ALTER TABLE pp_product_bom DROP CONSTRAINT cuom_ppproductbom CASCADE;
+ALTER TABLE pp_product_bom drop constraint if exists cuom_ppproductbom CASCADE;
 
-ALTER TABLE pp_product_bom DROP CONSTRAINT mchangenotice_ppproductbom CASCADE;
+ALTER TABLE pp_product_bom drop constraint if exists mchangenotice_ppproductbom CASCADE;
 
-ALTER TABLE pp_product_bom DROP CONSTRAINT mproduct_ppproductbom CASCADE;
+ALTER TABLE pp_product_bom drop constraint if exists mproduct_ppproductbom CASCADE;
 
-ALTER TABLE pp_product_bom_trl DROP CONSTRAINT adlangu_ppproductbomtrl CASCADE;
+ALTER TABLE pp_product_bom_trl drop constraint if exists adlangu_ppproductbomtrl CASCADE;
 
-ALTER TABLE pp_product_bom_trl DROP CONSTRAINT ppproductbom_ppproductbomtrl CASCADE;
+ALTER TABLE pp_product_bom_trl drop constraint if exists ppproductbom_ppproductbomtrl CASCADE;
 
-ALTER TABLE pp_product_bomline DROP CONSTRAINT cuom_ppproductbomline CASCADE;
+ALTER TABLE pp_product_bomline drop constraint if exists cuom_ppproductbomline CASCADE;
 
-ALTER TABLE pp_product_bomline DROP CONSTRAINT mchangenotice_ppproductbomline CASCADE;
+ALTER TABLE pp_product_bomline drop constraint if exists mchangenotice_ppproductbomline CASCADE;
 
-ALTER TABLE pp_product_bomline DROP CONSTRAINT mproduct_ppproductbomline CASCADE;
+ALTER TABLE pp_product_bomline drop constraint if exists mproduct_ppproductbomline CASCADE;
 
-ALTER TABLE pp_product_bomline DROP CONSTRAINT ppproductbom_ppproductbomline CASCADE;
+ALTER TABLE pp_product_bomline drop constraint if exists ppproductbom_ppproductbomline CASCADE;
 
-ALTER TABLE pp_product_bomline_trl DROP CONSTRAINT adlangu_ppproductbomlinetrl CASCADE;
+ALTER TABLE pp_product_bomline_trl drop constraint if exists adlangu_ppproductbomlinetrl CASCADE;
 
-ALTER TABLE pp_product_bomline_trl DROP CONSTRAINT ppproductbomline_ppproductboml CASCADE;
+ALTER TABLE pp_product_bomline_trl drop constraint if exists ppproductbomline_ppproductboml CASCADE;
 
-ALTER TABLE pp_product_planning DROP CONSTRAINT adworkflow_ppproductplanning CASCADE;
+ALTER TABLE pp_product_planning drop constraint if exists adworkflow_ppproductplanning CASCADE;
 
-ALTER TABLE pp_product_planning DROP CONSTRAINT ddnetworkdistribution_ppproduc CASCADE;
+ALTER TABLE pp_product_planning drop constraint if exists ddnetworkdistribution_ppproduc CASCADE;
 
-ALTER TABLE pp_product_planning DROP CONSTRAINT mproduct_ppproductplanning CASCADE;
+ALTER TABLE pp_product_planning drop constraint if exists mproduct_ppproductplanning CASCADE;
 
-ALTER TABLE pp_product_planning DROP CONSTRAINT mwarehouse_ppproductplanning CASCADE;
+ALTER TABLE pp_product_planning drop constraint if exists mwarehouse_ppproductplanning CASCADE;
 
-ALTER TABLE pp_product_planning DROP CONSTRAINT planner_ppproductplanning CASCADE;
+ALTER TABLE pp_product_planning drop constraint if exists planner_ppproductplanning CASCADE;
 
-ALTER TABLE pp_product_planning DROP CONSTRAINT ppproductbom_ppproductplanning CASCADE;
+ALTER TABLE pp_product_planning drop constraint if exists ppproductbom_ppproductplanning CASCADE;
 
-ALTER TABLE pp_product_planning DROP CONSTRAINT sresource_ppproductplanning CASCADE;
+ALTER TABLE pp_product_planning drop constraint if exists sresource_ppproductplanning CASCADE;
 
-ALTER TABLE pp_wf_node_asset DROP CONSTRAINT aasset_ppwfnodeasset CASCADE;
+ALTER TABLE pp_wf_node_asset drop constraint if exists aasset_ppwfnodeasset CASCADE;
 
-ALTER TABLE pp_wf_node_asset DROP CONSTRAINT adwfnode_ppwfnodeasset CASCADE;
+ALTER TABLE pp_wf_node_asset drop constraint if exists adwfnode_ppwfnodeasset CASCADE;
 
-ALTER TABLE pp_wf_node_product DROP CONSTRAINT adwfnode_ppwfnodeproduct CASCADE;
+ALTER TABLE pp_wf_node_product drop constraint if exists adwfnode_ppwfnodeproduct CASCADE;
 
-ALTER TABLE pp_wf_node_product DROP CONSTRAINT entityt_ppwfnodeproduct CASCADE;
+ALTER TABLE pp_wf_node_product drop constraint if exists entityt_ppwfnodeproduct CASCADE;
 
-ALTER TABLE pp_wf_node_product DROP CONSTRAINT mproduct_ppwfnodeproduct CASCADE;
+ALTER TABLE pp_wf_node_product drop constraint if exists mproduct_ppwfnodeproduct CASCADE;
 
-ALTER TABLE qm_specification DROP CONSTRAINT adworkflow_qmspecification CASCADE;
+ALTER TABLE qm_specification drop constraint if exists adworkflow_qmspecification CASCADE;
 
-ALTER TABLE qm_specification DROP CONSTRAINT mattributeset_qmspecification CASCADE;
+ALTER TABLE qm_specification drop constraint if exists mattributeset_qmspecification CASCADE;
 
-ALTER TABLE qm_specification DROP CONSTRAINT mproduct_qmspecification CASCADE;
+ALTER TABLE qm_specification drop constraint if exists mproduct_qmspecification CASCADE;
 
-ALTER TABLE qm_specification DROP CONSTRAINT ppproductbom_qmspecification CASCADE;
+ALTER TABLE qm_specification drop constraint if exists ppproductbom_qmspecification CASCADE;
 
-ALTER TABLE qm_specificationline DROP CONSTRAINT mattribute_qmspecificationline CASCADE;
+ALTER TABLE qm_specificationline drop constraint if exists mattribute_qmspecificationline CASCADE;
 
-ALTER TABLE qm_specificationline DROP CONSTRAINT qmspecification_qmspecificatio CASCADE;
+ALTER TABLE qm_specificationline drop constraint if exists qmspecification_qmspecificatio CASCADE;
 
-ALTER TABLE r_category DROP CONSTRAINT mproduct_rcategory CASCADE;
+ALTER TABLE r_category drop constraint if exists mproduct_rcategory CASCADE;
 
-ALTER TABLE r_group DROP CONSTRAINT mbom_rgroup CASCADE;
+ALTER TABLE r_group drop constraint if exists mbom_rgroup CASCADE;
 
-ALTER TABLE r_group DROP CONSTRAINT mchangenotice_rgroup CASCADE;
+ALTER TABLE r_group drop constraint if exists mchangenotice_rgroup CASCADE;
 
-ALTER TABLE r_group DROP CONSTRAINT ppproductbom_rgroup CASCADE;
+ALTER TABLE r_group drop constraint if exists ppproductbom_rgroup CASCADE;
 
-ALTER TABLE r_issueknown DROP CONSTRAINT rissuerecommendation_rissuekno CASCADE;
+ALTER TABLE r_issueknown drop constraint if exists rissuerecommendation_rissuekno CASCADE;
 
-ALTER TABLE r_issuesystem DROP CONSTRAINT aasset_rissuesystem CASCADE;
+ALTER TABLE r_issuesystem drop constraint if exists aasset_rissuesystem CASCADE;
 
-ALTER TABLE r_request DROP CONSTRAINT mchangerequest_rrequest CASCADE;
+ALTER TABLE r_request drop constraint if exists mchangerequest_rrequest CASCADE;
 
-ALTER TABLE r_requestaction DROP CONSTRAINT mproductspent_rrequestaction CASCADE;
+ALTER TABLE r_requestaction drop constraint if exists mproductspent_rrequestaction CASCADE;
 
-ALTER TABLE r_requestprocessor DROP CONSTRAINT rrequesttype_rrequestprocessor CASCADE;
+ALTER TABLE r_requestprocessor drop constraint if exists rrequesttype_rrequestprocessor CASCADE;
 
-ALTER TABLE r_requesttype DROP CONSTRAINT rstatuscategory_rrequesttype CASCADE;
+ALTER TABLE r_requesttype drop constraint if exists rstatuscategory_rrequesttype CASCADE;
 
-ALTER TABLE r_requestupdate DROP CONSTRAINT mproductspent_rrequestupdate CASCADE;
+ALTER TABLE r_requestupdate drop constraint if exists mproductspent_rrequestupdate CASCADE;
 
-ALTER TABLE r_status DROP CONSTRAINT nextstatus_rstatus CASCADE;
+ALTER TABLE r_status drop constraint if exists nextstatus_rstatus CASCADE;
 
-ALTER TABLE r_status DROP CONSTRAINT rstatuscategory_rstatus CASCADE;
+ALTER TABLE r_status drop constraint if exists rstatuscategory_rstatus CASCADE;
 
-ALTER TABLE r_status DROP CONSTRAINT updatestatus_rstatus CASCADE;
+ALTER TABLE r_status drop constraint if exists updatestatus_rstatus CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT cardbankaccount_uposterminal CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists cardbankaccount_uposterminal CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT cardtransferbankaccount_uposte CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists cardtransferbankaccount_uposte CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT cardtransfercashbook_upostermi CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists cardtransfercashbook_upostermi CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT cashtransferbankaccount_uposte CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists cashtransferbankaccount_uposte CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT cashtransfercashbook_upostermi CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists cashtransfercashbook_upostermi CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT ccashbook_uposterminal CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists ccashbook_uposterminal CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT ccashbpartner_uposterminal CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists ccashbpartner_uposterminal CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT checkbankaccount_uposterminal CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists checkbankaccount_uposterminal CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT checktransferbankaccount_upost CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists checktransferbankaccount_upost CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT checktransfercashbook_uposterm CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists checktransfercashbook_uposterm CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT ctemplatebpartner_uposterminal CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists ctemplatebpartner_uposterminal CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT mwarehouse_uposterminal CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists mwarehouse_uposterminal CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT popricelist_uposterminal CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists popricelist_uposterminal CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT salesrep_uposterminal CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists salesrep_uposterminal CASCADE;
 
-ALTER TABLE u_posterminal DROP CONSTRAINT sopricelist_uposterminal CASCADE;
+ALTER TABLE u_posterminal drop constraint if exists sopricelist_uposterminal CASCADE;
 
-ALTER TABLE u_rolemenu DROP CONSTRAINT adrole_urolemenu CASCADE;
+ALTER TABLE u_rolemenu drop constraint if exists adrole_urolemenu CASCADE;
 
-ALTER TABLE u_rolemenu DROP CONSTRAINT uwebmenu_urolemenu CASCADE;
+ALTER TABLE u_rolemenu drop constraint if exists uwebmenu_urolemenu CASCADE;
 
-ALTER TABLE u_webmenu DROP CONSTRAINT parentmenu_uwebmenu CASCADE;
+ALTER TABLE u_webmenu drop constraint if exists parentmenu_uwebmenu CASCADE;
 
-ALTER TABLE w_store DROP CONSTRAINT cpaymentterm_wstore CASCADE;
+ALTER TABLE w_store drop constraint if exists cpaymentterm_wstore CASCADE;
 
-ALTER TABLE w_store DROP CONSTRAINT mpricelist_wstore CASCADE;
+ALTER TABLE w_store drop constraint if exists mpricelist_wstore CASCADE;
 
-ALTER TABLE w_store DROP CONSTRAINT mwarehouse_wstore CASCADE;
+ALTER TABLE w_store drop constraint if exists mwarehouse_wstore CASCADE;
 
-ALTER TABLE w_store DROP CONSTRAINT salesrep_wstore CASCADE;
+ALTER TABLE w_store drop constraint if exists salesrep_wstore CASCADE;
 
 
 
@@ -1590,9 +1590,9 @@ ALTER TABLE ad_package_exp_detail ADD CONSTRAINT adworkbench_adpackageexpdetail 
 
 ALTER TABLE ad_package_exp_detail ADD CONSTRAINT adworkflow_adpackageexpdetail FOREIGN KEY(ad_workflow_id) REFERENCES ad_workflow DEFERRABLE INITIALLY DEFERRED;
 
-ALTER TABLE ad_package_imp_backup ADD CONSTRAINT adcolumn_adpackageimpbackup FOREIGN KEY(ad_column_id) REFERENCES ad_column DEFERRABLE INITIALLY DEFERRED;
+-- ALTER TABLE ad_package_imp_backup ADD CONSTRAINT adcolumn_adpackageimpbackup FOREIGN KEY(ad_column_id) REFERENCES ad_column DEFERRABLE INITIALLY DEFERRED;
      
-ALTER TABLE ad_package_imp_backup ADD CONSTRAINT adreference_adpackageimpbackup FOREIGN KEY(ad_reference_id) REFERENCES ad_reference DEFERRABLE INITIALLY DEFERRED;
+-- ALTER TABLE ad_package_imp_backup ADD CONSTRAINT adreference_adpackageimpbackup FOREIGN KEY(ad_reference_id) REFERENCES ad_reference DEFERRABLE INITIALLY DEFERRED;
 
 ALTER TABLE ad_printform ADD CONSTRAINT distribordermailtext_adprintfo FOREIGN KEY(distrib_order_mailtext_id) REFERENCES r_mailtext DEFERRABLE INITIALLY DEFERRED;
 
@@ -1858,9 +1858,9 @@ ALTER TABLE c_payment ADD CONSTRAINT c_payment__c_cashbo_c_cashbook FOREIGN KEY(
 	    
 ALTER TABLE c_payment ADD CONSTRAINT cinvoice_cpayment FOREIGN KEY(c_invoice_id) REFERENCES c_invoice DEFERRABLE INITIALLY DEFERRED;
 			   
-ALTER TABLE c_payment ADD CONSTRAINT corder_cpayment FOREIGN KEY(c_order_id) REFERENCES c_order DEFERRABLE INITIALLY DEFERRED;
+-- ALTER TABLE c_payment ADD CONSTRAINT corder_cpayment FOREIGN KEY(c_order_id) REFERENCES c_order DEFERRABLE INITIALLY DEFERRED;
 				 
-ALTER TABLE c_payment ADD CONSTRAINT refpayment_cpayment FOREIGN KEY(ref_payment_id) REFERENCES c_payment DEFERRABLE INITIALLY DEFERRED;
+-- ALTER TABLE c_payment ADD CONSTRAINT refpayment_cpayment FOREIGN KEY(ref_payment_id) REFERENCES c_payment DEFERRABLE INITIALLY DEFERRED;
 		       
 ALTER TABLE c_payment ADD CONSTRAINT reversal_cpayment FOREIGN KEY(reversal_id) REFERENCES c_payment DEFERRABLE INITIALLY DEFERRED;
 			    
@@ -2280,7 +2280,7 @@ ALTER TABLE m_forecast ADD CONSTRAINT mpricelist_mforecast FOREIGN KEY(m_priceli
 		   
 ALTER TABLE m_forecastline ADD CONSTRAINT mwarehouse_mforecastline FOREIGN KEY(m_warehouse_id) REFERENCES m_warehouse DEFERRABLE INITIALLY DEFERRED;
 	   
-ALTER TABLE m_inout ADD CONSTRAINT cinvoice_minout FOREIGN KEY(c_invoice_id) REFERENCES c_invoice DEFERRABLE INITIALLY DEFERRED;
+-- ALTER TABLE m_inout ADD CONSTRAINT cinvoice_minout FOREIGN KEY(c_invoice_id) REFERENCES c_invoice DEFERRABLE INITIALLY DEFERRED;
 			       
 ALTER TABLE m_inout ADD CONSTRAINT dropshipbpartner_minout FOREIGN KEY(dropship_bpartner_id) REFERENCES c_bpartner DEFERRABLE INITIALLY DEFERRED;
 	      
@@ -2388,7 +2388,7 @@ ALTER TABLE m_requisitionline ADD CONSTRAINT cbpartner_mrequisitionline FOREIGN 
 	
 ALTER TABLE m_requisitionline ADD CONSTRAINT ccharge_mrequisitionline FOREIGN KEY(c_charge_id) REFERENCES c_charge DEFERRABLE INITIALLY DEFERRED;
 	      
-ALTER TABLE m_requisitionline ADD CONSTRAINT corderline_mrequisitionline FOREIGN KEY(c_orderline_id) REFERENCES c_orderline DEFERRABLE INITIALLY DEFERRED;
+-- ALTER TABLE m_requisitionline ADD CONSTRAINT corderline_mrequisitionline FOREIGN KEY(c_orderline_id) REFERENCES c_orderline DEFERRABLE INITIALLY DEFERRED;
      
 ALTER TABLE m_requisitionline ADD CONSTRAINT cuom_mrequisitionline FOREIGN KEY(c_uom_id) REFERENCES c_uom DEFERRABLE INITIALLY DEFERRED;
 		       

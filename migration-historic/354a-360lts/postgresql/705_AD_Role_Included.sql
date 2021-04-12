@@ -103,15 +103,15 @@ UPDATE AD_Column SET IsUpdateable='N',Updated=TO_TIMESTAMP('2009-07-27 19:48:09'
 ;
 
 -- Jul 27, 2009 7:49:08 PM EEST
-INSERT INTO AD_Reference (AD_Client_ID,AD_Org_ID,AD_Reference_ID,Created,CreatedBy,EntityType,IsActive,IsOrderByValue,Name,Updated,UpdatedBy,ValidationType) VALUES (0,0,53317,TO_TIMESTAMP('2009-07-27 19:49:07','YYYY-MM-DD HH24:MI:SS'),0,'D','Y','N','AD_Role',TO_TIMESTAMP('2009-07-27 19:49:07','YYYY-MM-DD HH24:MI:SS'),0,'T')
+-- INSERT INTO AD_Reference (AD_Client_ID,AD_Org_ID,AD_Reference_ID,Created,CreatedBy,EntityType,IsActive,IsOrderByValue,Name,Updated,UpdatedBy,ValidationType) VALUES (0,0,53317,TO_TIMESTAMP('2009-07-27 19:49:07','YYYY-MM-DD HH24:MI:SS'),0,'D','Y','N','AD_Role',TO_TIMESTAMP('2009-07-27 19:49:07','YYYY-MM-DD HH24:MI:SS'),0,'T')
 ;
 
 -- Jul 27, 2009 7:49:08 PM EEST
-INSERT INTO AD_Reference_Trl (AD_Language,AD_Reference_ID, Description,Help,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Reference_ID, t.Description,t.Help,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Reference t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Reference_ID=53317 AND EXISTS (SELECT * FROM AD_Reference_Trl tt WHERE tt.AD_Language!=l.AD_Language OR tt.AD_Reference_ID!=t.AD_Reference_ID)
+-- INSERT INTO AD_Reference_Trl (AD_Language,AD_Reference_ID, Description,Help,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Reference_ID, t.Description,t.Help,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Reference t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Reference_ID=53317 AND EXISTS (SELECT * FROM AD_Reference_Trl tt WHERE tt.AD_Language!=l.AD_Language OR tt.AD_Reference_ID!=t.AD_Reference_ID)
 ;
 
 -- Jul 27, 2009 7:50:13 PM EEST
-INSERT INTO AD_Ref_Table (AD_Client_ID,AD_Display,AD_Key,AD_Org_ID,AD_Reference_ID,AD_Table_ID,Created,CreatedBy,EntityType,IsActive,IsValueDisplayed,Updated,UpdatedBy) VALUES (0,532,531,0,53317,156,TO_TIMESTAMP('2009-07-27 19:50:13','YYYY-MM-DD HH24:MI:SS'),0,'D','Y','N',TO_TIMESTAMP('2009-07-27 19:50:13','YYYY-MM-DD HH24:MI:SS'),0)
+-- INSERT INTO AD_Ref_Table (AD_Client_ID,AD_Display,AD_Key,AD_Org_ID,AD_Reference_ID,AD_Table_ID,Created,CreatedBy,EntityType,IsActive,IsValueDisplayed,Updated,UpdatedBy) VALUES (0,532,531,0,53317,156,TO_TIMESTAMP('2009-07-27 19:50:13','YYYY-MM-DD HH24:MI:SS'),0,'D','Y','N',TO_TIMESTAMP('2009-07-27 19:50:13','YYYY-MM-DD HH24:MI:SS'),0)
 ;
 
 -- Jul 27, 2009 7:50:45 PM EEST
@@ -265,15 +265,15 @@ UPDATE AD_Column SET IsParent='N',Updated=TO_TIMESTAMP('2009-07-27 19:59:00','YY
 UPDATE AD_Column SET IsParent='Y', IsUpdateable='N',Updated=TO_TIMESTAMP('2009-07-27 19:59:42','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=0 WHERE AD_Column_ID=57949
 ;
 
-CREATE TABLE AD_Role_Included (AD_Client_ID NUMERIC(10) NOT NULL, AD_Org_ID NUMERIC(10) NOT NULL, AD_Role_ID NUMERIC(10) NOT NULL, Created TIMESTAMP NOT NULL, CreatedBy NUMERIC(10) NOT NULL, Included_Role_ID NUMERIC(10) NOT NULL, IsActive CHAR(1) DEFAULT 'Y' CHECK (IsActive IN ('Y','N')) NOT NULL, SeqNo NUMERIC(10) NOT NULL, Updated TIMESTAMP NOT NULL, UpdatedBy NUMERIC(10) NOT NULL, CONSTRAINT AD_Role_Included_Key PRIMARY KEY (AD_Role_ID, Included_Role_ID))
+-- CREATE TABLE AD_Role_Included (AD_Client_ID NUMERIC(10) NOT NULL, AD_Org_ID NUMERIC(10) NOT NULL, AD_Role_ID NUMERIC(10) NOT NULL, Created TIMESTAMP NOT NULL, CreatedBy NUMERIC(10) NOT NULL, Included_Role_ID NUMERIC(10) NOT NULL, IsActive CHAR(1) DEFAULT 'Y' CHECK (IsActive IN ('Y','N')) NOT NULL, SeqNo NUMERIC(10) NOT NULL, Updated TIMESTAMP NOT NULL, UpdatedBy NUMERIC(10) NOT NULL, CONSTRAINT AD_Role_Included_Key PRIMARY KEY (AD_Role_ID, Included_Role_ID))
 ;
 
-ALTER TABLE AD_Role_Included ADD CONSTRAINT AD_Role_Included_Parent FOREIGN KEY (AD_Role_ID)
-	REFERENCES AD_Role(AD_Role_ID) ON DELETE CASCADE
+-- ALTER TABLE AD_Role_Included ADD CONSTRAINT AD_Role_Included_Parent FOREIGN KEY (AD_Role_ID)
+--	REFERENCES AD_Role(AD_Role_ID) ON DELETE CASCADE
 ;
 
-ALTER TABLE AD_Role_Included ADD CONSTRAINT AD_Role_Included_Role FOREIGN KEY (Included_Role_ID)
-	REFERENCES AD_Role(AD_Role_ID)
+-- ALTER TABLE AD_Role_Included ADD CONSTRAINT AD_Role_Included_Role FOREIGN KEY (Included_Role_ID)
+--	REFERENCES AD_Role(AD_Role_ID)
 ;
 
 -- Mar 25, 2010 10:30:48 AM COT

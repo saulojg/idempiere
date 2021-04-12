@@ -5,7 +5,7 @@ UPDATE AD_Column SET ColumnName='DiscontinuedAt',Updated=TO_TIMESTAMP('2009-11-2
 
 -- Nov 29, 2009 10:18:52 PM CET
 -- BF[1698281] - Wrong name and description for DiscontinuedBy field
-ALTER TABLE M_Product ADD COLUMN DiscontinuedAt TIMESTAMP DEFAULT NULL 
+-- ALTER TABLE M_Product ADD COLUMN DiscontinuedAt TIMESTAMP DEFAULT NULL 
 ;
 
 -- Nov 29, 2009 10:23:53 PM CET
@@ -60,7 +60,7 @@ UPDATE AD_Field SET Name='Discontinued At', Description='Discontinued At indicat
 
 -- Nov 29, 2009 10:30:09 PM CET
 -- BF[1698281] - Wrong name and description for DiscontinuedBy field
-ALTER TABLE M_Product_PO ADD COLUMN DiscontinuedAt TIMESTAMP DEFAULT NULL 
+-- ALTER TABLE M_Product_PO ADD COLUMN DiscontinuedAt TIMESTAMP DEFAULT NULL 
 ;
 
 -- Nov 29, 2009 10:32:50 PM CET

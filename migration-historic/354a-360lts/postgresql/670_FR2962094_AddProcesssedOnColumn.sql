@@ -64,7 +64,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 ;
 
 -- Mar 2, 2010 2:11:51 PM COT
-ALTER TABLE C_Order ADD COLUMN ProcessedOn NUMERIC DEFAULT NULL 
+-- ALTER TABLE C_Order ADD COLUMN ProcessedOn NUMERIC DEFAULT NULL 
 ;
 
 -- Mar 2, 2010 2:12:19 PM COT

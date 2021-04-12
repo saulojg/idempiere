@@ -16,7 +16,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 -- FR [2975307] - AD_Menu_Trl overwritten by AD_Window
 -- https://sourceforge.net/tracker/index.php?func=detail&aid=2975307&group_id=176962&atid=879335
 -- ADD IsCentrallyMaintained to AD_Table
-ALTER TABLE AD_Table ADD COLUMN IsCentrallyMaintained CHAR(1) DEFAULT 'Y' CHECK (IsCentrallyMaintained IN ('Y','N'))
+-- ALTER TABLE AD_Table ADD COLUMN IsCentrallyMaintained CHAR(1) DEFAULT 'Y' CHECK (IsCentrallyMaintained IN ('Y','N'))
 ;
 
 -- Mar 24, 2010 3:15:47 PM CET

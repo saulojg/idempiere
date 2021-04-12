@@ -92,7 +92,7 @@ UPDATE AD_Column SET IsMandatory='N',Updated=TO_TIMESTAMP('2009-12-16 08:25:00',
 ;
 
 -- Dec 16, 2009 8:25:02 AM COT
-ALTER TABLE C_BPartner_Product ADD COLUMN IsManufacturer CHAR(1) DEFAULT NULL CHECK (IsManufacturer IN ('Y','N'))
+-- ALTER TABLE C_BPartner_Product ADD COLUMN IsManufacturer CHAR(1) DEFAULT NULL CHECK (IsManufacturer IN ('Y','N'))
 ;
 
 -- manual

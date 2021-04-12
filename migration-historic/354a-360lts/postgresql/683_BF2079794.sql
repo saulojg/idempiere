@@ -31,7 +31,7 @@ $$
 DECLARE
 datepart VARCHAR;
 datetime TIMESTAMP WITH TIME ZONE;
-offset INTEGER;
+"offset" INTEGER;
 BEGIN
 	datepart = $2;
 	offset = 0;
@@ -71,6 +71,6 @@ BEGIN
 		datepart = 'microseconds';
 	END IF;
 	datetime = date_trunc(datepart, $1); 
-RETURN cast(datetime as date) + offset;
+RETURN cast(datetime as date) + "offset";
 END;
 $$ LANGUAGE plpgsql;

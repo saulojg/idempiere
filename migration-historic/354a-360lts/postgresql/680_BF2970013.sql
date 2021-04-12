@@ -79,4 +79,4 @@ UPDATE AD_Process_Para SET SeqNo=70,Updated=TO_TIMESTAMP('2010-03-13 17:47:46','
 UPDATE AD_Process_Para SET EntityType='EE01',Updated=TO_TIMESTAMP('2010-03-13 17:47:50','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Process_Para_ID=53275
 ;
 
-create unique index ad_procpara_procseqno on ad_process_para (ad_process_id, seqno);
+-- create unique index ad_procpara_procseqno on ad_process_para (ad_process_id, seqno);

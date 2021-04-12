@@ -27,8 +27,8 @@ CREATE TABLE C_OrderSource
 CREATE UNIQUE INDEX COrderSource_Value ON C_OrderSource (AD_Client_ID,Value);
 
 --- Table: C_Order -------------------------------------------------------------
-ALTER TABLE C_Order 
-ADD COLUMN C_OrderSource_ID NUMERIC(10);
+--ALTER TABLE C_Order 
+--ADD COLUMN C_OrderSource_ID NUMERIC(10);
 
 ALTER TABLE C_Order 
 ADD CONSTRAINT C_Order__C_OrderS_C_OrderSou FOREIGN KEY(C_OrderSource_ID)  REFERENCES C_OrderSource(C_OrderSource_ID);
