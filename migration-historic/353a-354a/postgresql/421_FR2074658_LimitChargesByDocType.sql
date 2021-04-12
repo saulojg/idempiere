@@ -100,7 +100,7 @@ INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Refe
 INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy) SELECT l.AD_Language,t.AD_Column_ID, t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy FROM AD_Language l, AD_Column t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Column_ID=56315 AND EXISTS (SELECT * FROM AD_Column_Trl tt WHERE tt.AD_Language!=l.AD_Language OR tt.AD_Column_ID!=t.AD_Column_ID)
 ;
 
-ALTER TABLE C_Charge ADD COLUMN C_ChargeType_ID NUMERIC(10)
+-- ALTER TABLE C_Charge ADD COLUMN C_ChargeType_ID NUMERIC(10)
 ;
 
 INSERT INTO AD_Table (AD_Client_ID,AD_Org_ID,AD_Table_ID,AccessLevel,CopyColumnsFromTable,Created,CreatedBy,Description,EntityType,ImportTable,IsActive,IsChangeLog,IsDeleteable,IsHighVolume,IsSecurityEnabled,IsView,LoadSeq,Name,ReplicationType,TableName,Updated,UpdatedBy) VALUES (0,0,53146,'3','N',TO_TIMESTAMP('2008-08-26 22:48:46','YYYY-MM-DD HH24:MI:SS'),100,'Configuration table for charges to be used by document type','D','N','Y','N','Y','N','N','N',0,'Charge Type by Doc Type','L','C_ChargeType_DocType',TO_TIMESTAMP('2008-08-26 22:48:46','YYYY-MM-DD HH24:MI:SS'),100)

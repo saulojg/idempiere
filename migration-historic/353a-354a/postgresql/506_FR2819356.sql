@@ -50,7 +50,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Jul 17, 2009 6:33:18 PM MYT
 -- Add more chart type support to Performance indicator - ID: 2819356
-ALTER TABLE PA_DashboardContent ADD COLUMN GoalDisplay CHAR(1) DEFAULT 'T' 
+-- ALTER TABLE PA_DashboardContent ADD COLUMN GoalDisplay CHAR(1) DEFAULT 'T' 
 ;
 
 -- Jul 17, 2009 6:35:13 PM MYT

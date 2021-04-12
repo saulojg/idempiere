@@ -44,7 +44,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 ;
 
 -- Sep 11, 2009 4:53:44 PM COT
-ALTER TABLE C_BPartner ADD COLUMN IsPOTaxExempt CHAR(1) DEFAULT 'N' CHECK (IsPOTaxExempt IN ('Y','N')) NOT NULL
+-- ALTER TABLE C_BPartner ADD COLUMN IsPOTaxExempt CHAR(1) DEFAULT 'N' CHECK (IsPOTaxExempt IN ('Y','N')) NOT NULL
 ;
 
 -- Sep 11, 2009 4:55:29 PM COT

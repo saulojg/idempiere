@@ -2962,7 +2962,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Apr 15, 2009 5:07:56 AM MYT
 -- FR [2723091] Sponsored Development: Promotions
-ALTER TABLE C_Order ADD COLUMN PromotionCode VARCHAR(30)
+--ALTER TABLE C_Order ADD COLUMN PromotionCode VARCHAR(30)
 ;
 
 -- Apr 15, 2009 5:08:48 AM MYT
@@ -2977,7 +2977,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Apr 15, 2009 5:08:54 AM MYT
 -- FR [2723091] Sponsored Development: Promotions
-ALTER TABLE C_OrderLine ADD COLUMN M_Promotion_ID NUMERIC(10)
+-- ALTER TABLE C_OrderLine ADD COLUMN M_Promotion_ID NUMERIC(10)
 ;
 
 -- Apr 15, 2009 5:11:49 AM MYT

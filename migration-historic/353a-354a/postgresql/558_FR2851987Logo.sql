@@ -40,7 +40,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 ;
 
 -- Sep 4, 2009 6:52:47 PM COT
-ALTER TABLE C_BPartner ADD COLUMN Logo_ID NUMERIC(10) DEFAULT NULL 
+-- ALTER TABLE C_BPartner ADD COLUMN Logo_ID NUMERIC(10) DEFAULT NULL 
 ;
 
 -- Sep 4, 2009 6:54:06 PM COT

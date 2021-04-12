@@ -657,7 +657,7 @@ FROM M_InOut io
 
 
 
-DROP VIEW PP_Order_BOM_Header_v;
+DROP VIEW IF EXISTS PP_Order_BOM_Header_v;
 
 CREATE OR REPLACE VIEW PP_Order_BOM_Header_v
 AS 
@@ -686,7 +686,7 @@ FROM PP_Order o
 	LEFT OUTER JOIN AD_User u ON (o.Planner_ID=u.AD_User_ID);
 
 
-DROP VIEW PP_Order_BOM_Header_vt;
+DROP VIEW IF EXISTS PP_Order_BOM_Header_vt;
 
 CREATE OR REPLACE VIEW PP_Order_BOM_Header_vt
 AS 
@@ -716,7 +716,7 @@ FROM PP_Order o
 	LEFT OUTER JOIN AD_User u ON (o.Planner_ID=u.AD_User_ID);
 
 
-DROP VIEW PP_Order_Header_v;	
+DROP VIEW IF EXISTS PP_Order_Header_v;	
 
 CREATE OR REPLACE VIEW PP_Order_Header_v
 AS 
@@ -744,7 +744,7 @@ FROM PP_Order o
 		
 
 
-DROP VIEW PP_Order_Header_vt;	
+DROP VIEW IF EXISTS PP_Order_Header_vt;	
 
 CREATE OR REPLACE VIEW PP_Order_Header_vt
 AS 
@@ -772,7 +772,7 @@ FROM PP_Order o
 		
 
 
-DROP VIEW PP_Order_Workflow_Header_v;
+DROP VIEW IF EXISTS PP_Order_Workflow_Header_v;
 
 CREATE OR REPLACE VIEW PP_Order_Workflow_Header_v
 AS 
@@ -806,7 +806,7 @@ FROM PP_Order o
 	LEFT OUTER JOIN AD_User u ON (o.Planner_ID=u.AD_User_ID);
 
 
-DROP VIEW PP_Order_Workflow_Header_vt;
+DROP VIEW IF EXISTS PP_Order_Workflow_Header_vt;
 
 CREATE OR REPLACE VIEW PP_Order_Workflow_Header_vt
 AS 
