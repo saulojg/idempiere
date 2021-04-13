@@ -8570,6 +8570,10 @@ FROM c_ordertax ot
         ON ot.c_tax_id = tt.c_tax_id
 ;
 
+-- Orbital Software 20210413
+DROP VIEW c_payment_v; 
+DROP VIEW if exists rv_bpartneropen;
+
 CREATE OR REPLACE VIEW c_payment_v AS 
 SELECT c_payment.c_payment_id,
     c_payment.ad_client_id,
@@ -11842,7 +11846,7 @@ FROM c_bpartner bp
         ON a.c_country_id = cc.c_country_id
 ;
 
-DROP VIEW rv_bpartneropen;
+-- DROP VIEW rv_bpartneropen;
 
 CREATE OR REPLACE VIEW rv_bpartneropen AS 
 SELECT i.ad_client_id,

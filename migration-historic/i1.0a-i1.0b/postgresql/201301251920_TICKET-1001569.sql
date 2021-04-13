@@ -249,12 +249,12 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Jan 23, 2013 5:48:01 PM SGT
 -- Ticket #1001569: Move receipts into batch from QS to Idempiere
-INSERT INTO AD_Element (ColumnName,AD_Element_ID,EntityType,Name,PrintName,AD_Element_UU,AD_Client_ID,Created,Updated,AD_Org_ID,CreatedBy,UpdatedBy,IsActive) VALUES ('DateDeposit',202197,'D','Deposit Date','Deposit Date','d11ff847-d57c-4f51-92e9-c7bed69071cc',0,TO_TIMESTAMP('2013-01-23 17:48:00','YYYY-MM-DD HH24:MI:SS'),TO_TIMESTAMP('2013-01-23 17:48:00','YYYY-MM-DD HH24:MI:SS'),0,100,100,'Y')
+--INSERT INTO AD_Element (ColumnName,AD_Element_ID,EntityType,Name,PrintName,AD_Element_UU,AD_Client_ID,Created,Updated,AD_Org_ID,CreatedBy,UpdatedBy,IsActive) VALUES ('DateDeposit',202197,'D','Deposit Date','Deposit Date','d11ff847-d57c-4f51-92e9-c7bed69071cc',0,TO_TIMESTAMP('2013-01-23 17:48:00','YYYY-MM-DD HH24:MI:SS'),TO_TIMESTAMP('2013-01-23 17:48:00','YYYY-MM-DD HH24:MI:SS'),0,100,100,'Y')
 ;
 
 -- Jan 23, 2013 5:48:01 PM SGT
 -- Ticket #1001569: Move receipts into batch from QS to Idempiere
-INSERT INTO AD_Element_Trl (AD_Language,AD_Element_ID, Help,PO_Description,PO_Help,Description,Name,PrintName,PO_Name,PO_PrintName, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Element_Trl_UU ) SELECT l.AD_Language,t.AD_Element_ID, t.Help,t.PO_Description,t.PO_Help,t.Description,t.Name,t.PrintName,t.PO_Name,t.PO_PrintName, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Element t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Element_ID=202197 AND NOT EXISTS (SELECT * FROM AD_Element_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Element_ID=t.AD_Element_ID)
+-- INSERT INTO AD_Element_Trl (AD_Language,AD_Element_ID, Help,PO_Description,PO_Help,Description,Name,PrintName,PO_Name,PO_PrintName, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Element_Trl_UU ) SELECT l.AD_Language,t.AD_Element_ID, t.Help,t.PO_Description,t.PO_Help,t.Description,t.Name,t.PrintName,t.PO_Name,t.PO_PrintName, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Element t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Element_ID=202197 AND NOT EXISTS (SELECT * FROM AD_Element_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Element_ID=t.AD_Element_ID)
 ;
 
 -- Jan 23, 2013 5:48:24 PM SGT
@@ -279,12 +279,12 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Jan 23, 2013 5:49:50 PM SGT
 -- Ticket #1001569: Move receipts into batch from QS to Idempiere
-INSERT INTO AD_Element (ColumnName,AD_Element_ID,EntityType,Name,PrintName,AD_Element_UU,AD_Client_ID,Created,Updated,AD_Org_ID,CreatedBy,UpdatedBy,IsActive) VALUES ('DepositAmt',202198,'D','Deposit Amount','Deposit Amount','1c52e614-ae8e-4767-aab1-f6ffe26eadee',0,TO_TIMESTAMP('2013-01-23 17:49:49','YYYY-MM-DD HH24:MI:SS'),TO_TIMESTAMP('2013-01-23 17:49:49','YYYY-MM-DD HH24:MI:SS'),0,100,100,'Y')
+--INSERT INTO AD_Element (ColumnName,AD_Element_ID,EntityType,Name,PrintName,AD_Element_UU,AD_Client_ID,Created,Updated,AD_Org_ID,CreatedBy,UpdatedBy,IsActive) VALUES ('DepositAmt',202198,'D','Deposit Amount','Deposit Amount','1c52e614-ae8e-4767-aab1-f6ffe26eadee',0,TO_TIMESTAMP('2013-01-23 17:49:49','YYYY-MM-DD HH24:MI:SS'),TO_TIMESTAMP('2013-01-23 17:49:49','YYYY-MM-DD HH24:MI:SS'),0,100,100,'Y')
 ;
 
 -- Jan 23, 2013 5:49:50 PM SGT
 -- Ticket #1001569: Move receipts into batch from QS to Idempiere
-INSERT INTO AD_Element_Trl (AD_Language,AD_Element_ID, Help,PO_Description,PO_Help,Description,Name,PrintName,PO_Name,PO_PrintName, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Element_Trl_UU ) SELECT l.AD_Language,t.AD_Element_ID, t.Help,t.PO_Description,t.PO_Help,t.Description,t.Name,t.PrintName,t.PO_Name,t.PO_PrintName, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Element t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Element_ID=202198 AND NOT EXISTS (SELECT * FROM AD_Element_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Element_ID=t.AD_Element_ID)
+--INSERT INTO AD_Element_Trl (AD_Language,AD_Element_ID, Help,PO_Description,PO_Help,Description,Name,PrintName,PO_Name,PO_PrintName, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Element_Trl_UU ) SELECT l.AD_Language,t.AD_Element_ID, t.Help,t.PO_Description,t.PO_Help,t.Description,t.Name,t.PrintName,t.PO_Name,t.PO_PrintName, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Element t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Element_ID=202198 AND NOT EXISTS (SELECT * FROM AD_Element_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Element_ID=t.AD_Element_ID)
 ;
 
 -- Jan 23, 2013 5:50:45 PM SGT

@@ -2825,12 +2825,12 @@ INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTran
 
 -- Feb 28, 2013 6:38:44 PM SGT
 -- Ticket 1001763: Standard Templates for Docs and Forms - Reporting
-INSERT INTO AD_Field (IsEncrypted,AD_Tab_ID,DisplayLength,IsSameLine,IsHeading,AD_Column_ID,IsCentrallyMaintained,AD_Field_ID,IsReadOnly,Help,EntityType,Description,Name,IsFieldOnly,IsDisplayed,AD_Field_UU,UpdatedBy,AD_Org_ID,Created,AD_Client_ID,CreatedBy,Updated,IsActive) VALUES ('N',291,22,'N','N',52008,'Y',201861,'N','Detail information about the returned goods','D','Return Material Authorization Line','RMA Line','N','Y','609fe7a6-7f66-4dda-b27a-7bec36e3dcfe',100,0,TO_TIMESTAMP('2013-02-28 18:38:43','YYYY-MM-DD HH24:MI:SS'),0,100,TO_TIMESTAMP('2013-02-28 18:38:43','YYYY-MM-DD HH24:MI:SS'),'Y')
+-- INSERT INTO AD_Field (IsEncrypted,AD_Tab_ID,DisplayLength,IsSameLine,IsHeading,AD_Column_ID,IsCentrallyMaintained,AD_Field_ID,IsReadOnly,Help,EntityType,Description,Name,IsFieldOnly,IsDisplayed,AD_Field_UU,UpdatedBy,AD_Org_ID,Created,AD_Client_ID,CreatedBy,Updated,IsActive) VALUES ('N',291,22,'N','N',52008,'Y',201861,'N','Detail information about the returned goods','D','Return Material Authorization Line','RMA Line','N','Y','609fe7a6-7f66-4dda-b27a-7bec36e3dcfe',100,0,TO_TIMESTAMP('2013-02-28 18:38:43','YYYY-MM-DD HH24:MI:SS'),0,100,TO_TIMESTAMP('2013-02-28 18:38:43','YYYY-MM-DD HH24:MI:SS'),'Y')
 ;
 
 -- Feb 28, 2013 6:38:44 PM SGT
 -- Ticket 1001763: Standard Templates for Docs and Forms - Reporting
-INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Field_Trl_UU ) SELECT l.AD_Language,t.AD_Field_ID, t.Help,t.Description,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=201861 AND NOT EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Field_ID=t.AD_Field_ID)
+-- INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Field_Trl_UU ) SELECT l.AD_Language,t.AD_Field_ID, t.Help,t.Description,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=201861 AND NOT EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Field_ID=t.AD_Field_ID)
 ;
 
 -- Feb 28, 2013 6:38:59 PM SGT

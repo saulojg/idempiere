@@ -1,3 +1,4 @@
+
 CREATE UNIQUE INDEX cm_chat_record ON cm_chat (ad_table_id, record_id);
 
 

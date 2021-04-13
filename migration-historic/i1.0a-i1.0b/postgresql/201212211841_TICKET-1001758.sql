@@ -31403,7 +31403,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Dec 21, 2012 5:03:14 PM SGT
 -- Ticket 1001758: FedEx & UPS
-ALTER TABLE C_Order ADD COLUMN ShippingRateInquiry CHAR(1) DEFAULT NULL 
+-- ALTER TABLE C_Order ADD COLUMN ShippingRateInquiry CHAR(1) DEFAULT NULL 
 ;
 
 -- Dec 21, 2012 5:03:38 PM SGT
@@ -31448,22 +31448,22 @@ INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTran
 
 -- Dec 21, 2012 5:03:42 PM SGT
 -- Ticket 1001758: FedEx & UPS
-INSERT INTO AD_Field (IsEncrypted,AD_Tab_ID,DisplayLength,IsSameLine,IsHeading,AD_Column_ID,IsCentrallyMaintained,AD_Field_ID,IsReadOnly,Help,EntityType,Description,Name,IsFieldOnly,IsDisplayed,AD_Field_UU,UpdatedBy,AD_Org_ID,Created,AD_Client_ID,CreatedBy,Updated,IsActive) VALUES ('N',186,22,'N','N',15899,'Y',201614,'N','The Volume indicates the volume of the product in the Volume UOM of the Client','D','Volume of a product','Volume','N','Y','7c1b2d8a-bbfc-4654-9e0f-4cf7886fd6d8',100,0,TO_TIMESTAMP('2012-12-21 17:03:41','YYYY-MM-DD HH24:MI:SS'),0,100,TO_TIMESTAMP('2012-12-21 17:03:41','YYYY-MM-DD HH24:MI:SS'),'Y')
+-- INSERT INTO AD_Field (IsEncrypted,AD_Tab_ID,DisplayLength,IsSameLine,IsHeading,AD_Column_ID,IsCentrallyMaintained,AD_Field_ID,IsReadOnly,Help,EntityType,Description,Name,IsFieldOnly,IsDisplayed,AD_Field_UU,UpdatedBy,AD_Org_ID,Created,AD_Client_ID,CreatedBy,Updated,IsActive) VALUES ('N',186,22,'N','N',15899,'Y',201614,'N','The Volume indicates the volume of the product in the Volume UOM of the Client','D','Volume of a product','Volume','N','Y','7c1b2d8a-bbfc-4654-9e0f-4cf7886fd6d8',100,0,TO_TIMESTAMP('2012-12-21 17:03:41','YYYY-MM-DD HH24:MI:SS'),0,100,TO_TIMESTAMP('2012-12-21 17:03:41','YYYY-MM-DD HH24:MI:SS'),'Y')
 ;
 
 -- Dec 21, 2012 5:03:42 PM SGT
 -- Ticket 1001758: FedEx & UPS
-INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Field_Trl_UU ) SELECT l.AD_Language,t.AD_Field_ID, t.Help,t.Description,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=201614 AND NOT EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Field_ID=t.AD_Field_ID)
+-- INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Field_Trl_UU ) SELECT l.AD_Language,t.AD_Field_ID, t.Help,t.Description,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=201614 AND NOT EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Field_ID=t.AD_Field_ID)
 ;
 
 -- Dec 21, 2012 5:03:43 PM SGT
 -- Ticket 1001758: FedEx & UPS
-INSERT INTO AD_Field (IsEncrypted,AD_Tab_ID,DisplayLength,IsSameLine,IsHeading,AD_Column_ID,IsCentrallyMaintained,AD_Field_ID,IsReadOnly,Help,EntityType,Description,Name,IsFieldOnly,IsDisplayed,AD_Field_UU,UpdatedBy,AD_Org_ID,Created,AD_Client_ID,CreatedBy,Updated,IsActive) VALUES ('N',186,22,'N','N',15900,'Y',201615,'N','The Weight indicates the weight  of the product in the Weight UOM of the Client','D','Weight of a product','Weight','N','Y','e4006a9b-e260-4ae0-8366-91b975d076b0',100,0,TO_TIMESTAMP('2012-12-21 17:03:42','YYYY-MM-DD HH24:MI:SS'),0,100,TO_TIMESTAMP('2012-12-21 17:03:42','YYYY-MM-DD HH24:MI:SS'),'Y')
+--INSERT INTO AD_Field (IsEncrypted,AD_Tab_ID,DisplayLength,IsSameLine,IsHeading,AD_Column_ID,IsCentrallyMaintained,AD_Field_ID,IsReadOnly,Help,EntityType,Description,Name,IsFieldOnly,IsDisplayed,AD_Field_UU,UpdatedBy,AD_Org_ID,Created,AD_Client_ID,CreatedBy,Updated,IsActive) VALUES ('N',186,22,'N','N',15900,'Y',201615,'N','The Weight indicates the weight  of the product in the Weight UOM of the Client','D','Weight of a product','Weight','N','Y','e4006a9b-e260-4ae0-8366-91b975d076b0',100,0,TO_TIMESTAMP('2012-12-21 17:03:42','YYYY-MM-DD HH24:MI:SS'),0,100,TO_TIMESTAMP('2012-12-21 17:03:42','YYYY-MM-DD HH24:MI:SS'),'Y')
 ;
 
 -- Dec 21, 2012 5:03:43 PM SGT
 -- Ticket 1001758: FedEx & UPS
-INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Field_Trl_UU ) SELECT l.AD_Language,t.AD_Field_ID, t.Help,t.Description,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=201615 AND NOT EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Field_ID=t.AD_Field_ID)
+-- INSERT INTO AD_Field_Trl (AD_Language,AD_Field_ID, Help,Description,Name, IsTranslated,AD_Client_ID,AD_Org_ID,Created,Createdby,Updated,UpdatedBy,AD_Field_Trl_UU ) SELECT l.AD_Language,t.AD_Field_ID, t.Help,t.Description,t.Name, 'N',t.AD_Client_ID,t.AD_Org_ID,t.Created,t.Createdby,t.Updated,t.UpdatedBy,Generate_UUID() FROM AD_Language l, AD_Field t WHERE l.IsActive='Y' AND l.IsSystemLanguage='Y' AND l.IsBaseLanguage='N' AND t.AD_Field_ID=201615 AND NOT EXISTS (SELECT * FROM AD_Field_Trl tt WHERE tt.AD_Language=l.AD_Language AND tt.AD_Field_ID=t.AD_Field_ID)
 ;
 
 -- Dec 21, 2012 5:04:27 PM SGT

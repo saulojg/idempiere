@@ -5,7 +5,7 @@ UPDATE AD_Column SET ColumnSQL=NULL, IsAllowCopy='N',Updated=TO_TIMESTAMP('2013-
 
 -- Mar 13, 2013 4:02:19 PM COT
 -- IDEMPIERE-661 OrderLineCreateProduction not passing accounting data from SO to Production
-ALTER TABLE M_Production ADD COLUMN C_BPartner_ID NUMERIC(10) DEFAULT NULL 
+-- ALTER TABLE M_Production ADD COLUMN C_BPartner_ID NUMERIC(10) DEFAULT NULL 
 ;
 
 update m_production 

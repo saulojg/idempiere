@@ -290,7 +290,7 @@ INSERT INTO AD_Column_Trl (AD_Language,AD_Column_ID, Name, IsTranslated,AD_Clien
 
 -- Feb 22, 2013 4:01:48 PM SGT
 -- Ticket 1001758: FedEx & UPS
-ALTER TABLE C_Order ADD COLUMN IsPriviledgedRate CHAR(1) DEFAULT 'N' CHECK (IsPriviledgedRate IN ('Y','N')) NOT NULL
+-- ALTER TABLE C_Order ADD COLUMN IsPriviledgedRate CHAR(1) DEFAULT 'N' CHECK (IsPriviledgedRate IN ('Y','N')) NOT NULL
 ;
 
 -- Feb 22, 2013 4:02:21 PM SGT

@@ -1,3 +1,4 @@
+/*
 -- Jan 30, 2009 5:51:53 PM COT
 -- Web Service Definition and Security
 INSERT INTO AD_Window (AD_Client_ID,AD_Org_ID,AD_Window_ID,Created,CreatedBy,EntityType,IsActive,IsBetaFunctionality,IsDefault,IsSOTrx,Name,Processing,Updated,UpdatedBy,WindowType,WinHeight,WinWidth) VALUES (0,0,53067,TO_TIMESTAMP('2009-01-30 17:51:52','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','Y','N','Y','Web Service Definition','N',TO_TIMESTAMP('2009-01-30 17:51:52','YYYY-MM-DD HH24:MI:SS'),100,'M',0,0)
@@ -1535,6 +1536,6 @@ UPDATE AD_Field SET IsSameLine='N',Updated=TO_TIMESTAMP('2009-01-30 20:03:13','Y
 -- Web Service Definition and Security
 UPDATE AD_Tab SET AD_Column_ID=56765,Updated=TO_TIMESTAMP('2009-02-01 19:49:10','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Tab_ID=53190
 ;
-
+*/
 SELECT register_migration_script('201212131723_WS001_WebServices.sql') FROM dual
 ;

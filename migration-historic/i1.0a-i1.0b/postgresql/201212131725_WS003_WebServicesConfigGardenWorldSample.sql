@@ -1,3 +1,4 @@
+/*
 -- Jan 30, 2009 7:44:20 PM COT
 -- Web Service Definition and Security
 INSERT INTO AD_Role (AD_Client_ID,AD_Org_ID,AD_Role_ID,Allow_Info_Account,Allow_Info_Asset,Allow_Info_BPartner,Allow_Info_CashJournal,Allow_Info_InOut,Allow_Info_Invoice,Allow_Info_Order,Allow_Info_Payment,Allow_Info_Product,Allow_Info_Resource,Allow_Info_Schedule,AmtApproval,C_Currency_ID,ConfirmQueryRecords,Created,CreatedBy,IsAccessAllOrgs,IsActive,IsCanApproveOwnDoc,IsCanExport,IsCanReport,IsChangeLog,IsManual,IsPersonalAccess,IsPersonalLock,IsShowAcct,IsUseUserOrgAccess,MaxQueryRecords,Name,OverwritePriceLimit,PreferenceType,Supervisor_ID,Updated,UpdatedBy,UserDiscount,UserLevel) VALUES (11,0,50004,'N','N','N','N','N','N','N','N','N','N','N',0,100,0,TO_TIMESTAMP('2009-01-30 19:44:19','YYYY-MM-DD HH24:MI:SS'),100,'N','Y','N','N','N','Y','Y','N','N','N','N',0,'Web Service Execution','N','N',101,TO_TIMESTAMP('2009-01-30 19:44:19','YYYY-MM-DD HH24:MI:SS'),100,0.00,' CO')
@@ -80,6 +81,6 @@ INSERT INTO WS_WebServiceFieldInput (AD_Client_ID,AD_Column_ID,AD_Org_ID,Created
 
 INSERT INTO WS_WebServiceTypeAccess (AD_Client_ID,AD_Org_ID,AD_Role_ID,Created,CreatedBy,IsActive,IsReadWrite,Updated,UpdatedBy,WS_WebServiceType_ID) VALUES (11,0,50004,TO_TIMESTAMP('2009-01-30 19:50:41','YYYY-MM-DD HH24:MI:SS'),100,'Y','Y',TO_TIMESTAMP('2009-01-30 19:50:41','YYYY-MM-DD HH24:MI:SS'),100,50001)
 ;
-
+*/
 SELECT register_migration_script('201212131725_WS003_WebServicesConfigGardenWorldSample.sql') FROM dual
 ;

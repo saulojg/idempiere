@@ -776,7 +776,7 @@ UPDATE AD_Field SET DisplayLogic='@AD_Reference_ID@=28',Updated=TO_TIMESTAMP('20
 
 -- Nov 21, 2012 10:43:01 AM COT
 -- IDEMPIERE-163: Adding UI Fields to  AD_Field and Ad_Userdef_Field
-UPDATE AD_Field SET DisplayLogic='@AD_Reference_ID@=17 | @AD_Reference_ID@=18 | @AD_Reference_ID@=30 | @AD_Reference_ID@=28',Updated=TO_TIMESTAMP('2012-11-49 10:43:01','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Field_ID=200855
+UPDATE AD_Field SET DisplayLogic='@AD_Reference_ID@=17 | @AD_Reference_ID@=18 | @AD_Reference_ID@=30 | @AD_Reference_ID@=28',Updated=TO_TIMESTAMP('2012-11-21 10:43:01','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Field_ID=200855
 ;
 
 -- Nov 21, 2012 11:58:01 AM COT
