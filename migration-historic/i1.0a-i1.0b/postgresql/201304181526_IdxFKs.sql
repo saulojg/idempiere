@@ -349,6 +349,7 @@ ALTER TABLE M_PackageMPS ADD CONSTRAINT CUOMWeight_MPackageMPS FOREIGN KEY (C_UO
 ALTER TABLE M_PackageMPS ADD CONSTRAINT MPackage_MPackageMPS FOREIGN KEY (M_Package_ID) REFERENCES M_Package DEFERRABLE INITIALLY DEFERRED
 ;
 
+update m_production set c_bpartner_id = 1000002 where c_bpartner_id = 0; -- Orbital Software / Roca
 ALTER TABLE M_Production ADD CONSTRAINT CBPartner_MProduction FOREIGN KEY (C_BPartner_ID) REFERENCES C_BPartner DEFERRABLE INITIALLY DEFERRED
 ;
 

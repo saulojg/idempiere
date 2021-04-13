@@ -315,7 +315,7 @@ INSERT INTO C_DocType_Trl (AD_Language,C_DocType_ID, DocumentNote,PrintName,Name
 
 -- Mar 24, 2013 10:49:45 AM ICT
 -- Bug Fix IDEMPIERE-675 - Internal Use with zero qty is dropping the inventory
-INSERT INTO M_Inventory (GenerateList,Posted,UpdateQty,M_Inventory_ID,Processed,M_Warehouse_ID,C_DocType_ID,IsApproved,DocStatus,ApprovalAmt,MovementDate,DocumentNo,Created,CreatedBy,IsActive,Processing,UpdatedBy,AD_Client_ID,M_Inventory_UU,AD_Org_ID,Updated,DocAction) VALUES ('N','N','N',200000,'N',50002,200000,'N','DR',0,TO_TIMESTAMP('2013-03-24','YYYY-MM-DD'),'10000001',TO_TIMESTAMP('2013-03-24 10:49:44','YYYY-MM-DD HH24:MI:SS'),100,'Y','N',100,11,'70e98c40-a782-4651-a443-d4a53146bb6b',50001,TO_TIMESTAMP('2013-03-24 10:49:44','YYYY-MM-DD HH24:MI:SS'),'CO')
+INSERT INTO M_Inventory (GenerateList,Posted,UpdateQty,M_Inventory_ID,Processed,M_Warehouse_ID,C_DocType_ID,IsApproved,DocStatus,ApprovalAmt,MovementDate,DocumentNo,Created,CreatedBy,IsActive,Processing,UpdatedBy,AD_Client_ID,M_Inventory_UU,AD_Org_ID,Updated,DocAction, lar_sucursal_id) VALUES ('N','N','N',200000,'N',50002,200000,'N','DR',0,TO_TIMESTAMP('2013-03-24','YYYY-MM-DD'),'10000001',TO_TIMESTAMP('2013-03-24 10:49:44','YYYY-MM-DD HH24:MI:SS'),100,'Y','N',100,11,'70e98c40-a782-4651-a443-d4a53146bb6b',50001,TO_TIMESTAMP('2013-03-24 10:49:44','YYYY-MM-DD HH24:MI:SS'),'CO', 1000025) -- Orbital Software / Roca
 ;
 
 -- Mar 24, 2013 10:49:58 AM ICT
@@ -325,7 +325,7 @@ UPDATE M_Inventory SET C_DocType_ID=144,Updated=TO_TIMESTAMP('2013-03-24 10:49:5
 
 -- Mar 24, 2013 10:50:08 AM ICT
 -- Bug Fix IDEMPIERE-675 - Internal Use with zero qty is dropping the inventory
-INSERT INTO M_Inventory (GenerateList,Posted,UpdateQty,M_Inventory_ID,Processed,M_Warehouse_ID,C_DocType_ID,IsApproved,DocStatus,ApprovalAmt,MovementDate,DocumentNo,Created,CreatedBy,IsActive,Processing,UpdatedBy,AD_Client_ID,M_Inventory_UU,AD_Org_ID,Updated,DocAction) VALUES ('N','N','N',200001,'N',50002,144,'N','DR',0,TO_TIMESTAMP('2013-03-24','YYYY-MM-DD'),'10000002',TO_TIMESTAMP('2013-03-24 10:50:07','YYYY-MM-DD HH24:MI:SS'),100,'Y','N',100,11,'6486b648-fdea-49d2-a2b2-9d87c2598e44',50001,TO_TIMESTAMP('2013-03-24 10:50:07','YYYY-MM-DD HH24:MI:SS'),'CO')
+INSERT INTO M_Inventory (GenerateList,Posted,UpdateQty,M_Inventory_ID,Processed,M_Warehouse_ID,C_DocType_ID,IsApproved,DocStatus,ApprovalAmt,MovementDate,DocumentNo,Created,CreatedBy,IsActive,Processing,UpdatedBy,AD_Client_ID,M_Inventory_UU,AD_Org_ID,Updated,DocAction, lar_sucursal_id) VALUES ('N','N','N',200001,'N',50002,144,'N','DR',0,TO_TIMESTAMP('2013-03-24','YYYY-MM-DD'),'10000002',TO_TIMESTAMP('2013-03-24 10:50:07','YYYY-MM-DD HH24:MI:SS'),100,'Y','N',100,11,'6486b648-fdea-49d2-a2b2-9d87c2598e44',50001,TO_TIMESTAMP('2013-03-24 10:50:07','YYYY-MM-DD HH24:MI:SS'),'CO', 1000025) -- Orbital Software / Roca
 ;
 
 SELECT register_migration_script('201304030854_IDEMPIERE-675_1.sql') FROM dual
