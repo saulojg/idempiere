@@ -48,7 +48,7 @@ INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAud
 ;
 
 -- Jul 18, 2013 11:53:03 PM COT
-INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'N',1000000,'N','Y',200104,'DocumentNo/Value for Table M_Product_BOM','DocumentNo_M_Product_BOM',1,'8995cbd2-4d94-4729-b933-a8f66ea0de11',0,TO_TIMESTAMP('2013-07-18 23:53:03','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-07-18 23:53:03','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,11)
+--INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'N',1000000,'N','Y',200104,'DocumentNo/Value for Table M_Product_BOM','DocumentNo_M_Product_BOM',1,'8995cbd2-4d94-4729-b933-a8f66ea0de11',0,TO_TIMESTAMP('2013-07-18 23:53:03','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-07-18 23:53:03','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,11)
 ;
 
 -- Jul 18, 2013 11:53:04 PM COT
@@ -88,7 +88,7 @@ INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAud
 ;
 
 -- Jul 18, 2013 11:53:08 PM COT
-INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'N',1000000,'N','Y',200114,'DocumentNo/Value for Table M_Production','DocumentNo_M_Production',1,'c4829f50-fbeb-4364-ac1e-4eb4364e10cf',0,TO_TIMESTAMP('2013-07-18 23:53:07','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-07-18 23:53:07','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,11)
+--INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'N',1000000,'N','Y',200114,'DocumentNo/Value for Table M_Production','DocumentNo_M_Production',1,'c4829f50-fbeb-4364-ac1e-4eb4364e10cf',0,TO_TIMESTAMP('2013-07-18 23:53:07','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-07-18 23:53:07','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,11)
 ;
 
 -- Jul 18, 2013 11:53:08 PM COT
@@ -124,7 +124,7 @@ INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAud
 ;
 
 -- Jul 18, 2013 11:53:12 PM COT
-INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'N',1000000,'N','Y',200123,'DocumentNo/Value for Table M_Product_BOM','DocumentNo_M_Product_BOM',1,'80e5942b-662b-4b08-a90b-1e2fd2f6ae92',0,TO_TIMESTAMP('2013-07-18 23:53:12','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-07-18 23:53:12','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,0)
+--INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'N',1000000,'N','Y',200123,'DocumentNo/Value for Table M_Product_BOM','DocumentNo_M_Product_BOM',1,'80e5942b-662b-4b08-a90b-1e2fd2f6ae92',0,TO_TIMESTAMP('2013-07-18 23:53:12','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-07-18 23:53:12','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,0)
 ;
 
 -- Jul 18, 2013 11:53:13 PM COT
@@ -164,7 +164,7 @@ INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAud
 ;
 
 -- Jul 18, 2013 11:53:17 PM COT
-INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'N',1000000,'N','Y',200133,'DocumentNo/Value for Table M_Production','DocumentNo_M_Production',1,'20b00ea5-f830-4af6-94db-2496bf351a95',0,TO_TIMESTAMP('2013-07-18 23:53:17','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-07-18 23:53:17','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,0)
+--INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'N',1000000,'N','Y',200133,'DocumentNo/Value for Table M_Production','DocumentNo_M_Production',1,'20b00ea5-f830-4af6-94db-2496bf351a95',0,TO_TIMESTAMP('2013-07-18 23:53:17','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-07-18 23:53:17','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,0)
 ;
 
 SELECT register_migration_script('201307182355_PendingSequences.sql') FROM dual

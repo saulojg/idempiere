@@ -843,7 +843,7 @@ INSERT INTO AD_Column (IsSyncDatabase,Version,AD_Table_ID,AD_Column_ID,IsMandato
 ;
 
 -- Aug 25, 2013 2:49:49 PM COT
-ALTER TABLE C_Order ADD COLUMN C_Opportunity_ID NUMERIC(10) DEFAULT NULL 
+--ALTER TABLE C_Order ADD COLUMN C_Opportunity_ID NUMERIC(10) DEFAULT NULL 
 ;
 
 -- Aug 25, 2013 2:49:50 PM COT

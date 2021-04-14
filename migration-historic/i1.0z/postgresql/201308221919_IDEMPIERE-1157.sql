@@ -1,6 +1,6 @@
 -- Aug 22, 2013 7:13:56 PM COT
 -- IDEMPIERE-1157 Adding functionality to add charts on the standard windows
-INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'Y',1000000,'N','Y',200142,'Table AD_Chart','AD_Chart',1,'ebc24c0c-e7bf-4f4c-a2bd-d1170ef873d6',0,TO_TIMESTAMP('2013-08-22 19:13:48','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-08-22 19:13:48','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,0)
+-- INSERT INTO AD_Sequence (StartNewYear,CurrentNextSys,IsTableID,CurrentNext,IsAudited,IsAutoSequence,AD_Sequence_ID,Description,Name,IncrementNo,AD_Sequence_UU,AD_Org_ID,Created,CreatedBy,Updated,UpdatedBy,IsActive,StartNo,AD_Client_ID) VALUES ('N',200000,'Y',1000000,'N','Y',200142,'Table AD_Chart','AD_Chart',1,'ebc24c0c-e7bf-4f4c-a2bd-d1170ef873d6',0,TO_TIMESTAMP('2013-08-22 19:13:48','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2013-08-22 19:13:48','YYYY-MM-DD HH24:MI:SS'),100,'Y',1000000,0)
 ;
 
 -- Aug 22, 2013 7:13:56 PM COT
