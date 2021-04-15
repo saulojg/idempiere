@@ -8,7 +8,7 @@ INSERT INTO AD_Column (AD_Column_ID,Version,Name,Description,Help,AD_Table_ID,Co
 ;
 
 -- Apr 27, 2015 10:36:06 AM CEST
-ALTER TABLE AD_UserPreference ADD COLUMN AutomaticDecimalPlacesForAmoun NUMERIC(10) DEFAULT '0' 
+-- ALTER TABLE AD_UserPreference ADD COLUMN AutomaticDecimalPlacesForAmoun NUMERIC(10) DEFAULT '0' 
 ;
 
 -- Apr 27, 2015 10:36:18 AM CEST

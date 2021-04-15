@@ -786,10 +786,10 @@ INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,
 INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Element_ID,AD_Org_ID,AD_Reference_ID,AD_Table_ID,ColumnName,Created,CreatedBy,EntityType,FieldLength,IsActive,IsAlwaysUpdateable,IsEncrypted,IsIdentifier,IsKey,IsMandatory,IsParent,IsSelectionColumn,IsTranslated,IsUpdateable,Name,Updated,UpdatedBy,Version) VALUES (0,60417,54511,0,10,53147,'AD_HouseKeeping_UU',TO_TIMESTAMP('2011-03-29 10:42:09','YYYY-MM-DD HH24:MI:SS'),100,'D',36,'Y','N','N','N','N','N','N','N','N','Y','AD_HouseKeeping_UU',TO_TIMESTAMP('2011-03-29 10:42:09','YYYY-MM-DD HH24:MI:SS'),100,1.00)
 ;
 
--- ALTER TABLE AD_HouseKeeping ADD COLUMN AD_HouseKeeping_UU VARCHAR(36) DEFAULT NULL 
+ALTER TABLE AD_HouseKeeping ADD COLUMN AD_HouseKeeping_UU VARCHAR(36) DEFAULT NULL 
 ;
 
--- CREATE UNIQUE INDEX AD_HouseKeeping_UU_idx ON ad_housekeeping(AD_HouseKeeping_UU)
+CREATE UNIQUE INDEX AD_HouseKeeping_UU_idx ON ad_housekeeping(AD_HouseKeeping_UU)
 ;
 
 INSERT INTO AD_Element (AD_Client_ID,AD_Element_ID,AD_Org_ID,ColumnName,Created,CreatedBy,EntityType,IsActive,Name,PrintName,Updated,UpdatedBy) VALUES (0,54512,0,'AD_Image_UU',TO_TIMESTAMP('2011-03-29 10:42:13','YYYY-MM-DD HH24:MI:SS'),100,'D','Y','AD_Image_UU','AD_Image_UU',TO_TIMESTAMP('2011-03-29 10:42:13','YYYY-MM-DD HH24:MI:SS'),100)

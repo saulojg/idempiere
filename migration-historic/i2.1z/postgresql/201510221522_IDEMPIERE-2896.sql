@@ -8,7 +8,7 @@ INSERT INTO AD_Column (AD_Column_ID,Version,Name,Description,Help,AD_Table_ID,Co
 ;
 
 -- Oct 22, 2015 3:21:49 PM CEST
-ALTER TABLE AD_UserPreference ADD COLUMN ToggleOnDoubleClick CHAR(1) DEFAULT 'N' CHECK (ToggleOnDoubleClick IN ('Y','N'))
+--ALTER TABLE AD_UserPreference ADD COLUMN ToggleOnDoubleClick CHAR(1) DEFAULT 'N' CHECK (ToggleOnDoubleClick IN ('Y','N'))
 ;
 
 -- Oct 22, 2015 3:22:22 PM CEST

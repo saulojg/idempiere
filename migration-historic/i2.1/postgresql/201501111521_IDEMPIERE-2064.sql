@@ -28,7 +28,7 @@ UPDATE AD_Column SET AD_Reference_Value_ID=200099,Updated=TO_TIMESTAMP('2015-01-
 ;
 
 -- Jan 11, 2015 3:20:35 PM COT
-INSERT INTO t_alter_column values('ad_column','IsToolbarButton','CHAR(1)',null,'Y')
+--INSERT INTO t_alter_column values('ad_column','IsToolbarButton','CHAR(1)',null,'Y')
 ;
 
 -- Jan 11, 2015 3:20:36 PM COT
@@ -43,7 +43,7 @@ INSERT INTO t_alter_column values('ad_field','IsToolbarButton','CHAR(1)',null,'N
 INSERT INTO t_alter_column values('ad_userdef_field','IsToolbarButton','CHAR(1)',null,'NULL')
 ;
 
-ALTER TABLE ad_column DROP CONSTRAINT ad_column_istoolbarbutton_check CASCADE
+--ALTER TABLE ad_column DROP CONSTRAINT ad_column_istoolbarbutton_check CASCADE
 ;
 
 -- Jan 11, 2015 4:53:13 PM COT

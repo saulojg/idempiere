@@ -141,8 +141,10 @@ UPDATE AD_Column SET FKConstraintName='UpdatedBy_ADUserPreference', FKConstraint
 ;
 
 -- Apr 18, 2015 1:47:41 AM CEST
-CREATE TABLE AD_UserPreference (AD_Client_ID NUMERIC(10) NOT NULL, AD_Org_ID NUMERIC(10) NOT NULL, AD_User_ID NUMERIC(10) NOT NULL, AD_UserPreference_ID NUMERIC(10) NOT NULL, AD_UserPreference_UU VARCHAR(36) DEFAULT NULL , AutoCommit CHAR(1) DEFAULT NULL CHECK (AutoCommit IN ('Y','N')), AutoNew CHAR(1) DEFAULT NULL CHECK (AutoNew IN ('Y','N')), Created TIMESTAMP DEFAULT statement_timestamp() NOT NULL, CreatedBy NUMERIC(10) NOT NULL, IsActive CHAR(1) DEFAULT 'Y' CHECK (IsActive IN ('Y','N')) NOT NULL, Updated TIMESTAMP DEFAULT statement_timestamp() NOT NULL, UpdatedBy NUMERIC(10) NOT NULL, CONSTRAINT AD_UserPreference_Key PRIMARY KEY (AD_UserPreference_ID), CONSTRAINT AD_UserPreference_UU_idx UNIQUE (AD_UserPreference_UU))
+/*CREATE TABLE AD_UserPreference (AD_Client_ID NUMERIC(10) NOT NULL, AD_Org_ID NUMERIC(10) NOT NULL, AD_User_ID NUMERIC(10) NOT NULL, AD_UserPreference_ID NUMERIC(10) NOT NULL, AD_UserPreference_UU VARCHAR(36) DEFAULT NULL , AutoCommit CHAR(1) DEFAULT NULL CHECK (AutoCommit IN ('Y','N')), AutoNew CHAR(1) DEFAULT NULL CHECK (AutoNew IN ('Y','N')), Created TIMESTAMP DEFAULT statement_timestamp() NOT NULL, CreatedBy NUMERIC(10) NOT NULL, IsActive CHAR(1) DEFAULT 'Y' CHECK (IsActive IN ('Y','N')) NOT NULL, Updated TIMESTAMP DEFAULT statement_timestamp() NOT NULL, UpdatedBy NUMERIC(10) NOT NULL, CONSTRAINT AD_UserPreference_Key PRIMARY KEY (AD_UserPreference_ID), CONSTRAINT AD_UserPreference_UU_idx UNIQUE (AD_UserPreference_UU))
 ;
+
+
 
 -- Apr 18, 2015 1:47:41 AM CEST
 ALTER TABLE AD_UserPreference ADD CONSTRAINT ADClient_ADUserPreference FOREIGN KEY (AD_Client_ID) REFERENCES ad_client(ad_client_id) DEFERRABLE INITIALLY DEFERRED
@@ -162,7 +164,7 @@ ALTER TABLE AD_UserPreference ADD CONSTRAINT CreatedBy_ADUserPreference FOREIGN 
 
 -- Apr 18, 2015 1:47:41 AM CEST
 ALTER TABLE AD_UserPreference ADD CONSTRAINT UpdatedBy_ADUserPreference FOREIGN KEY (UpdatedBy) REFERENCES ad_user(ad_user_id) DEFERRABLE INITIALLY DEFERRED
-;
+;*/
 
 -- Apr 18, 2015 1:49:31 AM CEST
 INSERT INTO AD_Window (AD_Window_ID,Name,Description,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,WindowType,Processing,EntityType,IsSOTrx,IsDefault,WinHeight,WinWidth,IsBetaFunctionality,AD_Window_UU) VALUES (200073,'User Preference','This window is use to set up the preferences entries for each user.',0,0,'Y',TO_TIMESTAMP('2015-04-18 01:49:31','YYYY-MM-DD HH24:MI:SS'),0,TO_TIMESTAMP('2015-04-18 01:49:31','YYYY-MM-DD HH24:MI:SS'),0,'M','N','D','Y','N',0,0,'N','69306fa5-a87a-4090-a641-8fa685bdaa34')
@@ -360,7 +362,7 @@ INSERT INTO AD_IndexColumn (AD_Client_ID,AD_Org_ID,AD_IndexColumn_ID,AD_IndexCol
 ;
 
 -- Apr 23, 2015 5:14:55 PM CEST
-CREATE UNIQUE INDEX ad_userpreference_user_idx ON AD_UserPreference (AD_User_ID,AD_Client_ID)
+-- CREATE UNIQUE INDEX ad_userpreference_user_idx ON AD_UserPreference (AD_User_ID,AD_Client_ID)
 ;
 
 SELECT register_migration_script('201504231737_IDEMPIERE-2556.sql') FROM dual

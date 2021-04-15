@@ -12,7 +12,7 @@ UPDATE AD_Column SET FKConstraintName='QuotationOrder_COrder', FKConstraintType=
 ;
 
 -- Apr 20, 2015 2:57:31 PM COT
-ALTER TABLE C_Order ADD COLUMN QuotationOrder_ID NUMERIC(10) DEFAULT NULL 
+--ALTER TABLE C_Order ADD COLUMN QuotationOrder_ID NUMERIC(10) DEFAULT NULL 
 ;
 
 -- Apr 20, 2015 2:57:32 PM COT
