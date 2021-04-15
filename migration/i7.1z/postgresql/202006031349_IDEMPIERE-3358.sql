@@ -198,7 +198,7 @@ INSERT INTO AD_TreeBar (AD_Tree_ID,AD_User_ID,Node_ID, AD_Client_ID,AD_Org_ID, I
 ;
 
 -- Jun 3, 2020, 3:10:40 PM CEST
-INSERT INTO AD_TreeBar (AD_Tree_ID,AD_User_ID,Node_ID, AD_Client_ID,AD_Org_ID, IsActive,Created,CreatedBy,Updated,UpdatedBy)VALUES (10,100,383,0,0,'Y',statement_timestamp(),100,statement_timestamp(),100)
+-- INSERT INTO AD_TreeBar (AD_Tree_ID,AD_User_ID,Node_ID, AD_Client_ID,AD_Org_ID, IsActive,Created,CreatedBy,Updated,UpdatedBy)VALUES (10,100,383,0,0,'Y',statement_timestamp(),100,statement_timestamp(),100)
 ;
 
 SELECT register_migration_script('202006031349_IDEMPIERE-3358.sql') FROM dual

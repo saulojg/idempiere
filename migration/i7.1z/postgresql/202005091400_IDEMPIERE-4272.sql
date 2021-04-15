@@ -448,7 +448,7 @@ INSERT INTO WS_WebServiceTypeAccess (AD_Client_ID,AD_Org_ID,AD_Role_ID,WS_WebSer
 ;
 
 -- Add Storage Detail process for the role Web Service Execution
-INSERT INTO AD_Process_Access (AD_Process_ID, AD_Role_ID, AD_Client_ID, AD_Org_ID, Created, CreatedBy, IsActive, Updated, UpdatedBy, IsReadWrite, AD_Process_Access_UU) VALUES (236, 50004, 11, 0, TO_TIMESTAMP('2020-05-09 14:03:21','YYYY-MM-DD HH24:MI:SS'), 100, 'Y', TO_TIMESTAMP('2020-05-09 14:03:21','YYYY-MM-DD HH24:MI:SS'), 100, 'Y', 'a7c6bbb6-e276-4e6e-bdf3-855e9c25da43')
+-- INSERT INTO AD_Process_Access (AD_Process_ID, AD_Role_ID, AD_Client_ID, AD_Org_ID, Created, CreatedBy, IsActive, Updated, UpdatedBy, IsReadWrite, AD_Process_Access_UU) VALUES (236, 50004, 11, 0, TO_TIMESTAMP('2020-05-09 14:03:21','YYYY-MM-DD HH24:MI:SS'), 100, 'Y', TO_TIMESTAMP('2020-05-09 14:03:21','YYYY-MM-DD HH24:MI:SS'), 100, 'Y', 'a7c6bbb6-e276-4e6e-bdf3-855e9c25da43')
 ;
 
 SELECT register_migration_script('202005091400_IDEMPIERE-4272.sql') FROM dual

@@ -15,6 +15,10 @@ SELECT 	AD_Client_ID, Node_ID, AD_Org_ID, (SELECT AD_Tree_Favorite_ID FROM AD_Tr
 		Generate_UUID(), NOW(), 100, 'N', 0, NOW(), 100, 'Y', LoginOpenSeqNo
 FROM AD_TreeBar tb
 WHERE (AD_Client_ID, AD_User_ID, Node_ID) NOT IN (SELECT DISTINCT tf.AD_Client_ID, tf.AD_User_ID, tfn.AD_Menu_ID FROM  AD_Tree_Favorite tf INNER JOIN AD_Tree_Favorite_Node tfn ON (tfn.AD_Tree_Favorite_ID = tf.AD_Tree_Favorite_ID) AND tfn.AD_Menu_ID>0)
+-- Orbital Software
+AND EXISTS (SELECT AD_Tree_Favorite_ID FROM AD_Tree_Favorite WHERE AD_Client_ID = tb.AD_Client_ID AND AD_User_ID=tb.AD_User_ID)
+AND EXISTS (SELECT 1 FROM AD_Menu WHERE AD_Menu.AD_Menu_ID = tb.Node_ID)
+-- 
 ORDER BY AD_Client_ID, AD_User_ID
 ;
 

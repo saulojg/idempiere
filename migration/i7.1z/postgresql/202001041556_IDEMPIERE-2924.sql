@@ -16,7 +16,7 @@ UPDATE AD_Ref_List SET Name='XLS',Updated=TO_TIMESTAMP('2020-01-04 16:09:08','YY
 ;
 
 -- Jan 4, 2020, 4:09:17 PM CET
-INSERT INTO AD_Ref_List (AD_Ref_List_ID,Name,AD_Reference_ID,Value,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,EntityType,AD_Ref_List_UU) VALUES (200491,'XLSX',200169,'XLSX',0,0,'Y',TO_TIMESTAMP('2020-01-04 16:09:16','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2020-01-04 16:09:16','YYYY-MM-DD HH24:MI:SS'),100,'D','2ebce9b0-ffa1-429d-aa8e-42be54bc161b')
+INSERT INTO AD_Ref_List (AD_Ref_List_ID,Name,AD_Reference_ID,Value,AD_Client_ID,AD_Org_ID,IsActive,Created,CreatedBy,Updated,UpdatedBy,EntityType,AD_Ref_List_UU) VALUES (200491,'XLSX',/*200169 Orbital Software - Roca */ 2000092,'XLSX',0,0,'Y',TO_TIMESTAMP('2020-01-04 16:09:16','YYYY-MM-DD HH24:MI:SS'),100,TO_TIMESTAMP('2020-01-04 16:09:16','YYYY-MM-DD HH24:MI:SS'),100,'D','2ebce9b0-ffa1-429d-aa8e-42be54bc161b')
 ;
 
 SELECT register_migration_script('202001041556_IDEMPIERE-2924.sql') FROM dual
