@@ -24,11 +24,11 @@ UPDATE AD_IndexColumn SET ColumnSQL='upper(columnname)',Updated=TO_TIMESTAMP('20
 ;
 
 -- Aug 25, 2017 12:27:46 PM CEST
-DROP INDEX ad_element_uppercolumnname
+DROP INDEX IF EXISTS ad_element_uppercolumnname
 ;
 
 -- Aug 25, 2017 12:27:46 PM CEST
-CREATE UNIQUE INDEX ad_element_uppercolumnname ON AD_Element (upper(columnname))
+-- CREATE UNIQUE INDEX ad_element_uppercolumnname ON AD_Element (upper(columnname))
 ;
 
 SELECT register_migration_script('201708251228_IDEMPIERE-3453.sql') FROM dual
