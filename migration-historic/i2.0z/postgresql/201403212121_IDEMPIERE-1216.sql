@@ -1666,7 +1666,7 @@ UPDATE AD_Column SET IsToolbarButton='N', IsTranslated='Y',Updated=TO_TIMESTAMP(
 ;
 
 -- Mar 21, 2014 8:58:07 PM CET
-INSERT INTO AD_Table (AD_Client_ID,AD_Org_ID,AD_Table_ID,AD_Table_UU,AD_Window_ID,AccessLevel,CopyColumnsFromTable,Created,CreatedBy,Description,EntityType,Help,ImportTable,IsActive,IsCentrallyMaintained,IsChangeLog,IsDeleteable,IsHighVolume,IsSecurityEnabled,IsView,LoadSeq,Name,Processing,ReplicationType,TableName,Updated,UpdatedBy) VALUES (0,0,200122,'2034b77d-71d5-45d6-8c1e-01d634495dbf',53124,'4','N',TO_TIMESTAMP('2014-03-21 20:58:06','YYYY-MM-DD HH24:MI:SS'),100,'Chart definition','D','Charts are for the graphical display of information','N','Y','Y','N','N','N','N','N',0,'Chart Translation','N','L','AD_Chart_Trl',TO_TIMESTAMP('2014-03-21 20:58:06','YYYY-MM-DD HH24:MI:SS'),100)
+INSERT INTO AD_Table (AD_Client_ID,AD_Org_ID,AD_Table_ID,AD_Table_UU,AD_Window_ID,AccessLevel,CopyColumnsFromTable,Created,CreatedBy,Description,EntityType,Help,ImportTable,IsActive,IsCentrallyMaintained,IsChangeLog,IsDeleteable,IsHighVolume,IsSecurityEnabled,IsView,LoadSeq,Name,Processing,ReplicationType,TableName,Updated,UpdatedBy) VALUES (0,0,200122,'2034b77d-71d5-45d6-8c1e-01d634495dbf',/*53124 ORBITAL Software*/ NULL,'4','N',TO_TIMESTAMP('2014-03-21 20:58:06','YYYY-MM-DD HH24:MI:SS'),100,'Chart definition','D','Charts are for the graphical display of information','N','Y','Y','N','N','N','N','N',0,'Chart Translation','N','L','AD_Chart_Trl',TO_TIMESTAMP('2014-03-21 20:58:06','YYYY-MM-DD HH24:MI:SS'),100)
 ;
 
 -- Mar 21, 2014 8:58:07 PM CET
@@ -1733,7 +1733,7 @@ INSERT INTO AD_Column (AD_Client_ID,AD_Column_ID,AD_Column_UU,AD_Element_ID,AD_O
 ;
 
 -- Mar 21, 2014 8:58:44 PM CET
-INSERT INTO AD_Tab (AD_Client_ID,AD_Column_ID,AD_Org_ID,AD_Tab_ID,AD_Tab_UU,AD_Table_ID,AD_Window_ID,Created,CreatedBy,EntityType,HasTree,ImportFields,IsActive,IsAdvancedTab,IsInfoTab,IsInsertRecord,IsReadOnly,IsSingleRow,IsSortTab,IsTranslationTab,Name,Processing,SeqNo,TabLevel,Updated,UpdatedBy) VALUES (0,211141,0,200132,'a4808408-ab7d-43b8-aac5-87ccae3bdab3',200122,53124,TO_TIMESTAMP('2014-03-21 20:58:43','YYYY-MM-DD HH24:MI:SS'),100,'D','N','N','Y','N','N','N','N','Y','N','Y','Translation','N',30,1,TO_TIMESTAMP('2014-03-21 20:58:43','YYYY-MM-DD HH24:MI:SS'),100)
+/*INSERT INTO AD_Tab (AD_Client_ID,AD_Column_ID,AD_Org_ID,AD_Tab_ID,AD_Tab_UU,AD_Table_ID,AD_Window_ID,Created,CreatedBy,EntityType,HasTree,ImportFields,IsActive,IsAdvancedTab,IsInfoTab,IsInsertRecord,IsReadOnly,IsSingleRow,IsSortTab,IsTranslationTab,Name,Processing,SeqNo,TabLevel,Updated,UpdatedBy) VALUES (0,211141,0,200132,'a4808408-ab7d-43b8-aac5-87ccae3bdab3',200122,53124,TO_TIMESTAMP('2014-03-21 20:58:43','YYYY-MM-DD HH24:MI:SS'),100,'D','N','N','Y','N','N','N','N','Y','N','Y','Translation','N',30,1,TO_TIMESTAMP('2014-03-21 20:58:43','YYYY-MM-DD HH24:MI:SS'),100)
 ;
 
 -- Mar 21, 2014 8:58:46 PM CET
@@ -1773,7 +1773,7 @@ INSERT INTO AD_Field (AD_Client_ID,AD_Column_ID,AD_Field_ID,AD_Field_UU,AD_Org_I
 There are two reasons for de-activating and not deleting records:
 (1) The system requires the record for audit purposes.
 (2) The record is referenced by other records. E.g., you cannot delete a Business Partner, if there are invoices for this partner record existing. You de-activate the Business Partner and prevent that this record is used for future entries.','Y','Y','Y','N','N','N','N','N','Active',90,TO_TIMESTAMP('2014-03-21 20:58:49','YYYY-MM-DD HH24:MI:SS'),100,2)
-;
+;*/
 
 -- Mar 21, 2014 8:59:11 PM CET
 UPDATE AD_Field SET IsDisplayed='Y', SeqNo=30, XPosition=1,Updated=TO_TIMESTAMP('2014-03-21 20:59:11','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Field_ID=202804
@@ -2619,12 +2619,12 @@ ALTER TABLE AD_Chart_Trl ADD COLUMN RangeLabel VARCHAR(60) DEFAULT NULL
 ;
 
 -- Mar 22, 2014 1:30:05 PM CET
-INSERT INTO AD_Field (AD_Client_ID,AD_Column_ID,AD_Field_ID,AD_Field_UU,AD_Org_ID,AD_Tab_ID,ColumnSpan,Created,CreatedBy,Description,DisplayLength,EntityType,IsActive,IsCentrallyMaintained,IsDisplayed,IsEncrypted,IsFieldOnly,IsHeading,IsReadOnly,IsSameLine,Name,SeqNo,Updated,UpdatedBy) VALUES (0,211154,202814,'df62a3b5-296f-4d6c-b408-5ec3011854dc',0,200132,5,TO_TIMESTAMP('2014-03-22 13:30:05','YYYY-MM-DD HH24:MI:SS'),100,'Label for the domain axis.',60,'D','Y','Y','Y','N','N','N','N','N','Domain Label',90,TO_TIMESTAMP('2014-03-22 13:30:05','YYYY-MM-DD HH24:MI:SS'),100)
+/*INSERT INTO AD_Field (AD_Client_ID,AD_Column_ID,AD_Field_ID,AD_Field_UU,AD_Org_ID,AD_Tab_ID,ColumnSpan,Created,CreatedBy,Description,DisplayLength,EntityType,IsActive,IsCentrallyMaintained,IsDisplayed,IsEncrypted,IsFieldOnly,IsHeading,IsReadOnly,IsSameLine,Name,SeqNo,Updated,UpdatedBy) VALUES (0,211154,202814,'df62a3b5-296f-4d6c-b408-5ec3011854dc',0,200132,5,TO_TIMESTAMP('2014-03-22 13:30:05','YYYY-MM-DD HH24:MI:SS'),100,'Label for the domain axis.',60,'D','Y','Y','Y','N','N','N','N','N','Domain Label',90,TO_TIMESTAMP('2014-03-22 13:30:05','YYYY-MM-DD HH24:MI:SS'),100)
 ;
 
 -- Mar 22, 2014 1:30:06 PM CET
 INSERT INTO AD_Field (AD_Client_ID,AD_Column_ID,AD_Field_ID,AD_Field_UU,AD_Org_ID,AD_Tab_ID,ColumnSpan,Created,CreatedBy,Description,DisplayLength,EntityType,IsActive,IsCentrallyMaintained,IsDisplayed,IsEncrypted,IsFieldOnly,IsHeading,IsReadOnly,IsSameLine,Name,SeqNo,Updated,UpdatedBy) VALUES (0,211155,202815,'8a63cc9e-c4a8-469d-b284-2a4f8b807612',0,200132,5,TO_TIMESTAMP('2014-03-22 13:30:05','YYYY-MM-DD HH24:MI:SS'),100,'Label for the range axis.',60,'D','Y','Y','Y','N','N','N','N','N','Range Label',100,TO_TIMESTAMP('2014-03-22 13:30:05','YYYY-MM-DD HH24:MI:SS'),100)
-;
+;*/
 
 -- Mar 22, 2014 1:30:27 PM CET
 UPDATE AD_Field SET ColumnSpan=2, SeqNo=90,Updated=TO_TIMESTAMP('2014-03-22 13:30:27','YYYY-MM-DD HH24:MI:SS'),UpdatedBy=100 WHERE AD_Field_ID=202814

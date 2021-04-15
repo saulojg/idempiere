@@ -375,11 +375,11 @@ UPDATE AD_Menu SET Name='Production', Description='Production based on Bill of M
 ;
 
 -- Apr 14, 2014 4:45:18 PM MYT
-INSERT INTO AD_Reference (AD_Reference_ID,Name,EntityType,AD_Reference_UU,IsOrderByValue,ValidationType,AD_Org_ID,CreatedBy,Updated,IsActive,Created,UpdatedBy,AD_Client_ID) VALUES (200080,'M_Production','D','25b245ad-6b82-42c5-a1dd-bea8fb43556b','N','T',0,100,TO_TIMESTAMP('2014-04-14 16:45:12','YYYY-MM-DD HH24:MI:SS'),'Y',TO_TIMESTAMP('2014-04-14 16:45:12','YYYY-MM-DD HH24:MI:SS'),100,0)
+--INSERT INTO AD_Reference (AD_Reference_ID,Name,EntityType,AD_Reference_UU,IsOrderByValue,ValidationType,AD_Org_ID,CreatedBy,Updated,IsActive,Created,UpdatedBy,AD_Client_ID) VALUES (200080,'M_Production','D','25b245ad-6b82-42c5-a1dd-bea8fb43556b','N','T',0,100,TO_TIMESTAMP('2014-04-14 16:45:12','YYYY-MM-DD HH24:MI:SS'),'Y',TO_TIMESTAMP('2014-04-14 16:45:12','YYYY-MM-DD HH24:MI:SS'),100,0)
 ;
 
 -- Apr 14, 2014 4:45:47 PM MYT
-INSERT INTO AD_Ref_Table (IsValueDisplayed,AD_Ref_Table_UU,CreatedBy,Updated,Created,UpdatedBy,AD_Org_ID,IsActive,AD_Client_ID,EntityType,AD_Display,AD_Key,AD_Reference_ID,AD_Table_ID) VALUES ('N','ba10e596-5065-48e6-932c-337e19726661',100,TO_TIMESTAMP('2014-04-14 16:45:47','YYYY-MM-DD HH24:MI:SS'),TO_TIMESTAMP('2014-04-14 16:45:47','YYYY-MM-DD HH24:MI:SS'),100,0,'Y',0,'D',59961,3596,200080,325)
+--INSERT INTO AD_Ref_Table (IsValueDisplayed,AD_Ref_Table_UU,CreatedBy,Updated,Created,UpdatedBy,AD_Org_ID,IsActive,AD_Client_ID,EntityType,AD_Display,AD_Key,AD_Reference_ID,AD_Table_ID) VALUES ('N','ba10e596-5065-48e6-932c-337e19726661',100,TO_TIMESTAMP('2014-04-14 16:45:47','YYYY-MM-DD HH24:MI:SS'),TO_TIMESTAMP('2014-04-14 16:45:47','YYYY-MM-DD HH24:MI:SS'),100,0,'Y',0,'D',59961,3596,200080,325)
 ;
 
 -- Apr 14, 2014 4:46:17 PM MYT
