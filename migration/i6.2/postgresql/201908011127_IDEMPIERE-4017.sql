@@ -40,7 +40,7 @@ DROP INDEX ad_column_name
 ;
 
 -- Aug 1, 2019, 11:59:04 AM CEST
-CREATE UNIQUE INDEX ad_column_name ON AD_Column (AD_Table_ID,UPPER(ColumnName))
+--CREATE UNIQUE INDEX ad_column_name ON AD_Column (AD_Table_ID,UPPER(ColumnName))
 ;
 
 -- Aug 1, 2019, 12:00:09 PM CEST
@@ -71,10 +71,4 @@ INSERT INTO AD_TableIndex (AD_Client_ID,AD_Org_ID,AD_TableIndex_ID,AD_TableIndex
 INSERT INTO AD_IndexColumn (AD_Client_ID,AD_Org_ID,AD_IndexColumn_ID,AD_IndexColumn_UU,Created,CreatedBy,EntityType,IsActive,Updated,UpdatedBy,AD_TableIndex_ID,ColumnSQL,SeqNo) VALUES (0,0,201389,'a163915d-a5ba-45f9-9411-144d499af1fd',TO_TIMESTAMP('2019-08-01 12:33:35','YYYY-MM-DD HH24:MI:SS'),100,'D','Y',TO_TIMESTAMP('2019-08-01 12:33:35','YYYY-MM-DD HH24:MI:SS'),100,201074,'UPPER(Name)',1)
 ;
 
--- Aug 1, 2019, 12:33:43 PM CEST
-CREATE UNIQUE INDEX ad_tableindex_name ON AD_TableIndex (UPPER(Name))
-;
-
-SELECT register_migration_script('201908011127_IDEMPIERE-4017.sql') FROM dual
-;
 
