@@ -12,7 +12,7 @@ INSERT INTO AD_Column (AD_Column_ID,Version,Name,Help,AD_Table_ID,ColumnName,Def
 ;
 
 -- Jan 19, 2018 6:11:30 PM CET
-ALTER TABLE AD_UserPreference ADD COLUMN IsDetailedZoomAcross CHAR(1) DEFAULT 'N' CHECK (IsDetailedZoomAcross IN ('Y','N'))
+-- ALTER TABLE AD_UserPreference ADD COLUMN IsDetailedZoomAcross CHAR(1) DEFAULT 'N' CHECK (IsDetailedZoomAcross IN ('Y','N'))
 ;
 
 -- Jan 19, 2018 6:11:39 PM CET

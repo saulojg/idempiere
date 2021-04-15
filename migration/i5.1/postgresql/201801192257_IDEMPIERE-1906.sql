@@ -8,7 +8,7 @@ INSERT INTO AD_Column (AD_Column_ID,Version,Name,Help,AD_Table_ID,ColumnName,Def
 ;
 
 -- Jan 19, 2018 10:56:07 PM CET
-ALTER TABLE AD_UserPreference ADD COLUMN IsUseSimilarTo CHAR(1) DEFAULT 'N' CHECK (IsUseSimilarTo IN ('Y','N'))
+-- ALTER TABLE AD_UserPreference ADD COLUMN IsUseSimilarTo CHAR(1) DEFAULT 'N' CHECK (IsUseSimilarTo IN ('Y','N'))
 ;
 
 -- Jan 19, 2018 10:56:20 PM CET
