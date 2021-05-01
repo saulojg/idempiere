@@ -426,7 +426,7 @@ public class GridFieldVO implements Serializable, Cloneable
 			//
 			vo.AD_Reference_Value_ID = rs.getInt("AD_Reference_Value_ID");
 			vo.ValidationCode = rs.getString("ValidationCode");
-			vo.AD_Chart_ID = rs.getInt("AD_Chart_ID");
+			try { vo.AD_Chart_ID = rs.getInt("AD_Chart_ID"); } catch(SQLException x) {}
 			vo.ValidationCodeLookup = rs.getString("ValidationCodeLookup");
 			vo.ReadOnlyLogic = rs.getString("ReadOnlyLogic");
 			vo.DisplayLogic= rs.getString("DisplayLogic");
