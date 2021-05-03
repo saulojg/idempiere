@@ -135,7 +135,7 @@ public class GenericPOElementHandler extends AbstractElementHandler {
 		List<String> excludes = defaultExcludeList(tableName);
 		boolean checkExcluded = ! sql.toLowerCase().startsWith("select *");				
 		try (Statement stmt = DB.createStatement();) {
-			sql = MRole.getDefault().addAccessSQL(sql, tableName, true, true);			
+			//sql = MRole.getDefault().addAccessSQL(sql, tableName, true, true);			
 			ResultSet rs = stmt.executeQuery(sql);
 			while (rs.next()) {
 				GenericPO po = new GenericPO(tableName, ctx.ctx, rs, getTrxName(ctx));
