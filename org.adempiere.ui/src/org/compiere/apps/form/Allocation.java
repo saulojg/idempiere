@@ -20,8 +20,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Properties;
 import java.util.Vector;
 import java.util.logging.Level;
 
@@ -73,21 +71,8 @@ public class Allocation
 	private int         i_applied = 9;
 	private int 		i_overUnder = 10;
 //	private int			i_multiplier = 10;
-	public int			i_c_bpartnerarendir_id=13; // Roca
 	public int         	m_AD_Org_ID = 0;
 
-	// region Roca
-	public boolean onlyEmployee;
-	public boolean onlyVendor;
-	public boolean onlyComisiones;
-	public boolean tercerizados;
-	public boolean autoAsigna;
-	public int Select_C_BPartner_ID = 0;
-	public int Select_C_BPartnerARendir_ID = 0;
-	public Timestamp allocDateFrom = null;
-	public Timestamp allocDateTo = null;
-	// endregion Roca
-	
 	private ArrayList<Integer>	m_bpartnerCheck = new ArrayList<Integer>(); 
 
 	public void dynInit() throws Exception
@@ -826,115 +811,4 @@ public class Allocation
 		
 		return alloc;
 	}   //  saveData
-	/**
-	 * 	Set Allocated Flag for payments
-	 * 	@param ctx context
-	 *	@param C_BPartner_ID if 0 all
-	 *	@param trxName trx
-	 */
-	private void setIsAllocated (Properties ctx, int C_BPartner_ID, String trxName)
-	{
-		Date fecha = null;
-		if(allocDateFrom!=null)
-			fecha = new Date(allocDateFrom.getTime());
-		
-		int counter = 0;
-		String sql = "SELECT * FROM C_Payment "
-			+ "WHERE IsAllocated='N' AND DocStatus IN ('CO','CL')";
-		if(fecha != null)
-			sql += " AND DateTrx >= ?::date";
-		
-		if (C_BPartner_ID > 0)
-			sql += " AND C_BPartner_ID=?";
-		else
-			sql += " AND AD_Client_ID=" + Env.getAD_Client_ID(ctx);
-		PreparedStatement pstmt = null;
-		try
-		{
-			int i = 0;
-			pstmt = DB.prepareStatement (sql, trxName);
-			if(fecha!=null)
-				pstmt.setTimestamp(++i, new Timestamp(fecha.getTime()));
-			if (C_BPartner_ID > 1)
-				pstmt.setInt (++i, C_BPartner_ID);
-			ResultSet rs = pstmt.executeQuery ();
-			while (rs.next ())
-			{
-				MPayment pay = new MPayment (ctx, rs, trxName);
-				if (pay.testAllocation())
-					if (pay.save())
-						counter++;
-			}
-			rs.close ();
-			pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			log.log(Level.SEVERE, e.toString());
-		}
-		try
-		{
-			if (pstmt != null)
-				pstmt.close ();
-			pstmt = null;
-		}
-		catch (Exception e)
-		{
-			pstmt = null;
-		}
-		log.config("#" + counter);
-	}	//	setIsAllocated
-	
-	/**
-	 * 	Set Paid Flag for invoices
-	 * 	@param ctx context
-	 *	@param C_BPartner_ID if 0 all
-	 *	@param trxName transaction
-	 */
-	private void setIsPaid (Properties ctx, int C_BPartner_ID, String trxName)
-	{
-		Date fecha = null;
-		if(allocDateFrom!=null)
-			fecha = allocDateFrom;
-		
-		int counter = 0;
-		String sql = "SELECT * FROM C_Invoice "
-			+ "WHERE IsPaid='N' AND DocStatus IN ('CO','CL')";
-		if(fecha != null)
-			sql += " AND DateInvoiced >= ?::Date ";
-		
-		if (C_BPartner_ID > 1)
-			sql += " AND C_BPartner_ID=?";
-		else
-			sql += " AND AD_Client_ID=" + Env.getAD_Client_ID(ctx);
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try
-		{
-			pstmt = DB.prepareStatement (sql, trxName);
-			int i=0;
-			if(fecha!=null)
-				pstmt.setTimestamp(++i, new Timestamp(fecha.getTime()));
-			if (C_BPartner_ID > 1)
-				pstmt.setInt (++i, C_BPartner_ID);
-			rs = pstmt.executeQuery ();
-			while (rs.next ())
-			{
-				MInvoice invoice = new MInvoice(ctx, rs, trxName);
-				if (invoice.testAllocation())
-					if (invoice.save())
-						counter++;
-			}
-		}
-		catch (Exception e)
-		{
-			log.log(Level.SEVERE, e.toString());
-		}finally{
-			DB.close(rs, pstmt);
-			rs = null; pstmt = null;
-		}
-		log.config("#" + counter);
-		/**/
-	}	//	setIsPaid
 }
