@@ -79,6 +79,10 @@ public final class EMail implements Serializable
 
 	//use in server bean
 	public final static String HTML_MAIL_MARKER = "ContentType=text/html;";
+	
+	//log last email send error message in context
+	public final static String EMAIL_SEND_MSG = "EmailSendMsg";
+	
 	/**
 	 *	Full Constructor
 	 *  @param client the client
@@ -248,10 +252,13 @@ public final class EMail implements Serializable
 		}
 		
 		m_sentMsg = null;
+		Env.getCtx().remove(EMAIL_SEND_MSG);
+		
 		//
 		if (!isValid(true))
 		{
 			m_sentMsg = "Invalid Data";
+			Env.getCtx().put(EMAIL_SEND_MSG, m_sentMsg);
 			return m_sentMsg;
 		}
 		//
@@ -306,12 +313,14 @@ public final class EMail implements Serializable
 		{
 			log.log(Level.WARNING, "Auth=" + m_auth + " - " + se.toString());
 			m_sentMsg = se.toString();
+			Env.getCtx().put(EMAIL_SEND_MSG, m_sentMsg);
 			return se.toString();
 		}
 		catch (Exception e)
 		{
 			log.log(Level.SEVERE, "Auth=" + m_auth, e);
 			m_sentMsg = e.toString();
+			Env.getCtx().put(EMAIL_SEND_MSG, m_sentMsg);
 			return e.toString();
 		}
 
@@ -476,12 +485,14 @@ public final class EMail implements Serializable
 			else
 				log.log(Level.WARNING, sb.toString());
 			m_sentMsg = sb.toString();
+			Env.getCtx().put(EMAIL_SEND_MSG, m_sentMsg);
 			return sb.toString();
 		}
 		catch (Exception e)
 		{
 			log.log(Level.SEVERE, "", e);
 			m_sentMsg = e.getLocalizedMessage();
+			Env.getCtx().put(EMAIL_SEND_MSG, m_sentMsg);
 			return e.getLocalizedMessage();
 		}
 		finally
