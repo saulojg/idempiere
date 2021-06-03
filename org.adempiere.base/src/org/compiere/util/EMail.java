@@ -49,7 +49,6 @@ import javax.mail.internet.MimeMultipart;
 import org.compiere.model.MAuthorizationAccount;
 import org.compiere.model.MClient;
 import org.compiere.model.MSysConfig;
-import org.compiere.model.MUser;
 
 import com.sun.mail.smtp.SMTPMessage;
 
@@ -1268,47 +1267,5 @@ public final class EMail implements Serializable
 		}
 		return ia;
 	}
-	
-	// region Roca
-	// sg TODO mover a clase de utilidades de Roca
-	// dREHER otro metodo para envio de correos
-	public static Boolean sendEmail(String to, String subject, String msg,
-			String fileName, String[] cc){
-
-		int AD_Client_ID = Env.getAD_Client_ID(Env.getCtx());
-		if(AD_Client_ID <= 0)
-			AD_Client_ID = DB.getSQLValue(null, "SELECT AD_Client_ID FROM AD_Client WHERE AD_Client_ID > 1000 AND IsActive='Y'");
-		if(AD_Client_ID <= 0)
-			AD_Client_ID = 1000000;
-		
-		MClient m_client = new MClient(Env.getCtx(), AD_Client_ID, null);		
-
-		MUser from = MUser.get(Env.getCtx(), Env.getAD_User_ID(Env.getCtx()));
-		
-		if(from==null || m_client == null){ // esta corriendo desde una agenda programada, no lee entorno
-			
-			m_client = new MClient(Env.getCtx(), 1000000, null);
-			
-			int idUser = DB.getSQLValue(null, "SELECT AD_User_ID FROM AD_User WHERE Name='SuperUser'");
-			if(idUser<0)
-				idUser=100;
-			
-			from = new MUser(Env.getCtx(), idUser, null);
-			
-			System.out.println("No pudo cargar MClient o MUser, toma datos por defecto. user=" + from);
-			
-		}		
-
-		EMail email = new EMail(m_client, from.getEMail(), to, subject, msg);
-		if(fileName!=null && !fileName.isEmpty())
-			email.addAttachment(new File(fileName));
-		if(cc!=null) {
-			for(String cca : cc)
-				email.addCc(cca);
-		}
-		
-		return SENT_OK.equals(email.send());		
-	}
-	// endregion Roca	
 
 }	//	EMail
