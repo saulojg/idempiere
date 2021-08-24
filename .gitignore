@@ -24,7 +24,7 @@ External Plug-in Libraries
 
 /runtime-server.product/
 /jettyhome/
-
+/reports/
 /org.idempiere.javadoc/API
 /.sonarlint/
 **/org.sonarlint.eclipse.core.prefs
