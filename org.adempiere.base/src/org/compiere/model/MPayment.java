@@ -3250,7 +3250,7 @@ public class MPayment extends X_C_Payment
 								|| pr.getLAR_PaymentRule_ID() == 1000018
 								|| pr.getLAR_PaymentRuleGroup_ID() == 1000011) {
 
-							Date fecha = new Date();
+							Timestamp fecha = new Timestamp(System.currentTimeMillis());
 							String sql = "UPDATE C_Payment SET dateacct= ? ::date WHERE C_Payment_ID=?";
 							int upd = DB.executeUpdate(sql, new Object[] {fecha, this.getC_Payment_ID()}
 								, false, get_TrxName());
@@ -3259,7 +3259,7 @@ public class MPayment extends X_C_Payment
 										"Se actualizo la fecha de autorizacion de automoviles,tajetas,depositos y transferencias del paymentId="
 												+ this.getC_Payment_ID() + " Fecha=" + fecha);
 							else
-								log.warning("Error al actualizar la fecha de autorizacion de automoviles del paymentId="
+								log.severe("Error al actualizar la fecha de autorizacion de automoviles del paymentId="
 										+ this.getC_Payment_ID() + " Fecha=" + fecha);
 
 						}
