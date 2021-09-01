@@ -1940,7 +1940,8 @@ public class MOrder extends X_C_Order implements DocAction
 		if (MDocType.DOCSUBTYPESO_OnCreditOrder.equals(DocSubTypeSO)		//	(W)illCall(I)nvoice
 			|| MDocType.DOCSUBTYPESO_WarehouseOrder.equals(DocSubTypeSO)	//	(W)illCall(P)ickup	
 			|| MDocType.DOCSUBTYPESO_POSOrder.equals(DocSubTypeSO)			//	(W)alkIn(R)eceipt
-			|| MDocType.DOCSUBTYPESO_PrepayOrder.equals(DocSubTypeSO)) 
+			// Roca || MDocType.DOCSUBTYPESO_PrepayOrder.equals(DocSubTypeSO)) // Comentado para que no genere shipment si es PrepayOrder 
+			)
 		{
 			if (!DELIVERYRULE_Force.equals(getDeliveryRule()))
 			{
