@@ -23,7 +23,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -3229,49 +3228,7 @@ public class MPayment extends X_C_Payment
 	public int getLAR_PaymentRule_ID() {
 		return get_ValueAsInt("LAR_PaymentRule_ID");
 	}
-	
-	protected boolean afterSave(boolean newRecord, boolean success) {
 
-		if (success) {
-
-			// actualiza fecha de autorizacion de vehiculos,depositos,transfrencias,tarjetas
-			// para comisiones
-			String estado = this.getDocStatus();
-			if (estado == "CO") {
-
-				int prID = getLAR_PaymentRule_ID();
-				if (prID > 0) {
-					X_LAR_PaymentRule pr = new X_LAR_PaymentRule(Env.getCtx(), prID, null);
-					if (pr != null) {
-						if (pr.getLAR_PaymentRule_ID() == 1000009 || pr.getLAR_PaymentRuleGroup_ID() == 1000006
-								|| pr.getLAR_PaymentRule_ID() == 1000004 || pr.getLAR_PaymentRuleGroup_ID() == 1000004
-								|| pr.getLAR_PaymentRule_ID() == 1000007 || pr.getLAR_PaymentRuleGroup_ID() == 1000005
-								|| pr.getLAR_PaymentRule_ID() == 1000016 || pr.getLAR_PaymentRuleGroup_ID() == 1000002
-								|| pr.getLAR_PaymentRule_ID() == 1000018
-								|| pr.getLAR_PaymentRuleGroup_ID() == 1000011) {
-
-							Timestamp fecha = new Timestamp(System.currentTimeMillis());
-							String sql = "UPDATE C_Payment SET dateacct= ? ::date WHERE C_Payment_ID=?";
-							int upd = DB.executeUpdate(sql, new Object[] {fecha, this.getC_Payment_ID()}
-								, false, get_TrxName());
-							if (upd > -1)
-								log.fine(
-										"Se actualizo la fecha de autorizacion de automoviles,tajetas,depositos y transferencias del paymentId="
-												+ this.getC_Payment_ID() + " Fecha=" + fecha);
-							else
-								log.severe("Error al actualizar la fecha de autorizacion de automoviles del paymentId="
-										+ this.getC_Payment_ID() + " Fecha=" + fecha);
-
-						}
-					}
-				}
-			}
-
-		}
-
-		return success;
-
-	}
 
 	public int getC_AllocationHdr(String trxName) {
 
