@@ -2,13 +2,17 @@ package org.adempiere.util;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import org.compiere.model.MChatEntry;
 import org.compiere.model.MSysConfig;
 import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
+import org.compiere.model.MChat;
 
 public class Miscfunc {
 
@@ -119,5 +123,136 @@ public class Miscfunc {
 
 		return s;
 
-	}	
+	}
+	
+	/**
+	 * Used by beanshell.
+	 * @author Roca
+	 */	
+	public static Date CtoD(String fecha, String fmt) {
+		Date d = new Date();
+		try {
+			fecha = fecha.replace("/", "-");
+			SimpleDateFormat sdf = new SimpleDateFormat(fmt);
+			d = sdf.parse(fecha);
+		} catch (Exception ex) {
+			System.out.println("No se pudo convertir a fecha valida\n"
+					+ ex.toString());
+		}
+		return d;
+	}
+
+	/**
+	 * Used by beanshell.
+	 * @author Roca
+	 */
+	public static Timestamp DateToTimestamp(Date fecha) {
+		return fecha == null ? null : new Timestamp(fecha.getTime());
+	}
+
+	public static Timestamp FechaHOYTimestamp() {
+		Timestamp hoy = DateToTimestamp(new Date());
+		return hoy;
+	}
+	
+    /**
+     * Used by beanshell.
+     * @author Roca
+     * @param adUserID
+     * @param opcion
+     * @return
+     */
+	public static boolean UserEspecial(int adUserID, int opcion) {
+		Boolean ok = false;
+
+		String usersEspeciales = "";
+
+		if(opcion == 4)
+			usersEspeciales = Miscfunc.ValueFromSystem("SUPER_USUARIOS", "100,117,", true); // por defecto SuperUser, Tere, Jimena
+		else
+			throw new RuntimeException("opción desconocida");
+
+		ArrayList<Integer> users = new ArrayList<Integer>();
+
+		if(usersEspeciales!=null && usersEspeciales.trim()!=""){
+
+			if(usersEspeciales.indexOf(",") > -1){
+				String[] x = usersEspeciales.split(",");
+				for(int i=0; i<x.length; i++)
+					users.add(Integer.valueOf(x[i].trim()));
+			}else
+				users.add(Integer.valueOf(usersEspeciales.trim()));
+
+			for(int i=0; i<users.size(); i++){
+				if(users.get(i).compareTo(adUserID)==0){
+					ok = true;
+					break;
+				}
+			}
+
+		}
+
+		return ok;
+	}
+
+	/**
+	 * Used only by beanshell.
+	 * @param message
+	 */
+	public static void ShowMessage(String message) {
+		s_log.info(message);
+	}
+	
+	/**
+	 * Used only by beanshell.
+	 * @param motivo
+	 * @param descripcion
+	 * @param trxName
+	 * @param AD_Table_ID
+	 * @param Recno_ID
+	 * @param AD_User_ID
+	 * @param AD_Org_ID
+	 * @throws Exception
+	 */
+    public static void registrarChat(String motivo, String descripcion, String trxName, int AD_Table_ID, int Recno_ID, int AD_User_ID, int AD_Org_ID) throws Exception{
+
+    	// dREHER, verificar si ya no existe un chat con el mismo motivo, si existe no volver a agregarlo
+
+    	int chat_id = DB.getSQLValue(trxName, "SELECT MAX(CM_Chat_ID) FROM CM_Chat WHERE AD_Table_ID=" + AD_Table_ID + " AND Record_ID=" + Recno_ID);
+    	if(chat_id < 0)
+    		chat_id = 0;
+    	
+    	
+    	if(AD_User_ID == 0)
+    		AD_User_ID = Env.getAD_User_ID(Env.getCtx());
+    	if(AD_Org_ID == 0)
+    		AD_Org_ID = Env.getAD_Org_ID(Env.getCtx());
+    	
+
+    	MChat mc = new MChat(Env.getCtx(), chat_id, trxName);
+    	if(mc!=null){
+    		mc.setAD_Org_ID(AD_Org_ID);
+    		mc.setDescription(descripcion);
+    		mc.setAD_Table_ID(AD_Table_ID);
+    		mc.setRecord_ID(Recno_ID);
+    		if(!mc.save(trxName)){
+    			throw new Exception("Se produjo un error al guardar log del "+ motivo);
+    		}else{
+    			MChatEntry ce =  new MChatEntry(Env.getCtx(), 0, trxName);
+    			if(ce!=null){
+    				int ch = mc.getCM_Chat_ID();
+    				ce.setAD_Org_ID(AD_Org_ID);
+    				ce.setAD_User_ID(AD_User_ID);
+    				ce.setCharacterData(descripcion);
+    				ce.setCM_Chat_ID(ch);
+    				ce.setSubject(motivo);
+    				if(!ce.save(trxName)){
+    					throw new Exception("No se pudo guardar log del " + motivo);
+    				}
+    			}
+    		}
+    	}
+    	
+    	// s_log.finer("Se registro CHAT en Tabla=" + AD_Table_ID + " Registro=" + Recno_ID);
+    }	
 }
