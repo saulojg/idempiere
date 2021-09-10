@@ -232,7 +232,7 @@ public class CompiereService {
 		Timestamp date = null;
 		String printer = null;
 		Login login = new Login(ctx);
-		login.loadPreferences(org, wh, date, printer);
+		login.loadPreferences(org, wh, date, printer, null);
 		//
 		return loginInfo;
 	}   //  checkLogin

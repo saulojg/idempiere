@@ -110,7 +110,7 @@ public class Login
 					@SuppressWarnings("unused")
 					KeyNamePair[] whs = login.getWarehouses(orgs[0]);
 					//
-					login.loadPreferences(orgs[0], null, null, null);
+					login.loadPreferences(orgs[0], null, null, null, null);
 				}
 			}
 		}
@@ -710,13 +710,22 @@ public class Login
 		}
 	}	//	getOrgAddSummary
 
+
+	/**
+	 *  Load Warehouses
+	 * @param org organization
+	 * @return Array of Warehouse Info
+	 */	
+	public KeyNamePair[] getWarehouses (KeyNamePair org) {
+		return getWarehouses(org, null);
+	}
 	
 	/**
 	 *  Load Warehouses
 	 * @param org organization
 	 * @return Array of Warehouse Info
 	 */
-	public KeyNamePair[] getWarehouses (KeyNamePair org)
+	public KeyNamePair[] getWarehouses (KeyNamePair org, /* Roca */ KeyNamePair larSucursal)
 	{
 		if (org == null)
 			throw new IllegalArgumentException("Org missing");
@@ -729,6 +738,18 @@ public class Login
 			+ "WHERE AD_Org_ID=? AND IsActive='Y' "
 			+ " AND "+I_M_Warehouse.COLUMNNAME_IsInTransit+"='N' " // do not show in tranzit warehouses - teo_sarca [ 2867246 ]
 			+ "ORDER BY Name";
+
+		// Roca
+		if(larSucursal!=null){
+			sql = "SELECT w.M_Warehouse_ID, w.Name FROM M_Warehouse w"
+			+ " INNER JOIN LAR_Sucursal s ON s.LAR_Sucursal_ID=" + larSucursal.getKey()
+			+ " INNER JOIN LAR_SucursalWarehouse ws ON ws.M_WareHouse_ID=w.M_WareHouse_ID AND ws.isActive='Y'"
+			+ " AND ws.LAR_Sucursal_ID=s.LAR_Sucursal_ID"
+			+ " WHERE (w.AD_Org_ID=? OR s.LAR_Sucursal_ID=0) AND w.IsActive='Y' "
+			+ " ORDER BY w.Name";
+		}
+		//
+		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try
@@ -819,7 +840,12 @@ public class Login
 	 *  @return AD_Message of error (NoValidAcctInfo) or ""
 	 */
 	public String loadPreferences (KeyNamePair org, 
-		KeyNamePair warehouse, java.sql.Timestamp timestamp, String printerName)
+			KeyNamePair warehouse, java.sql.Timestamp timestamp, String printerName) {
+		return loadPreferences(org, warehouse, timestamp, printerName, null);
+	}
+
+	public String loadPreferences (KeyNamePair org, 
+		KeyNamePair warehouse, java.sql.Timestamp timestamp, String printerName, Integer larSucursalId)
 	{
 		if (log.isLoggable(Level.INFO)) log.info("Org: " + org.toStringX());
 
@@ -836,6 +862,14 @@ public class Login
 		Env.setContext(m_ctx, Env.AD_ORG_ID, org.getKey());
 		Env.setContext(m_ctx, Env.AD_ORG_NAME, org.getName());
 		Ini.setProperty(Ini.P_ORG, org.getName());
+		
+		// Roca
+		if(larSucursalId!=null) {
+			Env.setContext(m_ctx, "LAR_Sucursal_ID", larSucursalId);
+			// dREHER, busco el LAR_SucursalGrupo_ID y lo seteo en el entorno global
+			int LAR_SucursalGrupo_ID = DB.getSQLValue(null, "SELECT LAR_SucursalGrupo_ID FROM LAR_Sucursal WHERE LAR_Sucursal_ID=" + larSucursalId);
+			m_ctx.setProperty("#LAR_SucursalGrupo_ID", String.valueOf(LAR_SucursalGrupo_ID));			
+		}
 
 		//  Warehouse Info
 		if (warehouse != null)
@@ -1228,7 +1262,7 @@ public class Login
 		String printerName = Ini.getProperty(Ini.P_PRINTER);
 		if (loginDate == null)
 			loginDate = new java.sql.Timestamp(System.currentTimeMillis());
-		loadPreferences(orgPP, whPP, loginDate, printerName);
+		loadPreferences(orgPP, whPP, loginDate, printerName, null);
 		
 		String error = validateLogin(orgPP);
 		if (error != null && error.length() > 0)

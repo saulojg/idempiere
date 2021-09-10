@@ -23,7 +23,11 @@
 
 package org.adempiere.webui.panel;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import org.adempiere.util.Callback;
@@ -45,6 +49,7 @@ import org.adempiere.webui.window.LoginWindow;
 import org.compiere.model.MRole;
 import org.compiere.model.MSysConfig;
 import org.compiere.model.MUser;
+import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.KeyNamePair;
 import org.compiere.util.Language;
@@ -85,8 +90,8 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
 	protected LoginWindow wndLogin;
 	protected Login login;
 
-	protected Combobox lstRole, lstClient, lstOrganisation, lstWarehouse;
-	protected Label lblRole, lblClient, lblDef, lblOrganisation, lblWarehouse, lblDate;
+	protected Combobox lstRole, lstClient, lstOrganisation, lstWarehouse, lstLarSucursal;
+	protected Label lblRole, lblClient, lblDef, lblOrganisation, lblWarehouse, lblDate, lblLarSucursal;
 	protected WDateEditor lstDate;
 
     /** Context					*/
@@ -241,6 +246,18 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
     	td.setSclass(ITheme.LOGIN_FIELD_CLASS);
     	tr.appendChild(td);
     	td.appendChild(lstOrganisation);
+    	
+    	tr = new Tr();
+        tr.setId("rowLarSucursal");
+        table.appendChild(tr);
+    	td = new Td();
+    	tr.appendChild(td);
+    	td.setSclass(ITheme.LOGIN_LABEL_CLASS);
+    	td.appendChild(lblLarSucursal.rightAlign());
+    	td = new Td();
+    	td.setSclass(ITheme.LOGIN_FIELD_CLASS);
+    	tr.appendChild(td);
+    	td.appendChild(lstLarSucursal);    	
 
     	tr = new Tr();
         tr.setId("rowWarehouse");
@@ -300,6 +317,10 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
         lblOrganisation = new Label();
         lblOrganisation.setId("lblOrganisation");
         lblOrganisation.setValue(Msg.getMsg(language,"Organization"));
+        
+        lblLarSucursal = new Label();
+        lblLarSucursal.setId("lblLarSucursal");
+        lblLarSucursal.setValue("Sucursal");
 
         lblWarehouse = new Label();
         lblWarehouse.setId("lblWarehouse");
@@ -332,6 +353,14 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
 
         lstOrganisation.addEventListener(Events.ON_SELECT, this);
         ZKUpdateUtil.setWidth(lstOrganisation, "220px");
+        
+        lstLarSucursal= new Combobox();
+        lstLarSucursal.setAutocomplete(true);
+        lstLarSucursal.setAutodrop(true);
+        lstLarSucursal.setId("lstLarSucursal");
+
+        lstLarSucursal.addEventListener(Events.ON_SELECT, this);
+        ZKUpdateUtil.setWidth(lstLarSucursal, "220px");
 
         lstWarehouse = new Combobox();
         lstWarehouse.setAutocomplete(true);
@@ -486,7 +515,7 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
     		}
             //
         }
-        updateWarehouseList();
+        actualizarSucursal();
     }
 
     private void updateWarehouseList()
@@ -494,7 +523,8 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
         lstWarehouse.getItems().clear();
         lstWarehouse.setText("");
         Comboitem lstItemOrganisation = lstOrganisation.getSelectedItem();
-        if(lstItemOrganisation != null)
+        Comboitem lstItemSucursal = lstLarSucursal.getSelectedItem();
+        if(lstItemOrganisation != null && lstItemSucursal != null)
         {
 			//  initial warehouse - Elaine 2009/02/06
         	UserPreference userPreference = SessionManager.getSessionApplication().getUserPreference();
@@ -504,7 +534,8 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
 				initDefault=m_userpreference.getProperty( UserPreference.P_WAREHOUSE );
 			}
             KeyNamePair organisationKNPair = new KeyNamePair(Integer.valueOf((String)lstItemOrganisation.getValue()), lstItemOrganisation.getLabel());
-            KeyNamePair warehouseKNPairs[] = login.getWarehouses(organisationKNPair);
+            KeyNamePair larSucursalKNPair = new KeyNamePair(Integer.valueOf((String)lstItemSucursal.getValue()), lstItemSucursal.getLabel());
+            KeyNamePair warehouseKNPairs[] = login.getWarehouses(organisationKNPair, larSucursalKNPair);
             if(warehouseKNPairs != null && warehouseKNPairs.length > 0)
             {
                 for(int i = 0; i < warehouseKNPairs.length; i++)
@@ -537,8 +568,11 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
             	setUserID();
                 updateOrganisationList();
             }
+            else if(eventCompId.equals(lstLarSucursal.getId())) {
+            	updateWarehouseList();
+            }
             else if(eventCompId.equals(lstOrganisation.getId()))
-                updateWarehouseList();
+            	actualizarSucursal();
         }
         if (event.getTarget().getId().equals(ConfirmPanel.A_OK))
         {
@@ -591,6 +625,8 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
     	updateOrganisationList();
     	int AD_Org_ID = Env.getAD_Org_ID(ctx);
     	lstOrganisation.setValue(AD_Org_ID);
+    	int larSucursalId = Env.getLAR_Sucursal_ID(ctx);
+    	lstLarSucursal.setValue(larSucursalId);    	
     	updateWarehouseList();
     	int M_Warehouse_ID = Env.getContextAsInt(ctx, Env.M_WAREHOUSE_ID);
     	lstWarehouse.setValue(M_Warehouse_ID);
@@ -607,6 +643,7 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
     	Comboitem lstItemClient = lstClient.getSelectedItem();
     	Comboitem lstItemOrg = lstOrganisation.getSelectedItem();
     	Comboitem lstItemWarehouse = lstWarehouse.getSelectedItem();
+    	Comboitem lstItemSucursal = lstLarSucursal.getSelectedItem();
 
         if(lstItemRole == null || lstItemRole.getValue() == null)
         {
@@ -620,6 +657,10 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
         {
         	throw new WrongValueException(lstOrganisation, Msg.getMsg(m_ctx, "FillMandatory") + lblOrganisation.getValue());
         }
+        else if(lstItemSucursal == null || lstItemSucursal.getValue() == null)
+        {
+        	throw new WrongValueException(lstLarSucursal, Msg.getMsg(m_ctx, "FillMandatory") + lblLarSucursal.getValue());
+        }        
         int orgId = 0, warehouseId = 0;
         orgId = Integer.parseInt((String)lstItemOrg.getValue());
         KeyNamePair orgKNPair = new KeyNamePair(orgId, lstItemOrg.getLabel());
@@ -631,8 +672,10 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
         }
 
 		Timestamp date = (Timestamp)lstDate.getValue();
+		
+		int larSucursalId = Integer.parseInt((String)lstItemSucursal.getValue());
 
-		String msg = login.loadPreferences(orgKNPair, warehouseKNPair, date, null);
+		String msg = login.loadPreferences(orgKNPair, warehouseKNPair, date, null, larSucursalId);
         if (! Util.isEmpty(msg))
 		{
 			Env.getCtx().clear();
@@ -651,6 +694,8 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
 		userPreference.setProperty(UserPreference.P_ROLE, (String) lstItemRole.getValue());
 		userPreference.setProperty(UserPreference.P_CLIENT, (String) lstItemClient.getValue());
 		userPreference.setProperty(UserPreference.P_ORG, (String) lstItemOrg.getValue());
+		userPreference.setProperty(UserPreference.P_LAR_SUCURSAL, 
+				lstItemSucursal == null ? "0" : (String) lstItemSucursal.getValue());
 		userPreference.setProperty(UserPreference.P_WAREHOUSE,
 				lstItemWarehouse != null ? (String) lstItemWarehouse.getValue() : "0");
 		userPreference.savePreference();
@@ -670,4 +715,115 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
 	public boolean show() {
 		return m_show;
 	}
+	
+    private void actualizarSucursal()
+    {
+        lstLarSucursal.getItems().clear();
+        lstLarSucursal.setText("");
+        Comboitem lstItemOrg = lstOrganisation.getSelectedItem();
+        if(lstItemOrg != null)
+        {
+        	UserPreference userPreference = SessionManager.getSessionApplication().getUserPreference();
+			String initDefault = userPreference.getProperty(UserPreference.P_LAR_SUCURSAL);
+			if( initDefault.length() == 0  &&  !m_show  &&  m_userpreference != null )
+			{
+				initDefault=m_userpreference.getProperty( UserPreference.P_LAR_SUCURSAL );
+			}
+            KeyNamePair orgKNPairs[] = getSucursales(Integer.valueOf(lstItemOrg.getValue()));
+            if(orgKNPairs != null && orgKNPairs.length > 0)
+            {
+                for(int i = 0; i < orgKNPairs.length; i++)
+                {
+                	ComboItem ci = new ComboItem(orgKNPairs[i].getName(), orgKNPairs[i].getID());
+                	String id = AdempiereIdGenerator.escapeId(ci.getLabel());
+                	if (lstLarSucursal.getFellowIfAny(id) == null)
+                		ci.setId(id);
+                	lstLarSucursal.appendChild(ci);
+                    if(orgKNPairs[i].getID().equals(initDefault))
+                    	lstLarSucursal.setSelectedItem(ci);
+
+                }
+                if (lstLarSucursal.getSelectedIndex() == -1 && lstLarSucursal.getItemCount() > 0) {
+                	m_show = true; // didn't find default organisation
+                	lstLarSucursal.setSelectedIndex(0);
+                }
+            }
+
+            // If we have only one org, we can make readonly the combobox
+    		if (lstLarSucursal.getItemCount() == 1)
+    		{
+    			lstLarSucursal.setSelectedIndex(0);
+    			lstLarSucursal.setEnabled(false);
+    		} else {
+    			lstLarSucursal.setEnabled(true);
+    		}
+            //
+        }
+        updateWarehouseList();
+    }
+    
+	
+	public static KeyNamePair[] getSucursales(int AD_Org_ID) 
+	{
+		int AD_User_ID = Env.getContextAsInt(Env.getCtx(), "#AD_User_ID");
+		
+		ArrayList<KeyNamePair> list = new ArrayList<KeyNamePair>();
+		KeyNamePair[] result = null;
+
+		String sql=
+			"SELECT s.LAR_Sucursal_ID,s.name " +
+			"FROM LAR_Sucursal s " +
+			"WHERE " +
+			"s.IsActive='Y' AND " +
+			"(s.LAR_Sucursal_ID IN " + 
+			"(	 " +
+			"SELECT ES.LAR_Sucursal_ID " + 
+			"FROM LAR_EmpleadoDeSucursal  " +
+			"    ES,LAR_SucursalOrg SO  " +
+			"WHERE SO.LAR_Sucursal_ID =  " +
+			"    ES.LAR_Sucursal_ID  " +
+			"    AND ES.IsActive='Y'  " +
+			"    AND SO.IsActive='Y'  " +
+			"    AND s.isActive='Y'" +
+			"    AND ES.AD_User_ID=" + AD_User_ID +
+			"    AND SO.AD_Org_ID ="+AD_Org_ID +
+			")" +" OR "+AD_Org_ID+"=0)";
+		
+	
+		sql += " ORDER BY s.Name";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try
+		{
+			pstmt = DB.prepareStatement(sql, null);
+			rs = pstmt.executeQuery();
+			//  Cargando sucursales
+			while (rs.next())
+			{
+				int LAR_Sucursal_ID = rs.getInt("LAR_Sucursal_ID");
+				String Name = rs.getString("name");
+				KeyNamePair p = new KeyNamePair(LAR_Sucursal_ID, Name);
+				list.add(p);
+			}
+			
+			DB.close(rs, pstmt);
+			//
+			result = new KeyNamePair[list.size()];
+			list.toArray(result);
+
+		}
+		catch (SQLException ex)
+		{
+			
+			ex.printStackTrace();
+		}
+		finally
+		{
+			DB.close(rs, pstmt);
+			rs=null; pstmt=null;
+		}
+		return result;
+	}    
 }

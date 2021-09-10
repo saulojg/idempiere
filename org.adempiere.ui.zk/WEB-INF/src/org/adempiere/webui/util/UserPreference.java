@@ -70,6 +70,8 @@ public final class UserPreference implements Serializable {
 	public static final String P_HEADER_COLLAPSED = "HeaderCollapsed";
 	public static final String DEFAULT_HEADER_COLLAPSED = "N";
 
+	public static final String P_LAR_SUCURSAL = "Sucursal";
+	
 	/** Ini Properties */
 	private static final String[] PROPERTIES = new String[] {
 		P_LANGUAGE,
@@ -79,7 +81,7 @@ public final class UserPreference implements Serializable {
 		P_WAREHOUSE,
 		P_MENU_COLLAPSED,
 		P_HELP_COLLAPSED,
-		P_HEADER_COLLAPSED};
+		P_HEADER_COLLAPSED, P_LAR_SUCURSAL};
 	/** Ini Property Values */
 	private static final String[] VALUES = new String[] {
 		DEFAULT_LANGUAGE,
@@ -89,7 +91,7 @@ public final class UserPreference implements Serializable {
 		DEFAULT_WAREHOUSE,
 		DEFAULT_MENU_COLLAPSED,
 		DEFAULT_HELP_COLLAPSED,
-		DEFAULT_HEADER_COLLAPSED};
+		DEFAULT_HEADER_COLLAPSED, "0"};
 
 	/** Container for Properties */
 	private Properties props = new Properties();
