@@ -169,8 +169,10 @@ public class Miscfunc {
 
 		if(opcion == 4)
 			usersEspeciales = Miscfunc.ValueFromSystem("SUPER_USUARIOS", "100,117,", true); // por defecto SuperUser, Tere, Jimena
+		else if(opcion == 28)
+			usersEspeciales = Miscfunc.ValueFromSystem("LoadUsuariosHabilitadosCompletarRecibosBancarios", "100,1000117,1001096,1001370,1000121,1000035,1001737", true); // por defecto ControlGestion, SuperUser			
 		else
-			throw new RuntimeException("opción desconocida");
+			throw new RuntimeException("opción [" + opcion + "] desconocida");
 
 		ArrayList<Integer> users = new ArrayList<Integer>();
 
