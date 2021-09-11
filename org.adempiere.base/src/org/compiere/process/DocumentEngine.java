@@ -694,7 +694,7 @@ public class DocumentEngine implements DocAction
 	{
 		if (isInvalid())
 			return new String[] {ACTION_Prepare, ACTION_Invalidate,
-				ACTION_Unlock, ACTION_Void};
+				ACTION_Unlock, ACTION_Void, /* Roca */ ACTION_Complete};
 
 		if (isDrafted())
 			return new String[] {ACTION_Prepare, ACTION_Invalidate, ACTION_Complete,
