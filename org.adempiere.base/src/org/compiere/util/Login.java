@@ -865,7 +865,7 @@ public class Login
 		
 		// Roca
 		if(larSucursalId!=null) {
-			Env.setContext(m_ctx, "LAR_Sucursal_ID", larSucursalId);
+			Env.setContext(m_ctx, "#LAR_Sucursal_ID", larSucursalId);
 			// dREHER, busco el LAR_SucursalGrupo_ID y lo seteo en el entorno global
 			int LAR_SucursalGrupo_ID = DB.getSQLValue(null, "SELECT LAR_SucursalGrupo_ID FROM LAR_Sucursal WHERE LAR_Sucursal_ID=" + larSucursalId);
 			m_ctx.setProperty("#LAR_SucursalGrupo_ID", String.valueOf(LAR_SucursalGrupo_ID));			
