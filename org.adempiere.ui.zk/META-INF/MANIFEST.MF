@@ -71,7 +71,7 @@ DynamicImport-Package: action.images
 Bundle-ClassPath: .,
  lib/ckez.jar,
  lib/daisydiff.jar,
- lib/owasp-java-html-sanitizer.jar, xecersIml.jar
+ lib/owasp-java-html-sanitizer.jar
 Export-Package: fi.jawsy.jawwa.zk.atmosphere,
  metainfo.zk,
  org.adempiere.webui,
