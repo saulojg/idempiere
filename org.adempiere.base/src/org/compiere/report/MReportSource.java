@@ -28,6 +28,7 @@ import org.compiere.model.X_PA_ReportSource;
  *  @author Jorg Janke
  *  @version $Id: MReportSource.java,v 1.3 2006/08/03 22:16:52 jjanke Exp $
  */
+@org.adempiere.base.Model
 public class MReportSource extends X_PA_ReportSource
 {
 	/**

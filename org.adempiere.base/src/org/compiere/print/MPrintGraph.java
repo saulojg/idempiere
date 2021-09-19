@@ -27,6 +27,7 @@ import org.compiere.model.X_AD_PrintGraph;
  * 	@author 	Jorg Janke
  * 	@version 	$Id: MPrintGraph.java,v 1.2 2006/07/30 00:53:02 jjanke Exp $
  */
+@org.adempiere.base.Model
 public class MPrintGraph extends X_AD_PrintGraph
 {
 	/**

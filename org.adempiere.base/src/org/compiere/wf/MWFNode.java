@@ -52,6 +52,7 @@ import org.idempiere.cache.ImmutablePOCache;
  * 			<li>BF [ 2815732 ] MWFNode.getWorkflow not working in trx
  * 				https://sourceforge.net/tracker/?func=detail&aid=2815732&group_id=176962&atid=879332 
  */
+@org.adempiere.base.Model
 public class MWFNode extends X_AD_WF_Node implements ImmutablePOSupport
 {
 	/**

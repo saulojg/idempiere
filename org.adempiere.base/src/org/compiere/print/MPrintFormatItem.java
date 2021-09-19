@@ -44,6 +44,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 	@author 	Jorg Janke
  * 	@version 	$Id: MPrintFormatItem.java,v 1.3 2006/08/03 22:17:17 jjanke Exp $
  */
+@org.adempiere.base.Model
 public class MPrintFormatItem extends X_AD_PrintFormatItem implements ImmutablePOSupport
 {
 	/**

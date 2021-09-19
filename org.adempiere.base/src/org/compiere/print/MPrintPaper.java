@@ -49,6 +49,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 			<li>FR [ 2829019 ] Check PrintPaper on save
  * 			https://sourceforge.net/tracker/?func=detail&aid=2829019&group_id=176962&atid=879335
  */
+@org.adempiere.base.Model
 public class MPrintPaper extends X_AD_PrintPaper implements ImmutablePOSupport
 {
 	/**

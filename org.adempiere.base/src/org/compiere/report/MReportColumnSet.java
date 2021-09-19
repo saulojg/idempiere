@@ -32,6 +32,7 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MReportColumnSet.java,v 1.3 2006/08/03 22:16:52 jjanke Exp $
  */
+@org.adempiere.base.Model
 public class MReportColumnSet extends X_PA_ReportColumnSet
 {
 	/**

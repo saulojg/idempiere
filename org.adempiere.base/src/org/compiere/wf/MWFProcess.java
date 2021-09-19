@@ -44,6 +44,7 @@ import org.compiere.util.Util;
  *  			<li>IDEMPIERE-3209 changed fucntions to public to improve integration support
  *  @version $Id: MWFProcess.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model
 public class MWFProcess extends X_AD_WF_Process
 {
 	/**

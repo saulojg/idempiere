@@ -36,6 +36,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 	@author 	Jorg Janke
  * 	@version 	$Id: MPrintFont.java,v 1.3 2006/07/30 00:53:02 jjanke Exp $
  */
+@org.adempiere.base.Model
 public class MPrintFont extends X_AD_PrintFont implements ImmutablePOSupport
 {
 	/**

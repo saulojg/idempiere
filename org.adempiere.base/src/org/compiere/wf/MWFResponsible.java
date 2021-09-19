@@ -33,6 +33,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MWFResponsible.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model
 public class MWFResponsible extends X_AD_WF_Responsible implements ImmutablePOSupport
 {
     /**

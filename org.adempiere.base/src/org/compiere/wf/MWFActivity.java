@@ -79,6 +79,7 @@ import org.compiere.util.Util;
  *  		<li>IDEMPIERE-3209 added process-aware resultset-based constructor
  *  @version $Id: MWFActivity.java,v 1.4 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model
 public class MWFActivity extends X_AD_WF_Activity implements Runnable
 {
 	/**
