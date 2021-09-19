@@ -28,9 +28,10 @@ import org.atteo.classindex.IndexAnnotated;
 public @interface Model {
 
 	/**
-	 * Table name
+	 * Table name. Can be an empty string if at least one of their superclasses have 
+	 * this annotation specifying a table name.
 	 * @return
 	 */
-	String table();
+	String table() default "";
 
 }

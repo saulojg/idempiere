@@ -12,9 +12,12 @@
  *****************************************************************************/
 package org.adempiere.base;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.atteo.classindex.ClassIndex;
-import org.compiere.util.CCache;
-import org.osgi.framework.Bundle;
+import org.compiere.model.PO;
+import org.compiere.util.CLogger;
 import org.osgi.framework.wiring.BundleWiring;
 import org.osgi.service.component.ComponentContext;
 import org.osgi.service.component.annotations.Activate;
@@ -31,51 +34,71 @@ import org.osgi.service.component.annotations.Component;
 public class AnnotationBasedModelFactory extends AbstractModelFactory implements IModelFactory
 {
 
-	private Bundle usingBundle;
+	private Map<String,Class<?>> classCache = new HashMap<>();
 
-	private CCache<String,Class<?>> classCache = new CCache<String,Class<?>>(null, "ABMF", 100, 120, false, 2000);
+	private final static CLogger s_log = CLogger.getCLogger(AnnotationBasedModelFactory.class);
 
 	@Activate
 	void activate(ComponentContext context)
 	{
-		this.usingBundle = context.getUsingBundle();
+		ClassLoader classLoader = context.getUsingBundle().adapt(BundleWiring.class).getClassLoader();
+
+		// scan model annotations
+		for(Class<?> clazz : ClassIndex.getAnnotated(Model.class, classLoader))
+		{
+			// determine table name
+			String tableName = null;
+			Model annotation = clazz.getAnnotation(Model.class);
+
+			if(annotation.table().isEmpty())
+				tableName = findTableName(clazz);
+			else
+				tableName = annotation.table();
+
+			if(tableName==null)
+				throw new RuntimeException("cannot determine table name for " + clazz);
+
+			// attempt to find the lowest class on the class hierarchy
+			Class<?> bottomClass = findBottomSubclass(clazz, classLoader);
+
+			if(!annotation.table().isEmpty() && bottomClass.equals(clazz))
+				s_log.finest("no subclasses found for " + clazz);
+
+			Class<?> existing = classCache.get(tableName);
+
+			if(existing==null || (!bottomClass.equals(existing) && bottomClass.isAssignableFrom(existing)))
+				classCache.put(tableName, bottomClass);
+		}
 	}
 
 	@Override
 	public Class<?> getClass(String tableName) 
 	{
-		// search first into cache
-		Class<?> candidate = classCache.get(tableName);
-		if (candidate != null)
+		return classCache.get(tableName);
+	}
+
+	private String findTableName(Class<?> clazz) {
+		String tableName = null;
+		if(!Object.class.equals(clazz) && !PO.class.equals(clazz))
 		{
-			// Object.class indicate no generated PO class for tableName
-			if (candidate.equals(Object.class))
-				return null;
+			Model annotation = clazz.getAnnotation(Model.class);
+			if(annotation!=null && !annotation.table().isEmpty())
+				tableName = annotation.table();
 			else
-				return candidate;
+				tableName = findTableName(clazz.getSuperclass());
 		}
+		return tableName;
+	}
 
-		// scan model annotations
-		BundleWiring wiring = usingBundle.adapt(BundleWiring.class);
-		for(Class<?> xClass : ClassIndex.getAnnotated(Model.class, wiring.getClassLoader()))
+	private Class<?> findBottomSubclass(Class<?> startingPoint, ClassLoader classLoader){
+		Class<?> result = startingPoint;
+		for(Class<?> clazz : ClassIndex.getSubclasses(result, classLoader))
 		{
-			Model annotation = xClass.getAnnotation(Model.class);
-			if(annotation.table().equalsIgnoreCase(tableName))
-			{
-				candidate = xClass;
-				for(Class<?> mClass : ClassIndex.getSubclasses(xClass, wiring.getClassLoader())) {
-					if(!mClass.equals(candidate) && candidate.isAssignableFrom(mClass))
-						// favoring candidates higher in the class hierarchy
-						candidate = mClass;
-				}
-				break;
-			}
+			if(!clazz.equals(result) && result.isAssignableFrom(clazz))
+				// favoring candidates lower in the class hierarchy
+				result = clazz;
 		}
-
-		//Object.class to indicate no PO class for tableName
-		classCache.put(tableName, candidate == null ? Object.class : candidate);
-
-		return candidate;
+		return result;
 	}
 
 }
