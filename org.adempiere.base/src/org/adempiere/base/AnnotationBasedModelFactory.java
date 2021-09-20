@@ -27,7 +27,7 @@ import org.osgi.service.component.annotations.Component;
  * discovery using SPI is preferred over reflection-based methods.
  * @author Saulo Gil
  */
-@Component(immediate = true, service = IModelFactory.class, property = {"service.ranking:Integer=-1"})
+@Component(immediate = true, service = IModelFactory.class, property = {"service.ranking:Integer=1"})
 public class AnnotationBasedModelFactory extends AbstractModelFactory implements IModelFactory
 {
 
@@ -60,15 +60,14 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 		for(Class<?> xClass : ClassIndex.getAnnotated(Model.class, wiring.getClassLoader()))
 		{
 			Model annotation = xClass.getAnnotation(Model.class);
-			if(annotation.table().equalsIgnoreCase(tableName))
+			if(annotation != null && annotation.table().equalsIgnoreCase(tableName))
 			{
-				candidate = xClass;
-				for(Class<?> mClass : ClassIndex.getSubclasses(xClass, wiring.getClassLoader())) {
-					if(!mClass.equals(candidate) && candidate.isAssignableFrom(mClass))
-						// favoring candidates higher in the class hierarchy
-						candidate = mClass;
-				}
-				break;
+				if (candidate == null)
+					candidate = xClass;
+				else if (!candidate.equals(xClass) && candidate.isAssignableFrom(xClass))
+					candidate = xClass;
+				else
+					continue;				
 			}
 		}
 
@@ -77,5 +76,4 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 
 		return candidate;
 	}
-
 }
