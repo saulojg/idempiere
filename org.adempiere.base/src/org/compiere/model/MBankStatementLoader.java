@@ -54,7 +54,8 @@ import org.compiere.util.Util;
  *	author Maarten Klinker, Eldir Tomassen
  *	@version $Id: MBankStatementLoader.java,v 1.3 2006/07/30 00:51:04 jjanke Exp $
  */
- public class MBankStatementLoader extends X_C_BankStatementLoader
+ @org.adempiere.base.Model(table = X_C_BankStatementLoader.Table_Name)
+public class MBankStatementLoader extends X_C_BankStatementLoader
  {
  	/**
 	 * 

@@ -23,6 +23,7 @@ import org.compiere.model.X_M_PromotionReward;
  * @author hengsin
  *
  */
+@org.adempiere.base.Model(table = X_M_PromotionReward.Table_Name)
 public class MPromotionReward extends X_M_PromotionReward {
 
 	private static final long serialVersionUID = -1466367082383341103L;

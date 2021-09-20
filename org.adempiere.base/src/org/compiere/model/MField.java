@@ -32,6 +32,7 @@ import org.idempiere.expression.logic.LogicEvaluator;
  *  @author Jorg Janke
  *  @version $Id: MField.java,v 1.2 2006/07/30 00:58:04 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Field.Table_Name)
 public class MField extends X_AD_Field implements ImmutablePOSupport
 {
 	/**

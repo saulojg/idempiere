@@ -32,6 +32,7 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MTest.java,v 1.3 2006/07/30 00:58:37 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_Test.Table_Name)
 public class MTest extends X_Test
 {
 	/**

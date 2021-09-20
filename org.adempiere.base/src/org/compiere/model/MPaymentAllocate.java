@@ -30,6 +30,7 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MPaymentAllocate.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_PaymentAllocate.Table_Name)
 public class MPaymentAllocate extends X_C_PaymentAllocate
 {
 	/**

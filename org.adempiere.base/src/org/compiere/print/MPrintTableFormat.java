@@ -48,6 +48,7 @@ import org.idempiere.cache.IntPOCopyCache;
  * 	<li>http://sourceforge.net/tracker/index.php?func=detail&aid=2011567&group_id=176962&atid=879335
  * 	@version 	$Id: MPrintTableFormat.java,v 1.3 2006/07/30 00:53:02 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_PrintTableFormat.Table_Name)
 public class MPrintTableFormat extends X_AD_PrintTableFormat implements ImmutablePOSupport
 {
 	/**

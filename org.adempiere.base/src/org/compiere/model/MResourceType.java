@@ -42,6 +42,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 				<li>added manufacturing related methods (getDayStart, getDayEnd etc)
  * 				<li>BF [ 2431049 ] If Time Slot then Time Slot Start/End should be mandatory
  */
+@org.adempiere.base.Model(table = X_S_ResourceType.Table_Name)
 public class MResourceType extends X_S_ResourceType implements ImmutablePOSupport
 {
 	/**

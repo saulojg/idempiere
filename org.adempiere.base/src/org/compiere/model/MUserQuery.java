@@ -33,6 +33,7 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id$
  */
+@org.adempiere.base.Model(table = X_AD_UserQuery.Table_Name)
 public class MUserQuery extends X_AD_UserQuery
 {
 	/**

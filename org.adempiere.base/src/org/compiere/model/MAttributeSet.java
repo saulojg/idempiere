@@ -39,6 +39,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Teo Sarca, www.arhipac.ro
  *			<li>FR [ 2214883 ] Remove SQL code and Replace for Query
  */
+@org.adempiere.base.Model(table = X_M_AttributeSet.Table_Name)
 public class MAttributeSet extends X_M_AttributeSet implements ImmutablePOSupport
 {
 	/**

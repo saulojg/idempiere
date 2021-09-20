@@ -34,6 +34,7 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MDistributionRunDetail.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_T_DistributionRunDetail.Table_Name)
 public class MDistributionRunDetail extends X_T_DistributionRunDetail
 {
 	/**

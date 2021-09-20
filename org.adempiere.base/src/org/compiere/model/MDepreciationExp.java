@@ -17,6 +17,7 @@ import org.idempiere.fa.exceptions.AssetException;
 import org.idempiere.fa.exceptions.AssetNotActiveException;
 
 
+@org.adempiere.base.Model(table = X_A_Depreciation_Exp.Table_Name)
 public class MDepreciationExp extends X_A_Depreciation_Exp
 {
 	

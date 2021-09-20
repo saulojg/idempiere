@@ -51,6 +51,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 			<li>FR [ 2905227 ] Calculate Measure based on the script to PA
  * 			<li>https://sourceforge.net/tracker/?func=detail&aid=2905227&group_id=176962&atid=879335
  */
+@org.adempiere.base.Model(table = X_PA_Measure.Table_Name)
 public class MMeasure extends X_PA_Measure implements ImmutablePOSupport
 {
 	/**

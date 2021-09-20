@@ -55,6 +55,7 @@ import org.compiere.util.Trx;
  *  	<li>BF [ 2847648 ] Manufacture & shipment cost errors
  *  		https://sourceforge.net/tracker/?func=detail&aid=2847648&group_id=176962&atid=934929
  */
+@org.adempiere.base.Model(table = X_M_Cost.Table_Name)
 public class MCost extends X_M_Cost
 {
 	/**

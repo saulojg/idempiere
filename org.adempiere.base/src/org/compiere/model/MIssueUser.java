@@ -30,6 +30,7 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MIssueUser.java,v 1.2 2006/07/30 00:54:54 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_R_IssueUser.Table_Name)
 public class MIssueUser extends X_R_IssueUser
 {
 	/**

@@ -34,6 +34,7 @@ import org.compiere.util.Env;
  * @author hengsin
  *
  */
+@org.adempiere.base.Model(table = X_M_LotCtlExclude.Table_Name)
 public class MLotCtlExclude extends X_M_LotCtlExclude {
 
 	/**

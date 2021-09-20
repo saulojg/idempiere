@@ -18,6 +18,7 @@ import org.compiere.util.Util;
  *	@author Teo Sarca, SC ARHIPAC SRL
  *	@version $Id
  */
+@org.adempiere.base.Model(table = X_I_FixedAsset.Table_Name)
 public class MIFixedAsset extends X_I_FixedAsset
 {
 	

@@ -33,6 +33,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MWFNodePara.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_WF_Node_Para.Table_Name)
 public class MWFNodePara extends X_AD_WF_Node_Para implements ImmutablePOSupport
 {
 	/**

@@ -28,6 +28,7 @@ import org.compiere.util.Env;
  *	@author Jorg Janke
  *	@version $Id: MProjectTask.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_ProjectTask.Table_Name)
 public class MProjectTask extends X_C_ProjectTask
 {
 	/**

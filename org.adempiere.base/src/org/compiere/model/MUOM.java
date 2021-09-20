@@ -34,6 +34,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 	@author 	Jorg Janke
  * 	@version 	$Id: MUOM.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_UOM.Table_Name)
 public class MUOM extends X_C_UOM implements ImmutablePOSupport
 {
 	/**

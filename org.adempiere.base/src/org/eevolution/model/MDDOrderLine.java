@@ -47,6 +47,7 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MOrderLine.java,v 1.6 2006/10/02 05:18:39 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_DD_OrderLine.Table_Name)
 public class MDDOrderLine extends X_DD_OrderLine
 {
 	/**

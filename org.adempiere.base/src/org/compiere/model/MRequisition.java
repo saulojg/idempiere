@@ -47,6 +47,7 @@ import org.compiere.util.TimeUtil;
  *  @author Teo Sarca, www.arhipac.ro
  *  		<li>FR [ 2744682 ] Requisition: improve error reporting
  */
+@org.adempiere.base.Model(table = X_M_Requisition.Table_Name)
 public class MRequisition extends X_M_Requisition implements DocAction
 {
 	/**

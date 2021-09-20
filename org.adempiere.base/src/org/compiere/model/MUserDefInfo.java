@@ -40,6 +40,7 @@ import org.compiere.util.Util;
  * @author Igor Pojzl, Cloudempiere
  * @version $Id$
  */
+@org.adempiere.base.Model(table = X_AD_UserDef_Info.Table_Name)
 public class MUserDefInfo extends X_AD_UserDef_Info {
 	
 	/**

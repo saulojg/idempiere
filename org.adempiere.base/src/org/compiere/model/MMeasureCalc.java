@@ -34,6 +34,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MMeasureCalc.java,v 1.4 2006/09/25 00:59:41 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_PA_MeasureCalc.Table_Name)
 public class MMeasureCalc extends X_PA_MeasureCalc implements ImmutablePOSupport
 {
 	/**

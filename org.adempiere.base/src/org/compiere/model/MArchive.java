@@ -43,6 +43,7 @@ import org.compiere.util.Env;
  * @author Jorg Janke
  * @version $Id: MArchive.java,v 1.3 2006/07/30 00:58:36 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Archive.Table_Name)
 public class MArchive extends X_AD_Archive {
 	/**
 	 * 

@@ -32,6 +32,7 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MOrderTax.java,v 1.4 2006/07/30 00:51:04 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_OrderTax.Table_Name)
 public class MOrderTax extends X_C_OrderTax
 {
 	/**

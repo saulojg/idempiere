@@ -49,6 +49,7 @@ import org.compiere.util.TimeUtil;
  * 			<li>BF [ 1899477 ] MCash.getLines should return only active lines
  * 			<li>BF [ 2588326 ] Cash Lines are not correctly updated on voiding
  */
+@org.adempiere.base.Model(table = X_C_Cash.Table_Name)
 public class MCash extends X_C_Cash implements DocAction
 {
 	/**

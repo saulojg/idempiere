@@ -37,6 +37,7 @@ import org.compiere.util.Env;
  *  @author red1 FR: [ 2214883 ] Remove SQL code and Replace for Query
  *  @version $Id: MDistribution.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_GL_Distribution.Table_Name)
 public class MDistribution extends X_GL_Distribution
 {
 	/**

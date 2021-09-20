@@ -28,6 +28,7 @@ import org.adempiere.exceptions.DBException;
 import org.compiere.util.DB;
 import org.compiere.util.KeyNamePair;
 
+@org.adempiere.base.Model(table = X_PA_ReportCube.Table_Name)
 public class MReportCube extends X_PA_ReportCube {
 
 	/**

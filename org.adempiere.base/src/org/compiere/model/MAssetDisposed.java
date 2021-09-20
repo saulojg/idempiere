@@ -23,6 +23,7 @@ import org.idempiere.fa.util.POCacheLocal;
  * Asset Disposal Model
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  */
+@org.adempiere.base.Model(table = X_A_Asset_Disposed.Table_Name)
 public class MAssetDisposed extends X_A_Asset_Disposed
 implements DocAction
 {

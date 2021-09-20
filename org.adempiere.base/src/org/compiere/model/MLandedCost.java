@@ -31,6 +31,7 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MLandedCost.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_LandedCost.Table_Name)
 public class MLandedCost extends X_C_LandedCost
 {
 	/**

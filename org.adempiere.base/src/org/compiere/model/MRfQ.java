@@ -33,6 +33,7 @@ import org.compiere.util.TimeUtil;
  *  @author Jorg Janke
  *  @version $Id: MRfQ.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_RfQ.Table_Name)
 public class MRfQ extends X_C_RfQ
 {
 	/**

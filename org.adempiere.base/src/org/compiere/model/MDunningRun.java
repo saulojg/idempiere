@@ -34,6 +34,7 @@ import org.compiere.util.DB;
  *  
  *  FR 2872010 - Dunning Run for a complete Dunning (not just level) - Developer: Carlos Ruiz - globalqss - Sponsor: Metas
  */
+@org.adempiere.base.Model(table = X_C_DunningRun.Table_Name)
 public class MDunningRun extends X_C_DunningRun
 {
 	/**

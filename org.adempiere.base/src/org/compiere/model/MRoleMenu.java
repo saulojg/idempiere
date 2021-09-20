@@ -25,6 +25,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 
+@org.adempiere.base.Model(table = X_U_RoleMenu.Table_Name)
 public class MRoleMenu extends X_U_RoleMenu
 {
 	/**

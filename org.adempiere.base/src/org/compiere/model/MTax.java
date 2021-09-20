@@ -40,6 +40,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  trifonnt - BF [2913276] - Allow only one Default Tax Rate per Tax Category
  *  mjmckay - BF [2948632] - Allow edits to the Default Tax Rate 
  */
+@org.adempiere.base.Model(table = X_C_Tax.Table_Name)
 public class MTax extends X_C_Tax implements ImmutablePOSupport
 {
 	/**

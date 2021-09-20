@@ -49,6 +49,7 @@ import org.compiere.util.Util;
  * @author Tobias Schoeneberg, www.metas.de - FR [ 2897194 ] Advanced Zoom and
  *         RelationTypes
  */
+@org.adempiere.base.Model(table = X_AD_RelationType.Table_Name)
 public class MRelationType extends X_AD_RelationType implements IZoomProvider {
 
 	private static final CLogger logger = CLogger

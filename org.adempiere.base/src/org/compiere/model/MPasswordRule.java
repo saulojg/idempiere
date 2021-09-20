@@ -59,6 +59,7 @@ import org.passay.dictionary.sort.ArraysSort;
  * @author juliana
  *
  */
+@org.adempiere.base.Model(table = X_AD_PasswordRule.Table_Name)
 public class MPasswordRule extends X_AD_PasswordRule {
 	/**
 	 * 

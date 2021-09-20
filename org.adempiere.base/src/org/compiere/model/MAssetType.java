@@ -12,6 +12,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * Asset Type
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  */
+@org.adempiere.base.Model(table = X_A_Asset_Type.Table_Name)
 public class MAssetType extends X_A_Asset_Type implements ImmutablePOSupport
 {
 	/**

@@ -32,6 +32,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Teo Sarca, www.arhipac.ro
  *  		<li>BF [ 2107083 ] Caching of MOrgInfo issue
  */
+@org.adempiere.base.Model(table = X_AD_OrgInfo.Table_Name)
 public class MOrgInfo extends X_AD_OrgInfo implements ImmutablePOSupport
 {
 	/**

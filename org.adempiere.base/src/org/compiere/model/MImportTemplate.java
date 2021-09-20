@@ -39,6 +39,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *
  *  @author Carlos Ruiz - GlobalQSS
  */
+@org.adempiere.base.Model(table = X_AD_ImportTemplate.Table_Name)
 public class MImportTemplate extends X_AD_ImportTemplate implements ImmutablePOSupport
 {
 	/**

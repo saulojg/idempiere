@@ -62,6 +62,7 @@ import org.compiere.util.Util;
  * 			<li> FR [ 2520591 ] Support multiples calendar for Org 
  *			@see http://sourceforge.net/tracker2/?func=detail&atid=879335&aid=2520591&group_id=176962 
  */
+@org.adempiere.base.Model(table = X_DD_Order.Table_Name)
 public class MDDOrder extends X_DD_Order implements DocAction
 {
 	/**

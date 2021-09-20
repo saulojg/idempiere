@@ -31,6 +31,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MCalendar.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_Calendar.Table_Name)
 public class MCalendar extends X_C_Calendar implements ImmutablePOSupport
 {
 	/**

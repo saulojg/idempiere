@@ -25,6 +25,7 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id$
  */
+@org.adempiere.base.Model(table = X_AD_LdapProcessorLog.Table_Name)
 public class MLdapProcessorLog extends X_AD_LdapProcessorLog implements AdempiereProcessorLog
 {
 

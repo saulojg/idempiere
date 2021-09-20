@@ -37,6 +37,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Carlos Ruiz
  *  @version $Id: MValRule.java
  */
+@org.adempiere.base.Model(table = X_AD_Val_Rule.Table_Name)
 public class MValRule extends X_AD_Val_Rule implements ImmutablePOSupport
 {
 	/**

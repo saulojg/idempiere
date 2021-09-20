@@ -45,7 +45,8 @@ import org.compiere.util.Msg;
  *	@version $Id: MDepositBatchLine.java,v 1.3 2007/07/02 00:51:02 afalcone Exp $
  *  
  */
- public class MDepositBatchLine extends X_C_DepositBatchLine
+ @org.adempiere.base.Model(table = X_C_DepositBatchLine.Table_Name)
+public class MDepositBatchLine extends X_C_DepositBatchLine
  {
 	/**
 	 * 

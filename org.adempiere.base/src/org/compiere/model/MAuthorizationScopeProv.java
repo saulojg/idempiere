@@ -30,6 +30,7 @@ import java.util.Properties;
 /**
  * Authorization ScopeProvider
  */
+@org.adempiere.base.Model(table = X_AD_AuthorizationScopeProv.Table_Name)
 public class MAuthorizationScopeProv extends X_AD_AuthorizationScopeProv {
 	/**
 	 * 

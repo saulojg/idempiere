@@ -27,6 +27,7 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MPaySchedule.java,v 1.3 2006/07/30 00:51:04 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_PaySchedule.Table_Name)
 public class MPaySchedule extends X_C_PaySchedule
 {
 	/**

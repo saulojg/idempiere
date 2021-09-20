@@ -43,6 +43,7 @@ import org.compiere.util.Env;
  * @author Jan Roessler, jr@schaeffer-ag.de
  *
  */
+@org.adempiere.base.Model(table = X_AD_SearchDefinition.Table_Name)
 public class MSearchDefinition extends X_AD_SearchDefinition {
 	/**
 	 * 

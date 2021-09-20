@@ -31,6 +31,7 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MBPartnerInfo.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_RV_BPartner.Table_Name)
 public class MBPartnerInfo extends X_RV_BPartner
 {
 	/**

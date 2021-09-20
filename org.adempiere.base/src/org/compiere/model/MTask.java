@@ -30,6 +30,7 @@ import org.compiere.util.Task;
  *  @author Jorg Janke
  *  @version $Id: MTask.java,v 1.2 2006/07/30 00:51:02 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Task.Table_Name)
 public class MTask extends X_AD_Task
 {
 	/**

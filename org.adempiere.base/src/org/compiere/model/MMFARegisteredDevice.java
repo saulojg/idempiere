@@ -33,6 +33,7 @@ import org.compiere.util.Env;
 /**
  * Multi-factor Authentication Registered Device
  */
+@org.adempiere.base.Model(table = X_MFA_RegisteredDevice.Table_Name)
 public class MMFARegisteredDevice extends X_MFA_RegisteredDevice {
 	/**
 	 * 

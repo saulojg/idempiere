@@ -39,6 +39,7 @@ import org.compiere.util.WebUtil;
  * 			<li>BF [ 1810182 ] Session lost after cache reset 
  * 			<li>BF [ 1892156 ] MSession is not really cached 
  */
+@org.adempiere.base.Model(table = X_AD_Session.Table_Name)
 public class MSession extends X_AD_Session
 {
 	/**

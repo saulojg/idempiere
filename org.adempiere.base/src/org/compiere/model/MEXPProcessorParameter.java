@@ -37,6 +37,7 @@ import org.compiere.util.CLogger;
 /**
  * @author Trifon N. Trifonov
  */
+@org.adempiere.base.Model(table = X_EXP_ProcessorParameter.Table_Name)
 public class MEXPProcessorParameter extends X_EXP_ProcessorParameter {
 	/**
 	 * 

@@ -29,6 +29,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author raphael.gildo (devCoffee, www.devcoffee.com.br)
  *
  */
+@org.adempiere.base.Model(table = X_AD_UserDef_Proc.Table_Name)
 public class MUserDefProc extends X_AD_UserDef_Proc implements ImmutablePOSupport {
 
 	/**

@@ -7,6 +7,7 @@ import java.util.Properties;
 import org.compiere.util.Env;
 /** Generated Model for A_Asset
  ** @version $Id: X_A_Asset.java,v 1.88 2004/08/27 21:26:37 jjanke Exp $ */
+@org.adempiere.base.Model(table = X_I_FAJournal.Table_Name)
 public class MXIFAJournal extends X_I_FAJournal
 {
 	/**

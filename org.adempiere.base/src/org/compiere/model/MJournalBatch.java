@@ -49,6 +49,7 @@ import org.compiere.util.TimeUtil;
  * 			<li>FR [ 1776045 ] Add ReActivate action to GL Journal
  *	@version $Id: MJournalBatch.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_GL_JournalBatch.Table_Name)
 public class MJournalBatch extends X_GL_JournalBatch implements DocAction
 {
 	/**

@@ -34,6 +34,7 @@ import org.compiere.util.DB;
  *  @author Teo Sarca, http://www.arhipac.ro
  *  			<li>FR [ 2079083 ] Add MFactAcct.deleteEx method
  */
+@org.adempiere.base.Model(table = X_Fact_Acct.Table_Name)
 public class MFactAcct extends X_Fact_Acct
 {
 	/**

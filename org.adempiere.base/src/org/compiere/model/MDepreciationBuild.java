@@ -8,6 +8,7 @@ import java.util.Properties;
  *  @author Teo Sarca, SC ARHIPAC SRL
  *  @version $Id$ -- Release 2.5.3a - 2006-06-22 18:03:22.896
  */
+@org.adempiere.base.Model(table = X_A_Depreciation_Build.Table_Name)
 public class MDepreciationBuild extends X_A_Depreciation_Build
 {
 	/**

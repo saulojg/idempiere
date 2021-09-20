@@ -52,6 +52,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  * 			<li>BF [ 1886480 ] Print Format Item Trl not updated even if not multilingual
  */
+@org.adempiere.base.Model(table = X_AD_Client.Table_Name)
 public class MClient extends X_AD_Client implements ImmutablePOSupport
 {	
 	/**

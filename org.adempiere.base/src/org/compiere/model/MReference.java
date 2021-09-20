@@ -31,6 +31,7 @@ import org.compiere.util.Env;
 import org.idempiere.cache.ImmutableIntPOCache;
 import org.idempiere.cache.ImmutablePOSupport;
 
+@org.adempiere.base.Model(table = X_AD_Reference.Table_Name)
 public class MReference extends X_AD_Reference implements ImmutablePOSupport {
 	/**
 	 * 

@@ -23,6 +23,7 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 
+@org.adempiere.base.Model(table = X_U_WebMenu.Table_Name)
 public class MWebMenu extends X_U_WebMenu
 {
     /**

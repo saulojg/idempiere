@@ -39,6 +39,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MWindow.java,v 1.2 2006/07/30 00:58:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Window.Table_Name)
 public class MWindow extends X_AD_Window implements ImmutablePOSupport
 {
 	/**

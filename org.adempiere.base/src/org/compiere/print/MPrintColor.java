@@ -36,6 +36,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 	@author 	Jorg Janke
  * 	@version 	$Id: MPrintColor.java,v 1.3 2006/07/30 00:53:02 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_PrintColor.Table_Name)
 public class MPrintColor extends X_AD_PrintColor implements ImmutablePOSupport
 {
 	/**

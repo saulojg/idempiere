@@ -16,6 +16,7 @@ import org.idempiere.fa.feature.UseLifeImpl;
  *	@author Teo Sarca, SC Arhipac SRL
  *	@version $Id$
  */
+@org.adempiere.base.Model(table = X_A_Asset_Class.Table_Name)
 public class MAssetClass extends X_A_Asset_Class implements ImmutablePOSupport
 {
 	

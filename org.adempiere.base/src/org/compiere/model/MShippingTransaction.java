@@ -15,6 +15,7 @@ import org.compiere.util.Env;
 import org.compiere.util.Msg;
 import org.compiere.util.Util;
 
+@org.adempiere.base.Model(table = X_M_ShippingTransaction.Table_Name)
 public class MShippingTransaction extends X_M_ShippingTransaction 
 {
 	/**

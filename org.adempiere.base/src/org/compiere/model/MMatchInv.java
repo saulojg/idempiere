@@ -43,6 +43,7 @@ import org.compiere.util.DB;
  * 			<li>BF [ 2240484 ] Re MatchingPO, MMatchPO doesn't contains Invoice info
  * 
  */
+@org.adempiere.base.Model(table = X_M_MatchInv.Table_Name)
 public class MMatchInv extends X_M_MatchInv
 {
 	/**

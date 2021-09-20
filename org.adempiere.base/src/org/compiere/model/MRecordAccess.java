@@ -30,6 +30,7 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MRecordAccess.java,v 1.3 2006/07/30 00:58:37 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Record_Access.Table_Name)
 public class MRecordAccess extends X_AD_Record_Access
 {
 	/**

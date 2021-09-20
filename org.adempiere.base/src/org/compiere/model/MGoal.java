@@ -43,6 +43,7 @@ import org.compiere.util.Msg;
  * 			<li>BF [ 1760482 ] New Dashboard broke old functionality
  * 			<li>BF [ 1887691 ] I get NPE if the PA Goal's target is 0
  */
+@org.adempiere.base.Model(table = X_PA_Goal.Table_Name)
 public class MGoal extends X_PA_Goal
 {
 	/**

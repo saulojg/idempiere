@@ -38,6 +38,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  			<li>BF [ 1874419 ] JDBC Statement not close in a finally block
  *  @version $Id: MWarehouse.java,v 1.3 2006/07/30 00:58:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_M_Warehouse.Table_Name)
 public class MWarehouse extends X_M_Warehouse implements ImmutablePOSupport
 {
 	/**

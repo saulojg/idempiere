@@ -45,6 +45,7 @@ import org.idempiere.cache.ImmutablePOCache;
  * 			<li>BF [ 1757523 ] Server Processes are using Server's context
  * 			<li>FR [ 2214883 ] Remove SQL code and Replace for Query
  */
+@org.adempiere.base.Model(table = X_AD_Process.Table_Name)
 public class MProcess extends X_AD_Process implements ImmutablePOSupport
 {
 	/**

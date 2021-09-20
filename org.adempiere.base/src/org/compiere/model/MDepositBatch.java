@@ -49,6 +49,7 @@ import org.compiere.util.Env;
  *	@author Alejandro Falcone
  *	@version $Id: MDepositBatch.java,v 1.3 2007/06/28 00:51:03 afalcone Exp $
  */
+@org.adempiere.base.Model(table = X_C_DepositBatch.Table_Name)
 public class MDepositBatch extends X_C_DepositBatch
 {
 	/**

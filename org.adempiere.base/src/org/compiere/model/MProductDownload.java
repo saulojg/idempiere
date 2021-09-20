@@ -37,6 +37,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @version $Id: MProductDownload.java,v 1.2 2006/07/30 00:51:03 jjanke Exp $
  *	@author	Michael Judd BF [ 2736995 ] - toURL() in java.io.File has been deprecated
  */
+@org.adempiere.base.Model(table = X_M_ProductDownload.Table_Name)
 public class MProductDownload extends X_M_ProductDownload implements ImmutablePOSupport
 {
 	/**

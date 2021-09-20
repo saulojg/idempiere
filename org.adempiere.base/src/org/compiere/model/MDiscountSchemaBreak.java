@@ -33,6 +33,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  * 			<li>BF [ 2012439 ] DiscountSchemaBreak: setting product & category is allowed
  */
+@org.adempiere.base.Model(table = X_M_DiscountSchemaBreak.Table_Name)
 public class MDiscountSchemaBreak extends X_M_DiscountSchemaBreak implements ImmutablePOSupport
 {
 

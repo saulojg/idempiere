@@ -23,6 +23,7 @@ import org.compiere.util.Env;
  * @author hengsin
  *
  */
+@org.adempiere.base.Model(table = X_AD_ToolBarButton.Table_Name)
 public class MToolBarButton extends X_AD_ToolBarButton {
 	/**
 	 * 

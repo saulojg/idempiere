@@ -33,6 +33,7 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MLandedCostAllocation.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_LandedCostAllocation.Table_Name)
 public class MLandedCostAllocation extends X_C_LandedCostAllocation
 {	
 	/**

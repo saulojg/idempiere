@@ -28,6 +28,7 @@ import java.util.Properties;
  *  		<li>FR [ 2884541 ] MRequestUpdate should detect automatically the fields
  *  			https://sourceforge.net/tracker/?func=detail&aid=2884541&group_id=176962&atid=879335
  */
+@org.adempiere.base.Model(table = X_R_RequestUpdate.Table_Name)
 public class MRequestUpdate extends X_R_RequestUpdate
 {
 	/**

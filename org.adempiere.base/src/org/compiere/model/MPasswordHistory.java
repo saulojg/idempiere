@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import org.compiere.util.Env;
 
+@org.adempiere.base.Model(table = X_AD_Password_History.Table_Name)
 public class MPasswordHistory extends X_AD_Password_History {
 	/**
 	 * 

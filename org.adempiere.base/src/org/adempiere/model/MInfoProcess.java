@@ -31,6 +31,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author hieplq
  *
  */
+@org.adempiere.base.Model(table = X_AD_InfoProcess.Table_Name)
 public class MInfoProcess extends X_AD_InfoProcess implements IInfoColumn, ImmutablePOSupport {
 	
 	/**

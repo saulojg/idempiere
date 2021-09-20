@@ -29,6 +29,7 @@ import org.compiere.model.X_AD_WorkflowProcessorLog;
  *  @author Jorg Janke
  *  @version $Id: MWorkflowProcessorLog.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_WorkflowProcessorLog.Table_Name)
 public class MWorkflowProcessorLog extends X_AD_WorkflowProcessorLog
 	implements AdempiereProcessorLog
 {

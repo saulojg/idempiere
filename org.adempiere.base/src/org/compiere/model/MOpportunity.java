@@ -20,6 +20,7 @@ package org.compiere.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
+@org.adempiere.base.Model(table = X_C_Opportunity.Table_Name)
 public class MOpportunity extends X_C_Opportunity {
 
 	/**

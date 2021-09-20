@@ -33,6 +33,7 @@ import org.compiere.util.TimeUtil;
  *  
  *  @author Teo Sarca, www.arhipac.ro
  */
+@org.adempiere.base.Model(table = X_S_ResourceUnAvailable.Table_Name)
 public class MResourceUnAvailable extends X_S_ResourceUnAvailable
 {
 	/**

@@ -39,6 +39,7 @@ import org.compiere.util.ValueNamePair;
  *  		<li>BF [ 1748449 ] Info Account - Posting Type is not translated
  *  		<li>FR [ 2694043 ] Query. first/firstOnly usage best practice
  */
+@org.adempiere.base.Model(table = X_AD_Ref_List.Table_Name)
 public class MRefList extends X_AD_Ref_List
 {
 	/**

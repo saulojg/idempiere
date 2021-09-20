@@ -37,6 +37,7 @@ import org.compiere.util.CCache;
 /**
  * Multi-factor Authentication Method
  */
+@org.adempiere.base.Model(table = X_MFA_Method.Table_Name)
 public class MMFAMethod extends X_MFA_Method {
 	/**
 	 * 

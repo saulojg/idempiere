@@ -28,6 +28,7 @@ import org.compiere.util.Env;
  * @author Elaine
  *
  */
+@org.adempiere.base.Model(table = X_M_RMATax.Table_Name)
 public class MRMATax extends X_M_RMATax 
 {	
 	/**

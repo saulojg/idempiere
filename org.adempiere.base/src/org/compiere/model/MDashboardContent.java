@@ -14,6 +14,7 @@ import org.compiere.util.Env;
  * @author teo_sarca
  *
  */
+@org.adempiere.base.Model(table = X_PA_DashboardContent.Table_Name)
 public class MDashboardContent extends X_PA_DashboardContent
 {
 	/**

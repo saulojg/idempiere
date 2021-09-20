@@ -17,6 +17,7 @@ import org.compiere.util.Msg;
 import org.compiere.util.Util;
 
 
+@org.adempiere.base.Model(table = X_M_ProductionLine.Table_Name)
 public class MProductionLine extends X_M_ProductionLine {
 	/**
 	 * 

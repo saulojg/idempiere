@@ -27,6 +27,7 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MPackageLine.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_M_PackageLine.Table_Name)
 public class MPackageLine extends X_M_PackageLine
 {
 	/**

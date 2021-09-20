@@ -36,6 +36,7 @@ import org.compiere.util.TimeUtil;
  *  @author Jorg Janke
  *  @version $Id: MOrderPaySchedule.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_OrderPaySchedule.Table_Name)
 public class MOrderPaySchedule extends X_C_OrderPaySchedule
 {
 	/**

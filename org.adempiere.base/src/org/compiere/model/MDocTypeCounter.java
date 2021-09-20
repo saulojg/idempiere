@@ -34,6 +34,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MDocTypeCounter.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_DocTypeCounter.Table_Name)
 public class MDocTypeCounter extends X_C_DocTypeCounter implements ImmutablePOSupport
 {
 	/**

@@ -23,6 +23,7 @@ import org.compiere.util.Msg;
  * @author Logilite Technologies
  * @since  June 20, 2017
  */
+@org.adempiere.base.Model(table = X_AD_Tree_Favorite_Node.Table_Name)
 public class MTreeFavoriteNode extends X_AD_Tree_Favorite_Node
 {
 

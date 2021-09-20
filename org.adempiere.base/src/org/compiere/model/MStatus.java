@@ -34,6 +34,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MStatus.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_R_Status.Table_Name)
 public class MStatus extends X_R_Status implements ImmutablePOSupport
 {
 	/**

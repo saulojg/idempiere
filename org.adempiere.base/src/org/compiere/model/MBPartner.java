@@ -44,6 +44,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *      <LI>BF [ 2041226 ] BP Open Balance should count only Completed Invoice
  *			<LI>BF [ 2498949 ] BP Get Not Invoiced Shipment Value return null
  */
+@org.adempiere.base.Model(table = X_C_BPartner.Table_Name)
 public class MBPartner extends X_C_BPartner implements ImmutablePOSupport
 {
 	/**

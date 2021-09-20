@@ -34,6 +34,7 @@ import org.compiere.util.Util;
  *  @author Jorg Janke
  *  @version $Id: MAlertRule.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_AlertRule.Table_Name)
 public class MAlertRule extends X_AD_AlertRule
 {
 	private static final long serialVersionUID = -1267260460210893262L;

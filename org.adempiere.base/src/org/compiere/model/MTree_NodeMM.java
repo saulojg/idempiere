@@ -30,6 +30,7 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MTree_NodeMM.java,v 1.3 2006/07/30 00:58:37 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_TreeNodeMM.Table_Name)
 public class MTree_NodeMM extends X_AD_TreeNodeMM
 {
 	/**

@@ -37,6 +37,7 @@ import org.compiere.util.Msg;
  *  			<li>BF [ 1918266 ] MCashLine.updateHeader should ignore not active lines
  * 				<li>BF [ 1918290 ] MCashLine.createReversal should inactivate if not processed
  */
+@org.adempiere.base.Model(table = X_C_CashLine.Table_Name)
 public class MCashLine extends X_C_CashLine
 {
 	/**

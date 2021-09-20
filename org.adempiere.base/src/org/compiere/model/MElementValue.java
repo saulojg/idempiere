@@ -34,6 +34,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 			BF [ 1883533 ] Change to summary - valid combination issue
  * 			BF [ 2320411 ] Translate "Already posted to" message
  */
+@org.adempiere.base.Model(table = X_C_ElementValue.Table_Name)
 public class MElementValue extends X_C_ElementValue implements ImmutablePOSupport
 {
 	/**

@@ -27,6 +27,7 @@ import org.compiere.util.DB;
  * @author raphael.gildo (devCoffee, www.devcoffee.com.br)
  *
  */
+@org.adempiere.base.Model(table = X_AD_UserDef_Proc_Parameter.Table_Name)
 public class MUserDefProcParameter extends X_AD_UserDef_Proc_Parameter {
 
 	/**

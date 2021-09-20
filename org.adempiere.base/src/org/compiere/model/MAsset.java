@@ -20,6 +20,7 @@ import org.compiere.util.Msg;
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  */
 @SuppressWarnings("serial")
+@org.adempiere.base.Model(table = X_A_Asset.Table_Name)
 public class MAsset extends X_A_Asset {
 	/** ChangeType - Asset Group changed */
 	public static final int CHANGETYPE_setAssetGroup = Table_ID * 100 + 1;

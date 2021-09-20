@@ -30,6 +30,7 @@ import java.util.Properties;
 
 import org.compiere.util.Msg;
 
+@org.adempiere.base.Model(table = X_AD_HouseKeeping.Table_Name)
 public class MHouseKeeping extends X_AD_HouseKeeping {
 	/**
 	 * 

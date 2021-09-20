@@ -48,6 +48,7 @@ import org.osgi.service.event.Event;
  * 		<li>FR [ 2818478 ] Introduce MPInstance.createParameter helper method
  * 			https://sourceforge.net/tracker/?func=detail&aid=2818478&group_id=176962&atid=879335
  */
+@org.adempiere.base.Model(table = X_AD_PInstance.Table_Name)
 public class MPInstance extends X_AD_PInstance
 {
 	/**

@@ -53,6 +53,7 @@ import org.compiere.util.Util;
  *
  *  @version $Id: MAttachment.java,v 1.4 2006/07/30 00:58:37 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Attachment.Table_Name)
 public class MAttachment extends X_AD_Attachment
 {
 	/**

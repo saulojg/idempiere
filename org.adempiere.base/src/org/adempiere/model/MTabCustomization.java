@@ -7,6 +7,7 @@ import org.compiere.model.Query;
 import org.compiere.model.X_AD_Tab_Customization;
 import org.compiere.util.Util;
 
+@org.adempiere.base.Model(table = X_AD_Tab_Customization.Table_Name)
 public class MTabCustomization extends X_AD_Tab_Customization {
 	/**
 	 * 

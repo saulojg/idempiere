@@ -33,6 +33,7 @@ import org.compiere.util.Util;
  *  @author Jorg Janke
  *  @version $Id: MBPBankAccount.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_BP_BankAccount.Table_Name)
 public class MBPBankAccount extends X_C_BP_BankAccount
 {
 	/**

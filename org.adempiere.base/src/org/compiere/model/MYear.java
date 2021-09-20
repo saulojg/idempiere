@@ -43,6 +43,7 @@ import org.compiere.util.Language;
  * 			<li>BF [ 1761918 ] Error creating periods for a year with per. created partial
  * 			<li>BF [ 2430755 ] Year Create Periods display proper error message
  */
+@org.adempiere.base.Model(table = X_C_Year.Table_Name)
 public class MYear extends X_C_Year
 {
 	/**

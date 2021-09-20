@@ -35,6 +35,7 @@ import org.compiere.util.CLogger;
  *
  *  @author Carlos Ruiz - GlobalQSS
  */
+@org.adempiere.base.Model(table = X_GL_JournalGeneratorLine.Table_Name)
 public class MJournalGeneratorLine extends X_GL_JournalGeneratorLine
 {
 	/**

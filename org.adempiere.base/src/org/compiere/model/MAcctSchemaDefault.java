@@ -33,6 +33,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *    			<li>RF [ 2214883 ] Remove SQL code and Replace for Query http://sourceforge.net/tracker/index.php?func=detail&aid=2214883&group_id=176962&atid=879335
  *  @version $Id: MAcctSchemaDefault.java,v 1.3 2006/07/30 00:58:37 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_AcctSchema_Default.Table_Name)
 public class MAcctSchemaDefault extends X_C_AcctSchema_Default implements ImmutablePOSupport
 {
 

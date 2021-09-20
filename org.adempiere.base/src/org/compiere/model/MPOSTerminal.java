@@ -29,6 +29,7 @@ import org.compiere.util.Env;
  * @author Ashley G Ramdass
  *
  */
+@org.adempiere.base.Model(table = X_U_POSTerminal.Table_Name)
 public class MPOSTerminal extends X_U_POSTerminal
 {
     /**

@@ -28,6 +28,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MGroup.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_R_Group.Table_Name)
 public class MGroup extends X_R_Group implements ImmutablePOSupport
 {
 	/**

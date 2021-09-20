@@ -35,6 +35,7 @@ import org.compiere.model.X_AD_WF_NextCondition;
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  * 		<li>BF [ 1943720 ] WF Next Condition: handling boolean values is poor
  */
+@org.adempiere.base.Model(table = X_AD_WF_NextCondition.Table_Name)
 public class MWFNextCondition extends X_AD_WF_NextCondition implements ImmutablePOSupport
 {
 	/**

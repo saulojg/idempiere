@@ -28,6 +28,7 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MPaySelection.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_PaySelection.Table_Name)
 public class MPaySelection extends X_C_PaySelection
 {
 

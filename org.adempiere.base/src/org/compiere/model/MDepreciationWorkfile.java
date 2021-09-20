@@ -25,6 +25,7 @@ import org.idempiere.fa.service.api.IDepreciationMethod;
  *  Depreciation Workfile Model
  *	@author	Teo Sarca, SC ARHIPAC SERVICE SRL
  */
+@org.adempiere.base.Model(table = X_A_Depreciation_Workfile.Table_Name)
 public class MDepreciationWorkfile extends X_A_Depreciation_Workfile
 	implements UseLife
 {

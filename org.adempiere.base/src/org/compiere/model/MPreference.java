@@ -25,6 +25,7 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MPreference.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Preference.Table_Name)
 public class MPreference extends X_AD_Preference
 {
 	/**

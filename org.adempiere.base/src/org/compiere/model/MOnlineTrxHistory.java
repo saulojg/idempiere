@@ -22,6 +22,7 @@ import java.util.Properties;
  * @author Elaine
  *
  */
+@org.adempiere.base.Model(table = X_C_OnlineTrxHistory.Table_Name)
 public class MOnlineTrxHistory extends X_C_OnlineTrxHistory {
 
 	/**

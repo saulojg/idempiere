@@ -50,6 +50,7 @@ import com.google.api.client.json.gson.GsonFactory;
 /**
  * Authorization Account
  */
+@org.adempiere.base.Model(table = X_AD_AuthorizationAccount.Table_Name)
 public class MAuthorizationAccount extends X_AD_AuthorizationAccount {
 	/**
 	 * 

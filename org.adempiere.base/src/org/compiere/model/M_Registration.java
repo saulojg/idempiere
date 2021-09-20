@@ -26,6 +26,7 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: M_Registration.java,v 1.3 2006/07/30 00:58:18 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Registration.Table_Name)
 public class M_Registration extends X_AD_Registration
 {
 	/**

@@ -71,6 +71,7 @@ import org.compiere.util.Util;
  * @author Michael Judd, www.akunagroup.com
  *          <li>BF [ 2804888 ] Incorrect reservation of products with attributes
  */
+@org.adempiere.base.Model(table = X_C_Order.Table_Name)
 public class MOrder extends X_C_Order implements DocAction
 {
 	/**

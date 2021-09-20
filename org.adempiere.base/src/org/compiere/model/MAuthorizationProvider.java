@@ -30,6 +30,7 @@ import java.util.Properties;
 /**
  * Authorization Provider
  */
+@org.adempiere.base.Model(table = X_AD_AuthorizationProvider.Table_Name)
 public class MAuthorizationProvider extends X_AD_AuthorizationProvider {
 	/**
 	 * 

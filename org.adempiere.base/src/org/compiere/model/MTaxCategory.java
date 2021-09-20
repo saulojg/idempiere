@@ -28,6 +28,7 @@ import org.adempiere.exceptions.AdempiereException;
  *  @author Jorg Janke
  *  @version $Id: MTaxCategory.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_TaxCategory.Table_Name)
 public class MTaxCategory extends X_C_TaxCategory
 {
 	/**

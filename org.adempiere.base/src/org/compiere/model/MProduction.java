@@ -22,6 +22,7 @@ import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
 
+@org.adempiere.base.Model(table = X_M_Production.Table_Name)
 public class MProduction extends X_M_Production implements DocAction {
 	/**
 	 * 

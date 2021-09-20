@@ -62,6 +62,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  			https://sourceforge.net/tracker/?func=detail&aid=3017117&group_id=176962&atid=879332
  *  @version $Id: MTable.java,v 1.3 2006/07/30 00:58:04 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Table.Table_Name)
 public class MTable extends X_AD_Table implements ImmutablePOSupport
 {
 	/**

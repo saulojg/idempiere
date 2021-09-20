@@ -36,6 +36,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @see [ 1966333 ] New Method to get the Default Locator based in Warehouse http://sourceforge.net/tracker/index.php?func=detail&aid=1966333&group_id=176962&atid=879335
  *  @version 	$Id: MLocator.java,v 1.3 2006/07/30 00:58:37 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_M_Locator.Table_Name)
 public class MLocator extends X_M_Locator implements ImmutablePOSupport
 {
 	/**

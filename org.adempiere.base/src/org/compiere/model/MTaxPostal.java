@@ -29,6 +29,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MTaxPostal.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_TaxPostal.Table_Name)
 public class MTaxPostal extends X_C_TaxPostal implements ImmutablePOSupport
 {
 	/**

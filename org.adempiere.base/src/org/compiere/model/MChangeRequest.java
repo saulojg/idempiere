@@ -27,6 +27,7 @@ import org.eevolution.model.MPPProductBOM;
  *  @author Jorg Janke
  *  @version $Id: MChangeRequest.java,v 1.2 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_M_ChangeRequest.Table_Name)
 public class MChangeRequest extends X_M_ChangeRequest
 {
 	/**

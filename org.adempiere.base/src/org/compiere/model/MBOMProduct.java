@@ -31,6 +31,7 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MBOMProduct.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_M_BOMProduct.Table_Name)
 public class MBOMProduct extends X_M_BOMProduct
 {
 	/**

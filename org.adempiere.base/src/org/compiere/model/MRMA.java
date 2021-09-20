@@ -42,6 +42,7 @@ import org.compiere.util.Msg;
  *
  *  Modifications: Completed RMA functionality (Ashley Ramdass)
  */
+@org.adempiere.base.Model(table = X_M_RMA.Table_Name)
 public class MRMA extends X_M_RMA implements DocAction
 {
 	/**

@@ -30,6 +30,7 @@ import org.compiere.util.EMail;
  *  @author Jorg Janke
  *  @version $Id: MAssetDelivery.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_A_Asset_Delivery.Table_Name)
 public class MAssetDelivery extends X_A_Asset_Delivery
 {
 	/**

@@ -51,6 +51,7 @@ import org.compiere.util.Util;
  *  @author Jorg Janke
  *  @version $Id: MSequence.java,v 1.3 2006/07/30 00:58:04 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Sequence.Table_Name)
 public class MSequence extends X_AD_Sequence
 {
 	/**

@@ -30,6 +30,7 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MColumnAccess.java,v 1.3 2006/07/30 00:54:54 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Column_Access.Table_Name)
 public class MColumnAccess extends X_AD_Column_Access
 {
 	/**

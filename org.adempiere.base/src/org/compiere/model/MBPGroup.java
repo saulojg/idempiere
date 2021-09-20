@@ -36,6 +36,7 @@ import org.idempiere.cache.IntPOCopyCache;
  *  @author Jorg Janke
  *  @version $Id: MBPGroup.java,v 1.4 2006/09/23 15:54:22 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_BP_Group.Table_Name)
 public class MBPGroup extends X_C_BP_Group implements ImmutablePOSupport
 {
 	/**

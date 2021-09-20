@@ -32,6 +32,7 @@ import org.compiere.util.CLogger;
 /**
  *	Country Group Country Model
  */
+@org.adempiere.base.Model(table = X_C_CountryGroupCountry.Table_Name)
 public class MCountryGroupCountry extends X_C_CountryGroupCountry
 {
 	/**

@@ -26,6 +26,7 @@ import org.compiere.util.Util;
 import org.idempiere.cache.ImmutablePOSupport;
 
 
+@org.adempiere.base.Model(table = X_AD_ViewColumn.Table_Name)
 public class MViewColumn extends X_AD_ViewColumn implements ImmutablePOSupport {
 	/**
 	 * 

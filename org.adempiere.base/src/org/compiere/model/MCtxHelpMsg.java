@@ -40,6 +40,7 @@ import org.idempiere.cache.ImmutablePOCache;
  *	
  *  @author Carlos Ruiz
  */
+@org.adempiere.base.Model(table = X_AD_CtxHelpMsg.Table_Name)
 public class MCtxHelpMsg extends X_AD_CtxHelpMsg implements ImmutablePOSupport {
 	/**
 	 * 

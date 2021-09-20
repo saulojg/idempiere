@@ -36,6 +36,7 @@ import org.compiere.util.Msg;
 * @author Carlos Ruiz - globalqss - bxservice
 *
 */
+@org.adempiere.base.Model(table = X_C_POSPayment.Table_Name)
 public class MPOSPayment extends X_C_POSPayment
 {
 	/**

@@ -39,6 +39,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author 	Jorg Janke
  *  @version 	$Id: MRegion.java,v 1.3 2006/07/30 00:58:36 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_C_Region.Table_Name)
 public class MRegion extends X_C_Region
 	implements Comparator<Object>, Serializable, ImmutablePOSupport
 {

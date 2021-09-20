@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.util.Properties;
 
+@org.adempiere.base.Model(table = X_M_ShipperLabels.Table_Name)
 public class MShipperLabels extends X_M_ShipperLabels 
 {
 	

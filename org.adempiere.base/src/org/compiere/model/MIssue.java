@@ -39,6 +39,7 @@ import org.compiere.util.Secure;
  *  @author Jorg Janke
  *  @version $Id: MIssue.java,v 1.3 2006/07/30 00:58:37 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Issue.Table_Name)
 public class MIssue extends X_AD_Issue
 {
 	/**

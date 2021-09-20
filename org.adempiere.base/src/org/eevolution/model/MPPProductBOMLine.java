@@ -49,6 +49,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Victor Perez www.e-evolution.com     
  * @author Teo Sarca, www.arhipac.ro
  */
+@org.adempiere.base.Model(table = X_PP_Product_BOMLine.Table_Name)
 public class MPPProductBOMLine extends X_PP_Product_BOMLine implements ImmutablePOSupport
 {
 	/**

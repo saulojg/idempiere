@@ -40,6 +40,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  Contributors:
  *    Carlos Ruiz - globalqss - FR [3135351] - Enable Scheduler for buttons
  */
+@org.adempiere.base.Model(table = X_AD_Scheduler.Table_Name)
 public class MScheduler extends X_AD_Scheduler
 	implements AdempiereProcessor, AdempiereProcessor2, ImmutablePOSupport
 {

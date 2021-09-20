@@ -24,6 +24,7 @@ import org.idempiere.cache.ImmutableIntPOCache;
 import org.idempiere.cache.ImmutablePOSupport;
 
 
+@org.adempiere.base.Model(table = X_AD_Ref_Table.Table_Name)
 public class MRefTable extends X_AD_Ref_Table implements ImmutablePOSupport
 {
 	/**

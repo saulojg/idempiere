@@ -29,6 +29,7 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MInOutLineConfirm.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_M_InOutLineConfirm.Table_Name)
 public class MInOutLineConfirm extends X_M_InOutLineConfirm
 {
 	/**

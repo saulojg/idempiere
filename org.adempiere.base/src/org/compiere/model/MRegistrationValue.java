@@ -25,6 +25,7 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MRegistrationValue.java,v 1.2 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_A_RegistrationValue.Table_Name)
 public class MRegistrationValue extends X_A_RegistrationValue
 	implements Comparable<Object>
 {

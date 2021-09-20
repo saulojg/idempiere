@@ -26,6 +26,7 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MSchedulerLog.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_SchedulerLog.Table_Name)
 public class MSchedulerLog extends X_AD_SchedulerLog
 	implements AdempiereProcessorLog
 {

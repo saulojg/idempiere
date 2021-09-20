@@ -39,6 +39,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author red1
  *  		<li>FR: [ 2214883 ] Remove SQL code and Replace for Query -- JUnit tested
  */
+@org.adempiere.base.Model(table = X_M_CostElement.Table_Name)
 public class MCostElement extends X_M_CostElement implements ImmutablePOSupport
 {
 	/**

@@ -29,6 +29,7 @@ import org.compiere.util.Msg;
  *  @author Nicolas Micoud
  *  @version $Id: MPostIt.java
  */
+@org.adempiere.base.Model(table = X_AD_PostIt.Table_Name)
 public class MPostIt extends X_AD_PostIt
 {
 	private static final long serialVersionUID = -5053130533036069784L;

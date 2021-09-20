@@ -12,6 +12,7 @@ import org.compiere.util.DB;
 import org.compiere.util.Env;
 import org.compiere.util.Util;
 
+@org.adempiere.base.Model(table = X_AD_ChartDatasource.Table_Name)
 public class MChartDatasource extends X_AD_ChartDatasource {
 
 	/**

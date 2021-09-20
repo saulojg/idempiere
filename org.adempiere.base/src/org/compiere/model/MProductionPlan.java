@@ -20,6 +20,7 @@ import org.compiere.util.Msg;
  * @author hengsin
  *
  */
+@org.adempiere.base.Model(table = X_M_ProductionPlan.Table_Name)
 public class MProductionPlan extends X_M_ProductionPlan {
 	/**
 	 * 

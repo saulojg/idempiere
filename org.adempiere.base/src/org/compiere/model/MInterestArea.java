@@ -38,6 +38,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MInterestArea.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */ 
+@org.adempiere.base.Model(table = X_R_InterestArea.Table_Name)
 public class MInterestArea extends X_R_InterestArea implements ImmutablePOSupport
 {
 	/**

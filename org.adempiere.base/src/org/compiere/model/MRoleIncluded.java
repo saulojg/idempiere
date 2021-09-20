@@ -18,6 +18,7 @@ import org.compiere.util.DB;
  * Included Role Model
  * @author teo.sarca@gmail.com
  */
+@org.adempiere.base.Model(table = X_AD_Role_Included.Table_Name)
 public class MRoleIncluded extends X_AD_Role_Included
 {
 	/**

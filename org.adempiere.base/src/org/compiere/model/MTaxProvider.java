@@ -21,6 +21,7 @@ import java.util.Properties;
  * @author Elaine
  *
  */
+@org.adempiere.base.Model(table = X_C_TaxProvider.Table_Name)
 public class MTaxProvider extends X_C_TaxProvider 
 {
 	/**

@@ -35,6 +35,7 @@ import org.compiere.util.Msg;
  *  		https://sourceforge.net/tracker/?func=detail&aid=2855807&group_id=176962&atid=879332
  *	@version $Id: MJournalLine.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_GL_JournalLine.Table_Name)
 public class MJournalLine extends X_GL_JournalLine
 {
 	/**

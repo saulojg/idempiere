@@ -28,6 +28,7 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MPInstancePara.java,v 1.3 2006/07/30 00:58:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_PInstance_Para.Table_Name)
 public class MPInstancePara extends X_AD_PInstance_Para
 {
 	

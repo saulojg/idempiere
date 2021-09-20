@@ -35,6 +35,7 @@ import org.compiere.util.WebUtil;
  *  @author Jorg Janke
  *  @version $Id: MRegistration.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_A_Registration.Table_Name)
 public class MRegistration extends X_A_Registration
 {
 	/**

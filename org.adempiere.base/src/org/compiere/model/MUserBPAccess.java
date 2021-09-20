@@ -34,6 +34,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author hengsin
  *
  */
+@org.adempiere.base.Model(table = X_AD_UserBPAccess.Table_Name)
 public class MUserBPAccess extends X_AD_UserBPAccess implements ImmutablePOSupport {
 
 	/**

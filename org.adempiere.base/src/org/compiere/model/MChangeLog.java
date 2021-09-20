@@ -32,6 +32,7 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MChangeLog.java,v 1.3 2006/07/30 00:58:18 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_ChangeLog.Table_Name)
 public class MChangeLog extends X_AD_ChangeLog
 {
 	/**

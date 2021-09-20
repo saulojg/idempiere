@@ -38,6 +38,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author red1 - FR: [ 2214883 ] Remove SQL code and Replace for Query
  *  @version $Id: MMenu.java,v 1.3 2006/07/30 00:58:18 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_AD_Menu.Table_Name)
 public class MMenu extends X_AD_Menu implements ImmutablePOSupport
 {
 

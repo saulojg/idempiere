@@ -45,6 +45,7 @@ import org.compiere.util.Env;
  *  @version $Id: MCostDetail.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  *  
  */
+@org.adempiere.base.Model(table = X_M_CostDetail.Table_Name)
 public class MCostDetail extends X_M_CostDetail
 {
 	/**

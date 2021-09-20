@@ -19,6 +19,7 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author hengsin
  *
  */
+@org.adempiere.base.Model(table = X_AD_Style.Table_Name)
 public class MStyle extends X_AD_Style implements ImmutablePOSupport {
 	/**
 	 * 

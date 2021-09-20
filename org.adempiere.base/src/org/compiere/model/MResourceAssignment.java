@@ -29,6 +29,7 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MResourceAssignment.java,v 1.2 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_S_ResourceAssignment.Table_Name)
 public class MResourceAssignment extends X_S_ResourceAssignment
 {
 	/**

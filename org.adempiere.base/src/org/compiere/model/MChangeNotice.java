@@ -24,6 +24,7 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MChangeNotice.java,v 1.2 2006/07/30 00:51:03 jjanke Exp $
  */
+@org.adempiere.base.Model(table = X_M_ChangeNotice.Table_Name)
 public class MChangeNotice extends X_M_ChangeNotice
 {
 	/**

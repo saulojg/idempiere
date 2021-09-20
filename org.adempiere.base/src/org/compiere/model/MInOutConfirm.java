@@ -46,6 +46,7 @@ import org.compiere.util.Msg;
  * 			<li>FR [ 2994115 ] Add C_DocType.IsPrepareSplitDoc flag
  * 				https://sourceforge.net/tracker/?func=detail&aid=2994115&group_id=176962&atid=879335
  */
+@org.adempiere.base.Model(table = X_M_InOutConfirm.Table_Name)
 public class MInOutConfirm extends X_M_InOutConfirm implements DocAction
 {
 	/**
