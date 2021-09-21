@@ -44,10 +44,12 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 	private final static CLogger s_log = CLogger.getCLogger(AnnotationBasedModelFactory.class);
 
 	/**
-	 * Packages to scan for X* classes
+	 * Packages to scan for model classes
 	 */
 	private final String[] CORE_PACKAGES = new String[] {
-		"org.compiere.model",  "compiere.model", "adempiere.model", "org.adempiere.model"
+		"org.compiere.model", "org.compiere.wf", "org.compiere.print"
+		, "org.compiere.impexp", "compiere.model",  "adempiere.model"
+		, "org.adempiere.model", "org.compiere.print", "org.eevolution.model"
 	};
 
 	/**
@@ -108,17 +110,6 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 		        String tableName = (String) annotationInfo.getParameterValues().getValue("table");
 
 		        Class<?> existing = classCache.get(tableName);
-
-		        // try to detect M classes only if we found an X class
-		        if(existing == null && className.startsWith("X_"))
-		        {
-			        ClassInfoList subclasses = classInfo.getSubclasses().directOnly();
-			        for(ClassInfo subclassInfo : subclasses)
-			        {
-			        	className = subclassInfo.getName();
-			        	break;
-			        }
-		        }
 
 		        if(existing==null)
 		        	classCache.put(tableName, classLoader.loadClass(className));
