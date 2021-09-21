@@ -8,7 +8,7 @@ Bundle-ClassPath: .,
  lib/commons-validator.jar,
  lib/cron4j.jar,
  lib/avalon-framework-api.jar,
- lib/classindex.jar
+ lib/classgraph.jar
 Export-Package: bsh,
  bsh.classpath,
  bsh.collection,

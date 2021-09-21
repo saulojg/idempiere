@@ -18,14 +18,12 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import org.atteo.classindex.IndexAnnotated;
 
 /**
  * Automatic model class registration
  * @author Saulo Gil
  */
 @Target(TYPE)
-@IndexAnnotated
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited
 public @interface Model {
