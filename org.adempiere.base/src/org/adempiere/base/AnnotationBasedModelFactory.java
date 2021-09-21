@@ -125,7 +125,7 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 		            .disableModuleScanning()
 		            .rejectJars("activemq-*.jar","antlr4-*.jar","ant-*.jar","ant.jar","aopalliance-*.jar","apache-*.jar",
 		            		"asm-*.jar","avalon-*.jar","bc*-jdk*.jar","breeze.jar","bsh.jar","calendar.jar",
-		            		"castor-*.jar","cdi-api-*.jar","closure-*.jar", "classgraph.jar","core-3.4.1.jar","commons-*.jar","cron4j.jar",
+		            		"castor-*.jar","cdi-api-*.jar","closure-*.jar", "classgraph.jar","core-*.jar","commons-*.jar","cron4j.jar",
 		            		"cryptacular-*.jar","cxf-*.jar","com.diffplug.osgi*.jar","com.jaspersoft.*.jar",
 		            		"com.google.*.jar","dom4j-*.jar","failureaccess-*.jar","FastInfoset-*.jar","geronimo-*.jar",
 		            		"gimap-*.jar","gmapsz.jar","gmbal-*.jar","gson-*.jar","google-*.jar","groovy-*.jar","grpc-context-*.jar",
