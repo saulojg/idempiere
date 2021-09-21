@@ -43,27 +43,49 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 
 	private final static CLogger s_log = CLogger.getCLogger(AnnotationBasedModelFactory.class);
 
+	/**
+	 * Packages to scan for X* classes
+	 */
+	private final String[] CORE_PACKAGES = new String[] {
+		"org.compiere.model",  "compiere.model", "adempiere.model", "org.adempiere.model"
+	};
+
+	/**
+	 * Extension point. Subclasses might override this method in order to have faster
+	 * model class scanning.
+	 * @return array of packages to be accepted during class scanning
+	 * @see ClassGraph#acceptPackagesNonRecursive(String...)
+	 */
 	protected String[] getPackages() {
-		return new String[] 
-		{
-			"org.compiere.model", "org.compiere.wf", "org.compiere.print", "org.compiere.impexp",
-        	"compiere.model", "adempiere.model", "org.adempiere.model"
-        };
+		return new String[]{};
+	}
+
+	/**
+	 * Extension point. Provide a list of patterns to match against class names.
+	 * @return array of strings containing patterns
+	 * @see ClassGraph#acceptClasses(String...)
+	 */
+	protected String[] getAcceptClassesPatterns() {
+		String[] patterns;
+		if(isAtCore())
+			// we only need to detect X classes at the core
+			patterns = new String[] {"*.X_*"};
+		else
+			// plugins might need to annotate their M classes if extending core M classes
+			patterns = new String[] {"*.X_*", "*.M*"};
+		return patterns;
 	}
 
 	@Activate
-	void activate(ComponentContext context) throws ClassNotFoundException
+	public void activate(ComponentContext context) throws ClassNotFoundException
 	{
+		long start = System.currentTimeMillis();
 		ClassLoader classLoader = context.getUsingBundle().adapt(BundleWiring.class).getClassLoader();
 
-		long start = System.currentTimeMillis();
-
 		try (ScanResult scanResult =
-		        new ClassGraph()
+		        initClassGraph(new ClassGraph())
 		            .enableAnnotationInfo()
 		            .overrideClassLoaders(classLoader)
-		            .acceptClasses("*.X_*")
-		            .acceptPackagesNonRecursive(getPackages())
 		            .disableNestedJarScanning()
 		            .disableModuleScanning()
 		            .scan())
@@ -74,14 +96,28 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 		        String className = classInfo.getName();
 		        AnnotationInfo annotationInfo = classInfo.getAnnotationInfo(Model.class);
 		        String tableName = (String) annotationInfo.getParameterValues().getValue("table");
-		        ClassInfoList subclasses = classInfo.getSubclasses().directOnly();
-		        for(ClassInfo subclassInfo : subclasses)
+
+		        Class<?> existing = classCache.get(tableName);
+
+		        // try to detect M classes only if we found an X class
+		        if(existing == null && className.startsWith("X_"))
 		        {
-		        	className = subclassInfo.getName();
-		        	break;
+			        ClassInfoList subclasses = classInfo.getSubclasses().directOnly();
+			        for(ClassInfo subclassInfo : subclasses)
+			        {
+			        	className = subclassInfo.getName();
+			        	break;
+			        }
 		        }
 
-		        classCache.put(tableName, classLoader.loadClass(className));
+		        if(existing==null)
+		        	classCache.put(tableName, classLoader.loadClass(className));
+		        else {
+		        	Class<?> found = classLoader.loadClass(className);
+		        	// replace existing entries only if found class has a lower hierarchy
+		        	if(existing.isAssignableFrom(found))
+		        		classCache.put(tableName, classLoader.loadClass(className));
+		        }
 		    }
 		}
 		long end = System.currentTimeMillis();
@@ -89,10 +125,35 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 				+((end-start)/1000f) + "s");
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Class<?> getClass(String tableName) 
 	{
 		return classCache.get(tableName);
+	}
+
+	/**
+	 * Tells whether we're executing code from a subclass of {@link AnnotationBasedModelFactory}.
+	 * @return
+	 */
+	private boolean isAtCore() {
+		return getClass().equals(AnnotationBasedModelFactory.class);
+	}
+
+	private ClassGraph initClassGraph(ClassGraph graph) {
+		// narrow search to a list of packages
+		String[] packages = isAtCore() ? CORE_PACKAGES : getPackages();
+		if(packages!=null && packages.length>0)
+			graph.acceptPackagesNonRecursive(packages);
+
+		// narrow search to class names matching a set of patterns
+		String[] acceptClasses = getAcceptClassesPatterns();
+		if(acceptClasses!=null && acceptClasses.length > 0)
+			graph.acceptClasses(acceptClasses);
+
+		return graph;
 	}
 
 }
