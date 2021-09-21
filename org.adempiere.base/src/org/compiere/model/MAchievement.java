@@ -31,7 +31,6 @@ import org.compiere.util.Env;
  *  @version $Id: MAchievement.java,v 1.2 2006/07/30 00:51:02 jjanke Exp $
  *  red1 - [ 2214883 ] Remove SQL code and Replace for Query
  */
-@org.adempiere.base.Model(table = X_PA_Achievement.Table_Name)
 public class MAchievement extends X_PA_Achievement
 {
 

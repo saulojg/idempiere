@@ -33,7 +33,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Nico
  *  @version $Id: MZoomCondition.java
  */
-@org.adempiere.base.Model(table = X_AD_ZoomCondition.Table_Name)
 public class MZoomCondition extends X_AD_ZoomCondition implements ImmutablePOSupport
 {
 	/**

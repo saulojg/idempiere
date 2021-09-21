@@ -32,7 +32,6 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MRoleOrgAccess.java,v 1.3 2006/07/30 00:58:38 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Role_OrgAccess.Table_Name)
 public class MRoleOrgAccess extends X_AD_Role_OrgAccess
 {
 	/**

@@ -45,7 +45,6 @@ import org.osgi.service.event.Event;
  *  @author Nicolas Micoud
  *  @version $Id: MStatusLine.java
  */
-@org.adempiere.base.Model(table = X_AD_StatusLine.Table_Name)
 public class MStatusLine extends X_AD_StatusLine implements ImmutablePOSupport
 {
 	/**

@@ -34,7 +34,6 @@ import org.compiere.util.Msg;
  *    			<li>RF [ 2214883 ] Remove SQL code and Replace for Query http://sourceforge.net/tracker/index.php?func=detail&aid=2214883&group_id=176962&atid=879335 
  *  @version $Id: MAcctProcessor.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_AcctProcessor.Table_Name)
 public class MAcctProcessor extends X_C_AcctProcessor
 	implements AdempiereProcessor, AdempiereProcessor2
 {

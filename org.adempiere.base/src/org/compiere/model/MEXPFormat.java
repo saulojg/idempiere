@@ -54,7 +54,6 @@ import org.idempiere.cache.POCopyCache;
  * 				<li>https://sourceforge.net/tracker/?func=detail&atid=879332&aid=2936561&group_id=176962
  *
  */
-@org.adempiere.base.Model(table = X_EXP_Format.Table_Name)
 public class MEXPFormat extends X_EXP_Format implements ImmutablePOSupport {
 
 	/**

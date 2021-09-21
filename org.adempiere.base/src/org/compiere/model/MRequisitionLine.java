@@ -42,7 +42,6 @@ import org.compiere.util.Msg;
  * 			<li>FR [ 2841841 ] Requisition Improvements
  * 				https://sourceforge.net/tracker/?func=detail&aid=2841841&group_id=176962&atid=879335
  */
-@org.adempiere.base.Model(table = X_M_RequisitionLine.Table_Name)
 public class MRequisitionLine extends X_M_RequisitionLine
 {
 	/**

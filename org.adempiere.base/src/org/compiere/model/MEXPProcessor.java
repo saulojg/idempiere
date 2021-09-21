@@ -43,7 +43,6 @@ import org.compiere.util.DB;
 /**
  * @author Trifon N. Trifonov
  */
-@org.adempiere.base.Model(table = X_EXP_Processor.Table_Name)
 public class MEXPProcessor extends X_EXP_Processor {
 	/**
 	 * 

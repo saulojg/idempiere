@@ -36,7 +36,6 @@ import org.compiere.wf.MWorkflow;
  * @author Victor Perez www.e-evolution.com     
  * @author Teo Sarca, www.arhipac.ro
  */
-@org.adempiere.base.Model(table = X_PP_Product_Planning.Table_Name)
 public class MPPProductPlanning extends X_PP_Product_Planning
 {
 	/**

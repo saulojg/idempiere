@@ -42,7 +42,6 @@ import org.osgi.service.event.Event;
  *
  *  @author Carlos Ruiz - GlobalQSS
  */
-@org.adempiere.base.Model(table = X_AD_RecentItem.Table_Name)
 public class MRecentItem extends X_AD_RecentItem implements ImmutablePOSupport
 {
 	/**

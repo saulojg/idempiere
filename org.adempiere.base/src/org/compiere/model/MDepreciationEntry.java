@@ -25,7 +25,6 @@ import org.idempiere.fa.exceptions.AssetException;
  * Depreciation Entry
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  */
-@org.adempiere.base.Model(table = X_A_Depreciation_Entry.Table_Name)
 public class MDepreciationEntry extends X_A_Depreciation_Entry
 implements DocAction
 {

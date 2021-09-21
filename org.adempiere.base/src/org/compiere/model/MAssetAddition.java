@@ -32,7 +32,6 @@ import org.idempiere.fa.util.POCacheLocal;
  *
  * TODO: BUG: REG in depexp creates a zero if they have more sites Addition during 0?!
  */
-@org.adempiere.base.Model(table = X_A_Asset_Addition.Table_Name)
 public class MAssetAddition extends X_A_Asset_Addition
 	implements DocAction
 {

@@ -36,7 +36,6 @@ import org.idempiere.cache.ImmutablePOSupport;
 /**
  *	Country Group Model
  */
-@org.adempiere.base.Model(table = X_C_CountryGroup.Table_Name)
 public class MCountryGroup extends X_C_CountryGroup implements ImmutablePOSupport
 {
 	/**

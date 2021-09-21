@@ -26,7 +26,6 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MProcessAccess.java,v 1.3 2006/07/30 00:58:04 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Process_Access.Table_Name)
 public class MProcessAccess extends X_AD_Process_Access
 {
 	

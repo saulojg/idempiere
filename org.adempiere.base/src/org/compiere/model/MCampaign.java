@@ -26,7 +26,6 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MCampaign.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_Campaign.Table_Name)
 public class MCampaign extends X_C_Campaign
 {
 

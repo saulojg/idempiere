@@ -23,7 +23,6 @@ import org.compiere.model.X_AD_InfoRelated;
 import org.compiere.util.Env;
 import org.idempiere.cache.ImmutablePOSupport;
 
-@org.adempiere.base.Model(table = X_AD_InfoRelated.Table_Name)
 public class MInfoRelated extends X_AD_InfoRelated implements IInfoColumn, ImmutablePOSupport {	
 	/**
 	 * 

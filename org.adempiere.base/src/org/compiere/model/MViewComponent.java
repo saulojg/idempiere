@@ -27,7 +27,6 @@ import org.compiere.util.Env;
 import org.idempiere.cache.ImmutablePOSupport;
 
 
-@org.adempiere.base.Model(table = X_AD_ViewComponent.Table_Name)
 public class MViewComponent extends X_AD_ViewComponent implements ImmutablePOSupport {
 	/**
 	 * 

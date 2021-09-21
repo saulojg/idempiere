@@ -51,7 +51,6 @@ import com.google.api.client.json.gson.GsonFactory;
 /**
  * Authorization Credential
  */
-@org.adempiere.base.Model(table = X_AD_AuthorizationCredential.Table_Name)
 public class MAuthorizationCredential extends X_AD_AuthorizationCredential {
 	/**
 	 * 

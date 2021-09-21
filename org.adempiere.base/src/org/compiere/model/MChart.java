@@ -6,7 +6,6 @@ import java.util.Properties;
 
 
 
-@org.adempiere.base.Model(table = X_AD_Chart.Table_Name)
 public class MChart extends X_AD_Chart {
 
 	/**

@@ -44,7 +44,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MImage.java,v 1.5 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Image.Table_Name)
 public class MImage extends X_AD_Image implements ImmutablePOSupport
 {
 	/**

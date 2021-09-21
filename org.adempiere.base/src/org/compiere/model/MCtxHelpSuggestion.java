@@ -10,7 +10,6 @@ import java.util.Properties;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_AD_CtxHelpSuggestion.Table_Name)
 public class MCtxHelpSuggestion extends X_AD_CtxHelpSuggestion {
 
 	/**

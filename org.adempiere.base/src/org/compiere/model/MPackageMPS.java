@@ -6,7 +6,6 @@ import java.util.Properties;
 
 import org.compiere.util.DB;
 
-@org.adempiere.base.Model(table = X_M_PackageMPS.Table_Name)
 public class MPackageMPS extends X_M_PackageMPS
 {
 	/**

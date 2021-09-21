@@ -3,7 +3,6 @@ package org.compiere.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-@org.adempiere.base.Model(table = X_M_QualityTest.Table_Name)
 public class MQualityTest extends X_M_QualityTest {
 
 	/**

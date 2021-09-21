@@ -34,7 +34,6 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MBankStatementMatcher.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_BankStatementMatcher.Table_Name)
 public class MBankStatementMatcher extends X_C_BankStatementMatcher
 {
 	/**

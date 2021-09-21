@@ -27,7 +27,6 @@ import org.compiere.util.CLogger;
  *  @version $Id: MCurrencyAcct.java,v 1.3 2006/07/30 00:58:38 jjanke Exp $
  *  @author red1 - FR: [ 2214883 ] Remove SQL code and Replace for Query
  */
-@org.adempiere.base.Model(table = X_C_Currency_Acct.Table_Name)
 public class MCurrencyAcct extends X_C_Currency_Acct
 {
 	/**

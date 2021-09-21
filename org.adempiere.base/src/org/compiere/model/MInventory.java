@@ -49,7 +49,6 @@ import org.compiere.util.Util;
  * 			<li>BF [ 1745154 ] Cost in Reversing Material Related Docs
  *  @see http://sourceforge.net/tracker/?func=detail&atid=879335&aid=1948157&group_id=176962
  */
-@org.adempiere.base.Model(table = X_M_Inventory.Table_Name)
 public class MInventory extends X_M_Inventory implements DocAction
 {
 	/**

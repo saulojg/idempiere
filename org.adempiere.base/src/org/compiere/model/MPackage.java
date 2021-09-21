@@ -35,7 +35,6 @@ import org.compiere.util.Trx;
  *  @author Jorg Janke
  *  @version $Id: MPackage.java,v 1.3 2006/07/30 00:51:04 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_M_Package.Table_Name)
 public class MPackage extends X_M_Package
 {
 	/**

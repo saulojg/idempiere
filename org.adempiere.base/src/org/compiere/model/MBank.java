@@ -29,7 +29,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MBank.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_Bank.Table_Name)
 public class MBank extends X_C_Bank implements ImmutablePOSupport
 {	
 	/**

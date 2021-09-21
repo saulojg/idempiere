@@ -51,7 +51,6 @@ import org.compiere.util.Msg;
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  *			<li>BF [ 2588043 ] Insufficient message ProductNotOnPriceList
  */
-@org.adempiere.base.Model(table = X_C_OrderLine.Table_Name)
 public class MOrderLine extends X_C_OrderLine
 {
 	/**

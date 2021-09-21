@@ -8,7 +8,6 @@ import java.util.Properties;
  * Asset Product
  * @author Teo Sarca, SC ARHIPAC SERIVCE SRL
  */
-@org.adempiere.base.Model(table = X_A_Asset_Product.Table_Name)
 public class MAssetProduct extends X_A_Asset_Product
 {
 

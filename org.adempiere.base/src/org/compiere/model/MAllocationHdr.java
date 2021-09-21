@@ -49,7 +49,6 @@ import org.compiere.util.Msg;
  *				<li>BF [ 2880182 ] Error you can allocate a payment to invoice that was paid
  *				<li> https://sourceforge.net/tracker/index.php?func=detail&aid=2880182&group_id=176962&atid=879332
 */
-@org.adempiere.base.Model(table = X_C_AllocationHdr.Table_Name)
 public class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 {
 	/**

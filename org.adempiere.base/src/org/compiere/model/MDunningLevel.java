@@ -32,7 +32,6 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MDunningLevel.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_DunningLevel.Table_Name)
 public class MDunningLevel extends X_C_DunningLevel
 {
 	/**

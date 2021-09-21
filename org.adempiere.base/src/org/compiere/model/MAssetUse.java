@@ -6,7 +6,6 @@ import java.util.Properties;
 import org.compiere.util.DB;
 /** Generated Model for A_Asset_Use
  ** @version $Id: X_A_Asset.java,v 1.88 2004/08/27 21:26:37 jjanke Exp $ */
-@org.adempiere.base.Model(table = X_A_Asset_Use.Table_Name)
 public class MAssetUse extends X_A_Asset_Use
 {
 	/**

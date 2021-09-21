@@ -38,7 +38,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @version $Id: MRule.java
  *  
  */
-@org.adempiere.base.Model(table = X_AD_Rule.Table_Name)
 public class MRule extends X_AD_Rule implements ImmutablePOSupport
 {
 	/**

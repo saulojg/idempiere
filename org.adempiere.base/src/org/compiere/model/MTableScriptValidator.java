@@ -40,7 +40,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 			<li>BF [ 2819654 ] Table Script Validator SeqNo is not set
  * 				https://sourceforge.net/tracker/?func=detail&atid=879332&aid=2819654&group_id=176962 
  */
-@org.adempiere.base.Model(table = X_AD_Table_ScriptValidator.Table_Name)
 public class MTableScriptValidator extends X_AD_Table_ScriptValidator implements ImmutablePOSupport
 {
 	/**

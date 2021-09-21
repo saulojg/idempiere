@@ -26,7 +26,6 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MRequestProcessorRoute.java,v 1.2 2006/07/30 00:51:03 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_R_RequestProcessor_Route.Table_Name)
 public class MRequestProcessorRoute extends X_R_RequestProcessor_Route
 {
 	/**

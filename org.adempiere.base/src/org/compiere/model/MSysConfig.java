@@ -38,7 +38,6 @@ import org.compiere.util.DisplayType;
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  * 			<li>BF [ 1885496 ] Performance NEEDS
  */
-@org.adempiere.base.Model(table = X_AD_SysConfig.Table_Name)
 public class MSysConfig extends X_AD_SysConfig
 {
 	/**

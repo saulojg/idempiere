@@ -40,7 +40,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * <li>http://sourceforge.net/tracker/?func=detail&atid=879335&aid=2826384&group_id=176962
  *  @version $Id: MTab.java,v 1.2 2006/07/30 00:58:37 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Tab.Table_Name)
 public class MTab extends X_AD_Tab implements ImmutablePOSupport
 {
 	/**

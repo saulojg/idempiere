@@ -27,7 +27,6 @@ import org.compiere.util.Msg;
  *  @author Carlos Ruiz
  *  @version $Id: MStatusLineUsedIn.java
  */
-@org.adempiere.base.Model(table = X_AD_StatusLineUsedIn.Table_Name)
 public class MStatusLineUsedIn extends X_AD_StatusLineUsedIn
 {
 	/**

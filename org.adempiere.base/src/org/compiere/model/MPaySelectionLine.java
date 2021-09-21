@@ -30,7 +30,6 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MPaySelectionLine.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_PaySelectionLine.Table_Name)
 public class MPaySelectionLine extends X_C_PaySelectionLine
 {
 	/**

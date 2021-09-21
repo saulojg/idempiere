@@ -31,7 +31,6 @@ import java.util.logging.Level;
  *  @author victor.perez@e-evolution.com www.e-evolution.com [ 1867477 ] http://sourceforge.net/tracker/index.php?func=detail&aid=1867477&group_id=176962&atid=879332
  *	FR: [ 2214883 ] Remove SQL code and Replace for Query - red1
  */
-@org.adempiere.base.Model(table = X_C_Commission.Table_Name)
 public class MCommission extends X_C_Commission
 {
 	/**

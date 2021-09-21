@@ -41,7 +41,6 @@ import org.compiere.util.Trx;
  * 	@author 	Jorg Janke
  * 	@version 	$Id: MPaySelectionCheck.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_PaySelectionCheck.Table_Name)
 public class MPaySelectionCheck extends X_C_PaySelectionCheck
 {
 	/**

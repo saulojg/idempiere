@@ -55,7 +55,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 			<li>FR [ 2788430 ] MUser.getOfBPartner add trxName parameter
  * 				https://sourceforge.net/tracker/index.php?func=detail&aid=2788430&group_id=176962&atid=879335
  */
-@org.adempiere.base.Model(table = X_AD_User.Table_Name)
 public class MUser extends X_AD_User implements ImmutablePOSupport
 {
 	/**

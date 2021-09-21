@@ -33,7 +33,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @version $Id$
  *  
  */
-@org.adempiere.base.Model(table = X_AD_UserDef_Tab.Table_Name)
 public class MUserDefTab extends X_AD_UserDef_Tab implements ImmutablePOSupport
 {
 	/**

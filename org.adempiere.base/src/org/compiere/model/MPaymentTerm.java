@@ -39,7 +39,6 @@ import org.compiere.util.Msg;
  * 			<li>BF [ 2889886 ] Net days in payment term
  * 				https://sourceforge.net/tracker/index.php?func=detail&aid=2889886&group_id=176962&atid=879332
  */
-@org.adempiere.base.Model(table = X_C_PaymentTerm.Table_Name)
 public class MPaymentTerm extends X_C_PaymentTerm
 {
 	/**

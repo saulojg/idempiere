@@ -24,7 +24,6 @@ import org.compiere.util.CLogger;
  *	@author Teo Sarca, SC ARHIPAC SERVICE SRL
  *
  */
-@org.adempiere.base.Model(table = X_A_Asset_Change.Table_Name)
 public class MAssetChange extends X_A_Asset_Change
 {
 	/**

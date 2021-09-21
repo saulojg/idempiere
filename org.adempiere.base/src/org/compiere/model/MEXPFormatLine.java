@@ -43,7 +43,6 @@ import org.idempiere.cache.ImmutablePOSupport;
 /**
  * @author Trifon N. Trifonov
  */
-@org.adempiere.base.Model(table = X_EXP_FormatLine.Table_Name)
 public class MEXPFormatLine extends X_EXP_FormatLine implements ImmutablePOSupport {
 	/**
 	 * 

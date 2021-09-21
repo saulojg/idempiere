@@ -41,7 +41,6 @@ import org.compiere.util.Env;
  *
  * @author Daniel Tamm
  */
-@org.adempiere.base.Model(table = X_M_Replenish.Table_Name)
 public class MReplenish extends X_M_Replenish {
 
     /**

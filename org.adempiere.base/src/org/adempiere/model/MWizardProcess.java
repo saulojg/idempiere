@@ -21,7 +21,6 @@ import java.util.Properties;
 import org.compiere.model.Query;
 import org.compiere.model.X_AD_WizardProcess;
 
-@org.adempiere.base.Model(table = X_AD_WizardProcess.Table_Name)
 public class MWizardProcess extends X_AD_WizardProcess {
 	/**
 	 * 

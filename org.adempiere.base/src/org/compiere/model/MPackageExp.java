@@ -32,7 +32,6 @@ import org.compiere.util.DB;
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  * 			<li>BF [ 1826273 ] Error when creating MPackageExp
  */
-@org.adempiere.base.Model(table = X_AD_Package_Exp.Table_Name)
 public class MPackageExp extends X_AD_Package_Exp
 {
 	/**

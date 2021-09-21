@@ -29,7 +29,6 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id: MMovementLineConfirm.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_M_MovementLineConfirm.Table_Name)
 public class MMovementLineConfirm extends X_M_MovementLineConfirm
 {
 

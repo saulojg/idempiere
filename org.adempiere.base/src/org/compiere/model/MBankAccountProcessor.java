@@ -32,7 +32,6 @@ import org.compiere.util.Msg;
  * @author Elaine
  * @date October 17, 2012
  */
-@org.adempiere.base.Model(table = X_C_BankAccount_Processor.Table_Name)
 public class MBankAccountProcessor extends X_C_BankAccount_Processor {
 
 	/**

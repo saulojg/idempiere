@@ -37,7 +37,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 				<li>BF [ 2824795 ] Deleting Resource product should be forbidden
  * 					https://sourceforge.net/tracker/?func=detail&aid=2824795&group_id=176962&atid=879332
  */
-@org.adempiere.base.Model(table = X_S_Resource.Table_Name)
 public class MResource extends X_S_Resource implements ImmutablePOSupport
 {
 	/**

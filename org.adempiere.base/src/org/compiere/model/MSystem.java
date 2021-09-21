@@ -51,7 +51,6 @@ import org.compiere.util.TimeUtil;
  *  @author Teo Sarca, www.arhipac.ro
  *  		<li>FR [ 2214883 ] Remove SQL code and Replace for Query
  */
-@org.adempiere.base.Model(table = X_AD_System.Table_Name)
 public class MSystem extends X_AD_System
 {
 	/**

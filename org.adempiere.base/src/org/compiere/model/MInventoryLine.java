@@ -36,7 +36,6 @@ import org.compiere.util.Msg;
  * 			<li>BF [ 1817757 ] Error on saving MInventoryLine in a custom environment
  * 			<li>BF [ 1722982 ] Error with inventory when you enter count qty in negative
  */
-@org.adempiere.base.Model(table = X_M_InventoryLine.Table_Name)
 public class MInventoryLine extends X_M_InventoryLine
 {
 	/**

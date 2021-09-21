@@ -37,7 +37,6 @@ import org.compiere.util.Util;
  *  @version $Id: M_Element.java,v 1.3 2006/07/30 00:58:37 jjanke Exp $
  *  FR: [ 2214883 ] Remove SQL code and Replace for Query - red1, teo_sarca
  */
-@org.adempiere.base.Model(table = X_AD_Element.Table_Name)
 public class M_Element extends X_AD_Element
 {
 

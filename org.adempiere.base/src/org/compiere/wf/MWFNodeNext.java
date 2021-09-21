@@ -35,7 +35,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * 	@author 	Jorg Janke
  * 	@version 	$Id: MWFNodeNext.java,v 1.3 2006/10/06 00:42:24 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_WF_NodeNext.Table_Name)
 public class MWFNodeNext extends X_AD_WF_NodeNext implements ImmutablePOSupport
 {
 	/**

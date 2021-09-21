@@ -36,7 +36,6 @@ import org.idempiere.cache.ImmutableIntPOCache;
 import org.idempiere.cache.ImmutablePOSupport;
 
 
-@org.adempiere.base.Model(table = X_AD_Schedule.Table_Name)
 public class MSchedule extends X_AD_Schedule implements ImmutablePOSupport
 {
 	/**

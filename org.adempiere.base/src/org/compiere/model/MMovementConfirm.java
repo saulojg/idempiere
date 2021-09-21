@@ -46,7 +46,6 @@ import org.compiere.wf.MWorkflow;
  *			@see http://sourceforge.net/tracker2/?func=detail&atid=879335&aid=2520591&group_id=176962 
  *  @version $Id: MMovementConfirm.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_M_MovementConfirm.Table_Name)
 public class MMovementConfirm extends X_M_MovementConfirm implements DocAction
 {
 	/**

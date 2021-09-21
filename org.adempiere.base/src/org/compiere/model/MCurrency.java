@@ -29,7 +29,6 @@ import org.idempiere.cache.ImmutablePOCache;
  *
  *  @author Jorg Janke
  */
-@org.adempiere.base.Model(table = X_C_Currency.Table_Name)
 public class MCurrency extends X_C_Currency implements ImmutablePOSupport
 {
 	/**

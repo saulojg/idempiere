@@ -39,7 +39,6 @@ import org.compiere.util.Util;
  *  @author Jorg Janke
  *  @version $Id: MChat.java,v 1.4 2006/07/30 00:51:05 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_CM_Chat.Table_Name)
 public class MChat extends X_CM_Chat
 {
 	/**

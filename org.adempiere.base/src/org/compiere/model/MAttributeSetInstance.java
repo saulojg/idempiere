@@ -39,7 +39,6 @@ import org.compiere.util.TimeUtil;
  * @author Teo Sarca, www.arhipac.ro
  *			<li>BF [ 2675699 ] MAttributeSetInstance.create should create Lot/Serial/Guaran
  */
-@org.adempiere.base.Model(table = X_M_AttributeSetInstance.Table_Name)
 public class MAttributeSetInstance extends X_M_AttributeSetInstance
 {
 	/**

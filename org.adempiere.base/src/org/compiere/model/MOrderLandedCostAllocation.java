@@ -28,7 +28,6 @@ import org.compiere.util.Env;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_C_OrderLandedCostAllocation.Table_Name)
 public class MOrderLandedCostAllocation extends X_C_OrderLandedCostAllocation {
 
 	/**

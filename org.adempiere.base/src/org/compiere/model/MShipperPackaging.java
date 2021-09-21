@@ -3,7 +3,6 @@ package org.compiere.model;
 import java.sql.ResultSet;
 import java.util.Properties;
 
-@org.adempiere.base.Model(table = X_M_ShipperPackaging.Table_Name)
 public class MShipperPackaging extends X_M_ShipperPackaging 
 {
 	

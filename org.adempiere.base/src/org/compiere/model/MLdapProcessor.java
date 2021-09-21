@@ -34,7 +34,6 @@ import org.compiere.util.Msg;
  *  @author Jorg Janke
  *  @version $Id$
  */
-@org.adempiere.base.Model(table = X_AD_LdapProcessor.Table_Name)
 public class MLdapProcessor extends X_AD_LdapProcessor implements AdempiereProcessor
 {
 	/**

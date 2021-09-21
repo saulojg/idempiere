@@ -18,7 +18,6 @@ import java.util.Properties;
 
 import org.compiere.model.X_M_PromotionLine;
 
-@org.adempiere.base.Model(table = X_M_PromotionLine.Table_Name)
 public class MPromotionLine extends X_M_PromotionLine {
 
 	private static final long serialVersionUID = -8284722914757724765L;

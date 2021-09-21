@@ -31,7 +31,6 @@ import org.compiere.util.Msg;
  *	@author Jorg Janke
  *	@version $Id: MTimeExpenseLine.java,v 1.4 2006/09/25 00:59:41 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_S_TimeExpenseLine.Table_Name)
 public class MTimeExpenseLine extends X_S_TimeExpenseLine
 {
 	/**

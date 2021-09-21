@@ -33,7 +33,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MColorSchema.java,v 1.2 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_PA_ColorSchema.Table_Name)
 public class MColorSchema extends X_PA_ColorSchema implements ImmutablePOSupport
 {
 	/**

@@ -39,8 +39,7 @@ import org.compiere.util.Msg;
  * 			<li>BF [ 1896880 ] Unlink Payment if TrxAmt is zero
  * 			<li>BF [ 1896885 ] BS Line: don't update header if after save/delete fails
  */
- @org.adempiere.base.Model(table = X_C_BankStatementLine.Table_Name)
-public class MBankStatementLine extends X_C_BankStatementLine
+ public class MBankStatementLine extends X_C_BankStatementLine
  {
 	/**
 	 * 

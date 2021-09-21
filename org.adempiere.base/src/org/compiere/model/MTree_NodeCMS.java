@@ -32,7 +32,6 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MTree_NodeCMS.java,v 1.2 2006/07/30 00:58:36 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_TreeNodeCMS.Table_Name)
 public class MTree_NodeCMS extends X_AD_TreeNodeCMS
 {
 	/**

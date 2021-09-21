@@ -34,7 +34,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Teo Sarca, www.arhipac.ro
  * 			<li>BF [ 2073484 ] MPriceList.getDefault is not working correctly
  */
-@org.adempiere.base.Model(table = X_M_PriceList.Table_Name)
 public class MPriceList extends X_M_PriceList implements ImmutablePOSupport
 {
 	/**

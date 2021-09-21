@@ -27,7 +27,6 @@ import org.compiere.util.Msg;
  * @author Elaine
  *
  */
-@org.adempiere.base.Model(table = X_C_AddressTransaction.Table_Name)
 public class MAddressTransaction extends X_C_AddressTransaction 
 {
 	/**

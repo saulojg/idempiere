@@ -51,7 +51,6 @@ import org.idempiere.expression.logic.LogicEvaluator;
  *  @author Jorg Janke
  *  @version $Id: MColumn.java,v 1.6 2006/08/09 05:23:49 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Column.Table_Name)
 public class MColumn extends X_AD_Column implements ImmutablePOSupport
 {
 	/**

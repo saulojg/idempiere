@@ -34,7 +34,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MRegistrationAttribute.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_A_RegistrationAttribute.Table_Name)
 public class MRegistrationAttribute extends X_A_RegistrationAttribute implements ImmutablePOSupport
 {
 	/**

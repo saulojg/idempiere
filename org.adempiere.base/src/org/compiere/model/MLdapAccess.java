@@ -26,7 +26,6 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id$
  */
-@org.adempiere.base.Model(table = X_AD_LdapAccess.Table_Name)
 public class MLdapAccess extends X_AD_LdapAccess
 {
 

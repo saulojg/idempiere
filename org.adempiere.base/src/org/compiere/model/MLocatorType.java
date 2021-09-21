@@ -37,7 +37,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *
  * 	@author 	Carlos Ruiz - Quality Systems & Solutions - globalqss
  */
-@org.adempiere.base.Model(table = X_M_LocatorType.Table_Name)
 public class MLocatorType extends X_M_LocatorType implements ImmutablePOSupport {
 	/**
 	 * 

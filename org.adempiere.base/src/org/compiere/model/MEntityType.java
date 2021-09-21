@@ -41,7 +41,6 @@ import org.idempiere.cache.ImmutablePOCache;
  * 		<li>BF [ 2861194 ] EntityType is not using normal PO framework for getting IDs
  * 			https://sourceforge.net/tracker/?func=detail&aid=2861194&group_id=176962&atid=879332
  */
-@org.adempiere.base.Model(table = X_AD_EntityType.Table_Name)
 public class MEntityType extends X_AD_EntityType implements ImmutablePOSupport
 {
 	/**

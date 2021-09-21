@@ -10,7 +10,6 @@ import java.util.Properties;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_AD_InfoWindow_Access.Table_Name)
 public class MInfoWindowAccess extends X_AD_InfoWindow_Access {
 
 	/**

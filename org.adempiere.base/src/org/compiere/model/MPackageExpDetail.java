@@ -28,7 +28,6 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MMenu.java,v 1.5 2005/05/14 05:32:16 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Package_Exp_Detail.Table_Name)
 public class MPackageExpDetail extends X_AD_Package_Exp_Detail
 {
 

@@ -23,7 +23,6 @@ import org.idempiere.fa.service.api.IDepreciationMethod;
  * Depreciation Engine (eg. SL, ARH_VAR ...)
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  */
-@org.adempiere.base.Model(table = X_A_Depreciation.Table_Name)
 public class MDepreciation extends X_A_Depreciation implements ImmutablePOSupport
 {
 	/**

@@ -23,7 +23,6 @@ import org.compiere.model.X_M_PromotionPreCondition;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_M_PromotionPreCondition.Table_Name)
 public class MPromotionPreCondition extends X_M_PromotionPreCondition {
 
 	private static final long serialVersionUID = 7344556244799964804L;

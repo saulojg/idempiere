@@ -36,7 +36,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *    			<li>RF [ 2214883 ] Remove SQL code and Replace for Query http://sourceforge.net/tracker/index.php?func=detail&aid=2214883&group_id=176962&atid=879335
  *  @version 	$Id: MAccount.java,v 1.4 2006/07/30 00:58:04 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_ValidCombination.Table_Name)
 public class MAccount extends X_C_ValidCombination implements ImmutablePOSupport
 {
 	/**

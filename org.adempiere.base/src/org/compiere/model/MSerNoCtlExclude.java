@@ -30,7 +30,6 @@ import java.util.Properties;
 
 import org.compiere.util.Env;
 
-@org.adempiere.base.Model(table = X_M_SerNoCtlExclude.Table_Name)
 public class MSerNoCtlExclude extends X_M_SerNoCtlExclude {
 
 	/**

@@ -33,7 +33,6 @@ import java.util.TreeSet;
  * 			Victor Perez, Trifon, red1
  * 			<li>FR: [ 2214883 ] Remove SQL code and Replace for Query
  */
-@org.adempiere.base.Model(table = X_AD_Alert.Table_Name)
 public class MAlert extends X_AD_Alert
 {
 	/**

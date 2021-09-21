@@ -35,7 +35,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_AD_StyleLine.Table_Name)
 public class MStyleLine extends X_AD_StyleLine implements ImmutablePOSupport {
 
 	/**

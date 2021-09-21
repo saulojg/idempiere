@@ -29,7 +29,6 @@ import org.compiere.util.Env;
  *	@author Jorg Janke
  *	@version $Id: MTransaction.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_M_Transaction.Table_Name)
 public class MTransaction extends X_M_Transaction
 {
 	/**

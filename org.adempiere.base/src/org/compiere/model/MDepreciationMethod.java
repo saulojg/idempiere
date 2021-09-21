@@ -20,7 +20,6 @@ import org.idempiere.cache.ImmutablePOCache;
  * ex. MDI, LDI, YDI ...
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  */
-@org.adempiere.base.Model(table = X_A_Depreciation_Method.Table_Name)
 public class MDepreciationMethod extends X_A_Depreciation_Method implements ImmutablePOSupport
 {
 	/**

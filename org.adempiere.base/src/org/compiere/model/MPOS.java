@@ -33,7 +33,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MPOS.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_POS.Table_Name)
 public class MPOS extends X_C_POS implements ImmutablePOSupport
 {
 	/**

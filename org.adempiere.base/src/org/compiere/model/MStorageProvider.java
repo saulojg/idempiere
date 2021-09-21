@@ -29,7 +29,6 @@ import org.compiere.util.Env;
 import org.idempiere.cache.ImmutableIntPOCache;
 import org.idempiere.cache.ImmutablePOSupport;
 
-@org.adempiere.base.Model(table = X_AD_StorageProvider.Table_Name)
 public class MStorageProvider extends X_AD_StorageProvider implements ImmutablePOSupport {
 	/**
 	 * 

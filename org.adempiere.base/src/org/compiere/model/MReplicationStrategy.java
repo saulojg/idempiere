@@ -33,7 +33,6 @@ import org.compiere.util.CLogger;
  * <li> IDEMPIERE-218 Replication not working in ZK
  * <li> http://jira.idempiere.com/browse/IDEMPIERE-218
  */
-@org.adempiere.base.Model(table = X_AD_ReplicationStrategy.Table_Name)
 public class MReplicationStrategy extends X_AD_ReplicationStrategy {
 
 	/**

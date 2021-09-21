@@ -28,7 +28,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MResolution.java,v 1.2 2006/07/30 00:51:03 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_R_Resolution.Table_Name)
 public class MResolution extends X_R_Resolution implements ImmutablePOSupport
 {
 	/**

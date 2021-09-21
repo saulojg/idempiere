@@ -24,7 +24,6 @@ import java.util.Properties;
  *	Revenue Recognition Run Model
  *	
  */
-@org.adempiere.base.Model(table = X_C_RevenueRecognition_Run.Table_Name)
 public class MRevenueRecognitionRun extends X_C_RevenueRecognition_Run
 {
 

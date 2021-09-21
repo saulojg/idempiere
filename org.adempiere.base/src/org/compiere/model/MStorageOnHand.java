@@ -39,7 +39,6 @@ import org.compiere.util.Util;
  *	@author Jorg Janke
  *	@version $Id: MStorageOnHand.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_M_StorageOnHand.Table_Name)
 public class MStorageOnHand extends X_M_StorageOnHand
 {
 	/**

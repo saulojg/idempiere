@@ -47,7 +47,6 @@ import org.compiere.util.Msg;
  * 				https://sourceforge.net/tracker/?func=detail&aid=2804142&group_id=176962&atid=879332
  * @author red1 FR: [ 2214883 ] Remove SQL code and Replace for Query
  */
-@org.adempiere.base.Model(table = X_C_InvoiceLine.Table_Name)
 public class MInvoiceLine extends X_C_InvoiceLine
 {
 	/**

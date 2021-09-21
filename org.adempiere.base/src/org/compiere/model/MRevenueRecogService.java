@@ -24,7 +24,6 @@ import java.util.Properties;
  *	Revenue Recognition Service Model
  *	
  */
-@org.adempiere.base.Model(table = X_C_RevenueRecog_Service.Table_Name)
 public class MRevenueRecogService extends X_C_RevenueRecog_Service
 {
 

@@ -30,7 +30,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MForm.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Form.Table_Name)
 public class MForm extends X_AD_Form implements ImmutablePOSupport
 {
 	/**

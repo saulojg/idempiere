@@ -27,7 +27,6 @@ import java.sql.ResultSet;
 import java.util.Properties;
 
 
-@org.adempiere.base.Model(table = X_C_BPartner_Product.Table_Name)
 public class MBPartnerProduct extends X_C_BPartner_Product
 {
 	/**

@@ -36,7 +36,6 @@ import org.compiere.util.Util;
  * @author Elaine
  *
  */
-@org.adempiere.base.Model(table = X_C_PaymentTransaction.Table_Name)
 public class MPaymentTransaction extends X_C_PaymentTransaction implements ProcessCall, PaymentInterface {
 
 	/**

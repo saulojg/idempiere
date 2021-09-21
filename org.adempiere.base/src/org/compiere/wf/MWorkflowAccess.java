@@ -29,7 +29,6 @@ import org.compiere.model.X_AD_Workflow_Access;
  *  @author Jorg Janke
  *  @version $Id: MWorkflowAccess.java,v 1.3 2006/07/30 00:51:05 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Workflow_Access.Table_Name)
 public class MWorkflowAccess extends X_AD_Workflow_Access
 {
 

@@ -35,7 +35,6 @@ import org.compiere.util.Env;
  * 			<li>BF [ 1801842 ] DB connection fix & improvements for concurrent threads
  * 			<li>BF [ 1943723 ] WF Activity History is not translated
  */
-@org.adempiere.base.Model(table = X_AD_WF_EventAudit.Table_Name)
 public class MWFEventAudit extends X_AD_WF_EventAudit
 {
 	/**

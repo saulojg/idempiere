@@ -12,7 +12,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * Asset Group Model
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  */
-@org.adempiere.base.Model(table = X_A_Asset_Group.Table_Name)
 public class MAssetGroup extends X_A_Asset_Group implements ImmutablePOSupport
 {
 	

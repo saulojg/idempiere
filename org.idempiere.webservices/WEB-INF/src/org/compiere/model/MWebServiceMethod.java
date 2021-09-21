@@ -35,7 +35,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_WS_WebServiceMethod.Table_Name)
 public class MWebServiceMethod extends X_WS_WebServiceMethod implements ImmutablePOSupport {
 
 	/**

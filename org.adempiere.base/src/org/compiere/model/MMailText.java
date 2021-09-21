@@ -35,7 +35,6 @@ import org.compiere.util.Util;
  *  @author Jorg Janke
  *  @version $Id: MMailText.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_R_MailText.Table_Name)
 public class MMailText extends X_R_MailText
 {
 	/**

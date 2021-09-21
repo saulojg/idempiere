@@ -26,7 +26,6 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MWindowAccess.java,v 1.4 2006/07/30 00:54:54 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Window_Access.Table_Name)
 public class MWindowAccess extends X_AD_Window_Access
 {
 

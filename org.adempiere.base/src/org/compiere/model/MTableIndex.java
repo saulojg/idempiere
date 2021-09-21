@@ -25,7 +25,6 @@ import org.compiere.db.Database;
 import org.compiere.util.Msg;
 import org.compiere.util.Util;
 
-@org.adempiere.base.Model(table = X_AD_TableIndex.Table_Name)
 public class MTableIndex extends X_AD_TableIndex {
 	/**
 	 * 

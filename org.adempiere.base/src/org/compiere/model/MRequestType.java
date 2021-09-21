@@ -37,7 +37,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  
  *  Teo Sarca - bug fix [ 1642833 ] MRequestType minor typo bug
  */
-@org.adempiere.base.Model(table = X_R_RequestType.Table_Name)
 public class MRequestType extends X_R_RequestType implements ImmutablePOSupport
 {
     /**

@@ -35,7 +35,6 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MWarehousePrice.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_RV_WarehousePrice.Table_Name)
 public class MWarehousePrice extends X_RV_WarehousePrice
 {
 	/**

@@ -26,7 +26,6 @@ import org.compiere.util.CLogger;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 
-@org.adempiere.base.Model(table = X_M_StorageReservation.Table_Name)
 public class MStorageReservation extends X_M_StorageReservation {
 	/**
 	 * 

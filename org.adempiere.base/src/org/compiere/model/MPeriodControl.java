@@ -28,7 +28,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MPeriodControl.java,v 1.3 2006/07/30 00:51:03 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_PeriodControl.Table_Name)
 public class MPeriodControl extends X_C_PeriodControl implements ImmutablePOSupport
 {
 	/**

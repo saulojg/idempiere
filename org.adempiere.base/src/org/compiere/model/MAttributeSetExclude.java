@@ -34,7 +34,6 @@ import org.compiere.util.Env;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_M_AttributeSetExclude.Table_Name)
 public class MAttributeSetExclude extends X_M_AttributeSetExclude {
 
 	/**

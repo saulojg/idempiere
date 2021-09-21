@@ -33,7 +33,6 @@ import java.util.Properties;
  *	
  *  @author Carlos Ruiz
  */
-@org.adempiere.base.Model(table = X_AD_CtxHelp.Table_Name)
 public class MCtxHelp extends X_AD_CtxHelp {
 	/**
 	 * 

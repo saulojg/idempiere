@@ -34,7 +34,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MClientInfo.java,v 1.2 2006/07/30 00:58:37 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_ClientInfo.Table_Name)
 public class MClientInfo extends X_AD_ClientInfo implements ImmutablePOSupport
 {
 	/**

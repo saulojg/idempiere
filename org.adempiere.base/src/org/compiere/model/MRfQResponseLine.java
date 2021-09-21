@@ -35,7 +35,6 @@ import org.compiere.util.TimeUtil;
  *  		<li>BF [ 2892581 ] Cannot load RfQResponseLine
  *  			https://sourceforge.net/tracker/?func=detail&aid=2892581&group_id=176962&atid=879335
  */
-@org.adempiere.base.Model(table = X_C_RfQResponseLine.Table_Name)
 public class MRfQResponseLine extends X_C_RfQResponseLine
 {
 	/**

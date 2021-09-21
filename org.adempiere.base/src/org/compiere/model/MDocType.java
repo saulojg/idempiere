@@ -37,7 +37,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  							See https://sourceforge.net/forum/message.php?msg_id=6499893
  *  @version $Id: MDocType.java,v 1.3 2006/07/30 00:54:54 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_DocType.Table_Name)
 public class MDocType extends X_C_DocType implements ImmutablePOSupport
 {
 	/**

@@ -25,7 +25,6 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MLotCtl.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_M_LotCtl.Table_Name)
 public class MLotCtl extends X_M_LotCtl
 {
 	/**

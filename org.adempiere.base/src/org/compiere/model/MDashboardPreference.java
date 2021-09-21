@@ -26,7 +26,6 @@ import org.compiere.util.Env;
  * @author Elaine
  * @date August 22, 2012
  */
-@org.adempiere.base.Model(table = X_PA_DashboardPreference.Table_Name)
 public class MDashboardPreference extends X_PA_DashboardPreference
 {
 	/**

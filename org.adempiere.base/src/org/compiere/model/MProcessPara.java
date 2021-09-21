@@ -35,7 +35,6 @@ import org.idempiere.expression.logic.LogicEvaluator;
  *  @author Jorg Janke
  *  @version $Id: MProcessPara.java,v 1.3 2006/07/30 00:58:37 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_Process_Para.Table_Name)
 public class MProcessPara extends X_AD_Process_Para implements ImmutablePOSupport
 {
 	/**

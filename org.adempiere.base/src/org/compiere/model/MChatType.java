@@ -29,7 +29,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MChatType.java,v 1.2 2006/07/30 00:51:03 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_CM_ChatType.Table_Name)
 public class MChatType extends X_CM_ChatType implements ImmutablePOSupport
 {
 	/**

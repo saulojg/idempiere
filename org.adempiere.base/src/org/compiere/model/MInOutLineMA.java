@@ -39,7 +39,6 @@ import org.compiere.util.Util;
  *  @author Jorg Janke
  *  @version $Id: MInOutLineMA.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_M_InOutLineMA.Table_Name)
 public class MInOutLineMA extends X_M_InOutLineMA
 {
 	/**

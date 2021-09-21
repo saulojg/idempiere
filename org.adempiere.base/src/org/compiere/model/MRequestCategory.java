@@ -28,7 +28,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @author Jorg Janke
  *  @version $Id: MRequestCategory.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_R_Category.Table_Name)
 public class MRequestCategory extends X_R_Category implements ImmutablePOSupport
 {
 	/**

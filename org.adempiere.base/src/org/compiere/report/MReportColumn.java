@@ -29,7 +29,6 @@ import org.compiere.model.X_PA_ReportColumn;
  *  @author Jorg Janke
  *  @version $Id: MReportColumn.java,v 1.3 2006/08/03 22:16:52 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_PA_ReportColumn.Table_Name)
 public class MReportColumn extends X_PA_ReportColumn
 {
 	/**

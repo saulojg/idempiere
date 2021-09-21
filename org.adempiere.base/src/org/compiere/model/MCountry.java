@@ -45,7 +45,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *   * @author Michael Judd (Akuna Ltd)
  * 				<li>BF [ 2695078 ] Country is not translated on invoice
  */
-@org.adempiere.base.Model(table = X_C_Country.Table_Name)
 public class MCountry extends X_C_Country
 	implements Comparator<Object>, Serializable, ImmutablePOSupport
 {

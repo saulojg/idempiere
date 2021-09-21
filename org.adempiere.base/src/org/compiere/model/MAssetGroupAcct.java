@@ -12,7 +12,6 @@ import org.idempiere.fa.feature.UseLifeImpl;
  * Asset Group Accounting Model
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  */
-@org.adempiere.base.Model(table = X_A_Asset_Group_Acct.Table_Name)
 public class MAssetGroupAcct extends X_A_Asset_Group_Acct
 	implements UseLife
 {

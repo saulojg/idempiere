@@ -32,7 +32,6 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MTree_NodeCMC.java,v 1.3 2006/09/16 07:28:53 comdivision Exp $
  */
-@org.adempiere.base.Model(table = X_AD_TreeNodeCMC.Table_Name)
 public class MTree_NodeCMC extends X_AD_TreeNodeCMC
 {
 	/**

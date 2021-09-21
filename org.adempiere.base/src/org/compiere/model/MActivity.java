@@ -33,7 +33,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Teo Sarca, www.arhipac.ro
  * 			<li>FR [ 2736867 ] Add caching support to MActivity
  */
-@org.adempiere.base.Model(table = X_C_Activity.Table_Name)
 public class MActivity extends X_C_Activity implements ImmutablePOSupport
 {
 	/**

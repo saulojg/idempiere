@@ -36,7 +36,6 @@ import org.compiere.util.Env;
 /**
  * Multi-factor Authentication Registration
  */
-@org.adempiere.base.Model(table = X_MFA_Registration.Table_Name)
 public class MMFARegistration extends X_MFA_Registration {
 	/**
 	 * 

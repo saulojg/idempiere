@@ -30,7 +30,6 @@ import org.compiere.util.DB;
  *
  *  @author Carlos Ruiz - GlobalQSS
  */
-@org.adempiere.base.Model(table = X_C_CashPlan.Table_Name)
 public class MCashPlan extends X_C_CashPlan
 {
 	/**

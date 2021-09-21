@@ -63,7 +63,6 @@ import org.idempiere.cache.ImmutablePOCache;
  * @author Silvano Trinchero, www.freepath.it
  * 			<li>IDEMPIERE-3209 changed functions to public to improve integration support
  */
-@org.adempiere.base.Model(table = X_AD_Workflow.Table_Name)
 public class MWorkflow extends X_AD_Workflow implements ImmutablePOSupport
 {
 	/**

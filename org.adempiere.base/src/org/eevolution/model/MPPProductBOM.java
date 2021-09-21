@@ -37,7 +37,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Victor Perez www.e-evolution.com     
  * @author Teo Sarca, http://www.arhipac.ro
  */
-@org.adempiere.base.Model(table = X_PP_Product_BOM.Table_Name)
 public class MPPProductBOM extends X_PP_Product_BOM implements ImmutablePOSupport
 {
 	/**

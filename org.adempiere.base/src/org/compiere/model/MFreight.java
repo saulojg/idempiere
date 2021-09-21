@@ -30,7 +30,6 @@ import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.Properties;
 
-@org.adempiere.base.Model(table = X_M_Freight.Table_Name)
 public class MFreight extends X_M_Freight {
 	/**
 	 * 

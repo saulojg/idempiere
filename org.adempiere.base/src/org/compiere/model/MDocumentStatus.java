@@ -37,7 +37,6 @@ import java.util.Properties;
 import org.compiere.util.DB;
 import org.compiere.util.Env;
 
-@org.adempiere.base.Model(table = X_PA_DocumentStatus.Table_Name)
 public class MDocumentStatus extends X_PA_DocumentStatus {
 	/**
 	 * 

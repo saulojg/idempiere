@@ -36,7 +36,6 @@ import java.util.Properties;
  *
  * @author Daniel Tamm
  */
-@org.adempiere.base.Model(table = X_M_FreightCategory.Table_Name)
 public class MFreightCategory extends X_M_FreightCategory {
 
     /**

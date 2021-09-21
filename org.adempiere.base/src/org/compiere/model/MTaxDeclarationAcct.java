@@ -25,7 +25,6 @@ import java.util.Properties;
  *  @author Jorg Janke
  *  @version $Id: MTaxDeclarationAcct.java,v 1.2 2006/07/30 00:51:05 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_TaxDeclarationAcct.Table_Name)
 public class MTaxDeclarationAcct extends X_C_TaxDeclarationAcct
 {
 	/**

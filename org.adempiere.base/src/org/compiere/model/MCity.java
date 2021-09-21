@@ -32,7 +32,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *
  *  @author 	Mario Calderon / Carlos Ruiz
  */
-@org.adempiere.base.Model(table = X_C_City.Table_Name)
 public class MCity extends X_C_City
 	implements Comparator<Object>, Serializable, ImmutablePOSupport
 {

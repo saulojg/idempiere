@@ -33,7 +33,6 @@ import org.compiere.util.Env;
  *         .net/tracker/index.php?func=detail&aid=2788465&group_id
  *         =176962&atid=879335
  */
-@org.adempiere.base.Model(table = X_C_BPartner_Location.Table_Name)
 public class MBPartnerLocation extends X_C_BPartner_Location {
 	/**
 	 * 

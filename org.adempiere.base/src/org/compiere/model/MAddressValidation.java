@@ -28,7 +28,6 @@ import org.compiere.util.DB;
  * @author Elaine
  *
  */
-@org.adempiere.base.Model(table = X_C_AddressValidation.Table_Name)
 public class MAddressValidation extends X_C_AddressValidation {	
 	
 	/**

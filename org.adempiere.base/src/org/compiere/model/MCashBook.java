@@ -31,7 +31,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *  @version $Id: MCashBook.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  *  @author red1 - FR: [ 2214883 ] Remove SQL code and Replace for Query
  */
-@org.adempiere.base.Model(table = X_C_CashBook.Table_Name)
 public class MCashBook extends X_C_CashBook implements ImmutablePOSupport
 {
 	/**

@@ -42,7 +42,6 @@ import org.compiere.util.Trx;
  *  @author Jorg Janke
  *  @version $Id: MConversionRate.java,v 1.2 2006/07/30 00:58:18 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_Conversion_Rate.Table_Name)
 public class MConversionRate extends X_C_Conversion_Rate
 {
 	/**

@@ -52,7 +52,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Teo Sarca, SC ARHIPAC SERVICE SRL
  * 			<li>BF [ 1886480 ] Print Format Item Trl not updated even if not multilingual
  */
-@org.adempiere.base.Model(table = X_AD_Client.Table_Name)
 public class MClient extends X_AD_Client implements ImmutablePOSupport
 {	
 	/**
@@ -905,7 +904,12 @@ public class MClient extends X_AD_Client implements ImmutablePOSupport
 		EMail email = new EMail (this,
 				   from, to,
 				   subject, message, html);
-		if (isSmtpAuthorization())
+
+		MSMTP smtp = MSMTP.get(getCtx(), getAD_Client_ID(), from, get_TrxName());
+
+		if (smtp != null && smtp.isSmtpAuthorization())
+			email.createAuthenticator (smtp.getRequestUser(), smtp.getRequestUserPW());
+		else if (isSmtpAuthorization())
 			email.createAuthenticator (getRequestUser(), getRequestUserPW());
 		return email;
 	}	//	createEMailFrom

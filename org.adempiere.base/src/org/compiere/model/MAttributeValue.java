@@ -27,7 +27,6 @@ import org.compiere.util.Env;
  *	@author Jorg Janke
  *	@version $Id: MAttributeValue.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_M_AttributeValue.Table_Name)
 public class MAttributeValue extends X_M_AttributeValue
 {
 	/**

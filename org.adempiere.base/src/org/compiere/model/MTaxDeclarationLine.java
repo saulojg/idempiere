@@ -27,7 +27,6 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MTaxDeclarationLine.java,v 1.2 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_TaxDeclarationLine.Table_Name)
 public class MTaxDeclarationLine extends X_C_TaxDeclarationLine
 {
 	/**

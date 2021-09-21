@@ -35,7 +35,6 @@ import org.idempiere.expression.logic.LogicEvaluator;
  *  @author Dirk Niemeyer, action42 GmbH
  *  @version $Id$
  */
-@org.adempiere.base.Model(table = X_AD_UserDef_Field.Table_Name)
 public class MUserDefField extends X_AD_UserDef_Field implements ImmutablePOSupport
 {
 	/**

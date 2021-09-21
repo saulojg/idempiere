@@ -36,7 +36,6 @@ import org.compiere.util.DB;
  *  @author Jorg Janke
  *  @version $Id: MReportLine.java,v 1.3 2006/08/03 22:16:52 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_PA_ReportLine.Table_Name)
 public class MReportLine extends X_PA_ReportLine
 {
 	/**

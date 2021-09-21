@@ -35,7 +35,6 @@ import org.compiere.util.KeyNamePair;
  *	@version $Id: MLot.java,v 1.3 2006/07/30 00:51:02 jjanke Exp $
  *	FR: [ 2214883 ] Remove SQL code and Replace for Query - red1
  */
-@org.adempiere.base.Model(table = X_M_Lot.Table_Name)
 public class MLot extends X_M_Lot
 {
 	/**

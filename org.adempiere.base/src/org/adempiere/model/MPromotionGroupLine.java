@@ -23,7 +23,6 @@ import org.compiere.model.X_M_PromotionGroupLine;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_M_PromotionGroupLine.Table_Name)
 public class MPromotionGroupLine extends X_M_PromotionGroupLine {
 
 	private static final long serialVersionUID = -3945719908086926013L;

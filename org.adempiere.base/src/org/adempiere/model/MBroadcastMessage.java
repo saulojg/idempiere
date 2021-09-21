@@ -28,7 +28,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Deepak Pansheriya
  *
  */
-@org.adempiere.base.Model(table = X_AD_BroadcastMessage.Table_Name)
 public class MBroadcastMessage extends X_AD_BroadcastMessage implements ImmutablePOSupport
 {
     /**

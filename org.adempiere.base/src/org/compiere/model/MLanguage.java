@@ -45,7 +45,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  * @author Teo Sarca, www.arhipac.ro
  * 			<li>BF [ 2444851 ] MLanguage should throw an exception if there is an error
  */
-@org.adempiere.base.Model(table = X_AD_Language.Table_Name)
 public class MLanguage extends X_AD_Language implements ImmutablePOSupport
 {	
 	/**

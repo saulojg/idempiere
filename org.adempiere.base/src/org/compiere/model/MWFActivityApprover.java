@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Properties;
 
-@org.adempiere.base.Model(table = X_AD_WF_ActivityApprover.Table_Name)
 public class MWFActivityApprover extends X_AD_WF_ActivityApprover {
 
     private static final long serialVersionUID = -7135169624317070006L;

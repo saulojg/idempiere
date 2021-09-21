@@ -10,7 +10,6 @@ import java.util.Properties;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_AD_FieldSuggestion.Table_Name)
 public class MFieldSuggestion extends X_AD_FieldSuggestion {
 
 	/**

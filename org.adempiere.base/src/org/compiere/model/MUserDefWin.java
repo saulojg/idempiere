@@ -31,7 +31,6 @@ import org.idempiere.cache.ImmutablePOCache;
  *  @version $Id$
  *  
  */
-@org.adempiere.base.Model(table = X_AD_UserDef_Win.Table_Name)
 public class MUserDefWin extends X_AD_UserDef_Win implements ImmutablePOSupport
 {
 	/**

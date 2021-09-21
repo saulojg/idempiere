@@ -31,7 +31,6 @@ import org.compiere.util.Util;
  * @author hengsin
  *
  */
-@org.adempiere.base.Model(table = X_C_OrderLandedCost.Table_Name)
 public class MOrderLandedCost extends X_C_OrderLandedCost {
 
 	/**

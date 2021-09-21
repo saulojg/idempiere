@@ -30,7 +30,6 @@ import org.idempiere.fa.exceptions.AssetAlreadyDepreciatedException;
  * @author www.arhipac.ro
  *
  */
-@org.adempiere.base.Model(table = X_A_Asset_Transfer.Table_Name)
 public class MAssetTransfer extends X_A_Asset_Transfer
 implements DocAction
 {

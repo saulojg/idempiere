@@ -20,7 +20,6 @@ import org.compiere.util.TimeUtil;
  * @author Anca Bradau www.arhipac.ro
  *
  */
-@org.adempiere.base.Model(table = X_A_Asset_Reval.Table_Name)
 public class MAssetReval extends X_A_Asset_Reval
 implements DocAction
 {

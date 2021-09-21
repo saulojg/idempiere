@@ -14,7 +14,6 @@ import org.idempiere.cache.ImmutablePOSupport;
  *	@author Teo Sarca, SC Arhipac SRL
  *	@version $Id$
  */
-@org.adempiere.base.Model(table = X_A_Depreciation_Convention.Table_Name)
 public class MDepreciationConvention extends X_A_Depreciation_Convention implements ImmutablePOSupport
 {
 	/**

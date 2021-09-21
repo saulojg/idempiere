@@ -30,7 +30,6 @@ import org.compiere.util.Env;
  *  ToolBar & Button Restriction
  *  @author Nicolas Micoud
  */
-@org.adempiere.base.Model(table = X_AD_ToolBarButtonRestrict.Table_Name)
 public class MToolBarButtonRestrict extends X_AD_ToolBarButtonRestrict
 {
 

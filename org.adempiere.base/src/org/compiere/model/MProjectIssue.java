@@ -39,7 +39,6 @@ import org.compiere.util.Msg;
  *	@author Jorg Janke
  *	@version $Id: MProjectIssue.java,v 1.2 2006/07/30 00:51:02 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_C_ProjectIssue.Table_Name)
 public class MProjectIssue extends X_C_ProjectIssue implements DocAction, DocOptions
 {
 	/**

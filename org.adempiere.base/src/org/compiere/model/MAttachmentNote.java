@@ -27,7 +27,6 @@ import org.compiere.util.Env;
  *  @author Jorg Janke
  *  @version $Id: MAttachmentNote.java,v 1.3 2006/07/30 00:58:18 jjanke Exp $
  */
-@org.adempiere.base.Model(table = X_AD_AttachmentNote.Table_Name)
 public class MAttachmentNote extends X_AD_AttachmentNote
 {
 	/**
