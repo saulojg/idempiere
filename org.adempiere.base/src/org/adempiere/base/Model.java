@@ -25,7 +25,6 @@ import java.lang.annotation.Target;
  */
 @Target(TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Inherited
 public @interface Model {
 
 	/**

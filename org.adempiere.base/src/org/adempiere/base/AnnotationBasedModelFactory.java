@@ -111,6 +111,13 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 
 		        Class<?> existing = classCache.get(tableName);
 
+		        // try to detect M classes only if we found an X class
+		        if(existing == null && className.contains("X_"))
+		        {
+		        	ClassInfo bottomClass = getBottomClass(classInfo);
+		        	className = bottomClass.getName();
+		        }
+
 		        if(existing==null)
 		        	classCache.put(tableName, classLoader.loadClass(className));
 		        else {
@@ -143,4 +150,13 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 		return getClass().equals(AnnotationBasedModelFactory.class);
 	}
 
+	private ClassInfo getBottomClass(ClassInfo start) {
+		ClassInfo result;
+        ClassInfoList subclasses = start.getSubclasses().directOnly();
+        if(subclasses.size()==0)
+        	result = start;
+        else
+        	result = getBottomClass(subclasses.get(0));
+        return result;
+	}
 }
