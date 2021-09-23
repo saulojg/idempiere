@@ -65,16 +65,6 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 		return new String[]{};
 	}
 
-	/**
-	 * Extension point. Provide a list of patterns to match against class names.
-	 * @return array of strings containing patterns
-	 * @see ClassGraph#acceptClasses(String...)
-	 */
-	protected String[] getAcceptClassesPatterns() {
-		String[] patterns = new String[] {"*.X_*"};
-		return patterns;
-	}
-	
 	@Activate
 	public void activate(ComponentContext context) throws ClassNotFoundException {
 		long start = System.currentTimeMillis();
@@ -84,7 +74,6 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 				.enableAnnotationInfo()
 				.overrideClassLoaders(classLoader)
 				.disableJarScanning()
-				.disableNestedJarScanning()
 				.disableModuleScanning();
 
 		// narrow search to a list of packages
@@ -98,11 +87,6 @@ public class AnnotationBasedModelFactory extends AbstractModelFactory implements
 			else
 				graph.acceptPackagesNonRecursive(packages);
 		}
-
-		// narrow search to class names matching a set of patterns
-		String[] acceptClasses = getAcceptClassesPatterns();
-		if(acceptClasses!=null && acceptClasses.length > 0)
-			graph.acceptClasses(acceptClasses);
 
 		try (ScanResult scanResult = graph.scan())
 		{
