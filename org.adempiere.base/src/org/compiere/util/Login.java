@@ -863,13 +863,18 @@ public class Login
 		Env.setContext(m_ctx, Env.AD_ORG_NAME, org.getName());
 		Ini.setProperty(Ini.P_ORG, org.getName());
 		
-		// Roca
-		if(larSucursalId!=null) {
-			Env.setContext(m_ctx, "#LAR_Sucursal_ID", larSucursalId);
-			// dREHER, busco el LAR_SucursalGrupo_ID y lo seteo en el entorno global
-			int LAR_SucursalGrupo_ID = DB.getSQLValue(null, "SELECT LAR_SucursalGrupo_ID FROM LAR_Sucursal WHERE LAR_Sucursal_ID=" + larSucursalId);
-			m_ctx.setProperty("#LAR_SucursalGrupo_ID", String.valueOf(LAR_SucursalGrupo_ID));			
-		}
+		// region Roca
+		if(larSucursalId==null)
+			larSucursalId = -1;
+
+		Env.setContext(m_ctx, "#LAR_Sucursal_ID", larSucursalId);
+		// dREHER, busco el LAR_SucursalGrupo_ID y lo seteo en el entorno global
+		int LAR_SucursalGrupo_ID = DB.getSQLValue(null, "SELECT LAR_SucursalGrupo_ID FROM LAR_Sucursal WHERE LAR_Sucursal_ID=" + larSucursalId);
+		m_ctx.setProperty("#LAR_SucursalGrupo_ID", String.valueOf(LAR_SucursalGrupo_ID));
+
+		int C_Period_ID = DB.getSQLValue(null, "SELECT getperiodo('" + Env.getContextAsDate(m_ctx, "#Date")  + "')" );
+		m_ctx.setProperty("#C_Period_ID", String.valueOf(C_Period_ID));
+		// endregion
 
 		//  Warehouse Info
 		if (warehouse != null)
