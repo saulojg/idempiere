@@ -2817,7 +2817,8 @@ public class MPayment extends X_C_Payment
 		MPeriod.testPeriodOpen(getCtx(), dateAcct, getC_DocType_ID(), getAD_Org_ID());
 		
 		//	Create Reversal
-		MPayment reversal = new MPayment (getCtx(), 0, get_TrxName());
+		// MPayment reversal = new MPayment (getCtx(), 0, get_TrxName()); // Orbital
+		MPayment reversal = (MPayment) MTable.get(Table_ID).getPO(0, get_TrxName());
 		copyValues(this, reversal);
 		reversal.setClientOrg(this);
 		// reversal.setC_Order_ID(0); // IDEMPIERE-1764
