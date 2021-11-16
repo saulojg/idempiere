@@ -22,7 +22,7 @@ import org.compiere.util.KeyNamePair;
 
 /** Generated Interface for AD_Process_Para
  *  @author iDempiere (generated) 
- *  @version Release 8.2
+ *  @version Development 9.0
  */
 public interface I_AD_Process_Para 
 {
@@ -413,6 +413,19 @@ public interface I_AD_Process_Para
 
 	/** Get Placeholder2	  */
 	public String getPlaceholder2();
+
+    /** Column name Query */
+    public static final String COLUMNNAME_Query = "Query";
+
+	/** Set Query.
+	  * SQL
+	  */
+	public void setQuery (String Query);
+
+	/** Get Query.
+	  * SQL
+	  */
+	public String getQuery();
 
     /** Column name ReadOnlyLogic */
     public static final String COLUMNNAME_ReadOnlyLogic = "ReadOnlyLogic";

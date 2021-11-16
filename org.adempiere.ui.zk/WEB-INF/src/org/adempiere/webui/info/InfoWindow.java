@@ -215,6 +215,21 @@ public class InfoWindow extends InfoPanel implements ValueChangeListener, EventL
 	 */
 	public InfoWindow(int WindowNo, String tableName, String keyColumn, String queryValue, 
 			boolean multipleSelection, String whereClause, int AD_InfoWindow_ID, boolean lookup, GridField field) {
+		this(WindowNo, tableName, keyColumn, queryValue, multipleSelection, whereClause, AD_InfoWindow_ID, lookup, field, null);		
+	}
+
+	/**
+	 * @param WindowNo
+	 * @param tableName
+	 * @param keyColumn
+	 * @param multipleSelection
+	 * @param whereClause
+	 * @param lookup
+	 * @param gridfield
+	 * @param predefinedContextVariables
+	 */
+	public InfoWindow(int WindowNo, String tableName, String keyColumn, String queryValue, 
+			boolean multipleSelection, String whereClause, int AD_InfoWindow_ID, boolean lookup, GridField field, String predefinedContextVariables) {
 		super(WindowNo, tableName, keyColumn, multipleSelection, whereClause,
 				lookup, AD_InfoWindow_ID, queryValue);		
 		this.m_gridfield = field;
@@ -240,6 +255,7 @@ public class InfoWindow extends InfoPanel implements ValueChangeListener, EventL
    			}
    		}); //xolali --end-
 
+   		Env.setPredefinedVariables(Env.getCtx(), getWindowNo(), predefinedContextVariables);
 		infoContext = new Properties(Env.getCtx());
 		p_loadedOK = loadInfoDefinition(); 
 		
@@ -568,7 +584,7 @@ public class InfoWindow extends InfoPanel implements ValueChangeListener, EventL
 	@Override
 	protected void loadInfoWindowData (){
 		if (m_infoWindowID > 0) {
-			infoWindow = new MInfoWindow(Env.getCtx(), m_infoWindowID, null);
+			infoWindow = MInfoWindow.getInfoWindow(m_infoWindowID);
 		}else {
 			infoWindow = MInfoWindow.get(p_tableName, (String)null);			
 		}

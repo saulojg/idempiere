@@ -72,7 +72,7 @@ import org.zkoss.zk.ui.Desktop;
 import org.zkoss.zk.ui.Execution;
 import org.zkoss.zk.ui.Executions;
 
-import com.itextpdf.text.DocumentException;
+import com.lowagie.text.DocumentException;
 
 /**
  *  ZK Application Environment and utilities
@@ -816,4 +816,17 @@ public final class AEnv
 		return getApplicationUrl() + "?Action=Zoom&TableName" + po.get_TableName() + "&Record_ID=" + po.get_ID();
 	}
 
+	/**
+	 * 
+	 * @param attribute
+	 * @return true if attribute have been set for current executions
+	 */
+	public static boolean getOrSetExecutionAttribute(String attribute) {
+		if (Executions.getCurrent() != null) {
+    		if (Executions.getCurrent().getAttribute(attribute) != null)
+    			return true;
+    		Executions.getCurrent().setAttribute(attribute, Boolean.TRUE);
+    	}
+    	return false;
+	}
 }	//	AEnv
