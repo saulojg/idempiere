@@ -48,7 +48,9 @@ public class SynchronizeTerminology extends SvrProcess
 	 *	@return message
 	 *	@throws Exception
 	 */
-	protected String doIt() throws Exception
+	protected String doIt() throws Exception { return "@OK@";} // Roca
+
+	protected String _doIt() throws Exception
 	{
 		//TODO Error handling
 		String sql = null;
