@@ -42,6 +42,7 @@ import org.compiere.print.MPrintFormat;
 import org.compiere.print.ReportEngine;
 import org.compiere.process.DocAction;
 import org.compiere.process.DocumentEngine;
+import org.compiere.process.IDocsPostProcess;
 import org.compiere.process.ProcessInfo;
 import org.compiere.process.ServerProcessCtl;
 import org.compiere.util.CLogger;
@@ -68,7 +69,7 @@ import org.eevolution.model.MPPProductBOMLine;
  *  Modifications: Added RMA functionality (Ashley Ramdass)
  *  Modifications: Generate DocNo^ instead of using a new number whan an invoice is reversed (Diego Ruiz-globalqss)
  */
-public class MInvoice extends X_C_Invoice implements DocAction
+public class MInvoice extends X_C_Invoice implements DocAction, IDocsPostProcess
 {
 	/**
 	 * 
@@ -2289,7 +2290,8 @@ public class MInvoice extends X_C_Invoice implements DocAction
 		docsPostProcess.add(doc);
 	}
 
-	public ArrayList<PO> getDocsPostProcess() {
+	@Override
+	public List<PO> getDocsPostProcess() {
 		return docsPostProcess;
 	}
 

@@ -623,7 +623,7 @@ public class RolePanel extends Window implements EventListener<Event>, Deferrabl
     	int AD_Role_ID = Env.getAD_Role_ID(ctx);
     	lstRole.setValue(AD_Role_ID);
     	updateOrganisationList();
-    	int AD_Org_ID = Env.getAD_Org_ID(ctx);
+    	int AD_Org_ID = Env.getContextAsInt(ctx, "#AD_Org_ID_ChangeRole");
     	lstOrganisation.setValue(AD_Org_ID);
     	int larSucursalId = Env.getLAR_Sucursal_ID(ctx);
     	lstLarSucursal.setValue(larSucursalId);    	
