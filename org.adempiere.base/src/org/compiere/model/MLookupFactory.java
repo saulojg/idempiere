@@ -388,6 +388,7 @@ public class MLookupFactory
 		StringBuilder key = new StringBuilder()
 				.append(Env.getAD_Client_ID(ctx)).append("|")
 				.append(Env.getAD_Role_ID(ctx)).append("|")
+				.append(Env.getLAR_Sucursal_ID(ctx)).append("|")
 				.append(Env.getAD_User_ID(ctx)).append("|")
 				.append(lang).append("|")
 				.append(String.valueOf(AD_Reference_Value_ID));
@@ -766,6 +767,7 @@ public class MLookupFactory
 		StringBuilder cacheKey = new StringBuilder()
 				.append(Env.getAD_Client_ID(ctx)).append("|")
 				.append(Env.getAD_Role_ID(ctx)).append("|")
+				.append(Env.getLAR_Sucursal_ID(ctx)).append("|")
 				.append(Env.getAD_User_ID(ctx)).append("|")
 				.append(language.getAD_Language()).append("|")
 				.append(TableName).append(".")
