@@ -3324,11 +3324,14 @@ public class MPayment extends X_C_Payment
 		return get_ValueAsInt("LAR_Sucursal_ID");
 	}
 
-
+	/**
+	 * @deprecated Usar {@link #getCreatedBy()} o {@link #getUpdatedBy()} segun corresponda.
+	 */
+	@Deprecated
 	public int getAD_User_ID() {
 		return get_ValueAsInt("AD_User_ID");
 	}
-	
+
 	// endregion Roca
 	
 }   //  MPayment
