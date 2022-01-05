@@ -1072,67 +1072,6 @@ public class MBPartner extends X_C_BPartner implements ImmutablePOSupport
 		}
 		if (newRecord || is_ValueChanged(COLUMNNAME_Value))
 			update_Tree(MTree_Base.TREETYPE_BPartner);
-
-		/* verifica duplicacion de documento y numero */
-		boolean yaEsta = false;
-		String name = "";
-		
-		String nroDoc = "";
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-
-			nroDoc = String.valueOf(this.getLAR_DocumentNo());
-			
-			if(nroDoc=="null")
-				nroDoc = "";
-			
-			int tipoDoc = this.getLAR_TipoDocumento_ID();
-
-			pstmt = null;
-			String sql = "SELECT CBP.name FROM C_BPartner CBP WHERE CBP.LAR_TipoDocumento_ID=? AND TRIM(CBP.LAR_DocumentNo)=?";
-			pstmt = DB.prepareStatement(sql, this.get_TrxName());
-			pstmt.setInt(1, tipoDoc);
-			pstmt.setString(2, nroDoc);
-			rs = pstmt.executeQuery();
-
-			int i = 0;
-			while (rs.next()) {
-				i++;
-				if(i==1)
-					name = rs.getString("name");
-			}
-			if (i > 1) 
-				yaEsta = true;
-			
-			rs.close();
-			pstmt.close();
-			pstmt = null;
-
-		} catch (Exception e) {
-
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return false;
-
-		} finally {
-			DB.close(rs, pstmt);
-			rs=null; pstmt=null;
-		}
-
-		if (yaEsta) {
-			if(nroDoc.length() > 0){
-				// ADialog.warn(Env.WINDOW_FIND, null,
-				//	"El documento ya fue registrado a nombre de: \n" + name + "\n"
-				//		+ nroDoc + "\n"
-				//			+ "Por favor, verifique la informacion registrada!");
-				log.saveError("El socio de negocios " + name + " tiene un numero de documento existente!", "");
-				return false;
-			}else
-				log.warning("El socio de negocios " + name + " no tiene numero de documento!");
-		} /* verificacion de documento y numero */
-		
-		
 		
 		//	Value/Name change
 		if (!newRecord 
