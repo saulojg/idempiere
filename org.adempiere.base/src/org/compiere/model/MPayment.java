@@ -2250,38 +2250,7 @@ public class MPayment extends X_C_Payment
 			} // encontro el payment de referencia
 
 		} // SI genera transferencia automatica
-
-
 		// <-- hasta aca genere los LAR_ChequePayment
-
-		// dREHER si el pago esta asociado a una Orden de Venta WP, verificar si con
-		// este recibo completo, se abona toda la orden y completarla tambien
-		if (isReceipt()) {
-
-			int C_Order_ID = DB.getSQLValue(get_TrxName(),
-					"SELECT al.C_Order_ID FROM C_AllocationLine al "
-							+ " INNER JOIN C_AllocationHdr h ON h.C_AllocationHdr_ID=al.C_AllocationHdr_ID "
-							+ " WHERE al.C_Payment_ID=? AND al.IsActive='Y' "
-							+ " AND h.IsActive='Y' AND h.DocStatus IN ('CO','CL')",
-					getC_Payment_ID());
-			if (C_Order_ID > 0) {
-
-				log.info("Encontro una orden de venta asociada al cobro! C_Order_ID=" + C_Order_ID);
-
-				MOrder ord = new MOrder(Env.getCtx(), C_Order_ID, get_TrxName());
-				if (ord.getDocStatus().equals("WP")) {
-
-					log.info("La orden de venta esta en espera de pagos WP...");
-
-					if (ord.calcOpenAmt(null).compareTo(Env.ZERO) <= 0) {
-						log.info("La orden de venta, ya no tiene saldo, COMPLETAR...");
-						ord.completeIt();
-						ord.save(null);
-					}
-				}
-			}
-
-		}		
 		// endregion Roca
 		return DocAction.STATUS_Completed;
 	}	//	completeIt
