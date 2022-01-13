@@ -133,37 +133,23 @@ public class MLARCheque extends X_LAR_Cheque
 		boolean isCobrado = false;
 		boolean isPagado = false;
 		
-		try 
-		{
 
-			boolean isAcreditado = this.isAcreditado();
-			if(isAcreditado){
-				String sql = "SELECT C_Payment_ID FROM LAR_ChequePayment WHERE LAR_Cheque_ID=? AND IsActive='Y'";
-				int C_Payment_ID = DB.getSQLValue(get_TrxName(), sql, this.getLAR_Cheque_ID());
-				if(C_Payment_ID > 0){
-					Date fecha = this.getFechaAcreditado();
-					sql = "UPDATE C_Payment SET dateacct='" + Miscfunc.FechaAMD(fecha) + "' WHERE C_Payment_ID=?";
-					int upd = DB.executeUpdate(sql,C_Payment_ID, get_TrxName());
-					if(upd > -1)
-						log.fine("Se actualizo la fecha contable del paymentId=" + C_Payment_ID + " Fecha=" + fecha);
-					else
-						log.warning("Error al actualizar la fecha contable del paymentId=" + C_Payment_ID + " Fecha=" + fecha);
-				}
+// Se cambia la fecha acct del cheque
+		boolean isAcreditado = this.isAcreditado();
+		if(isAcreditado){
+			String sql = "SELECT C_Payment_ID FROM LAR_ChequePayment WHERE LAR_Cheque_ID=? AND IsActive='Y'";
+			int C_Payment_ID = DB.getSQLValue(get_TrxName(), sql, this.getLAR_Cheque_ID());
+			if(C_Payment_ID > 0){
+				Date fecha = this.getFechaAcreditado();
+				sql = "UPDATE C_Payment SET dateacct='" + Miscfunc.FechaAMD(fecha) + "' WHERE C_Payment_ID=?";
+				int upd = DB.executeUpdate(sql,C_Payment_ID, get_TrxName());
+				if(upd > -1)
+					log.finest("Se actualizo la fecha contable del paymentId=" + C_Payment_ID + " Fecha=" + fecha);
+				else
+					log.warning("Error al actualizar la fecha contable del paymentId=" + C_Payment_ID + " Fecha=" + fecha);
 			}
-			
 		}
-		catch (Exception e) 
-		{
-			e.printStackTrace();
-			return false;
 
-		} finally 
-		{
-
-		}
-		
-		
-		
 		
 		//begin msuarez -> si un cheque es rechazado, se debe generar una nueva orden de venta con el monto del cheque
 		if (this.getLAR_ChequeEstado().compareTo(X_LAR_Cheque.LAR_CHEQUEESTADO_Rechazado)==0){
@@ -179,8 +165,6 @@ public class MLARCheque extends X_LAR_Cheque
 				if (paymentIDC>0){
 					isCobrado = true;
 				}
-				//else
-				//	throw new IllegalArgumentException("MLARCheque, El cheque no tiene cobros asignados!");
 			}
 			
 			if(this.getOUT_BPartner_ID() > 0)
@@ -190,15 +174,14 @@ public class MLARCheque extends X_LAR_Cheque
 				if (paymentIDP>0){
 					isPagado = true;
 				}
-				//else
-				//	throw new IllegalArgumentException("MLARCheque, El cheque no tiene pagos asignados!");
 			}
 			
 			try{
 				
 				if(isCobrado){		// dREHER
 					
-		
+					int M_Warehouse_ID = 0;
+					
 					BigDecimal monto=this.getAmount();
 					MOrder mo = new MOrder(this.getCtx(), 0, this.get_TrxName());
 					if (mo != null) {
@@ -234,12 +217,14 @@ public class MLARCheque extends X_LAR_Cheque
 							if (orderOld!=null){
 								mo.set_ValueOfColumn("FIN_BPartnerCredit_ID", 
 										orderOld.get_Value("FIN_BPartnerCredit_ID"));
-								mo.setM_Warehouse_ID(orderOld.getM_Warehouse_ID());
+								M_Warehouse_ID = orderOld.getM_Warehouse_ID();
 							}
+						}else {
+							M_Warehouse_ID = DB.getSQLValue(get_TrxName(), "SELECT MAX(M_Warehouse_ID) FROM LAR_SucursalWarehouse WHERE LAR_Sucursal_ID=? AND IsActive='Y'", payment.getLAR_Sucursal_ID());
 						}
 
-
-
+						mo.setM_Warehouse_ID(M_Warehouse_ID);
+						
 						MBPartner bp = new MBPartner(Env.getCtx(), payment.getC_BPartner_ID(),
 								this.get_TrxName());
 
@@ -277,8 +262,8 @@ public class MLARCheque extends X_LAR_Cheque
 					
 					// Buscar el documento para cheques rechazados de proveedor
 					int LAR_Sucursal_ID = this.getLAR_Sucursal_ID();
-					sql = "SELECT ndchequerechazadoprov_id FROM LAR_SucursalParams WHERE LAR_Sucursal_ID=" + LAR_Sucursal_ID;
-					int ND_ID = DB.getSQLValue(get_TrxName(), sql);
+					sql = "SELECT ndchequerechazadoprov_id FROM LAR_SucursalParams WHERE LAR_Sucursal_ID=?";
+					int ND_ID = DB.getSQLValue(get_TrxName(), sql, LAR_Sucursal_ID);
 					
 					
 					BigDecimal monto = this.getAmount();
@@ -349,21 +334,6 @@ public class MLARCheque extends X_LAR_Cheque
 		
 		if (getC_Payment_ID() == 0)
 			   return true;
-		/*
-		StringBuffer sqlDelete = new StringBuffer("DELETE FROM LAR_ChequePayment " +
-                "WHERE LAR_Cheque_ID="+getLAR_Cheque_ID()+" AND C_Payment_ID="+ getC_Payment_ID());
-                
-        log.fine("sqlDelete="+sqlDelete);
-		
-    	int no = DB.executeUpdate(sqlDelete.toString(),null);
-        
-    	if (no == -1)
-    	{
-    		// Error Borrando Cheques
-    		log.log(Level.SEVERE, "executeUpdate FAIL");
-    		return false;
-    	}
-    	*/
 		
 		String sql = "SELECT Count(*) FROM LAR_ChequePayment "+
         "WHERE LAR_Cheque_ID="+getLAR_Cheque_ID()+" AND C_Payment_ID="+ getC_Payment_ID();
