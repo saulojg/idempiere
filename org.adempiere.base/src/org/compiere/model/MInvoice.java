@@ -63,9 +63,9 @@ import org.eevolution.model.MPPProductBOMLine;
  *  @author Jorg Janke
  *  @version $Id: MInvoice.java,v 1.2 2006/07/30 00:51:02 jjanke Exp $
  *  @author victor.perez@e-evolution.com, e-Evolution http://www.e-evolution.com
- *  		@see http://sourceforge.net/tracker/?func=detail&atid=879335&aid=1948157&group_id=176962
+ *  		@see https://sourceforge.net/p/adempiere/feature-requests/412/
  * 			<li> FR [ 2520591 ] Support multiples calendar for Org
- *			@see http://sourceforge.net/tracker2/?func=detail&atid=879335&aid=2520591&group_id=176962
+ *			@see https://sourceforge.net/p/adempiere/feature-requests/631/
  *  Modifications: Added RMA functionality (Ashley Ramdass)
  *  Modifications: Generate DocNo^ instead of using a new number whan an invoice is reversed (Diego Ruiz-globalqss)
  */
@@ -95,7 +95,7 @@ public class MInvoice extends X_C_Invoice implements DocAction, IDocsPostProcess
 	 * 	Create new Invoice by copying
 	 * 	@param from invoice
 	 * 	@param dateDoc date of the document date
-	 *  @param acctDate original account date 
+	 *  @param dateAcct original account date 
 	 * 	@param C_DocTypeTarget_ID target doc type
 	 * 	@param isSOTrx sales order
 	 * 	@param counter create counter links
@@ -116,13 +116,13 @@ public class MInvoice extends X_C_Invoice implements DocAction, IDocsPostProcess
 	 * 	Create new Invoice by copying
 	 * 	@param from invoice
 	 * 	@param dateDoc date of the document date
-	 *  @param acctDate original account date 
+	 *  @param dateAcct original account date 
 	 * 	@param C_DocTypeTarget_ID target doc type
 	 * 	@param isSOTrx sales order
 	 * 	@param counter create counter links
 	 * 	@param trxName trx
 	 * 	@param setOrder set Order links
-	 *  @param Document Number for reversed invoices
+	 *  @param documentNo Document Number for reversed invoices
 	 *	@return Invoice
 	 */
 	public static MInvoice copyFrom (MInvoice from, Timestamp dateDoc, Timestamp dateAcct,
@@ -277,7 +277,11 @@ public class MInvoice extends X_C_Invoice implements DocAction, IDocsPostProcess
 	 */
 	public MInvoice (Properties ctx, int C_Invoice_ID, String trxName)
 	{
-		super (ctx, C_Invoice_ID, trxName);
+		this (ctx, C_Invoice_ID, trxName, (String[]) null);
+	}	//	MInvoice
+
+	public MInvoice(Properties ctx, int C_Invoice_ID, String trxName, String... virtualColumns) {
+		super(ctx, C_Invoice_ID, trxName, virtualColumns);
 		if (C_Invoice_ID == 0)
 		{
 			setDocStatus (DOCSTATUS_Drafted);		//	Draft
@@ -307,7 +311,7 @@ public class MInvoice extends X_C_Invoice implements DocAction, IDocsPostProcess
 			super.setProcessed (false);
 			setProcessing(false);
 		}
-	}	//	MInvoice
+	}
 
 	/**
 	 *  Load Constructor
@@ -469,7 +473,7 @@ public class MInvoice extends X_C_Invoice implements DocAction, IDocsPostProcess
 	}	//	setClientOrg
 
 	/**
-	 * 	Set Business Partner Defaults & Details
+	 * 	Set Business Partner Defaults and Details
 	 * 	@param bp business partner
 	 */
 	public void setBPartner (MBPartner bp)

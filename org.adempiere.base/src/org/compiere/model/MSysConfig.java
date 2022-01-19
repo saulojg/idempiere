@@ -44,7 +44,7 @@ public class MSysConfig extends X_AD_SysConfig
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4071371201535378277L;
+	private static final long serialVersionUID = 7257949078651339908L;
 
 	public static final String ADDRESS_VALIDATION = "ADDRESS_VALIDATION";
     public static final String ALERT_SEND_ATTACHMENT_AS_XLS = "ALERT_SEND_ATTACHMENT_AS_XLS";
@@ -126,6 +126,7 @@ public class MSysConfig extends X_AD_SysConfig
     public static final String MAX_RESULTS_PER_SEARCH_IN_DOCUMENT_CONTROLLER = "MAX_RESULTS_PER_SEARCH_IN_DOCUMENT_CONTROLLER";
     public static final String MAX_TEXT_LENGTH_ON_GRID_VIEW = "MAX_TEXT_LENGTH_ON_GRID_VIEW";
     public static final String MENU_INFOUPDATER_SLEEP_MS = "MENU_INFOUPDATER_SLEEP_MS";
+    public static final String MESSAGES_AT_TENANT_LEVEL = "MESSAGES_AT_TENANT_LEVEL";
     public static final String MFA_NTP_TIMEOUT_IN_MILLISECONDS = "MFA_NTP_TIMEOUT_IN_MILLISECONDS";
 	public static final String MFA_REGISTERED_DEVICE_EXPIRATION_DAYS = "MFA_REGISTERED_DEVICE_EXPIRATION_DAYS";
     public static final String MONITOR_INITIAL_WAIT_FOR_CLUSTER_IN_SECONDS = "MONITOR_INITIAL_WAIT_FOR_CLUSTER_IN_SECONDS";
@@ -365,7 +366,7 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get client configuration property of type string
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
+	 * @param AD_Client_ID Client ID
 	 * @return String
 	 */
 	public static String getValue(String Name, String defaultValue, int AD_Client_ID)
@@ -376,7 +377,7 @@ public class MSysConfig extends X_AD_SysConfig
 	/**
 	 * Get system configuration property of type string
 	 * @param Name
-	 * @param Client ID
+	 * @param AD_Client_ID Client ID
 	 * @return String
 	 */
 	public static String getValue(String Name, int AD_Client_ID)
@@ -388,7 +389,7 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type int
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
+	 * @param AD_Client_ID Client ID
 	 * @return int
 	 */
 	public static int getIntValue(String Name, int defaultValue, int AD_Client_ID)
@@ -415,7 +416,7 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type double
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
+	 * @param AD_Client_ID Client ID
 	 * @return double
 	 * @deprecated use better getBigDecimalValue
 	 */
@@ -440,7 +441,7 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type BigDecimal
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
+	 * @param AD_Client_ID Client ID
 	 * @return BigDecimal
 	 */
 	public static BigDecimal getBigDecimalValue(String Name, BigDecimal defaultValue, int AD_Client_ID)
@@ -464,7 +465,7 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type boolean
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
+	 * @param AD_Client_ID Client ID
 	 * @return boolean
 	 */
 	public static boolean getBooleanValue(String Name, boolean defaultValue, int AD_Client_ID)
@@ -485,8 +486,8 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get client configuration property of type string
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
-	 * @param Organization ID
+	 * @param AD_Client_ID Client ID
+	 * @param AD_Org_ID Organization ID
 	 * @return String
 	 */
 	public static String getValue(String Name, String defaultValue, int AD_Client_ID, int AD_Org_ID)
@@ -543,8 +544,8 @@ public class MSysConfig extends X_AD_SysConfig
 	/**
 	 * Get system configuration property of type string
 	 * @param Name
-	 * @param Client ID
-	 * @param Organization ID
+	 * @param AD_Client_ID Client ID
+	 * @param AD_Org_ID Organization ID
 	 * @return String
 	 */
 	public static String getValue(String Name, int AD_Client_ID, int AD_Org_ID)
@@ -556,8 +557,8 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type int
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
-	 * @param Organization ID
+	 * @param AD_Client_ID Client ID
+	 * @param AD_Org_ID Organization ID
 	 * @return int
 	 */
 	public static int getIntValue(String Name, int defaultValue, int AD_Client_ID, int AD_Org_ID)
@@ -584,8 +585,8 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type double
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
-	 * @param Organization ID
+	 * @param AD_Client_ID Client ID
+	 * @param AD_Org_ID Organization ID
 	 * @return double
 	 * @deprecated use better getBigDecimalValue
 	 */
@@ -610,8 +611,8 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type BigDecimal
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
-	 * @param Organization ID
+	 * @param AD_Client_ID Client ID
+	 * @param AD_Org_ID Organization ID
 	 * @return BigDecimal
 	 */
 	public static BigDecimal getBigDecimalValue(String Name, BigDecimal defaultValue, int AD_Client_ID, int AD_Org_ID)
@@ -635,8 +636,8 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type boolean
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
-	 * @param Organization ID
+	 * @param AD_Client_ID Client ID
+	 * @param AD_Org_ID Organization ID
 	 * @return boolean
 	 */
 	public static boolean getBooleanValue(String Name, boolean defaultValue, int AD_Client_ID, int AD_Org_ID)
@@ -678,7 +679,7 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type Timestamp
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
+	 * @param AD_Client_ID Client ID
 	 * @return Timestamp
 	 */
 	public static Timestamp getTimestampValue(String Name, Timestamp defaultValue, int AD_Client_ID)
@@ -690,8 +691,8 @@ public class MSysConfig extends X_AD_SysConfig
 	 * Get system configuration property of type Timestamp
 	 * @param Name
 	 * @param defaultValue
-	 * @param Client ID
-	 * @param Organization ID
+	 * @param AD_Client_ID Client ID
+	 * @param AD_Org_ID Organization ID
 	 * @return Timestamp
 	 */
 	public static Timestamp getTimestampValue(String Name, Timestamp defaultValue, int AD_Client_ID, int AD_Org_ID)

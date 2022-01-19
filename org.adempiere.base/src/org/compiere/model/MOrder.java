@@ -66,13 +66,13 @@ import org.eevolution.model.MPPProductBOMLine;
  *
  *  @author victor.perez@e-evolution.com, e-Evolution http://www.e-evolution.com
  * 			<li> FR [ 2520591 ] Support multiples calendar for Org 
- *			@see http://sourceforge.net/tracker2/?func=detail&atid=879335&aid=2520591&group_id=176962
+ *			@see https://sourceforge.net/p/adempiere/feature-requests/631/
  *  @version $Id: MOrder.java,v 1.5 2006/10/06 00:42:24 jjanke Exp $
  * 
  * @author Teo Sarca, www.arhipac.ro
  * 			<li>BF [ 2419978 ] Voiding PO, requisition don't set on NULL
  * 			<li>BF [ 2892578 ] Order should autoset only active price lists
- * 				https://sourceforge.net/tracker/?func=detail&aid=2892578&group_id=176962&atid=879335
+ * 				https://sourceforge.net/p/adempiere/feature-requests/873/
  * @author Michael Judd, www.akunagroup.com
  *          <li>BF [ 2804888 ] Incorrect reservation of products with attributes
  */
@@ -173,7 +173,11 @@ public class MOrder extends X_C_Order implements DocAction
 	 */
 	public MOrder(Properties ctx, int C_Order_ID, String trxName)
 	{
-		super (ctx, C_Order_ID, trxName);
+		this (ctx, C_Order_ID, trxName, (String[]) null);
+	}	//	MOrder
+
+	public MOrder(Properties ctx, int C_Order_ID, String trxName, String... virtualColumns) {
+		super(ctx, C_Order_ID, trxName, virtualColumns);
 		//  New
 		if (C_Order_ID == 0)
 		{
@@ -215,7 +219,7 @@ public class MOrder extends X_C_Order implements DocAction
 			setTotalLines (Env.ZERO);
 			setGrandTotal (Env.ZERO);
 		}
-	}	//	MOrder
+	}
 
 	/**************************************************************************
 	 *  Project Constructor
@@ -448,7 +452,7 @@ public class MOrder extends X_C_Order implements DocAction
 
 
 	/**
-	 * 	Set Business Partner Defaults & Details.
+	 * 	Set Business Partner Defaults and Details.
 	 * 	SOTrx should be set.
 	 * 	@param bp business partner
 	 */

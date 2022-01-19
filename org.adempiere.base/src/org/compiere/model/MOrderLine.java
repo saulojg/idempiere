@@ -125,7 +125,11 @@ public class MOrderLine extends X_C_OrderLine
 	 */
 	public MOrderLine (Properties ctx, int C_OrderLine_ID, String trxName)
 	{
-		super (ctx, C_OrderLine_ID, trxName);
+		this (ctx, C_OrderLine_ID, trxName, (String[]) null);
+	}	//	MOrderLine
+
+	public MOrderLine(Properties ctx, int C_OrderLine_ID, String trxName, String... virtualColumns) {
+		super(ctx, C_OrderLine_ID, trxName, virtualColumns);
 		if (C_OrderLine_ID == 0)
 		{
 			setFreightAmt (Env.ZERO);
@@ -148,8 +152,8 @@ public class MOrderLine extends X_C_OrderLine
 			setProcessed (false);
 			setLine (0);
 		}
-	}	//	MOrderLine
-	
+	}
+
 	/**
 	 *  Parent Constructor.
 	 		ol.setM_Product_ID(wbl.getM_Product_ID());
@@ -845,7 +849,7 @@ public class MOrderLine extends X_C_OrderLine
 			int C_DocType_ID = getParent().getDocTypeID();
 			MDocType docType = MDocType.get(getCtx(), C_DocType_ID);
 			//
-			if (!docType.IsNoPriceListCheck() && !m_productPrice.isCalculated())
+			if (!docType.isNoPriceListCheck() && !m_productPrice.isCalculated())
 			{
 				throw new ProductNotOnPriceListException(m_productPrice, getLine());
 			}
@@ -989,7 +993,7 @@ public class MOrderLine extends X_C_OrderLine
 	 * @param oldTax true if the old C_Tax_ID should be used
 	 * @return true if success, false otherwise
 	 * 
-	 * @author teo_sarca [ 1583825 ]
+	 * author teo_sarca [ 1583825 ]
 	 */
 	public boolean updateOrderTax(boolean oldTax) {
 		MOrderTax tax = MOrderTax.get (this, getPrecision(), oldTax, get_TrxName());
@@ -1009,7 +1013,7 @@ public class MOrderLine extends X_C_OrderLine
 	}
 	
 	/**
-	 *	Update Tax & Header
+	 *	Update Tax and Header
 	 *	@return true if header updated
 	 */
 	public boolean updateHeaderTax()
