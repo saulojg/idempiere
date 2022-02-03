@@ -1039,7 +1039,7 @@ public class MPeriod extends X_C_Period implements ImmutablePOSupport
 				if(C_Year_ID > -1) {
 					
 					// Romper para que no carguen cualquier a#o en los documentos....
-					if(anio < anioActual || (anio - anioActual) > 2)
+					if(anio < anioActual || (anio - anioActual) > 1)
 						return false;
 					
 					MYear y = new MYear(Env.getCtx(), C_Year_ID, null);
