@@ -1017,7 +1017,7 @@ public class MPeriod extends X_C_Period implements ImmutablePOSupport
 			MCalendar cal = new MCalendar(Env.getCtx(), C_Calendar_ID, null);
 			
 			@SuppressWarnings("deprecation")
-			String anio = String.valueOf(1900 + DateAcct.getYear());
+			int anio = 1900 + DateAcct.getYear();
 			
 			if (cal != null) {
 				
@@ -1027,33 +1027,29 @@ public class MPeriod extends X_C_Period implements ImmutablePOSupport
 				if(C_Year_ID <= 0) {
 					C_Year_ID = 0;
 					
-					s_log.info("Busco periodo activo. sql= " + sql);
-					
 					sql = "SELECT C_Year_ID FROM C_Year WHERE FiscalYear='" + anio + "' AND IsActive='N'";
-					C_Year_ID = DB.getSQLValue(null, sql);
-					
-					s_log.info("Busco periodo inactivo. sql= " + sql);
-					
+					C_Year_ID = DB.getSQLValue(null, sql);					
 				}
 				
 				if(C_Year_ID <= 0) 
 					C_Year_ID = 0;
 				
-				s_log.info("Encontro C_Year_ID=" + C_Year_ID);
-				
+				int anioActual = DB.getSQLValue(null, "SELECT EXTRACT(Year FROM current_date)");
 				
 				if(C_Year_ID > -1) {
+					
+					// Romper para que no carguen cualquier a#o en los documentos....
+					if(anio < anioActual || (anio - anioActual) > 2)
+						return false;
 					
 					MYear y = new MYear(Env.getCtx(), C_Year_ID, null);
 					if (y != null) {
 
-						s_log.info("Se va a crear Año :" + anio);
-						
 						y.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
 						y.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
 						y.setC_Calendar_ID(cal.getC_Calendar_ID());
 						y.setDescription("Año : " + anio + " creado automaticamente!");
-						y.setFiscalYear(anio);
+						y.setFiscalYear(String.valueOf(anio));
 						y.setIsActive(true);
 						if (y.save(null)) {
 							y.createStdPeriods(null);
