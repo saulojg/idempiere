@@ -23,6 +23,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -288,8 +289,8 @@ public class MPeriod extends X_C_Period implements ImmutablePOSupport
 		{
 			s_log.warning("No Period for " + DateAcct + " (" + DocBaseType + ")");
 			// dREHER, crearlo en forma automatica
-			if(createPeriodo(DateAcct)){
-				period = MPeriod.get(ctx, DateAcct);
+			if(createPeriods(DateAcct)){
+				period = MPeriod.get(ctx, DateAcct, 0, null);
 				if(period != null)
 					openPeriodo(period);
 				else {
@@ -1001,67 +1002,46 @@ public class MPeriod extends X_C_Period implements ImmutablePOSupport
 	}
 
 	/*
-	 * dREHER, crear el periodo que no existe en forma automatica
-	 * 
+	 * Crear periodos en forma automatica, para el año correspondiene a la fecha solicitada.
+	 * @author dREHER
+	 * @author Orbital Software (refactoring)
 	 */
-	public static boolean createPeriodo(Timestamp DateAcct){
-		boolean created = false;
-		
-		MClient mc = new MClient(Env.getCtx(), Env.getAD_Client_ID(Env
-				.getCtx()), null);
-		
-		if (mc != null) {
-			
-			int C_Calendar_ID = DB.getSQLValue(null, "SELECT C_Calendar_ID FROM C_Calendar WHERE AD_Client_ID=" + mc.getAD_Client_ID());
-			
-			MCalendar cal = new MCalendar(Env.getCtx(), C_Calendar_ID, null);
-			
-			@SuppressWarnings("deprecation")
-			int anio = 1900 + DateAcct.getYear();
-			
-			if (cal != null) {
-				
-				String sql = "SELECT C_Year_ID FROM C_Year WHERE FiscalYear='" + anio + "' AND IsActive='Y'";
-				int C_Year_ID = DB.getSQLValue(null, sql);
-				
-				if(C_Year_ID <= 0) {
-					C_Year_ID = 0;
-					
-					sql = "SELECT C_Year_ID FROM C_Year WHERE FiscalYear='" + anio + "' AND IsActive='N'";
-					C_Year_ID = DB.getSQLValue(null, sql);					
-				}
-				
-				if(C_Year_ID <= 0) 
-					C_Year_ID = 0;
-				
-				int anioActual = DB.getSQLValue(null, "SELECT EXTRACT(Year FROM current_date)");
-				
-				if(C_Year_ID > -1) {
-					
-					// GANDALF - Romper para que no carguen cualquier a#o en los documentos....
-					if(anio < anioActual || (anio - anioActual) > 1)
-						return false;
-					
-					MYear y = new MYear(Env.getCtx(), C_Year_ID, null);
-					if (y != null) {
+	public static boolean createPeriods(Timestamp DateAcct){
+		Calendar cd = Calendar.getInstance();
+		cd.setTime(DateAcct);
+		int requestedYear = cd.get(Calendar.YEAR);
+		int currentYear = Calendar.getInstance().get(Calendar.YEAR);
 
-						y.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
-						y.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
-						y.setC_Calendar_ID(cal.getC_Calendar_ID());
-						y.setDescription("Año : " + anio + " creado automaticamente!");
-						y.setFiscalYear(String.valueOf(anio));
-						y.setIsActive(true);
-						if (y.save(null)) {
-							y.createStdPeriods(null);
-							created = true;
-							s_log.warning("Se crearon los periodos del año " + anio + " en forma automatica!");
-
-						}
-					}
-				}
-			}
+		// Impedir creacion de periodos para un año anterior al actual o mayor al año próximo
+		if(requestedYear < currentYear || (requestedYear - currentYear) > 1) {
+			s_log.warning(String.format("Se impide creación automática de período para el año %s", requestedYear));
+			return false;
 		}
 		
+		boolean created = false;		
+
+		// determinar calendario
+		MClient mc = MClient.get(Env.getCtx());		
+		int C_Calendar_ID = DB.getSQLValue(null, "SELECT C_Calendar_ID FROM C_Calendar WHERE AD_Client_ID=" + mc.getAD_Client_ID());	
+		MCalendar cal = new MCalendar(Env.getCtx(), C_Calendar_ID, null);
+
+		// seleccion de año existente o determinacion de su creación
+		String sql = "SELECT C_Year_ID FROM C_Year WHERE FiscalYear= ?  ORDER BY IsActive DESC";
+		int C_Year_ID = Math.max(0, DB.getSQLValue(null, sql, requestedYear));
+		
+		MYear y = new MYear(Env.getCtx(), C_Year_ID, null);
+		y.setAD_Client_ID(Env.getAD_Client_ID(Env.getCtx()));
+		y.setAD_Org_ID(Env.getAD_Org_ID(Env.getCtx()));
+		y.setC_Calendar_ID(cal.getC_Calendar_ID());
+		y.setDescription("Año : " + requestedYear + " creado automaticamente!");
+		y.setFiscalYear(String.valueOf(requestedYear));
+		y.setIsActive(true);
+		if (y.save()) {
+			y.createStdPeriods(null);
+			created = true;
+			s_log.info("Se crearon los periodos del año " + requestedYear + " en forma automatica");
+		}
+
 		return created;
 	}
 
