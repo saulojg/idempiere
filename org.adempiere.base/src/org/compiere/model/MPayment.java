@@ -2164,93 +2164,6 @@ public class MPayment extends X_C_Payment
 		setProcessed(true);
 		setDocAction(DOCACTION_Close);
 
-		// region Roca
-		// Desde aca chequeo si una recepcion que estoy recibiendo de cheques, asi
-		// genero los LAR_ChequePayment
-
-		// Es un cobro, del tipo recepcion en la sucursal destino
-
-		String t = MSysConfig.getValue("GenerarPagoPorTransferenciaEntreSucursales", "SI", getAD_Client_ID()).toUpperCase();		
-		int C_Charge_ID = getC_Charge_ID();
-		int ID_TransfR = MSysConfig.getIntValue("CargoDeTransferenciaDesdeSucursal", 1000071, getAD_Client_ID());
-
-		if (C_Charge_ID == ID_TransfR && t.equals("SI") && isReceipt()) {
-
-			int C_PaymentRecepcion = getRef_Payment_ID();
-
-			MPayment pay = new MPayment(Env.getCtx(), C_PaymentRecepcion, null);
-
-			if (pay != null && C_PaymentRecepcion > 0) {
-
-				if (getTenderType().equals("K")) {
-
-					// dREHER, si no encuentro cheques en este nuevo payment entonces paso los
-					// cheques correspondientes
-					int cheques = DB.getSQLValue(get_TrxName(),
-							"SELECT COUNT(*) FROM LAR_ChequePayment WHERE C_Payment_ID=" + getC_Payment_ID());
-					if (cheques <= 0) {
-						// En caso de ser una recepcion de cheques, pasar los cheques a este payment de
-						// recepcion
-						String sqlC = "SELECT * FROM LAR_ChequePayment WHERE C_Payment_ID=?";
-						PreparedStatement pstmt = null;
-						ResultSet rs = null;
-
-						try {
-
-							pstmt = DB.prepareStatement(sqlC, get_TrxName());
-							pstmt.setInt(1, C_PaymentRecepcion);
-
-							rs = pstmt.executeQuery();
-							while (rs.next()) {
-
-								MLARChequePayment cp = new MLARChequePayment(Env.getCtx(), rs, get_TrxName());
-
-								if (cp != null) {
-
-									MLARChequePayment cpNew = new MLARChequePayment(Env.getCtx(), 0, get_TrxName());
-									if (cpNew != null) {
-
-										cpNew.setAD_Org_ID(getAD_Org_ID());
-										cpNew.setAmount(cp.getAmount());
-										cpNew.setC_Payment_ID(getC_Payment_ID());
-										cpNew.setIsActive(cp.isActive());
-										cpNew.setLAR_Cheque_ID(cp.getLAR_Cheque_ID());
-
-										if (cpNew.save(get_TrxName())) {
-
-											// 12/08/2015
-											// dREHER
-											// Busco el cheque y lo paso a estado Cartera para que pueda ser utilizado
-											// en un pago
-											String upd = "UPDATE LAR_Cheque SET LAR_ChequeEstado='C' WHERE LAR_Cheque_ID="
-													+ cp.getLAR_Cheque_ID();
-											DB.executeUpdate(upd, get_TrxName());
-
-										}
-
-									}
-								}
-							}
-
-
-						} catch (Exception ex) {
-							log.warning("Error al pasar cheques a sucursal recepcion... " + ex.toString());
-
-						} finally {
-							DB.close(rs, pstmt);
-							rs = null;
-							pstmt = null;
-						}
-
-					} // encontro cheques en la trasnferencia de envio
-
-				} // TenderType=K
-
-			} // encontro el payment de referencia
-
-		} // SI genera transferencia automatica
-		// <-- hasta aca genere los LAR_ChequePayment
-		// endregion Roca
 		return DocAction.STATUS_Completed;
 	}	//	completeIt
 
@@ -3257,36 +3170,6 @@ public class MPayment extends X_C_Payment
 
 		return C_AllocationHdr_ID;
 	}
-
-
-	// dREHER, leo que cheques de terceros estan asociados al pago
-	public List<MLARCheque> getChequesTerceros() {
-		ArrayList<org.compiere.model.MLARCheque> cheques = new ArrayList<MLARCheque>();
-
-		String sql = "SELECT * FROM LAR_ChequePayment WHERE C_Payment_ID=?";
-		PreparedStatement pstmt;
-		pstmt = DB.prepareStatement(sql, get_TrxName());
-		ResultSet rs = null;
-		try {
-			pstmt.setInt(1, getC_Payment_ID());
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				cheques.add(new MLARCheque(Env.getCtx(), rs, get_TrxName()));
-			}
-
-		} catch (SQLException e) {
-			DB.close(rs, pstmt);
-			log.warning("Error al leer cheques asociados al pago " + e.toString());
-		} finally {
-			DB.close(rs, pstmt);
-			rs = null;
-			pstmt = null;
-		}
-
-		return cheques;
-	}
-
 
 	public int getLAR_Sucursal_ID() {
 		return get_ValueAsInt("LAR_Sucursal_ID");
