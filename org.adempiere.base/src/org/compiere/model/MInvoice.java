@@ -1263,9 +1263,9 @@ public class MInvoice extends X_C_Invoice implements DocAction, IDocsPostProcess
 			+ "FROM C_AllocationLine al"
 			+ " INNER JOIN C_AllocationHdr ah ON (al.C_AllocationHdr_ID=ah.C_AllocationHdr_ID)"
 			+ " INNER JOIN C_Invoice i ON (al.C_Invoice_ID=i.C_Invoice_ID) "
-			+ " INNER JOIN C_Payment pay ON (pay.C_Payment_ID=al.C_Payment_ID)" // Roca			
+			+ " LEFT JOIN C_Payment pay ON (pay.C_Payment_ID=al.C_Payment_ID)" // Roca
 			+ "WHERE al.C_Invoice_ID=?"
-			+ " AND pay.DocStatus IN ('CO','CL')" // Roca
+			+ " AND (pay.C_Payment_ID IS NULL OR pay.DocStatus IN ('CO','CL'))" // Roca
 			+ " AND ah.IsActive='Y' AND al.IsActive='Y'";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
