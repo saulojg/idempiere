@@ -452,32 +452,6 @@ public class MAllocationHdr extends X_C_AllocationHdr implements DocAction
 				m_processMsg = "No Business Partner";
 				return DocAction.STATUS_Invalid;
 			}
-			// region Roca
-			int C_Order_ID= m_lines[i].getC_Order_ID();
-			if (C_Order_ID != 0)
-			{
-			    MOrder order = new MOrder (getCtx(), C_Order_ID, get_TrxName());
-			    if ("WP".equals(order.getDocStatus()))
-			    {
-			    	//TODO COMPLETAR SOLO SI ESTA PAGA POR COMPLETO
-			    	// calculando saldo abierto
-		    		BigDecimal openAmt = order.calcOpenAmt(get_TrxName());
-		    		openAmt=openAmt.subtract(line.getAmount());
-		    		if(openAmt.compareTo(Env.ZERO)<=0)
-		    		{
-		    			order.setC_Payment_ID(m_lines[i].getC_Payment_ID());
-		    			order.setDocAction(X_C_Order.DOCACTION_WaitComplete);
-		    			order.set_TrxName(get_TrxName());
-		    			order.processIt (X_C_Order.DOCACTION_WaitComplete);
-		    			String pm = order.getProcessMsg();
-		    			if((pm!=null)&&(pm.length()>0))
-		    				throw new RuntimeException(pm);
-		    			if(pm!=null)
-		    				order.save(get_TrxName());;
-		    		}
-			    }	//	WaitingPayment
-			}
-			// endregion Roca
 
 			// IDEMPIERE-1850 - validate date against related docs
 			if (line.getC_Invoice_ID() > 0) {

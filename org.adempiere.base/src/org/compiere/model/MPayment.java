@@ -1906,18 +1906,6 @@ public class MPayment extends X_C_Payment
 				order.setC_Payment_ID(getC_Payment_ID());
 				order.setDocAction(X_C_Order.DOCACTION_WaitComplete);
 				order.set_TrxName(get_TrxName());
-				// region Roca
-				// COMPLETAR SOLO SI ESTA PAGA POR COMPLETO
-				BigDecimal open = order.calcOpenAmt(get_TrxName());
-				if(open.compareTo(Env.ZERO) <= 0) {
-					// added AdempiereException by zuhri 
-					if (!order.processIt (X_C_Order.DOCACTION_WaitComplete))
-						throw new AdempiereException(Msg.getMsg(getCtx(), "FailedProcessingDocument") + " - " + order.getProcessMsg());
-					// end added
-					m_processMsg = order.getProcessMsg();
-					order.saveEx(get_TrxName());					
-				}
-				// endregion Roca
 
 				//	Set Invoice
 				MInvoice[] invoices = order.getInvoices();
