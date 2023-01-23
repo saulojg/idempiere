@@ -152,7 +152,7 @@ public class MChat extends X_CM_Chat
 		if (m_entries != null && !reload)
 			return m_entries;
 		ArrayList<MChatEntry> list = new ArrayList<MChatEntry>();
-		String sql = "SELECT * FROM CM_ChatEntry WHERE CM_Chat_ID=? ORDER BY Created DESC"; // dREHER, traigo el ultimo comentario arriba de todo, de actual a mas antiguo...
+		String sql = "SELECT * FROM CM_ChatEntry WHERE CM_Chat_ID=? ORDER BY Created";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try
